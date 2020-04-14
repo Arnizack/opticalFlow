@@ -27,7 +27,7 @@ void logger::logLine(int logLevel)
 
 void logger::logLine()
 {
-	logger::logLine(10, '-', 100);
+	logger::logLine(DEBUG_LEVEL, '-', 100);
 }
 
 template<typename T>
@@ -39,13 +39,16 @@ std::string convertToString(T& obj)
 
 }
 
-void fillStrWithMaxLength(const size_t length, const std::string& str, const size_t start, std::string* fillStr)
-{
-	for (size_t i = 0; i < str.size() && i < length; i++)
-	{
-		fillStr->operator[](i) = str[i];
-	}
 
+void logger::logFunctionBegin(int level, std::string functionName)
+{
+	logLine(level);
+	logger::log(level, functionName);
+	logLine(level);
 }
 
 
+void logger::logFunctionBegin(std::string functionName)
+{
+	logFunctionBegin(DEBUG_LEVEL, functionName);
+}

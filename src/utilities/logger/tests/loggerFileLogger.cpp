@@ -7,7 +7,7 @@
 TEST(loggerFileLogger, HalloWorld)
 {
 	std::string input = "Hallo World";
-	logger::registerLoggerType(logger::FILELOGGER,10,"logFileTest.txt");
+	logger::registerLoggerType(logger::loggerTypes::FILELOGGER,10,"logFileTest.txt");
 	logger::log(10, input);
 
 	std::ifstream t("logFileTest.txt");
@@ -20,8 +20,8 @@ TEST(loggerFileLogger, HalloWorld)
 TEST(loggerFileLogger, HalloWorldButToLow)
 {
 	std::string input = "Hallo World";
-	logger::registerLoggerType(logger::FILELOGGER, 0, "logFileTest.txt");
-	logger::registerLoggerType(logger::FILELOGGER, 10, "logFileTest.txt");
+	logger::registerLoggerType(logger::loggerTypes::FILELOGGER, 0, "logFileTest.txt");
+	logger::registerLoggerType(logger::loggerTypes::FILELOGGER, 10, "logFileTest.txt");
 	logger::log(4, input);
 	std::ifstream t("logFileTest.txt");
 	std::string output((std::istreambuf_iterator<char>(t)),
@@ -33,7 +33,9 @@ TEST(loggerFileLogger, HalloWorldButToLow)
 TEST(loggerFileLogger, HalloWorldFormated)
 {
 	std::string input = "Hallo World%s%d";
-	logger::registerLoggerType(logger::FILELOGGER, 10, "logFileTest.txt");
+	logger::registerLoggerType(logger::loggerTypes::FILELOGGER, 0, "logFileTest.txt");
+	logger::log(10, "Vorherige Line");
+	logger::registerLoggerType(logger::loggerTypes::FILELOGGER, 10, "logFileTest.txt");
 	logger::log(10, input," Die Zahl ist: ",10);
 	std::ifstream t("logFileTest.txt");
 	std::string output((std::istreambuf_iterator<char>(t)),
@@ -44,7 +46,7 @@ TEST(loggerFileLogger, HalloWorldFormated)
 
 TEST(loggerFileLogger, HalloWorldMultiLine)
 {
-	logger::registerLoggerType(logger::FILELOGGER, 10, "logFileTest.txt");
+	logger::registerLoggerType(logger::loggerTypes::FILELOGGER, 10, "logFileTest.txt");
 	logger::log(10, "Hallo");
 	logger::log(22, "World");
 	std::ifstream t("logFileTest.txt");

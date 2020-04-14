@@ -9,7 +9,7 @@ class FileLogger : public iLogger
 	public:
 		FileLogger(int level, std::string filePath);
 		// Inherited via iLogger
-		void log(int level, std::string msg) override;
+		void log(int level, std::string msg) const override;
 
 		
 };

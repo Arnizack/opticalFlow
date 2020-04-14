@@ -5,5 +5,5 @@
 class iLogger
 {
 	public:
-		virtual void log(int level, std::string msg) = 0;
+		virtual void log(int level, std::string msg) const = 0;
 };

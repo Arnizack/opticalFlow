@@ -14,7 +14,7 @@ FileLogger::FileLogger(int level, std::string filePath)
 
 }
 
-void FileLogger::log(int level, std::string msg)
+void FileLogger::log(int level, std::string msg) const
 {
 	if (level >= this->logLevel)
 	{

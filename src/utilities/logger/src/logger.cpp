@@ -4,66 +4,97 @@
 #include "FileLogger.hpp"
 #include <stdarg.h>
 #include<vector>
-
-static std::vector<iLogger*> loggerInstances;
-static std::vector<logger::loggerTypes> loggerInstancesTypes;
+#include<mutex>
 
 
-void logger::registerLoggerType(loggerTypes type, int level, std::string strArgs)
+namespace logger
 {
-	iLogger* ptrloggerInst = 0;
-	switch (type)
-	{
-	case FILELOGGER:
-	{
-		
-		FileLogger temp(level, strArgs);
-		static FileLogger fLogger = temp;
-		ptrloggerInst = &(fLogger);
-	}
-		break;
-	
-
-	default:
-		
-		static ConsoleLogger cLogger(level, strArgs);
-
-		ptrloggerInst = &(cLogger);
-
-		
-
-	}
-
-	if (std::count(loggerInstancesTypes.begin(), loggerInstancesTypes.end(), type) == 0)
-	{
-		loggerInstances.push_back(ptrloggerInst);
-		loggerInstancesTypes.push_back(type);
-	}
-	
-}
-
-void logger::log(int level, std::string msg, ...)
-{
-	for each (iLogger* loggerInstance in loggerInstances)
-	{
+	/*
+	static std::vector<iLogger*> loggerInstances;
+	static std::vector<logger::loggerTypes> loggerInstancesTypes;
+	*/
 
 	
-		if (loggerInstance == 0)
+	using loggerInstancesTyp = std::vector<std::pair<std::unique_ptr<iLogger>, loggerTypes>>;
+
+	static loggerInstancesTyp loggerInstances;
+
+	static std::mutex loggerTypesMux;
+
+	template<typename T>
+	inline decltype(auto) createPair(loggerTypes type,int level,std::string strArgs)
+	{
+		
+		return std::pair<std::unique_ptr<iLogger>, loggerTypes>(std::make_unique<T>(level, strArgs),type);
+	}
+
+	void registerLoggerType(loggerTypes type, int level, std::string strArgs)
+	{
+		loggerTypesMux.lock();
+		bool alreadyAdded = false;
+		for (auto& loggerPair : loggerInstances)
 		{
-			printf("logger Instance is not initialized\n");
-
+			if (type == loggerPair.second)
+			{
+				switch (type)
+				{
+				case logger::loggerTypes::FILELOGGER:
+					loggerPair.first.reset(new FileLogger(level, strArgs));
+					break;
+				default:
+					loggerPair.first.reset(new ConsoleLogger(level,strArgs));
+					break;
+				}
+				alreadyAdded = true;
+				break;
+						
+			}
 		}
-		else
+	
+		if(! alreadyAdded)
 		{
-			char dest[1024 * 16];
-			va_list argptr;
-			va_start(argptr, msg);
-		
-			vsprintf_s(dest, msg.data(), argptr);
-			va_end(argptr);
+			switch (type)
+			{
+			case logger::loggerTypes::FILELOGGER:
+			
+				loggerInstances.push_back(createPair<FileLogger>(type, level, strArgs));
+				break;
+			default:
 
-			loggerInstance->log(level, dest);
+				loggerInstances.push_back(createPair<ConsoleLogger>(type, level, strArgs));
+				break;
+			}
 		}
+		loggerTypesMux.unlock();
+	
 	}
-}
 
+	void logger::log(int level, std::string msg, ...)
+	{
+		loggerTypesMux.lock();
+		loggerTypesMux.unlock();
+		for each (auto& loggerPair in loggerInstances)
+		{
+			auto& loggerInstance = loggerPair.first;
+	
+			if (loggerInstance == 0)
+			{
+				printf("logger Instance is not initialized\n");
+
+			}
+			else
+			{
+				char dest[1024 * 16];
+				va_list argptr;
+				va_start(argptr, msg);
+		
+				vsprintf_s(dest, msg.data(), argptr);
+				va_end(argptr);
+
+				loggerInstance->log(level, dest);
+			}
+		}
+		
+	}
+
+}

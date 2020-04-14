@@ -8,7 +8,7 @@
 namespace logger
 {
 	
-	enum loggerTypes
+	enum class loggerTypes
 	{
 		CONSOLELOGGER,
 		FILELOGGER

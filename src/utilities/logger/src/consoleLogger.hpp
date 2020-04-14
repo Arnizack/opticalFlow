@@ -8,6 +8,6 @@ class ConsoleLogger : public iLogger
 	public: 
 		ConsoleLogger(int level, std::string strArgs);
 
-		void log(int level, std::string msg) override;
+		void log(int level, std::string msg) const override;
 
 };
