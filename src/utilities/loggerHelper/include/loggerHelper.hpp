@@ -20,13 +20,43 @@ namespace logger
 
 
 
-	void logLine(int logLevel, char zeichen, int length);
-	void logLine(int logLevel, char zeichen);
+	/*
+	Example: logLine(5,"a",2)
+	Logges at Level 5:
+	"aa"
+	*/
+	void logLine(int logLevel, char symbol, int length);
+	/*
+	Example: logLine(5,"a")
+	Logges at Level 5:
+	"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+	*/
+	void logLine(int logLevel, char symbol);
+	/*
+	Example: logLine(5,2)
+	Logges at Level 5:
+	"--"
+	*/
 	void logLine(int logLevel, int length);
+
+	/*
+	Example: logLine(5)
+	Logges at Level 5:
+	"---------------------------------------------"
+	*/
 	void logLine(int logLevel);
+	/*
+	Example: logLine()
+	Logges at Level 10:
+	"---------------------------------------------"
+	*/
 	void logLine();
 
 
+	/* Example: logArgsDefault(4,0.1,std::vector<int>{1,2,3},"test")
+	logges at level 10:
+	4	|0.1	|[1,2,3]	|test
+	*/
 	template<typename... argsTypes>
 	void logArgsDefault(const argsTypes & ...args)
 	{
@@ -144,6 +174,10 @@ namespace logger
 
 	}
 
+	/* Example: logArgs(42,4,0.1,std::vector<int>{1,2,3},"test")
+	logges at level 42:
+	4	|0.1	|[1,2,3]	|test
+	*/
 	template<typename... argsTypes>
 	void logArgs(int level, const size_t maxLength,const argsTypes&... args)
 	{
@@ -163,6 +197,9 @@ namespace logger
 		logger::log(level, prtss->str());
 	}
 
+	/*
+	log2DData logges a 2D vector as a table 
+	*/
 	template<typename T>
 	void log2DData(int level, std::vector<std::vector<T>> data)
 	{
@@ -215,22 +252,52 @@ namespace logger
 		}
 	}
 
+
+
+	/*
+	log2DData logges a 2D vector as a table
+	with default level 10
+	*/
 	template<typename T>
 	void log2DData(std::vector<std::vector<T>> data)
 	{
 		log2DData(DEBUG_LEVEL, data);
 	}
 
+	/*
+	Example: logFunctionBegin(42,"test Func")
+	logges at Level 42:
+	-------------------------------------
+	test func
+	-------------------------------------
+	*/
 	void logFunctionBegin(int level, std::string functionName);
 
+	/*
+	Example: logFunctionBegin("test Func")
+	logges at Level 10:
+	-------------------------------------
+	test func
+	-------------------------------------
+	*/
 	void logFunctionBegin(std::string functionName);
 
+	/*
+	Example: logFunctionEnd(42,"test func",2)
+	logges at level 42:
+	End of test func: 2
+	*/
 	template<typename T>
 	void logFunctionEnd(int level, std::string functionName, T returnData)
 	{
 		logger::log(level,"End of " + functionName + ": " + internal::toString(returnData));
 	}
 
+	/*
+	Example: logFunctionEnd("test func",2)
+	logges at level 10:
+	End of test func: 2
+	*/
 	template<typename T>
 	void logFunctionEnd(std::string functionName, T returnData)
 	{
