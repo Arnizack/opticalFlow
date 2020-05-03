@@ -9,3 +9,11 @@ if(TARGET gtest_main)
 else()
 	message("gtest_main cloud be located")
 endif()
+
+add_subdirectory(cub)
+
+if(TARGET cub_Lib)
+	message("cub_Lib cloud be located")
+else()
+	message("cub_Lib cloud be located")
+endif()

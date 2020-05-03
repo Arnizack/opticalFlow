@@ -15,3 +15,9 @@ add_subdirectory(libs)
 #Add the Subdirectories here with add_subdirectory()
 
 add_subdirectory(utilities)
+
+#add_subdirectory(gaussianKdTree)
+
+add_subdirectory(core)
+
+add_subdirectory(intern)

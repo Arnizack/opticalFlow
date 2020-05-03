@@ -1,0 +1,4 @@
+add_subdirectory(imagegradient)
+add_subdirectory(kdtree)
+add_subdirectory(bilateralfilter)
+add_subdirectory(cpuoptflow)

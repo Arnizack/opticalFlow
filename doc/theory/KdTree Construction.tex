@@ -1,0 +1,29 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{xcolor}
+
+\usepackage[noend]{algpseudocode}
+
+\algblockdefx[PForeach]{PForeach}{EndPForeach}[1]{\textbf{for each} #1 \textbf{in parallel}}{\textbf{end for}}
+
+\algrenewcommand{\algorithmiccomment}[1]{\State \textcolor{gray}{{$//$} #1}}
+
+\begin{document}
+\begin{algorithmic}
+
+\If {$x>y$}
+	\State $i\gets i+k$
+
+\EndIf
+
+\PForeach {$x \in test$}
+	\State $i \gets k$
+	\Comment{das ist ein Test}
+	\State $\text{min}(i)$
+	
+\EndPForeach
+
+
+
+\end{algorithmic}
+\end{document} 
