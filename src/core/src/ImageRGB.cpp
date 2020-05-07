@@ -100,16 +100,14 @@ core::ImageRGB core::ImageRGB::Conv1D(std::vector<float> kernel,bool yDirection,
 
 	int32_t kernelHalf = kernel.size() / 2;
 
-	float kernelSum = 0;
-	for (const float& item : kernel)
-	{
-		kernelSum += item;
-	}
+	
+
 
 	for (uint32_t x = 0; x < width; x++)
 	{
 		for (uint32_t y = 0; y < heigth; y++)
 		{
+			float kernelSum = 0;
 			float pixelValueR = 0;
 			float pixelValueG = 0;
 			float pixelValueB = 0;
@@ -134,6 +132,7 @@ core::ImageRGB core::ImageRGB::Conv1D(std::vector<float> kernel,bool yDirection,
 							pixelValueR += kernelValue * pixelInKernel.Red;
 							pixelValueG += kernelValue * pixelInKernel.Green;
 							pixelValueB += kernelValue * pixelInKernel.Blue;
+							kernelSum += kernelValue;
 						}
 
 					}
