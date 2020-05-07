@@ -23,7 +23,11 @@ namespace core
 		ImageRGB Downsize(uint32_t target_wight, uint32_t target_height);
 		
 		//returns True, when saved successfull 
-		bool save(std::string filepath);
+		bool Save(std::string filepath);
+
+		ImageRGB Conv1D (std::vector<float> kernel, bool yDirection = false);
+
+		
 
 	private:
 		uint32_t width;

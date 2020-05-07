@@ -104,14 +104,13 @@ TEST(coreImageRGB, JpgColor)
 TEST(coreImageRGB, SaveImage)
 {
 	core::ImageRGB img(2,3);
-	std::string filepath = __TESTDATADIR__;
-	filepath += "\\testSave.png";
+	std::string filepath = "testSave.png";
 	core::Color color;
 	color.Red = 255;
 	color.Green = 120;
 	color.Blue = 100;
 	img.SetPixel(1, 1, color);
-	img.save(filepath);
+	img.Save(filepath);
 
 	core::ImageRGB imgLoaded(filepath);
 	core::Color actual_color = imgLoaded.GetPixel(1, 1);
@@ -120,5 +119,37 @@ TEST(coreImageRGB, SaveImage)
 
 	EXPECT_EQ(actual_color.Green, color.Green);
 	EXPECT_EQ(actual_color.Blue, color.Blue);
+
+}
+
+TEST(coreImageRGB, RescaleImage)
+{
+	std::string filepath = __TESTDATADIR__;
+	filepath += "\\rescaleTest.png";
+	core::ImageRGB img(filepath);
+
+	auto result = img.Downsize(img.GetWidth() / 4, img.GetHeight() / 4);
+
+	std::string resultFilePath = "rescaleResult.png";
+
+
+	result.Save(resultFilePath);
+
+}
+
+TEST(coreImageRGB, RescaleImageMultiple)
+{
+	std::string filepath = __TESTDATADIR__;
+	filepath += "\\rescaleTest.png";
+	core::ImageRGB img(filepath);
+
+	auto result = img.Downsize(img.GetWidth() / 2, img.GetHeight() / 2);
+
+	result = result.Downsize(result.GetWidth() / 2, result.GetHeight() / 2);
+
+	std::string resultFilePath = "rescaleResult2.png";
+
+
+	result.Save(resultFilePath);
 
 }

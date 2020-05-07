@@ -4,6 +4,8 @@
 #include"loggerHelper.hpp"
 #include<filesystem>
 #include<memory>
+#include<cmath>
+#include<array>
 
 core::ImageRGB::ImageRGB(std::string filepath)
 {
@@ -70,12 +72,156 @@ const unsigned char * core::ImageRGB::Data()
 	return &pixels[0];
 }
 
-core::ImageRGB core::ImageRGB::Downsize(uint32_t target_wight, uint32_t target_height)
+float gaussianPdf(float standardDeviation, float x)
 {
-	return *this;
+	const float pi = M_PI;
+	float premulticator = 1 /( standardDeviation * std::sqrt(2 * pi));
+	float exponent = -x * x / (2 * standardDeviation*standardDeviation);
+	return premulticator * std::exp(exponent);
 }
 
-bool core::ImageRGB::save(std::string filepath)
+std::vector<float> createGaussianKernel(float standardDeviation, size_t kernelSize)
+{
+	std::vector<float> kernel(kernelSize);
+	
+	for (int idx = 0; idx < kernelSize; idx++)
+	{
+		kernel[idx] = gaussianPdf(standardDeviation, idx - (int)(kernelSize / 2));
+	}
+
+	return kernel;
+}
+
+
+core::ImageRGB core::ImageRGB::Conv1D(std::vector<float> kernel,bool yDirection)
+{
+	
+	core::ImageRGB bluredImg(width,heigth);
+
+	int32_t kernelHalf = kernel.size() / 2;
+
+	float kernelSum = 0;
+	for (const float& item : kernel)
+	{
+		kernelSum += item;
+	}
+
+	for (uint32_t x = 0; x < width; x++)
+	{
+		for (uint32_t y = 0; y < heigth; y++)
+		{
+			float pixelValueR = 0;
+			float pixelValueG = 0;
+			float pixelValueB = 0;
+			for (int kernelIdx = 0; kernelIdx < kernel.size(); kernelIdx++)
+			{
+
+				if (yDirection)
+				{
+					if (y+kernelIdx >= kernelHalf)
+					{
+						uint32_t pixelInKernelY = y + kernelIdx - kernelHalf;
+
+						if(pixelInKernelY<heigth)
+						{ 
+
+							uint32_t pixelInKernelX = x;
+
+							core::Color pixelInKernel = this->GetPixel(pixelInKernelX, pixelInKernelY);
+
+							float kernelValue = kernel[kernelIdx];
+
+							pixelValueR += kernelValue * pixelInKernel.Red;
+							pixelValueG += kernelValue * pixelInKernel.Green;
+							pixelValueB += kernelValue * pixelInKernel.Blue;
+						}
+
+					}
+				}
+				else
+				{
+					if (x + kernelIdx >= kernelHalf)
+					{
+						uint32_t pixelInKernelX = x + kernelIdx - kernelHalf;
+
+						if(pixelInKernelX<width)
+						{
+						
+							uint32_t pixelInKernelY = y;
+
+							core::Color pixelInKernel = this->GetPixel(pixelInKernelX, pixelInKernelY);
+
+							float kernelValue = kernel[kernelIdx];
+
+							pixelValueR += kernelValue * pixelInKernel.Red;
+							pixelValueG += kernelValue * pixelInKernel.Green;
+							pixelValueB += kernelValue * pixelInKernel.Blue;
+						}
+					}
+				}
+			}
+
+			pixelValueR /= kernelSum;
+			pixelValueB /= kernelSum;
+			pixelValueG /= kernelSum;
+
+			core::Color resultColor;
+			if (pixelValueR > 225)
+				pixelValueR = 225;
+			if (pixelValueB > 225)
+				pixelValueB = 225;
+			if (pixelValueG > 225)
+				pixelValueG = 225;
+			resultColor.Red = pixelValueR;
+			resultColor.Green = pixelValueG;
+			resultColor.Blue = pixelValueB;
+			bluredImg.SetPixel(x, y, resultColor);
+			
+		}
+	}
+
+	return bluredImg;
+}
+
+core::ImageRGB core::ImageRGB::Downsize(uint32_t target_wight, uint32_t target_height)
+{
+	float scaleFactorX = (float)width/(float)target_wight  ;
+	float scaleFactorY = (float)heigth/(float) target_height  ;
+
+	float standardDeviationX = 1 / std::sqrt(2 * scaleFactorX);
+	float standardDeviationY = 1 / std::sqrt(2 * scaleFactorY);
+
+	int kernelSizeX = std::round(3 * standardDeviationX) * 2 + 1 ;
+	int kernelSizeY = std::round(3 * standardDeviationY) * 2 + 1;
+
+	
+	auto kernelX = createGaussianKernel(standardDeviationX, kernelSizeX);
+	auto kernelY = createGaussianKernel(standardDeviationY, kernelSizeY);
+
+	this->Save("input.png");
+
+	core::ImageRGB xBlurImg = Conv1D(kernelX);
+
+	core::ImageRGB xyBlurImg = xBlurImg.Conv1D(kernelY,true);
+
+	core::ImageRGB downScaledImg(target_wight, target_height);
+
+	for (int x = 0; x < target_wight; x++)
+	{
+		for (int y = 0; y < target_height; y++)
+		{
+			int upScaledX = (int) x * scaleFactorX;
+			int upScaledY = (int) y * scaleFactorY;
+
+			core::Color color = xyBlurImg.GetPixel(upScaledX, upScaledY);
+			downScaledImg.SetPixel(x, y, color);
+		}
+	}
+
+	return downScaledImg;
+}
+
+bool core::ImageRGB::Save(std::string filepath)
 {
 	std::unique_ptr < OIIO::ImageOutput > out = OIIO::ImageOutput::create(filepath);
 	if (!out)
