@@ -93,7 +93,7 @@ std::vector<float> createGaussianKernel(float standardDeviation, size_t kernelSi
 }
 
 
-core::ImageRGB core::ImageRGB::Conv1D(std::vector<float> kernel,bool yDirection)
+core::ImageRGB core::ImageRGB::Conv1D(std::vector<float> kernel,bool yDirection, bool normalize)
 {
 	
 	core::ImageRGB bluredImg(width,heigth);
@@ -160,11 +160,12 @@ core::ImageRGB core::ImageRGB::Conv1D(std::vector<float> kernel,bool yDirection)
 					}
 				}
 			}
-
-			pixelValueR /= kernelSum;
-			pixelValueB /= kernelSum;
-			pixelValueG /= kernelSum;
-
+			if(normalize)
+			{
+				pixelValueR /= kernelSum;
+				pixelValueB /= kernelSum;
+				pixelValueG /= kernelSum;
+			}
 			core::Color resultColor;
 			if (pixelValueR > 225)
 				pixelValueR = 225;

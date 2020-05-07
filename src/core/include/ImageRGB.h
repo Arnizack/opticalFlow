@@ -25,7 +25,10 @@ namespace core
 		//returns True, when saved successfull 
 		bool Save(std::string filepath);
 
-		ImageRGB Conv1D (std::vector<float> kernel, bool yDirection = false);
+		/*
+		normalize ensures, that the area under the kernel function is 1. 
+		*/
+		ImageRGB Conv1D (std::vector<float> kernel, bool yDirection = false, bool normalize = true);
 
 		
 
