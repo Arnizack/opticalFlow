@@ -3,9 +3,9 @@ namespace core
 {
 	struct Color
 	{
-		float Red;
-		float Green;
-		float Blue;
+		unsigned char Red;
+		unsigned char Green;
+		unsigned char Blue;
 	};
 }
 

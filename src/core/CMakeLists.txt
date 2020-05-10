@@ -60,8 +60,10 @@ message(${CMAKE_PREFIX_PATH})
 
 find_package(Boost REQUIRED COMPONENTS system filesystem thread)
 
+find_package(JPEG REQUIRED)
+
 target_link_libraries(${LIB_TARGET} PUBLIC 
-${LIB_DEPENDENCIES} PRIVATE Boost::system Boost::filesystem Boost::thread OpenImageIO::OpenImageIO OpenImageIO::OpenImageIO_Util ) 
+${LIB_DEPENDENCIES} PRIVATE JPEG::JPEG Boost::system Boost::filesystem Boost::thread OpenImageIO::OpenImageIO OpenImageIO::OpenImageIO_Util ) 
 
 
 
