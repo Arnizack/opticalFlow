@@ -87,7 +87,7 @@ void core::FlowField::Load(std::string filepath)
 	}
 }
 
-core::FlowField core::FlowField::Upsize(uint32_t target_widht, uint32_t target_height)
+core::FlowField core::FlowField::Upsize(uint32_t target_width, uint32_t target_height)
 {
 
 	/*
@@ -98,21 +98,21 @@ core::FlowField core::FlowField::Upsize(uint32_t target_widht, uint32_t target_h
 	*/
 	
 	//the new upscaled Field
-	core::FlowField new_field (target_height, target_widht);
+	core::FlowField new_field (target_width, target_height);
 
 	core::FlowVector a, b, c, d, temp;
 
 	std::int32_t original_width = this->width;
 	std::int32_t original_height = this->height;
 
-	double x_ratio = (original_width - 1) / target_widht;
-	double y_ratio = (original_height - 1) / target_widht;
+	double x_ratio = (original_width - 1) / target_width;
+	double y_ratio = (original_height - 1) / target_height;
 	double x_spacing, y_spacing;
 	int x, y, index;
 
 	for (std::uint32_t i = 0; i < target_height; i++) //columns
 	{
-		for (std::uint32_t j = 0; j < target_widht; j++) //rows
+		for (std::uint32_t j = 0; j < target_width; j++) //rows
 		{
 			x = (int)(x_ratio * j);
 			y = (int)(y_ratio * i);
@@ -127,8 +127,8 @@ core::FlowField core::FlowField::Upsize(uint32_t target_widht, uint32_t target_h
 			d = this->field[index + original_width + 1];
 
 			//temp = A * (1 - x_spacing) * (1 - y_spacing) + B * x_spacing * (1 - y_spacing) + C * (1 - x_spacing) * y_spacing + D *( x_spacing * y_spacing)
-			temp.vector_X = (std::int32_t) (a.vector_X*(1 - x_spacing) * (1 - y_spacing) + b.vector_X * x_spacing * (1 - y_spacing) + c.vector_X * (1 - x_spacing) * y_spacing + d.vector_X * x_spacing * y_spacing);
-			temp.vector_Y = (std::int32_t) (a.vector_Y*(1 - x_spacing) * (1 - y_spacing) + b.vector_Y * x_spacing * (1 - y_spacing) + c.vector_Y * (1 - x_spacing) * y_spacing + d.vector_Y * x_spacing * y_spacing);
+			temp.vector_X = 2 * (std::int32_t) (a.vector_X*(1 - x_spacing) * (1 - y_spacing) + b.vector_X * x_spacing * (1 - y_spacing) + c.vector_X * (1 - x_spacing) * y_spacing + d.vector_X * x_spacing * y_spacing);
+			temp.vector_Y = 2 * (std::int32_t) (a.vector_Y*(1 - x_spacing) * (1 - y_spacing) + b.vector_Y * x_spacing * (1 - y_spacing) + c.vector_Y * (1 - x_spacing) * y_spacing + d.vector_Y * x_spacing * y_spacing);
 
 			new_field.SetVector(j, i, temp);
 		}
