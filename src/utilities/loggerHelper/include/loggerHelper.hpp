@@ -1,5 +1,5 @@
-#include<logger.hpp>
 #pragma once
+#include<logger.hpp>
 #include<vector>
 #include<array>
 #include<sstream>

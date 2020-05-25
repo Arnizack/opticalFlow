@@ -1,7 +1,7 @@
 #include<gtest/gtest.h>
 
 
-TEST(printerLibTESTS, vecConverterTest)
+TEST(ImageGradient, vecConverterTest)
 {
 
 }

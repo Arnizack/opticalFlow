@@ -8,7 +8,7 @@ set(LIBNAME core)
 set(LIB_SOURCE 
 	src/FlowField.cpp
 	src/ImageRGB.cpp
-	)
+	  )
 
 #In this DIRECTORY are the Headers, which can be accessed from outside Code
 set(LIB_PUBLIC_INCLUDE_DIRECTORY include)
@@ -19,7 +19,8 @@ set(LIB_PRIVATE_INCLUDE_DIRECTORY src)
 #ccp Files for the Unit TESTS
 
 set(TEST_SOURCE
-	tests/ImageRGBTest.cpp)
+	tests/ImageRGBTest.cpp
+	tests/FlowFieldtest.cpp)
 
 set(LIB_DEPENDENCIES logger_Lib loggerHelper_Lib)
 

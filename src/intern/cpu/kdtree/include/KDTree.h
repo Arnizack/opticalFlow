@@ -2,30 +2,21 @@
 #include<memory>
 #include"ImageRGB.h"
 #include<vector>
-
+#include"KDTreeData.h"
+#include"KDResults.h"
 namespace kdtree
 { 
 
-	struct KDTreeData;
-
-	struct KDResult
-	{
-		float X;
-		float Y;
-		float R;
-		float G;
-		float B;
-	};
-
-	std::vector<KDResult> queryKDTree(KDTreeData data);
+	std::vector<KDResult> queryKDTree(std::unique_ptr<kdtree::KDTreeData>& data,uint32_t x, uint32_t y, core::Color color);
 
 	class KDTree
 	{
 	public:
 		KDTree(std::shared_ptr<core::ImageRGB> image);
-		KDTreeData Build(float sigma_distance, float sigma_color,int sampleCount);
+		std::unique_ptr<kdtree::KDTreeData> Build(float sigma_distance, float sigma_color, int sampleCount);
 		
-		
+	private:
+		std::shared_ptr<core::ImageRGB> Image;
 	};
 
 }

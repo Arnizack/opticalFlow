@@ -354,6 +354,7 @@ build
 installation
 
 src/CMakeSettings.json
+src/out
 
 src/.vs
 /doc/theory/.ipynb_checkpoints

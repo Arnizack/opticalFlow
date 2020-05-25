@@ -67,7 +67,7 @@ add_executable(${TEST_TARGET}
 
 
 target_link_libraries(${TEST_TARGET} PUBLIC
-${TESTFRAMEWORK} ${LIB_TARGET} ) 
+${TESTFRAMEWORK} ${LIB_TARGET} "-static") 
 
 target_include_directories( ${TEST_TARGET} PRIVATE $<TARGET_PROPERTY:${LIB_TARGET},INCLUDE_DIRECTORIES>)
 

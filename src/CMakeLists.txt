@@ -1,7 +1,9 @@
-cmake_minimum_required(VERSION 3.2 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.14.2 FATAL_ERROR)
 project(OpticalFlow VERSION 0.1)
+
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+#set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreadedDebug<$<CONFIG:Debug>:Debug>")
 
 # Must use GNUInstallDirs to install libraries into correct
 # locations on all platforms.

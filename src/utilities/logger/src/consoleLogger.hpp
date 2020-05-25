@@ -1,3 +1,4 @@
+#pragma once
 #include"iLogger.hpp"
 
 class ConsoleLogger : public iLogger

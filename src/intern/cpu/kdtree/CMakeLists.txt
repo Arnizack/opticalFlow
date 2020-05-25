@@ -7,7 +7,17 @@ set(LIBNAME cpu_kdtree)
 #cpp Files for the Library
 set(LIB_SOURCE 
 	src/KDTree.cpp
-	)
+	src/CoordinateConverter.cpp
+	src/BoundingBox.cpp
+	src/KDTreeFactory.cpp
+	src/KDTreeQuery/KDTreeRecrusivQuery.cpp
+	src/KDTreeQuery/KDTreeMath.cpp
+	src/KDTreeQuery/KDSerialRandom.cpp
+	src/KDTreeSpaces.cpp
+	src/KDTreeData.cpp
+	src/KDTreeVisualizer.cpp
+	src/KDTreeQuery/KDTreeSerialQuery.cpp
+)
 
 #In this DIRECTORY are the Headers, which can be accessed from outside Code
 set(LIB_PUBLIC_INCLUDE_DIRECTORY include)
@@ -18,7 +28,12 @@ set(LIB_PRIVATE_INCLUDE_DIRECTORY src)
 #ccp Files for the Unit TESTS
 
 set(TEST_SOURCE
-	tests/sampleTest.cpp)
+	tests/CoordinateConverterTests.cpp
+	tests/KDTreeTests.cpp
+	tests/KDTreeQueryTests.cpp
+	tests/KDTreeAnalyser.cpp	
+	tests/KDTreeMathTests.cpp
+)
 
 set(LIB_DEPENDENCIES logger_Lib loggerHelper_Lib core_Lib )
 
@@ -65,6 +80,8 @@ export(TARGETS ${LIB_TARGET} FILE ${LIBCONFIG}.cmake)
 add_executable(${TEST_TARGET} 
 				${TEST_SOURCE})
 
+
+target_compile_definitions(${TEST_TARGET} PRIVATE __TESTDATADIR__="${CMAKE_CURRENT_SOURCE_DIR}/tests/data" )
 
 target_link_libraries(${TEST_TARGET} PUBLIC
 ${TESTFRAMEWORK} ${LIB_TARGET} ) 

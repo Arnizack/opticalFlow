@@ -132,7 +132,9 @@ core::ImageRGB core::ImageRGB::Conv1D(std::vector<float> kernel,bool yDirection,
 							pixelValueR += kernelValue * pixelInKernel.Red;
 							pixelValueG += kernelValue * pixelInKernel.Green;
 							pixelValueB += kernelValue * pixelInKernel.Blue;
-							kernelSum += kernelValue;
+							
+							if(normalize)
+								kernelSum += std::abs(kernelValue);
 						}
 
 					}
