@@ -2,6 +2,7 @@
 
 
 
+
 core::FlowField::FlowField(uint32_t width, uint32_t height)
 {
 	this->width = width;
@@ -16,7 +17,7 @@ core::FlowField::~FlowField()
 	free(this->field);
 }*/
 
-core::FlowVector core::FlowField::GetVector(uint32_t x, uint32_t y)
+core::FlowVector core::FlowField::GetVector(uint32_t x, uint32_t y) const
 {
 	return this->field[x + y * this->width];
 }
@@ -31,7 +32,7 @@ uint32_t core::FlowField::GetWidth() const
 	return this->width;
 }
 
-uint32_t core::FlowField::GetHeight()
+uint32_t core::FlowField::GetHeight() const
 {
 	return this->height;
 }

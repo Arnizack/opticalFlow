@@ -68,8 +68,8 @@ namespace kdtree
 		StandardVal maxValues(width, height, (unsigned char)255, (unsigned char)255, (unsigned char)255);
 		CoordinateConverter converter(maxValues, sigma_distance, sigma_color);
 
-		//std::unique_ptr<IKDTreeQuery> queryPtr = std::make_unique< KDTreeRecrusivQuery>(width, height, sampleCount, converter);
-		std::unique_ptr<IKDTreeQuery> queryPtr = std::make_unique< KDTreeSerialQuery>(width, height, sampleCount, converter);
+		std::unique_ptr<IKDTreeQuery> queryPtr = std::make_unique< KDTreeRecrusivQuery>(width, height, sampleCount, converter);
+		//std::unique_ptr<IKDTreeQuery> queryPtr = std::make_unique< KDTreeSerialQuery>(width, height, sampleCount, converter);
 
 		std::unique_ptr<KDTreeData> data = 
 			std::make_unique<KDTreeData>(std::move(queryPtr));

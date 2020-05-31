@@ -2,15 +2,14 @@
 #******************************************************************************************
 #------------------------------------------------------------------------------------------
 #Settings:
-set(LIBNAME core)
+set(LIBNAME visualization)
 
 #cpp Files for the Library
 set(LIB_SOURCE 
-	src/FlowField.cpp
-	src/ImageRGB.cpp
-	src/OpticalFlowMath.cpp
-	src/FlowVector.cpp
-	src/Color.cpp
+	src/FlowFieldVisualizer.cpp
+	src/ColorCircle.cpp
+	src/ColorSpaceConverter.cpp
+	src/HSV.cpp
 	  )
 
 #In this DIRECTORY are the Headers, which can be accessed from outside Code
@@ -22,10 +21,10 @@ set(LIB_PRIVATE_INCLUDE_DIRECTORY src)
 #ccp Files for the Unit TESTS
 
 set(TEST_SOURCE
-	tests/ImageRGBTest.cpp
-	tests/FlowFieldtest.cpp)
+	tests/FlowVizTests.cpp
+	 "tests/ColorConverterTests.cpp")
 
-set(LIB_DEPENDENCIES logger_Lib loggerHelper_Lib)
+set(LIB_DEPENDENCIES logger_Lib loggerHelper_Lib core_Lib)
 
 #Ende Settings
 #------------------------------------------------------------------------------------------
@@ -51,15 +50,7 @@ $<INSTALL_INTERFACE:${LIB_PUBLIC_INCLUDE_DIRECTORY}>
 PRIVATE ${LIB_PRIVATE_INCLUDE_DIRECTORY}
 )
 
-#find_package(Modules CONFIG REQUIRED)
-find_package(OpenImageIO CONFIG REQUIRED)
 
-if(TARGET OpenImageIO::OpenImageIO)
-	message("OpenImageIO was found")
-
-else()
-	message("OpenImageIO was not found")
-endif()
 message(${CMAKE_PREFIX_PATH})
 
 find_package(Boost REQUIRED COMPONENTS system filesystem thread)
@@ -67,7 +58,7 @@ find_package(Boost REQUIRED COMPONENTS system filesystem thread)
 find_package(JPEG REQUIRED)
 
 target_link_libraries(${LIB_TARGET} PUBLIC 
-${LIB_DEPENDENCIES} PRIVATE JPEG::JPEG Boost::system Boost::filesystem Boost::thread OpenImageIO::OpenImageIO OpenImageIO::OpenImageIO_Util ) 
+${LIB_DEPENDENCIES} ) 
 
 
 

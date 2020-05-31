@@ -8,6 +8,8 @@ set(LIBNAME cpu_bilateralfilter)
 set(LIB_SOURCE 
 	src/BilateralFlowFilter.cpp
 	src/ReliabilityMap.cpp
+	src/ReliabilityFactory.cpp
+	src/NaiveBilateralFlowFilter.cpp
 	)
 
 #In this DIRECTORY are the Headers, which can be accessed from outside Code
@@ -19,7 +21,8 @@ set(LIB_PRIVATE_INCLUDE_DIRECTORY src)
 #ccp Files for the Unit TESTS
 
 set(TEST_SOURCE
-	tests/sampleTest.cpp)
+	"tests/NaiveVsKdTest.cpp"
+)
 
 set(LIB_DEPENDENCIES logger_Lib loggerHelper_Lib core_Lib cpu_imagegradient_Lib cpu_kdtree_Lib )
 
@@ -66,9 +69,11 @@ export(TARGETS ${LIB_TARGET} FILE ${LIBCONFIG}.cmake)
 add_executable(${TEST_TARGET} 
 				${TEST_SOURCE})
 
+target_compile_definitions(${TEST_TARGET} PRIVATE 
+__TESTDATADIR__="${CMAKE_CURRENT_SOURCE_DIR}/tests/data" )
 
 target_link_libraries(${TEST_TARGET} PUBLIC
-${TESTFRAMEWORK} ${LIB_TARGET} ) 
+${TESTFRAMEWORK} ${LIB_TARGET} visualization_Lib ) 
 
 target_include_directories( ${TEST_TARGET} PRIVATE $<TARGET_PROPERTY:${LIB_TARGET},INCLUDE_DIRECTORIES>)
 

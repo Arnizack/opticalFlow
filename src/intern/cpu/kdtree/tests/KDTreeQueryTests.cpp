@@ -36,7 +36,7 @@ TEST(KDTree, QueryTree)
 	
 	std::shared_ptr<core::ImageRGB> imagePtr = std::make_shared<core::ImageRGB>(fotoPath);
 	
-
+	core::Timer timer(40);
 	kdtree::KDTree tree(imagePtr);
 	
 	float sigma_color = 80;
@@ -60,7 +60,7 @@ TEST(KDTree, QueryTree)
 	
 	for (uint32_t x = 0; x <  imagePtr->GetWidth() ; x++)
 	{
-		core::Timer timer(40);
+		
 		for (uint32_t y = 0; y <imagePtr->GetHeight(); y++)
 		{
 			
@@ -104,9 +104,10 @@ TEST(KDTree, QueryTree)
 			
 			
 		}
-		timer.Stop();
+		
 		logger::log(40, "x: %d", x);
 	}
+	timer.Stop();
 	resultImg.Save("BilateralBlureLola.png");
 	
 }
