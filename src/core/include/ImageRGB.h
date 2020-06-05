@@ -13,7 +13,7 @@ namespace core
 		//can't import jpg correctly
 		ImageRGB(std::string filepath);
 		ImageRGB(uint32_t width, uint32_t height);
-		Color GetPixel(uint32_t x, uint32_t y) const;
+		virtual Color GetPixel(uint32_t x, uint32_t y) const;
 		void SetPixel(uint32_t x, uint32_t y, Color col);
 		uint32_t GetWidth() const;
 		uint32_t GetHeight() const;

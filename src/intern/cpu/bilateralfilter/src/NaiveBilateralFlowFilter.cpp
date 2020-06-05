@@ -1,6 +1,10 @@
 #include"NaiveBilateralFlowFilter.hpp"
 #include"OpticalFlowMath.h"
 
+#include <windows.h>
+#include <ppl.h>
+#include<algorithm>
+
 namespace cpu::bilateralfilter
 {
 	core::FlowField NaiveBilateralFilter::filter(cpu::bilateralfilter::ReliabilityMap& map, 
@@ -14,15 +18,17 @@ namespace cpu::bilateralfilter
 
 	core::FlowField resultFlow(width, heigth);
 
-	for (int x_0 = 0; x_0 < width; x_0++)
+	concurrency::parallel_for(0, static_cast<int>(width), [&](int x_0) 
+
+	//for (int x_0 = 0; x_0 < width; x_0++)
 	{
 		for (int y_0 = 0; y_0 < heigth; y_0++)
 		{
-			uint32_t x_min = std::max(x_0 - consideredImagRegHalf, 0);
-			uint32_t x_max = std::min(x_0 + consideredImagRegHalf, (int)width);
+			uint32_t x_min = max(x_0 - consideredImagRegHalf, 0);
+			uint32_t x_max = min(x_0 + consideredImagRegHalf, (int)width);
 
-			uint32_t y_min = std::max(y_0 - consideredImagRegHalf, 0);
-			uint32_t y_max = std::min(y_0 + consideredImagRegHalf, (int)heigth);
+			uint32_t y_min = max(y_0 - consideredImagRegHalf, 0);
+			uint32_t y_max = min(y_0 + consideredImagRegHalf, (int)heigth);
 
 			auto color_0 = templateImg.GetPixel(x_0, y_0);
 
@@ -62,6 +68,7 @@ namespace cpu::bilateralfilter
 			resultFlow.SetVector(x_0, y_0, core::FlowVector(flow_x,flow_y));
 		}
 	}
+	);
 	return resultFlow;
 }
 }

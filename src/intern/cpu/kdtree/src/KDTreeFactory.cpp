@@ -171,7 +171,7 @@ namespace kdtree
 		float length = last - first;
 		for (float t = length / 2; t * 2 > 1; t /= 2)
 		{
-			uint8_t prefix = findCommanPrefix(mortonCodes, first, first + split + ceil(t));
+			int8_t prefix = findCommanPrefix(mortonCodes, first, first + split + ceil(t));
 			if ( prefix > commanPrefix_min)
 				split += ceil(t);
 		}

@@ -42,13 +42,13 @@ namespace kdtree
 
 	
 	
-	std::vector<KDResult> queryKDTree(std::unique_ptr<KDTreeData>& data, uint32_t x, uint32_t y, core::Color color)
+	std::vector<KDResult> queryKDTree(KDTreeData& data, uint32_t x, uint32_t y, core::Color color)
 	{
 		std::vector<KDResult> results;
 		results.reserve(32);
 		float sigma =static_cast<float>(3 / sqrt(11));
 
-		data->Query->Query(StandardVal(x,y,color.Red,color.Green,color.Blue),data->kdTreeNodes,data->samples,results, sigma,data->sampleCount);
+		data.Query->Query(StandardVal(x,y,color.Red,color.Green,color.Blue),data.kdTreeNodes,data.samples,results, sigma,data.sampleCount);
 
 
 		return results;
@@ -60,7 +60,7 @@ namespace kdtree
 	}
 
 
-	std::unique_ptr<KDTreeData> KDTree::Build(float sigma_distance, float sigma_color, int sampleCount)
+	KDTreeData KDTree::Build(float sigma_distance, float sigma_color, int sampleCount)
 	{
 		uint32_t width = Image->GetWidth();
 		uint32_t height = Image->GetHeight();
@@ -71,17 +71,16 @@ namespace kdtree
 		std::unique_ptr<IKDTreeQuery> queryPtr = std::make_unique< KDTreeRecrusivQuery>(width, height, sampleCount, converter);
 		//std::unique_ptr<IKDTreeQuery> queryPtr = std::make_unique< KDTreeSerialQuery>(width, height, sampleCount, converter);
 
-		std::unique_ptr<KDTreeData> data = 
-			std::make_unique<KDTreeData>(std::move(queryPtr));
+		KDTreeData data(std::move(queryPtr));
 		
-		data->sampleCount = sampleCount;
+		data.sampleCount = sampleCount;
 
 		std::vector<MortonNode>  mortonNodes(nodeCount-1);
 		std::vector<MortonCodeVal> mortonCodes(nodeCount);
 		auto samples = std::vector<KDTreeSample>(nodeCount);
 
-		data->kdTreeNodes = std::vector<KdNode>(nodeCount-1);
-		auto& kdTreeNodes = data->kdTreeNodes;
+		data.kdTreeNodes = std::vector<KdNode>(nodeCount-1);
+		auto& kdTreeNodes = data.kdTreeNodes;
 
 		KDTreeFactory factory = KDTreeFactory();
 		
@@ -112,11 +111,11 @@ namespace kdtree
 
 		factory.createKdTreeNodes(mortonNodes, mortonCodes, samples, kdTreeNodes, converter);
 
-		data->samples = std::vector<KdTreeVal>(samples.size());
+		data.samples = std::vector<KdTreeVal>(samples.size());
 
 		for (uint32_t i = 0; i < samples.size(); i++)
 		{
-			data->samples[i] = samples[i];
+			data.samples[i] = samples[i];
 		}
 
 		return data;

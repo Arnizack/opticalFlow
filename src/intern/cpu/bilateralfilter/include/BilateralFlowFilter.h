@@ -9,7 +9,7 @@ namespace cpu::bilateralfilter
 	class BilateralFlowFilter
 	{
 	public:
-		static core::FlowField filter(const core::FlowField& flow, const ReliabilityMap& map, std::unique_ptr<kdtree::KDTreeData>& tree, const core::ImageRGB templateImage);
+		static core::FlowField filter(const core::FlowField& flow, const ReliabilityMap& map, kdtree::KDTreeData& tree, const core::ImageRGB templateImage);
 	};
 
 }

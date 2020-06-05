@@ -7,7 +7,10 @@ set(LIBNAME cpu_optflow)
 #cpp Files for the Library
 set(LIB_SOURCE 
 	src/CpuOptFlow.cpp
-	)
+	  "src/ImagePyramid.cpp" 
+	  "src/Minimizer/BruteForceMinimizer.cpp" 
+	  "src/IMinimizer.cpp" 
+	  )
 
 #In this DIRECTORY are the Headers, which can be accessed from outside Code
 set(LIB_PUBLIC_INCLUDE_DIRECTORY include)
@@ -18,9 +21,11 @@ set(LIB_PRIVATE_INCLUDE_DIRECTORY src)
 #ccp Files for the Unit TESTS
 
 set(TEST_SOURCE
-	tests/sampleTest.cpp)
+	"tests/BruteForceMinimizer.cpp")
 
-set(LIB_DEPENDENCIES logger_Lib loggerHelper_Lib core_Lib cpu_imagegradient_Lib cpu_kdtree_Lib cpu_bilateralfilter_Lib )
+set(LIB_DEPENDENCIES logger_Lib loggerHelper_Lib core_Lib 
+cpu_imagegradient_Lib cpu_kdtree_Lib cpu_bilateralfilter_Lib 
+visualization_Lib)
 
 #Ende Settings
 #------------------------------------------------------------------------------------------
@@ -65,6 +70,7 @@ export(TARGETS ${LIB_TARGET} FILE ${LIBCONFIG}.cmake)
 add_executable(${TEST_TARGET} 
 				${TEST_SOURCE})
 
+target_compile_definitions(${TEST_TARGET} PRIVATE __TESTDATADIR__="${CMAKE_CURRENT_SOURCE_DIR}/tests/data" )
 
 target_link_libraries(${TEST_TARGET} PUBLIC
 ${TESTFRAMEWORK} ${LIB_TARGET} ) 

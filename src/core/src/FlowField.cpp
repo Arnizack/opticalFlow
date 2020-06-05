@@ -59,6 +59,30 @@ void core::FlowField::Save(std::string filepath)
 	outfile.close();
 }
 
+void core::FlowField::SaveCsv(std::string filepath)
+{
+	std::ofstream outfile;
+	outfile.open(filepath, std::ios::binary | std::ios::out);
+
+	outfile<<width;
+	outfile << ";";
+	outfile<<height;
+
+	outfile << std::endl;
+
+	for (std::uint32_t i = 0; i < this->width * this->height; i++)
+	{
+		outfile<<field[i].vector_X, sizeof(std::int32_t);
+		outfile << ";";
+		outfile<<field[i].vector_Y, sizeof(std::int32_t);
+		if(i!=width*height-1)
+			outfile << ";";
+	}
+	
+	outfile.close();
+
+}
+
 void core::FlowField::Load(std::string filepath)
 {
 	std::ifstream infile;

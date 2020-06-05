@@ -8,5 +8,8 @@ namespace core
 	float Length(int x, int y);
 
 	float Distance(int x1, int y1, int x2, int y2);
+	/*
+	template<class matrixType, typename cellType, class >
+	interpolate(float x, float y, const matrixType& mat, )*/
 }
                 

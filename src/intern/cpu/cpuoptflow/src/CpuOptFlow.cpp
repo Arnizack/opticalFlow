@@ -1,7 +1,6 @@
 #include"CpuOptFlow.h"
 
-namespace cpu
-{
+namespace cpu {
 	OpticalFlow::OpticalFlow(float sigma_distance, float sigma_color, float convergence_threshold)
 	{
 	}

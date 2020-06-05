@@ -11,6 +11,7 @@ namespace cpu::bilateralfilter
 	private:
 		float FilterSize;
 		float Error(const uint32_t x,const uint32_t y,const core::FlowVector& vec, const core::ImageRGB& templateFrame, const core::ImageRGB& nextFrame);
+		
 };
 
 }

@@ -1,3 +1,9 @@
+#include <windows.h>
+#include <ppl.h>
+#include <iostream>
+#include <algorithm>
+#include <array>
+
 #include<gtest/gtest.h>
 #include<KDTree.h>
 #include"logger.hpp"
@@ -6,6 +12,10 @@
 #include"KDTreeAnalyser.hpp"
 
 #include"Timer.h"
+//#include<amp.h>
+
+#include <iostream>
+
 
 float calcWeight(uint32_t x1, uint32_t y1, unsigned char r1, unsigned char g1, unsigned char b1,
 	uint32_t x2, uint32_t y2, unsigned char r2, unsigned char g2, unsigned char b2, float sigma_color, float sigma_distance)
@@ -36,45 +46,51 @@ TEST(KDTree, QueryTree)
 	
 	std::shared_ptr<core::ImageRGB> imagePtr = std::make_shared<core::ImageRGB>(fotoPath);
 	
-	core::Timer timer(40);
+	
 	kdtree::KDTree tree(imagePtr);
 	
 	float sigma_color = 80;
 	float sigma_distance = 20;
 	int sampleCount = 32;
 	
-	
-
-	auto data = tree.Build(sigma_distance, sigma_color, sampleCount);
+	logger::log(40, "Build");
+	core::Timer timer1(40);
+	kdtree::KDTreeData data = tree.Build(sigma_distance, sigma_color, sampleCount);
+	timer1.Stop();
 
 	core::ImageRGB resultImg(imagePtr->GetWidth(), imagePtr->GetHeight());
-	
+	/*
 	kdtree::KDTreeAnalyser analyser;
-	analyser.logTreeLevelCount(*data, 40);
-	analyser.logLeftPath(*data, 40);
-
+	analyser.logTreeLevelCount(data, 40);
+	analyser.logLeftPath(data, 40);
+	*/
 	//kdtree::KDTreeVisualizer treeVis(*data);
 
 	//treeVis.write("graph.txt");
 
 	
-	for (uint32_t x = 0; x <  imagePtr->GetWidth() ; x++)
-	{
-		
-		for (uint32_t y = 0; y <imagePtr->GetHeight(); y++)
+
+	core::Timer timer(40);
+
+	concurrency::parallel_for(0, (int)imagePtr->GetWidth(),
+		[imagePtr, &resultImg, &data](int x) {
+		//for (uint32_t x = 0; x <  imagePtr->GetWidth() ; x++)
+
+
+		for (uint32_t y = 0; y < imagePtr->GetHeight(); y++)
 		{
-			
+
 			auto color = imagePtr->GetPixel(x, y);
-			
-			std::vector<kdtree::KDResult> results = kdtree::queryKDTree(data,x,y,color);
-			
+
+			std::vector<kdtree::KDResult> results = kdtree::queryKDTree(data, x, y, color);
+
 			float divider = 0;
 			core::Color resultColor;
 			float red = 0;
 			float green = 0;
 			float blue = 0;
 			int resultCount = results.size();
-			
+
 			float level = 0;
 
 			for (const auto& result : results)
@@ -101,12 +117,13 @@ TEST(KDTree, QueryTree)
 			resultColor.Green = static_cast<unsigned char> (green);
 			resultColor.Blue = static_cast<unsigned char> (blue);
 			resultImg.SetPixel(x, y, resultColor);
-			
-			
+
+
 		}
-		
-		logger::log(40, "x: %d", x);
+
+		//logger::log(40, "x: %d", x);
 	}
+	);
 	timer.Stop();
 	resultImg.Save("BilateralBlureLola.png");
 	

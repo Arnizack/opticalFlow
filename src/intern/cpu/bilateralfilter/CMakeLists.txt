@@ -24,7 +24,7 @@ set(TEST_SOURCE
 	"tests/NaiveVsKdTest.cpp"
 )
 
-set(LIB_DEPENDENCIES logger_Lib loggerHelper_Lib core_Lib cpu_imagegradient_Lib cpu_kdtree_Lib )
+set(LIB_DEPENDENCIES logger_Lib loggerHelper_Lib core_Lib cpu_imagegradient_Lib cpu_kdtree_Lib visualization_Lib)
 
 #Ende Settings
 #------------------------------------------------------------------------------------------
@@ -73,7 +73,7 @@ target_compile_definitions(${TEST_TARGET} PRIVATE
 __TESTDATADIR__="${CMAKE_CURRENT_SOURCE_DIR}/tests/data" )
 
 target_link_libraries(${TEST_TARGET} PUBLIC
-${TESTFRAMEWORK} ${LIB_TARGET} visualization_Lib ) 
+${TESTFRAMEWORK} ${LIB_TARGET}  ) 
 
 target_include_directories( ${TEST_TARGET} PRIVATE $<TARGET_PROPERTY:${LIB_TARGET},INCLUDE_DIRECTORIES>)
 

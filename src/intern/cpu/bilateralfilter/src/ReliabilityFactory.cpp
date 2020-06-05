@@ -1,5 +1,6 @@
 #include "ReliabilityFactory.hpp"
 #include"OpticalFlowMath.h"
+#include"loggerHelper.hpp"
 
 namespace cpu::bilateralfilter
 {
@@ -19,13 +20,15 @@ float ReliabilityFactory::ReliabilityAt(uint32_t x, uint32_t y, const core::Flow
     uint32_t yMax = std::min(y + filterHalf, heigth);
     //Calc Min and Mean
 
-    float minError = 1000;
+    float minError = std::numeric_limits<float>::infinity();
     float meanError = 0;
+
+
 
     for (uint32_t xChild = xMin; xChild < xMax; xChild++)
     {
 
-        for (uint32_t yChild = yMin; xChild < yMax; xChild++)
+        for (uint32_t yChild = yMin; yChild < yMax; yChild++)
         {
             core::FlowVector vec = flow.GetVector(xChild, yChild);
             float error = Error(x, y, vec, templateFrame, nextFrame);
@@ -33,9 +36,12 @@ float ReliabilityFactory::ReliabilityAt(uint32_t x, uint32_t y, const core::Flow
             meanError += error;
         }
     }
+
     meanError /= (xMax - xMin) * (yMax - yMin);
 
-    return meanError - minError;
+    float reliability = meanError - minError;
+
+    return reliability;
 }
 float ReliabilityFactory::Error(const uint32_t x, const uint32_t y, const core::FlowVector& vec, const core::ImageRGB& templateFrame, const core::ImageRGB& nextFrame)
 {

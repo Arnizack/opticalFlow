@@ -14,8 +14,11 @@ namespace  cpu::bilateralfilter
 		~ReliabilityMap();
 
 		float GetReliability(uint32_t x, uint32_t y) const;
+		core::ImageRGB toImage();
 
 	private:
 		std::vector<std::vector<float>> ReliabilityValues;
+		uint32_t Width;
+		uint32_t Heigth;
 	};
 }

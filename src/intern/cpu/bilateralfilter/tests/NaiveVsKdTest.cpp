@@ -58,7 +58,7 @@ TEST(bilateralfilter, naiveVskd)
 	logger::log(20, "Naive:");
 	core::Timer timerNaive(20);
 
-	tests::NaiveBilateralFilter naiveFilter;
+	NaiveBilateralFilter naiveFilter;
 	auto naiveFlowFiltered = naiveFilter.filter(reliableMap, flow, *templateImg, delta_d, delta_c);
 	timerNaive.Stop();
 	
