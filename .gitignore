@@ -30,6 +30,7 @@ bld/
 [Oo]bj/
 [Ll]og/
 [Ll]ogs/
+CMakeFiles/
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/
@@ -352,6 +353,18 @@ MigrationBackup/
 build
 
 installation
+
+#CMAKE FIles
+
+*.vcxproj
+*.filters
+*.sln
+CMakeCache.txt*
+cmake_install.cmake*
+*config.cmake
+*.dir/
+.cmake/
+.vscode/
 
 src/CMakeSettings.json
 src/out
