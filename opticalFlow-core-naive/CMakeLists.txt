@@ -8,7 +8,7 @@ add_library(opticalFlow-core-naive
     ${SOURCE})
     
 target_include_directories(opticalFlow-core-naive PUBLIC
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/source/opticalFlow>
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/source/>
     $<INSTALL_INTERFACE:opticalFlow>
     PRIVATE source
 )

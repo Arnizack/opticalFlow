@@ -2,7 +2,6 @@ set(SOURCE)
 
 add_subdirectory(source)
 
-message(${SOURCE})
 
 find_package(CUDAToolkit)
 
