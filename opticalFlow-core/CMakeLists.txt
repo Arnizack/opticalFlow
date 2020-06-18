@@ -4,6 +4,8 @@ add_subdirectory(source)
 
 message(${SOURCE})
 
+find_package(CUDAToolkit)
+
 add_library(opticalFlow-core 
     ${SOURCE})
     
@@ -13,7 +15,7 @@ target_include_directories(opticalFlow-core PUBLIC
     PRIVATE source
 )
 
-
+target_link_libraries(opticalFlow-core PRIVATE CUDA::toolkit)
 
 #exporting the lib
 install(TARGETS opticalFlow-core  EXPORT opticalFlow-core-config
