@@ -1,0 +1,32 @@
+pseudoCode:
+
+opticalFlow
+	calcCudaOptFlow(...)
+
+calcCudaOptFlow(img1...,img2...)
+	range1 = createImgPyramide(img1,...)
+	range2 = createImgPyramide(img2,...)
+	flowForward = 0
+	flowBackward = 0
+	
+	mask1=-1,-1
+	mask2=-1,-1
+
+	for img1,img2 in range1,range2:
+
+		flowForward = calcFlowSingleLayer(img1,img2,flowForward,mask1)
+		flowBackward = calcFlowSingleLayer(img2,img1,flowBackward,mask2)
+		postProcessFlow(*flowForward,*flowBackward&)
+		mask1 = selectFlowPoints(...)
+		mask2 = selectFlowPoints(...)
+		flowForward = upscale(flowForward)
+		flowBackward = upscale(flowBackward)
+
+postProcessFlow
+		occlusionMapForward,occlusionMapBackward = calcOcclusionMap(flowForwad,flowBackward)
+		reliableMapForward = calcReliableMap(flowForward)
+		reliableMapBackward = calcReliableMap(flowBackward)
+		bilateralFilterFlow(flowForward,...)
+		bilateralFilterFlow(flowBackward,..)
+
+
