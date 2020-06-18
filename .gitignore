@@ -366,10 +366,5 @@ cmake_install.cmake*
 .cmake/
 .vscode/
 
-src/CMakeSettings.json
-src/out
+scripts/CMakeSettings.json
 
-src/.vs
-/doc/theory/.ipynb_checkpoints
-/prototypes/KD Tree/.vscode
-/prototypes/KD Tree Optimization
