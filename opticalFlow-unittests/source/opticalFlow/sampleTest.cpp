@@ -1,6 +1,7 @@
+
 #include<gtest/gtest.h>
-#include"opticalFlow-core/source/test/main.h"
-TEST(SampleTest, test1)
-{
-	main();
+
+int main(int argc, char** argv) {
+    ::testing::InitGoogleTest(&argc, argv);
+    return RUN_ALL_TESTS();
 }

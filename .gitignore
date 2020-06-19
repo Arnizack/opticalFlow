@@ -351,6 +351,7 @@ MigrationBackup/
 .ionide/
 
 build
+out
 
 installation
 
@@ -365,6 +366,7 @@ cmake_install.cmake*
 *.dir/
 .cmake/
 .vscode/
+CTestTestfile.cmake*
 
 scripts/CMakeSettings.json
 

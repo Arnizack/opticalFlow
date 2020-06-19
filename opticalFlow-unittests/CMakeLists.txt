@@ -1,17 +1,22 @@
+enable_testing()
+
 add_subdirectory(extern)
 
-set(SOURCE)
+set(OPTFLOWTESTSSOURCE "")
 
 add_subdirectory(source)
 
+message(STATUS "TEST UNIT SOURCE")
+message(STATUS ${OPTFLOWTESTSSOURCE}) 
+
 add_executable(opticalFlow-unittests
-                ${SOURCE}
+                ${OPTFLOWTESTSSOURCE}
 )
 
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 
 target_link_libraries(opticalFlow-unittests PUBLIC
-    opticalFlow-core opticalFlow-core-naive gtest_main "-static"
+    opticalFlow-core opticalFlow-core-naive gtest_main gmock_main "-static"
 ) 
 
 #set_property(TARGET opticalFlow-unittests PROPERTY

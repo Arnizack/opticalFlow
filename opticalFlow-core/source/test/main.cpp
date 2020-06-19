@@ -1,5 +1,5 @@
 #include"main.h"
-int main()
+int testMain()
 {
     return 0;
 }

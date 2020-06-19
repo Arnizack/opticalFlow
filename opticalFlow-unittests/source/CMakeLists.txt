@@ -4,4 +4,7 @@ file(
      *.cpp *.hpp *.h *.c
 )
 
-set(SOURCE ${source_list} PARENT_SCOPE)
+set(OPTFLOWTESTSSOURCE ${source_list} PARENT_SCOPE)
+
+
+
