@@ -65,7 +65,7 @@
     - 
 ## Buffer
 
-- ArrayBuffer<T> cacheAllocArray<_Size>()
+- ArrayBuffer<T> cacheAllocArray(_Size)
 
 - 2DMatrixBuffer<T> cacheAlloc2DMatrix<_Width,_Heigth>()
 
