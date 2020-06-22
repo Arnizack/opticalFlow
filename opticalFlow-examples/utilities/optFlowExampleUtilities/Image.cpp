@@ -16,8 +16,8 @@ bool loadImage(std::string& path, utilities::Image& img)
 
 	img.width = spec.width;
 	img.heigth = spec.height;
-	img.data = std::vector<unsigned char>(img.width * img.heigth * nchannels);
-	input->read_image(OIIO::TypeDesc::UINT8, img.data.data());
+	img.data = std::vector<float>(img.width * img.heigth * nchannels);
+	input->read_image(OIIO::TypeDesc::FLOAT, img.data.data());
 	input->close();
 	img.nchannels = nchannels;
 	return true;
@@ -40,7 +40,7 @@ bool utilities::saveImage(std::string& path, utilities::Image& img)
 	std::unique_ptr < OIIO::ImageOutput > out = OIIO::ImageOutput::create(path);
 	if (!out)
 		return false;
-	OIIO::ImageSpec spec(img.width, img.heigth, img.nchannels, OIIO::TypeDesc::UINT8);
+	OIIO::ImageSpec spec(img.width, img.heigth, img.nchannels, OIIO::TypeDesc::FLOAT);
 	out->open(path, spec);
 	out->write_image(OIIO::TypeDesc::UINT8, img.data.data());
 	out->close();

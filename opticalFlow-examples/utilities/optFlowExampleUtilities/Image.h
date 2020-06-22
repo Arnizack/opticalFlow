@@ -10,7 +10,7 @@ namespace utilities
 	{
 		uint32_t width;
 		uint32_t heigth;
-		std::vector<uint8_t> data;
+		std::vector<float> data;
 		uint8_t nchannels;
 
 	};
