@@ -2,12 +2,30 @@
 
 ## SBE : SIMD BACKEND
 - index1
-    - op+ op- op* op/ 
+    - op+ op- op* op/
+
 - index2
+	- x
+	- y
     - op+ op- op* op/
+
+	
 - float3
+	- x
+	- y
+	- z
     - op+ op- op* op/
+	
+- float4
+	- x
+	- y
+	- z
+	- w
+    - op+ op- op* op/
+	
 - float2
+	- x
+	- y
     - op+ op- op* op/
 
 - kernelInfo
@@ -15,6 +33,7 @@
 //Scheduler sollte das regeln
 /*
 - index3 GlobalSize()
+
     - op+ op- op* op/
 - index3 GlobalIdx()
     - op+ op- op* op/

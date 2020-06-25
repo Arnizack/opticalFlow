@@ -5,7 +5,7 @@ namespace datastructurs
 	{
 	public:
 		IDeviceObj(const IDeviceObj& obj) = delete;
-		virtual ~IDeviceObj()=0;
+		virtual ~IDeviceObj() = 0;
 	};
 
 	template<typename T>
@@ -15,7 +15,7 @@ namespace datastructurs
 		const int ItemCount;
 	};
 
-	template<typename T,size_t VectorDimensions>
+	template<typename T,int VectorDimensions>
 	class IDevice2DMatrix : public IDeviceArray<T>
 	{
 	public:
@@ -26,7 +26,12 @@ namespace datastructurs
 
 
 
-	class IDeviceTexture : public IDevice2DMatrix<float,4>
+	class IDeviceTextureRGBA : public IDeviceObj
 	{
+	};
+
+	class IDeviceTextureGrayScale : public IDeviceObj
+	{
+		
 	};
 }

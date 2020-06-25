@@ -1,6 +1,6 @@
 #pragma once
 #include"datastructurs/DeviceData.h"
-namespace kernelbackend
+namespace kernel
 {
 	class IDeviceMemAccess
 	{
