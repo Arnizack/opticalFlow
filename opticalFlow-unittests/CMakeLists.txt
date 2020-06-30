@@ -22,5 +22,5 @@ target_link_libraries(opticalFlow-unittests PUBLIC
 #set_property(TARGET opticalFlow-unittests PROPERTY
 #  MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
 
-target_include_directories( opticalFlow-unittests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../)
+target_include_directories( opticalFlow-unittests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../opticalFlow-core/source)
 target_include_directories(opticalFlow-unittests PRIVATE source)

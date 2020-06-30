@@ -1,5 +1,6 @@
 #pragma once
 #include"datastructurs/DeviceData.h"
+#include<memory>
 
 namespace kernel
 {
@@ -10,7 +11,6 @@ namespace kernel
 	class IKernels
 	{
 	public:
-		virtual bool convolution1d(const datastructurs::IDevice2DMatrix<float, 4>&  source, datastructurs::IDevice2DMatrix<float, 4>& destination,const datastructurs::IDeviceArray<float>& kernel,
-			DIRECTION dir) = 0;
+		virtual bool multArray(int size, std::shared_ptr< datastructurs::IDeviceArray<float>> src, float scalar, std::shared_ptr<datastructurs::IDeviceArray<float>> dst) = 0;
 	};
 }

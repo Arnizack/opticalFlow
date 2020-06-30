@@ -1,10 +1,10 @@
 #include "CPUKernels.h"
 
 #include"platforms/cpu/CPUMacros.h"
-
-
-
-
+#include"kernel/kernels/multArray.h"
+#include"platforms/cpu/launchers/serializeLaunch.h"
+#include"platforms/cpu/datastructurs/Host_Array.h"
+#include"platforms/cpu/CPUBackend.h"
 
 
 namespace kernel
@@ -12,9 +12,22 @@ namespace kernel
 
 
 	
-	bool CPUKernels::convolution1d(const datastructurs::IDevice2DMatrix<float, 4>& source, datastructurs::IDevice2DMatrix<float, 4>& destination, const datastructurs::IDeviceArray<float>& kernel, DIRECTION dir)
+
+
+
+	bool CPUKernels::multArray(int size, std::shared_ptr<datastructurs::IDeviceArray<float>> src, float scalar, std::shared_ptr<datastructurs::IDeviceArray<float>> dst)
 	{
-		return false;
+		auto srcH = std::static_pointer_cast<cpu::Host_Array<float>>(src);
+		auto dstH = std::static_pointer_cast<cpu::Host_Array<float>>(dst);
+
+		cpu::BackendCPU::ds::ArrayMetaData<float> srcMD = srcH->getKernelData();
+		cpu::BackendCPU::ds::ArrayMetaData<float> dstMD = dstH->getKernelData();
+		
+		
+
+		cpu::launchSerial(kernels::multKernel<cpu::BackendCPU>::multArray,size, srcMD, scalar, dstMD);
+
+		return true;
 	}
 
 }

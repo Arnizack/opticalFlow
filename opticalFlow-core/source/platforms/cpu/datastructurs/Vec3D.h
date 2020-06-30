@@ -6,11 +6,16 @@ namespace cpu
 	template<class T>
 	struct Vec3D
 	{
-		T x;
-		T y;
-		T z;
+		T x=0;
+		T y=0;
+		T z=0;
 
-		Vec2D(const Vec<T, 3>& other)
+		Vec3D()
+		{
+
+		}
+
+		Vec3D(const Vec<T, 3>& other)
 		{
 			x = other[0];
 			y = other[1];
@@ -20,7 +25,7 @@ namespace cpu
 
 		inline Vec3D operator+(const Vec2D& a) const
 		{
-			Vec3D result = *this:
+			Vec3D result = *this;
 			result += a;
 			return result;
 		}
@@ -34,7 +39,7 @@ namespace cpu
 
 		inline Vec3D operator-(const Vec2D& a) const
 		{
-			Vec3D result = *this:
+			Vec3D result = *this;
 			result -= a;
 			return result;
 		}
@@ -48,7 +53,7 @@ namespace cpu
 
 		inline Vec3D operator*(const T& s)
 		{
-			Vec3D result = *this:
+			Vec3D result = *this;
 			result *= s;
 			return s;
 		}
@@ -63,7 +68,7 @@ namespace cpu
 
 		inline Vec3D operator/(const T& s)
 		{
-			Vec3D result = *this:
+			Vec3D result = *this;
 			result /= s;
 			return s;
 		}

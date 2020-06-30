@@ -102,7 +102,12 @@
 - gridStripSchedular2D(kernelInfo,index2 GlobalStart,index2 GlobalEnd
  lambda(index2 idx,args...), args...)
 
-- tilesSchedular2D(kernelInfo,index2 GlobalStart, index2 GlobalEnd,index2 tilesSizePerBlock, index2 Overlap, args...
+//Row first order
+- tilesSchedular2DRF(kernelInfo,index2 GlobalStart, index2 GlobalEnd,index2 tilesSizePerBlock, index2 Overlap, args...
+ lambda(index2 idx,args...))
+
+//Colum first order
+- tilesSchedular2DRF(kernelInfo,index2 GlobalStart, index2 GlobalEnd,index2 tilesSizePerBlock, index2 Overlap, args...
  lambda(index2 idx,args...))
 
 
