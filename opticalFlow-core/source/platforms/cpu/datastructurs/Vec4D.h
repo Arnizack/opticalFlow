@@ -1,4 +1,5 @@
 #pragma once
+#include"Vec.h"
 
 namespace cpu
 {
@@ -6,15 +7,10 @@ namespace cpu
 	template<class T>
 	struct Vec4D
 	{
-		T x=0;
-		T y=0;
-		T z=0;
-		T w=0;
-
-		Vec4D()
-		{
-
-		}
+		T x;
+		T y;
+		T z;
+		T w;
 
 		Vec4D(const Vec<T, 4>& other)
 		{

@@ -1,87 +1,97 @@
 #pragma once
-#include<array>
+
+#include <vector>
+#include <memory>
+
 
 namespace cpu
 {
-
-
-	template<typename _Ty,size_t _Size>
-	class Vec : public std::array<_Ty, _Size>
+	template<class T, size_t S>
+	struct Vec
 	{
-	public:
+		std::unique_ptr<T[]> data;
+		const size_t length;
 
-		//using std::array<_Ty, _Size>::array;
-		template<typename T>
-		Vec operator+(const Vec<T, _Size>& v) const
+		Vec()
+			:length(S)
 		{
-			Vec<_Ty, _Size> result;
-			for (size_t idx = 0; idx < _Size; idx++)
-				result[idx] = operator[](idx) + v[idx];
-			return result;
+			this->data = std::make_unique<T[]>(this->length);
 		}
 
-		template<typename T>
-		Vec operator-(const Vec<T, _Size>& v) const
+		inline T& operator[](const int& i)
 		{
-			Vec<_Ty, _Size> result;
-			for (size_t idx = 0; idx < _Size; idx++)
-				result[idx] = operator[](idx) - v[idx];
-			return result;
+			return this->data.get()[i];
 		}
 
-		template<typename T>
-		Vec operator*(const T& scalar) const
+		inline const T& operator[] (const int& i) const
 		{
-			Vec<_Ty, _Size> result;
-			for (size_t idx = 0; idx < _Size; idx++)
-				result[idx] = operator[](idx) * scalar;
-			return result;
+			return this->data.get()[i];
 		}
 
-		template<typename T>
-		Vec operator/(const T& scalar) const
+		inline T& operator=(const T& other)
 		{
-			Vec<_Ty, _Size> result;
-			for (size_t idx = 0; idx < _Size; idx++)
-				result[idx] = operator[](idx) / scalar;
-			return result;
-		}
-
-		template<typename T>
-		Vec& operator+=(const Vec<T, _Size>& v)
-		{
-			for (size_t idx = 0; idx < _Size; idx++)
-				operator[](idx) += v[idx];
+			this = other;
 			return *this;
 		}
 
-		template<typename T>
-		Vec& operator-=(const Vec<T, _Size>& v)
+		inline Vec operator+(const Vec& a) const
 		{
-			for (size_t idx = 0; idx < _Size; idx++)
-				operator[](idx) += v[idx];
-			return *this;
+			Vec result = *this;
+			result += a;
+			return result;
 		}
 
-		template<typename T>
-		Vec& operator*=(const T& scalar)
+		inline void operator+=(const Vec& a)
 		{
-			std::for_each(this->begin(), this->end(), [&](_Ty& cell)
+			for (size_t i = 0; i < length; i++)
 			{
-				cell *= scalar;
-			});
-			return *this;
+				data[i] += a[i];
+			}
 		}
 
-		template<typename T>
-		Vec& operator/=(const T& scalar)
+		inline Vec operator-(const Vec& a) const
 		{
-			std::for_each(this->begin(), this->end(), [](_Ty& cell)
-			{
-				cell /= scalar;
-			});
-			return *this;
+			Vec result = *this;
+			result -= a;
+			return result;
 		}
 
+		inline void operator-=(const Vec& a)
+		{
+			for (size_t i = 0; i < length; i++)
+			{
+				data[i] -= a[i];
+			}
+		}
+
+		inline Vec operator*(const T& s)
+		{
+			Vec result = *this;
+			result *= s;
+			return s;
+		}
+
+		inline void operator*=(const T& s)
+		{
+			for (size_t i = 0; i < length; i++)
+			{
+				data[i] *= s;
+			}
+		}
+
+		inline Vec operator/(const T& s)
+		{
+			Vec result = *this;
+			result /= s;
+			return s;
+		}
+
+		inline void operator/=(const T& s)
+		{
+			for (size_t i = 0; i < length; i++)
+			{
+				data[i] /= s;
+			}
+		}
 	};
 }

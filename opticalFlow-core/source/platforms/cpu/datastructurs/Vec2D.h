@@ -15,11 +15,13 @@ namespace cpu
 
 		}
 
-		Vec2D(const Vec<T, 2>& other)
-		{
-			x = other[0];
-			y = other[1];
-		}
+		Vec2D(Vec<T, 2>& other)
+			: x(other[0]), y(other[1])
+		{}
+
+		Vec2D(T X, T Y)
+			: x(X), y(Y)
+		{}
 
 		inline Vec2D operator+(const Vec2D& a) const
 		{
@@ -51,7 +53,7 @@ namespace cpu
 		{
 			Vec2D result = *this;
 			result *= s;
-			return s;
+			return result;
 		}
 
 		inline void operator*=(const T& s)
@@ -65,14 +67,14 @@ namespace cpu
 		{
 			Vec2D result = *this;
 			result /= s;
-			return s;
+			return result;
 		}
 
 		inline void operator/=(const T& s)
 		{
 			x /= s;
 			y /= s;
-
 		}
+
 	};
 }
