@@ -1,4 +1,5 @@
 #pragma once
+#include"Vec.h"
 
 namespace cpu
 {
@@ -11,7 +12,7 @@ namespace cpu
 		T z;
 		T w;
 
-		Vec2D(const Vec<T, 4>& other)
+		Vec4D(const Vec<T, 4>& other)
 		{
 			x = other[0];
 			y = other[1];
@@ -21,7 +22,7 @@ namespace cpu
 
 		inline Vec4D operator+(const Vec4D& a) const
 		{
-			Vec4D result = *this:
+			Vec4D result = *this;
 			result += a;
 			return result;
 		}
@@ -36,7 +37,7 @@ namespace cpu
 
 		inline Vec4D operator-(const Vec4D& a) const
 		{
-			Vec4D result = *this:
+			Vec4D result = *this;
 			result -= a;
 			return result;
 		}
@@ -51,7 +52,7 @@ namespace cpu
 
 		inline Vec4D operator*(const T& s)
 		{
-			Vec4D result = *this:
+			Vec4D result = *this;
 			result *= s;
 			return s;
 		}
@@ -66,7 +67,7 @@ namespace cpu
 
 		inline Vec4D operator/(const T& s)
 		{
-			Vec4D result = *this:
+			Vec4D result = *this;
 			result /= s;
 			return s;
 		}
