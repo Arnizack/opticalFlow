@@ -1,4 +1,4 @@
-#pragma once
+/*#pragma once
 
 //#include "DataStructures/Host/host_data.h"
 //#include "DataStructures/Host/index.h"
@@ -46,3 +46,4 @@ namespace cpu
 		inline Mat2D& operator/(const T& other) const;
 	};
 }
+*/

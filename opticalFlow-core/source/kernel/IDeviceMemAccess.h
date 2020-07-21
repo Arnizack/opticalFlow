@@ -6,8 +6,8 @@ namespace kernel
 	{
 	public:
 		
-		void load(float* dst, datastructurs::IDeviceArray<float> data);
-		void load(int* dst, datastructurs::IDeviceArray<int> data);
+		void load(float* dst, datastructures::IDeviceArray<float> data);
+		void load(int* dst, datastructures::IDeviceArray<int> data);
 
 	};
 

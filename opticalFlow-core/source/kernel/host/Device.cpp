@@ -5,7 +5,9 @@ namespace kernels
 
 }
 
-kernel::Device::Device(std::unique_ptr<IDataStrcuturesFactory>&& dsFactory, std::unique_ptr<IDeviceMemAccess>&& dmAccess, std::unique_ptr<IKernels>&& kernels)
+
+
+kernel::Device::Device(std::unique_ptr<kernel::IDataStructuresFactory>&& dsFactory, std::unique_ptr<IDeviceMemAccess>&& dmAccess, std::unique_ptr<IKernels>&& kernels)
 
 {
 	DataStructureFactory =std::move(dsFactory);

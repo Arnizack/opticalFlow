@@ -1,4 +1,4 @@
-#pragma once
+/*#pragma once
 #include <memory>
 #include <cassert>
 
@@ -37,4 +37,4 @@ namespace cpu
 		inline void operator/=(const T& other);
 		inline Mat& operator/(const T& other) const;
 	};
-}
+}*/

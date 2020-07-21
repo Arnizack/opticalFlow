@@ -1,9 +1,10 @@
 #pragma once
-namespace datastructurs
+namespace datastructures
 {
 	class IDeviceObj
 	{
 	public:
+		IDeviceObj() = default;
 		IDeviceObj(const IDeviceObj& obj) = delete;
 		virtual ~IDeviceObj() = 0;
 	};
@@ -12,19 +13,26 @@ namespace datastructurs
 	class IDeviceArray : public IDeviceObj
 	{
 	public:
-		const int ItemCount;
+		IDeviceArray(T* const& arr, const size_t& _ItemCount)
+			: host_array(arr), ItemCount(_ItemCount)
+		{}
+
+		T* host_array;
+		const size_t ItemCount;
 	};
 
-	template<typename T,int VectorDimensions>
+	template<typename T,size_t VectorDimensions>
 	class IDevice2DMatrix : public IDeviceArray<T>
 	{
 	public:
-		const int Width;
-		const int Heigth;
+		IDevice2DMatrix(const T*& matrix, const size_t& width, const size_t& height)
+			: host_array(matrix), Width(width), Heigth(height)
+		{}
+
+		T* host_array;
+		const size_t Width;
+		const size_t Heigth;
 	};
-
-
-
 
 	class IDeviceTextureRGBA : public IDeviceObj
 	{

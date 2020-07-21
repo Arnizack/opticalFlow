@@ -13,7 +13,7 @@ namespace kernel
 		
 
 		// Inherited via IKernels
-		virtual bool convolution1d(const datastructurs::IDevice2DMatrix<float, 4>& source, datastructurs::IDevice2DMatrix<float, 4>& destination, const datastructurs::IDeviceArray<float>& kernel, DIRECTION dir) override;
+		virtual bool convolution1d(const datastructures::IDevice2DMatrix<float, 4>& source, datastructures::IDevice2DMatrix<float, 4>& destination, const datastructures::IDeviceArray<float>& kernel, DIRECTION dir) override;
 
 	};
 
