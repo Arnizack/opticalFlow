@@ -163,13 +163,15 @@ namespace cuda
         for (int i = 0; i < dimY*dimX; i++)
         {
         
+            EXPECT_EQ(h_dst[i], h_src[i + y_padding * dimX + x_padding] * 2);
+            /*
             if (h_dst[i] != h_src[i+y_padding*dimX+x_padding] *2)
             {
                 count++;
                 printf("Fehler %d,%d i:%d\n", i%dimX,i/dimX,i);
 
                 //break;
-            }
+            }*/
         }
 
     
