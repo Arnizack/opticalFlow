@@ -6,22 +6,17 @@ namespace datastructures
 	public:
 		IDeviceObj() = default;
 		IDeviceObj(const IDeviceObj& obj) = delete;
-		virtual ~IDeviceObj() //= 0;
-		{}
+		virtual ~IDeviceObj() = 0;
 	};
 
 	template<typename T>
 	class IDeviceArray : public IDeviceObj
 	{
 	public:
-		IDeviceArray(T* const& arr, const size_t& _ItemCount)
-			: host_array(arr), ItemCount(_ItemCount)
+		IDeviceArray(const size_t& _ItemCount)
+			: ItemCount(_ItemCount)
 		{}
 
-		virtual ~IDeviceArray() override
-		{}
-
-		T* host_array;
 		const size_t ItemCount;
 	};
 
@@ -29,14 +24,9 @@ namespace datastructures
 	class IDevice2DMatrix : public IDeviceArray<T>
 	{
 	public:
-		IDevice2DMatrix(const T*& matrix, const size_t& width, const size_t& height)
-			: host_array(matrix), Width(width), Heigth(height)
+		IDevice2DMatrix(const size_t& width, const size_t& height)
+			: Width(width), Heigth(height), IDeviceArray(width*height)
 		{}
-
-		virtual ~IDevice2DMatrix() override
-		{}
-
-		T* host_array;
 		const size_t Width;
 		const size_t Heigth;
 	};

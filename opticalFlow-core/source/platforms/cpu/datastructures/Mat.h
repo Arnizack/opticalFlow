@@ -1,13 +1,14 @@
-/*#pragma once
+#pragma once
 #include <memory>
 #include <cassert>
+/*#include"Mat.h"
 
 namespace cpu
 {
 	template<typename T>
 	struct Mat
 	{
-		std::unique_ptr<T[]> matrix;		//matrice
+		std::unique_ptr<T> matrix;		//matrice
 		const size_t size;				//size of matrix
 
 		//constructor
@@ -15,8 +16,8 @@ namespace cpu
 
 		//operators:
 		//acces
-		inline T& operator[](const cpu::index& i);
-		inline const T& operator[](const cpu::index& i) const;
+		inline T& operator[](const cpu::BackendCPU::dt::index2& i);
+		inline const T& operator[](const cpu::BackendCPU::dt::index2& i) const;
 
 		//set
 		inline T& operator=(const T& other);

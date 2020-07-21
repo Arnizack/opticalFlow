@@ -1,5 +1,5 @@
-/*#pragma once
-
+#pragma once
+/*
 //#include "DataStructures/Host/host_data.h"
 //#include "DataStructures/Host/index.h"
 //#include "DataStructures/Host/index2.h"
@@ -8,16 +8,17 @@
 
 namespace cpu
 {
-	template<typename T, const size_t XDimension, const size_t YDimension>
+	template<typename T>
 	struct Mat2D
 	{
+		/schlecht es per Template zu machen, die Dimensionen!!
 		const size_t sizeX = XDimension;	//number of elements in the rows
 		const size_t sizeY = YDimension;	//number of elements in the columns
 		const size_t size;					//number of total elements
 		std::unique_ptr<T[]> matrix;		//matrice
 
 		//constructor
-		Mat2D();
+		Mat2D(const size_t& xDimension, const size_t& yDimension);
 
 		//operators:
 		//acces

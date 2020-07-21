@@ -7,15 +7,20 @@ namespace kernel
 	std::shared_ptr<Device> kernel::DeviceFactory::createCPUDevice()
 	{
 		CPUDeviceBuilder builder;
+		
 		if (builder.isAvailable())
 		{
+			auto dataFactory = builder.createDataStrucFactory();
+			auto memAccess = builder.createMemAccesser();
+			auto kernels = builder.createKernels();
 			auto result = std::make_shared<Device>(
-				builder.createDataStrucFactory(),
-				builder.createMemAccesser(),
-				builder.createKernels()
+				std::move(dataFactory),
+				std::move(memAccess),
+				std::move(kernels)
 				);
 			return result;
 		}
+		
 		return nullptr;
 	}
 }

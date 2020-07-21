@@ -7,8 +7,13 @@ namespace cpu
 	template<class T>
 	struct Vec2D
 	{
-		T x;
-		T y;
+		T x = 0;
+		T y = 0;
+
+		Vec2D()
+		{
+
+		}
 
 		Vec2D(Vec<T, 2>& other)
 			: x(other[0]), y(other[1])

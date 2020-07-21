@@ -1,3 +1,3 @@
 #pragma once
 
-#define DEVICE inline
+#define DEVICE
