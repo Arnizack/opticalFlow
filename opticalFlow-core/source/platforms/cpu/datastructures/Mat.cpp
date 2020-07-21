@@ -1,4 +1,4 @@
-#include "Mat.h"
+/*#include "Mat.h"
 
 namespace cpu
 {
@@ -10,14 +10,14 @@ namespace cpu
 	}
 
 	template<typename T>
-	inline T& Mat<T>::operator[](const cpu::index & i)
+	inline T& Mat<T>::operator[](const cpu::BackendCPU::dt::index2& i)
 	{
 		//access
 		return this->matrix[i];
 	}
 
 	template<typename T>
-	inline const T& Mat<T>::operator[](const cpu::index & i) const
+	inline const T& Mat<T>::operator[](const int& i) const
 	{
 		//acces for const
 		return this->matrix[i];
@@ -107,3 +107,4 @@ namespace cpu
 		return result;
 	}
 }
+*/

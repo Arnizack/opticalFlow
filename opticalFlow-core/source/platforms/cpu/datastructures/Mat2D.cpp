@@ -1,11 +1,11 @@
-#include "Mat2D.h"
+/*#include "Mat2D.h"
 
 namespace cpu
 {
 	//constructor
-	template<typename T, const size_t XDimension, const size_t YDimension>
-	cpu::Mat2D<T, XDimension, YDimension>::Mat2D(void)
-		:size(sizeX * sizeY)
+	template<typename T>
+	cpu::Mat2D<T>::Mat2D(const size_t& xDimension, const size_t& yDimension)
+		:size(xDimension* yDimension), XDimension(xDimension) , YDimension(yDimension)
 	{
 		this->matrix = std::make_unique<T[]>(size);
 	}
@@ -116,3 +116,4 @@ namespace cpu
 	}
 
 }
+*/

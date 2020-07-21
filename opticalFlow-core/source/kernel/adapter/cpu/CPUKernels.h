@@ -11,7 +11,7 @@ namespace kernel
 	public:
 
 		// Inherited via IKernels
-		virtual bool multArray(int size, std::shared_ptr<datastructurs::IDeviceArray<float>> src, float scalar, std::shared_ptr<datastructurs::IDeviceArray<float>> dst) override;
+		virtual bool multArray(int size, std::shared_ptr<datastructures::IDeviceArray<float>> src, float scalar, std::shared_ptr<datastructures::IDeviceArray<float>> dst) override;
 	};
 
 }

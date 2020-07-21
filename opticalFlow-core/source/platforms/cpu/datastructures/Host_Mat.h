@@ -1,10 +1,10 @@
 #pragma once
 #include"Mat.h"
 #include<memory>
-#include"datastructurs/DeviceData.h"
+#include"datastructures/DeviceData.h"
 #include"platforms/cpu/CPUBackend.h"
 #include<algorithm>
-
+/*
 namespace cpu
 {
 	template<class T>
@@ -69,16 +69,16 @@ namespace cpu
 
 
 	template<class T,class vecT,int _dim>
-	class Host_Mat : public datastructurs::IDevice2DMatrix<vecT, _dim>
+	class Host_Mat : public datastructures::IDevice2DMatrix<vecT, _dim>
 	{
 		using Matrix2D = Mat<T>;
-		using index2 = cpu::BackendCPU::dt::index2;
+		//using index2 = cpu::BackendCPU::dt::index2;
 		
 	private:
 		std::unique_ptr<Matrix2D> data = nullptr;
 	public:
 		Host_Mat(vecT* srcData,int width, int heigth)
-			: datastructurs::IDevice2DMatrix<vecT, _dim>(width,heigth)
+			: datastructures::IDevice2DMatrix<vecT, _dim>(width,heigth)
 		{
 			index2 dim;
 			dim.x = width;
@@ -90,7 +90,8 @@ namespace cpu
 
 			for (int i = 0; i < width * heigth ; i++)
 			{
-				auto& item = data->data->operator[](i);
+				
+				auto& item = data->operator[](i);
 				__setVector<vecT>(item, srcData + i * _dim);
 			}
 
@@ -100,11 +101,11 @@ namespace cpu
 		{
 			for (int i = 0; i < Width * Heigth; i++)
 			{
-				auto& item = data->data->operator[](i);
+				auto& item = data->operator[](i);
 				__getVector<vecT>(item, dst + i * _dim);
 			}
 		}
 	};
 	
 	
-}
+}*/

@@ -2,11 +2,12 @@
 #include<vector>
 #include<array>
 
-#include"datastructurs/Mat.h"
-#include"datastructurs/Vec.h"
-#include"datastructurs/Vec2D.h"
-#include"datastructurs/Vec3D.h"
-#include"datastructurs/Vec4D.h"
+#include"datastructures/Mat.h"
+#include"datastructures/Vec.h"
+#include"datastructures/Vec2D.h"
+#include"datastructures/Vec3D.h"
+#include"datastructures/Vec4D.h"
+#include"datastructures/Mat2D.h"
 #include"launchers/kernelInfo.h"
 #include<functional>
 
@@ -16,43 +17,38 @@ namespace cpu
 {
 
 	
-
+	/*
 	struct dataStructsCPU
 	{
 		template<typename T>
 		using Array = std::vector<T>;
-		template<typename T>
-		using ArrayMetaData = Array<T>*;
+
 
 		template<class T>
 		using Matrix1D = Mat<T>;
-		template<typename T>
-		using Matrix1DMetaData = Matrix1D<T>*;
+
 
 
 		template<class T>
 		using Matrix2D = Mat<Vec2D<T>>;
-		template<typename T>
-		using Matrix2DMetaData = Matrix2D<T>*;
+
 
 		template<class T>
 		using Matrix3D = Mat<Vec3D<T>>;
-		template<typename T>
-		using Matrix3DMetaData = Matrix3D<T>*;
+
 
 		template<class T>
 		using Matrix4D = Mat<Vec4D<T>>;
-		template<typename T>
-		using Matrix4DMetaData = Matrix4D<T>*;
+
 
 		using TextureRGBA = Matrix4D<float>;
-		using TextureRGBAMetaData = TextureRGBA*;
+
 
 		using TextureGrayScale = Mat<float>;
-		using TextureGrayScaleMetaData = TextureGrayScale*;
 
 
-	};
+
+	};*/
 
 	struct dataTypesCPU
 	{
@@ -79,7 +75,7 @@ namespace cpu
 			cpu::gridStripSchedular(info, itemCount, Instruction, args...);
 		}
 	};
-
+	/*
 	struct BackendCPU
 	{
 		//datastructur
@@ -89,6 +85,6 @@ namespace cpu
 
 		using sh = schedularsCPU;
 
-	};
+	};*/
 
 }

@@ -12,9 +12,9 @@
 #include"platforms/cuda/helper/errorCheckingMacro.cuh"
 #include<cuda_occupancy.h>
 #include<math.h>
-#include"platforms/cuda/datastructurs/tilesBuffer.cuh"
+#include"platforms/cuda/datastructures/tilesBuffer.cuh"
 
-#include"platforms/cuda/datastructurs/kernelInfo.cuh"
+#include"platforms/cuda/datastructures/kernelInfo.cuh"
 #include"platforms/cuda/kernelLauncher.h"
 #include <assert.h>
 #include <cooperative_groups.h>

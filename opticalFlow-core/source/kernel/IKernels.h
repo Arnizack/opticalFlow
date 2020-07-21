@@ -1,5 +1,5 @@
 #pragma once
-#include"datastructurs/DeviceData.h"
+#include"datastructures/DeviceData.h"
 #include<memory>
 
 namespace kernel
@@ -11,6 +11,6 @@ namespace kernel
 	class IKernels
 	{
 	public:
-		virtual bool multArray(int size, std::shared_ptr< datastructurs::IDeviceArray<float>> src, float scalar, std::shared_ptr<datastructurs::IDeviceArray<float>> dst) = 0;
+		virtual bool multArray(int size, std::shared_ptr< datastructures::IDeviceArray<float>> src, float scalar, std::shared_ptr<datastructures::IDeviceArray<float>> dst) = 0;
 	};
 }

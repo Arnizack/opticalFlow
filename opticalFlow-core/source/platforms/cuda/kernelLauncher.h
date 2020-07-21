@@ -4,7 +4,7 @@
 #include "device_launch_parameters.h"
 #include"platforms/cuda/helper/errorCheckingMacro.cuh"
 #include<memory>
-#include"platforms/cuda/datastructurs/kernelInfo.cuh"
+#include"platforms/cuda/datastructures/kernelInfo.cuh"
 #include<tuple>
 
 template<typename _kernel, typename... ARGS>

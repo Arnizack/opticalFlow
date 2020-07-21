@@ -3,7 +3,7 @@
 #include"platforms/cpu/CPUMacros.h"
 #include"kernel/kernels/multArray.h"
 #include"platforms/cpu/launchers/serializeLaunch.h"
-#include"platforms/cpu/datastructurs/Host_Array.h"
+#include"platforms/cpu/datastructures/Host_Array.h"
 #include"platforms/cpu/CPUBackend.h"
 
 
@@ -15,8 +15,9 @@ namespace kernel
 
 
 
-	bool CPUKernels::multArray(int size, std::shared_ptr<datastructurs::IDeviceArray<float>> src, float scalar, std::shared_ptr<datastructurs::IDeviceArray<float>> dst)
+	bool CPUKernels::multArray(int size, std::shared_ptr<datastructures::IDeviceArray<float>> src, float scalar, std::shared_ptr<datastructures::IDeviceArray<float>> dst)
 	{
+		/*
 		auto srcH = std::static_pointer_cast<cpu::Host_Array<float>>(src);
 		auto dstH = std::static_pointer_cast<cpu::Host_Array<float>>(dst);
 
@@ -26,7 +27,7 @@ namespace kernel
 		
 
 		cpu::launchSerial(kernels::multKernel<cpu::BackendCPU>::multArray,size, srcMD, scalar, dstMD);
-
+		*/
 		return true;
 	}
 
