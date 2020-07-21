@@ -7,14 +7,14 @@
 namespace datastructures
 {
 	template<typename T>
-	class HostDeviceArray : virtual datastructures::IDeviceArray<T>, HostDeviceObj
+	class HostDeviceArray : virtual datastructures::IDeviceArray<T>, public HostDeviceObj
 	{
 	public:
 		HostDeviceArray(T* const& arr, const size_t& ItemCount)
 			: IDeviceArray<T>::IDeviceArray(arr, ItemCount)
 		{}
 
-		~HostDeviceArray()
+		virtual ~HostDeviceArray()
 		{
 			//cudaFree(device_array.array);
 		}
@@ -27,7 +27,7 @@ namespace datastructures
 		datastructures::ThreadDeviceArray<T> getCudaArray()
 		{
 			//returns the gpu array struct
-			//this->to_gpu();
+			to_device();
 			return device_array;
 		}
 

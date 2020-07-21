@@ -10,7 +10,7 @@ namespace datastructures
 		T* array = 0;
 
 		ThreadDeviceArray() = default;
-		ThreadDeviceArray(const ThreadDeviceArray& obj) = delete;
+		//ThreadDeviceArray(const ThreadDeviceArray& obj) = delete;
 
 		~ThreadDeviceArray()
 		{
@@ -21,13 +21,13 @@ namespace datastructures
 		__device__
 			T& operator[](const int& i)
 		{
-			array[i];
+			return array[i];
 		}
 
 		__device__
 			const T& operator[](const int& i) const
 		{
-			array[i];
+			return array[i];
 		}
 	};
 

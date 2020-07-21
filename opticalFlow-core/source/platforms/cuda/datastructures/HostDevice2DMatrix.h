@@ -26,6 +26,7 @@ namespace datastructures
 		datastructures::ThreadDevice2DMatrix getCuda2DMatrix()
 		{
 			//could return not initialized Data
+			to_device();
 			return device_matirx;
 		}
 
