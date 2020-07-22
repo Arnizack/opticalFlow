@@ -8,6 +8,11 @@ namespace datastructures
 		IDeviceObj(const IDeviceObj& obj) = delete;
 		virtual ~IDeviceObj() = 0;
 	};
+	/*
+	needs Deconstructor body to compile, does not change abstraction
+	else undifined Reference
+	*/
+	IDeviceObj::~IDeviceObj(){}
 
 	template<typename T>
 	class IDeviceArray : public IDeviceObj
@@ -30,7 +35,8 @@ namespace datastructures
 		const size_t Width;
 		const size_t Heigth;
 	};
-
+	
+	//no use add this point in time
 	class IDeviceTextureRGBA : public IDeviceObj
 	{
 	};
@@ -39,4 +45,5 @@ namespace datastructures
 	{
 		
 	};
+	
 }

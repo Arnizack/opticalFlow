@@ -1,12 +1,27 @@
 #pragma once
-#include"Mat.h"
-#include<memory>
 #include"datastructures/DeviceData.h"
 #include"platforms/cpu/CPUBackend.h"
+
+#include<vector>
 #include<algorithm>
-/*
+
 namespace cpu
 {
+	template<typename T, size_t VectorDimension>
+	class Host_Mat : public datastructures::IDevice2DMatrix<T, VectorDimension>
+	{
+	public:
+		Host_Mat(cpu::Vec<T, VectorDimension>* const src, const size_t& width, const size_t& height)
+			: datastructures::IDevice2DMatrix(width, height), data(width*height)
+		{
+			std::copy_n(src, ItemCount, data.data())
+		}
+
+	private:
+		std::vector <cpu::Vec<T, VectorDimension>> data;
+	};
+
+	/*
 	template<class T>
 	void __setVector(Vec2D<T>& vec, T* src)
 	{
@@ -106,6 +121,6 @@ namespace cpu
 			}
 		}
 	};
+	*/
 	
-	
-}*/
+}
