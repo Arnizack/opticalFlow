@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../../datastructurs/DeviceData.h"
+#include"datastructures/DeviceData.h"
 #include <cuda_runtime.h>
 #include <iostream>
 #include <cassert>
@@ -8,30 +8,23 @@
 namespace datastructures
 {
 
-	class HostDeviceObj : datastructures::IDeviceObj
+	class HostDeviceObj
 	{
 	public:
 		HostDeviceObj() = default;
 
-		void to_device()
+		void to_host(void* const& dst) const
 		{
 			//can throw error have to add CudaError controll
-			allocate_gpu();
-			memcpy_to_device();
-		}
-
-		void to_host()
-		{
-			//can throw error have to add CudaError controll
-			memcpy_to_host();
+			memcpy_to_host(dst);
 		}
 
 	protected:
 		virtual void allocate_gpu() = 0;
-		virtual void memcpy_to_device() = 0;
-		virtual void memcpy_to_host() = 0;
+		virtual void memcpy_to_device(void* const& src) = 0;
+		virtual void memcpy_to_host(void* dst) const = 0;
 
-		cudaError_t checkCuda(cudaError_t result)
+		cudaError_t checkCuda(cudaError_t result) const
 		{
 			if (result != cudaSuccess)
 			{

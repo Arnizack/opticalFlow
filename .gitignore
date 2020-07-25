@@ -371,3 +371,4 @@ CTestTestfile.cmake*
 scripts/CMakeSettings.json
 
 /opticalFlow-examples/flowfield/testFlowField.csv
+/doc/.ipynb_checkpoints/Untitled-checkpoint.ipynb

@@ -1,32 +1,45 @@
 #pragma once
 
-#include "../../../datastructurs/DeviceData.h"
+#include"datastructures/DeviceData.h"
 #include "HostDeviceObj.h"
 #include "ThreadDevice2DMatrix.h"
+#include"platforms/cuda/helper/CudaVecType.h"
 
 namespace datastructures
 {
-	template<typename T, size_t VectorDimensions>
-	class HostDevice2DMatrix : virtual datastructures::IDevice2DMatrix<T, VectorDimensions>, HostDeviceObj
-	{
-		HostDevice2DMatrix(const T*& matrix, const size_t& width, const size_t& height)
-			: IDevice2DMatrix<T>{ matrix, width, height }, device_matirx{ datastructures::ThreadDevice2DMatrix<T> temp(width) }
-		{}
 
-		~HostDevice2DMatrix()
+	
+
+	template<typename T, size_t VectorDimensions>
+	class HostDevice2DMatrix : public datastructures::IDevice2DMatrix<T, VectorDimensions>, public HostDeviceObj
+	{
+	public:
+		
+		typedef typename cuda_help::template get_cuda_matrix_type<T, VectorDimensions>::type internCudaVecType;
+		//using internCudaVecType = cuda_help::template get_cuda_matrix_type<T, VectorDimensions>::type;
+
+		HostDevice2DMatrix(T* const& matrix, const size_t& width, const size_t& height)
+			: IDevice2DMatrix( width, height )
 		{
-			//cudaFree(device_matirx.matrix);
+			allocate_gpu();
+			
+			memcpy_to_device(matrix);
+		}
+
+		virtual ~HostDevice2DMatrix() override
+		{
+			cudaFree(device_matrix);
 		}
 
 		constexpr size_t size() noexcept
 		{
-			return VectorDimensions;
+			return Width * Heigth * VectorDimensions;
 		}
 
-		datastructures::ThreadDevice2DMatrix getCuda2DMatrix()
+		datastructures::ThreadDevice2DMatrix<internCudaVecType> getCuda2DMatrix()
 		{
 			//could return not initialized Data
-			return device_matirx;
+			return datastructures::ThreadDevice2DMatrix<internCudaVecType>(Width, device_matrix);
 		}
 
 	protected:
@@ -34,28 +47,28 @@ namespace datastructures
 		{
 			//allocates Memory on the gpu for the matrix
 			checkCuda(
-				cudaMalloc((void**)device_matrix.matrix, VectorDimensions * sizeof(T)) // vlt (void**)
+				cudaMalloc(&device_matrix, Width*Heigth* VectorDimensions * sizeof(T)) // vlt (void**)
 			);
 		}
 
-		virtual void memcpy_to_device()
+		virtual void memcpy_to_device(void* const& src) override
 		{
 			//copies the data to gpu
 			checkCuda(
-				cudaMemcpy((void**)device_matrix.matrix, host_array, VectorDimensions * sizeof(T), cudaMemcpyHostToDevice)
+				cudaMemcpy(device_matrix, src, Width * Heigth * VectorDimensions * sizeof(T), cudaMemcpyHostToDevice)
 			);
 		}
 
-		virtual void memcpy_to_host()
+		virtual void memcpy_to_host(void* dst) const override
 		{
 			//copies the data to cpu
 			checkCuda(
-				cudaMemcpy((void**)host_array, device_matrix.matirx, VectorDimensions * sizeof(T), cudaMemcpyDeviceToHost)
+				cudaMemcpy(dst, device_matrix, Width * Heigth * VectorDimensions * sizeof(T), cudaMemcpyDeviceToHost)
 			);
 		}
 
 	private:
-		const datastructures::ThreadDevice2DMatrix<T> device_matirx;
+		internCudaVecType* device_matrix;
 	};
 
 }

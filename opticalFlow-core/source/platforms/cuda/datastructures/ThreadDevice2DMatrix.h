@@ -6,31 +6,25 @@ namespace datastructures
 	template<typename T>
 	struct ThreadDevice2DMatrix
 	{
-		T* matrix = 0;
+		T* matrix;
 		const size_t width;
 
-		ThreadDevice2DMatrix(const size_t& _width)
-			:width(_width)
+		ThreadDevice2DMatrix(const size_t& _width,T* _matrix)
+			:width(_width), matrix(_matrix)
 		{}
 
-		ThreadDevice2DMatrix(const ThreadDevice2DMatrix& obj) = delete;
-
-		~ThreadDevice2DMatrix()
-		{
-			cudaFree(matrix);
-		}
 
 		//Device Operators
 		__device__
 			T& operator[](const int2& i)
 		{
-			matrix[i.x + i.y * width];
+			return matrix[i.x + i.y * width];
 		}
 
 		__device__
 			const T& operator[](const int2& i) const
 		{
-			matrix[i.x + i.y * width];
+			return matrix[i.x + i.y * width];
 		}
 	};
 

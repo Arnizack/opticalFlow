@@ -1,4 +1,4 @@
-#include "kernelLauncher.h"
+#include "kernelLauncher.hpp"
 #include<algorithm>
 
 KernelLauncher::KernelLauncher(const int& sharedMemoryCount, const int& blockSize)
