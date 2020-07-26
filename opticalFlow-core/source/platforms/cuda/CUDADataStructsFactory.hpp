@@ -3,7 +3,7 @@
 
 namespace cuda
 {
-	class CUDADataStructsFactory : kernel::IDataStructuresFactory
+	class CUDADataStructsFactory : public kernel::IDataStructuresFactory
 	{
 		// Inherited via IDataStructuresFactory
 		virtual std::shared_ptr<datastructures::IDeviceArray<float>> createArray(float* data, int itemCount) override;

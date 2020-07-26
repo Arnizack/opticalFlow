@@ -152,7 +152,7 @@ inline __device__ void _calcTilesBlockSize(const int2& dimenions, const int2& ti
 }
 
 template<typename... ARGS,typename _inst>
-inline __device__ void tilesSchedular2D(int Info, const int2& dimenions, const int2& tilesSize, const int2& padding,
+inline __device__ void tilesScheduler2D(int Info, const int2& dimenions, const int2& tilesSize, const int2& padding,
 	_inst Instruction, ARGS&&... args)
 {
 	/*//little bit faster

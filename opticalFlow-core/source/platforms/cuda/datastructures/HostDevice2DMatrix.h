@@ -15,7 +15,6 @@ namespace datastructures
 	{
 	public:
 		
-		typedef typename cuda_help::template get_cuda_matrix_type<T, VectorDimensions>::type internCudaVecType;
 		//using internCudaVecType = cuda_help::template get_cuda_matrix_type<T, VectorDimensions>::type;
 
 		HostDevice2DMatrix(T* const& matrix, const size_t& width, const size_t& height)
@@ -36,10 +35,10 @@ namespace datastructures
 			return Width * Heigth * VectorDimensions;
 		}
 
-		datastructures::ThreadDevice2DMatrix<internCudaVecType> getCuda2DMatrix()
+		datastructures::ThreadDevice2DMatrix<T, VectorDimensions> getCuda2DMatrix()
 		{
 			//could return not initialized Data
-			return datastructures::ThreadDevice2DMatrix<internCudaVecType>(Width, device_matrix);
+			return datastructures::ThreadDevice2DMatrix<T, VectorDimensions>(Width, device_matrix);
 		}
 
 	protected:
@@ -68,7 +67,7 @@ namespace datastructures
 		}
 
 	private:
-		internCudaVecType* device_matrix;
+		T* device_matrix;
 	};
 
 }

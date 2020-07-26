@@ -2,7 +2,7 @@
 #include"kernel/IDeviceMemAccess.h"
 namespace cuda
 {
-	class CUDADeviceMemAccess : kernel::IDeviceMemAccess
+	class CUDADeviceMemAccess : public kernel::IDeviceMemAccess
 	{
 		// Inherited via IDeviceMemAccess
 		virtual void load(float* dst, const datastructures::IDeviceArray<float>& data) override;

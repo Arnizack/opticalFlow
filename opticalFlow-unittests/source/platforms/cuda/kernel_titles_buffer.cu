@@ -7,7 +7,7 @@
 #include <stdio.h>
 #include<memory>
 #include<vector>
-#include"platforms/cuda/schedulers/tilesSchedular.cuh"
+#include"platforms/cuda/schedulers/tilesScheduler.cuh"
 
 #include"platforms/cuda/helper/errorCheckingMacro.cuh"
 #include<cuda_occupancy.h>
@@ -41,7 +41,7 @@ namespace cuda
             cooperative_groups::thread_block block = cooperative_groups::this_thread_block();
 
 
-            tilesSchedular2D(0, { dimX,dimY }, { 1,1 }, { x_padding,y_padding },
+            tilesScheduler2D(0, { dimX,dimY }, { 1,1 }, { x_padding,y_padding },
                 [](const int2& idx, int* src, int* dst, const int2& dim, tilesBufferRF<int>& buffer)
             {
 
@@ -53,7 +53,7 @@ namespace cuda
             
             }, src, dst, dim, buffer);
         
-            tilesSchedular2D(0, { dimX,dimY }, { 1,1 }, { x_padding,y_padding },
+            tilesScheduler2D(0, { dimX,dimY }, { 1,1 }, { x_padding,y_padding },
                 [](const int2& idx, int* src, int* dst, const int2& dim, tilesBufferRF<int>& buffer)
             {
 
@@ -66,7 +66,7 @@ namespace cuda
             }, src, dst, dim, buffer2);
         
             block.sync();
-            tilesSchedular2D(0, { dimX,dimY }, { 1,1 }, { 0,0 },
+            tilesScheduler2D(0, { dimX,dimY }, { 1,1 }, { 0,0 },
                 [](const int2& idx, int* src, int* dst, const int2& dim, tilesBufferRF<int>& buffer)
             {
 
@@ -76,7 +76,7 @@ namespace cuda
 
 
             }, src, dst, dim, buffer);
-            tilesSchedular2D(0, { dimX,dimY }, { 1,1 }, { 0,0 },
+            tilesScheduler2D(0, { dimX,dimY }, { 1,1 }, { 0,0 },
                 [](const int2& idx, int* src, int* dst, const int2& dim, tilesBufferRF<int>& buffer)
             {
 

@@ -5,7 +5,7 @@
 #include<gtest/gtest.h>
 
 
-__global__ void testMatrix(datastructures::ThreadDevice2DMatrix<int4> mat, int width, int heigth,int* dst)
+__global__ void testMatrix(datastructures::ThreadDevice2DMatrix<int,4> mat, int width, int heigth,int* dst)
 {
 	int sum = 0;
 	for (int x = 0; x < width; x++)
@@ -33,7 +33,7 @@ TEST(cuda, kernel_matrix_test)
 		item = count++;
 
 	datastructures::HostDevice2DMatrix<int, 4> mat(data.data(), 2, 2);
-	datastructures::ThreadDevice2DMatrix<int4> cuda_mat = mat.getCuda2DMatrix();
+	datastructures::ThreadDevice2DMatrix< int, 4 > cuda_mat = mat.getCuda2DMatrix();
 	
 
 

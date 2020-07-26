@@ -15,7 +15,7 @@ namespace cpu
 
 		for (int index = min; index < max; index++)
 		{
-			Instruction(index, args...);
+			Instruction(index, std::forwad<ARGS>(args)...);
 		}
 	}
 }

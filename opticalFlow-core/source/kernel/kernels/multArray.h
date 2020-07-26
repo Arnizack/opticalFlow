@@ -29,7 +29,7 @@ class multKernel
 		}
 
 
-		static DEVICE void multArray
+		static DEVICE void kernel
 		(kernInfo kInfo, int size, ArrayMD src,
 			float scalar,
 			ArrayMD dst )

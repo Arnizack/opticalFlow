@@ -1,14 +1,26 @@
 # BackendSpecifications
 
 ## SBE : SIMD BACKEND
-- index1
+- int
     - op+ op- op* op/
 
-- index2
+- int2
 	- x
 	- y
     - op+ op- op* op/
 
+- int3
+	- x
+	- y
+	- z
+    - op+ op- op* op/
+
+- int4
+	- x
+	- y
+	- z
+	- w
+    - op+ op- op* op/
 	
 - float3
 	- x
@@ -30,17 +42,6 @@
 
 - kernelInfo
 
-//Scheduler sollte das regeln
-/*
-- index3 GlobalSize()
-
-    - op+ op- op* op/
-- index3 GlobalIdx()
-    - op+ op- op* op/
-- index3 LocalSize()
-    - op+ op- op* op/
-- index3 LocalIdx()
-    - op+ op- op* op/
 */
 
 ## Datatypes
@@ -63,7 +64,7 @@
     - float [*index2* i]
 
 
-
+/*
 ## Iterators
 
 - 2DRectangleRange(index2 start, index2 end)
@@ -81,33 +82,34 @@
 - NativeIterator<T>(T start, T end)
     - operator++
     - T operator*
-    - 
+
+*/
+	
 ## Buffer
 
-- ArrayBuffer<T> cacheAllocArray(_Size)
-
-- 2DMatrixBuffer<T> cacheAlloc2DMatrix<_Width,_Heigth>()
 
 - ArrayBuffer<T>
-    - T [*index* i] //local
+    - T [*int* i] //local
 
 - 2DMatrixBuffer<T,Dim>
-    -T[Dim] [*index2* i]  //local
+    -T[Dim] [*int2* i]  //local
+	
+- TilesBuffer<T> 
+    - T [*int2* i]
+
+- ArrayBuffer<T> allocArrayBuffer(size)
+
+- 2DMatrixBuffer<T> alloc2DMatrixBuffer(width,heigth)
+	
+- TilesBuffer<T> allocTilesBuffer(*kernelInfo* Kinfo, int2 dimensions, int2 tilesSize, int2 padding )
 
 ## Schedulars
 
 - gridStripSchedular(kernelInfo,int itemCount,
  lambda(index idx,args...), args...)
 
-- gridStripSchedular2D(kernelInfo,index2 GlobalStart,index2 GlobalEnd
- lambda(index2 idx,args...), args...)
-
 //Row first order
 - tilesSchedular2D(kernelInfo,index2 GlobalStart, index2 GlobalEnd,index2 tilesSizePerBlock, index2 Overlap, args...
- lambda(index2 idx,args...))
-
-//Colum first order
-- tilesSchedular2DRF(kernelInfo,index2 GlobalStart, index2 GlobalEnd,index2 tilesSizePerBlock, index2 Overlap, args...
  lambda(index2 idx,args...))
 
 
