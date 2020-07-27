@@ -12,12 +12,14 @@ namespace cpu
 		T z;
 
 		Vec3D(const Vec<T, 3>& other)
-		{
-			x = other[0];
-			y = other[1];
-			z = other[2];
-		}
+			: x(other[0]), y(other[1]), z(other[2])
+		{}
 
+		Vec3D(const T& X, const T& Y, const T& Z)
+			:x(X), y(Y), z(Z)
+		{}
+
+		Vec3D() = default;
 
 		inline Vec3D operator+(const Vec3D& a) const
 		{

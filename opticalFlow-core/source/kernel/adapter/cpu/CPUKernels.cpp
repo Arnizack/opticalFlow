@@ -3,7 +3,7 @@
 #include"platforms/cpu/CPUMacros.h"
 #include"kernel/kernels/multArray.h"
 #include"platforms/cpu/launchers/serializeLaunch.h"
-#include"platforms/cpu/datastructures/Host_Array.h"
+#include"platforms/cpu/datastructures/HostArray.h"
 #include"platforms/cpu/CPUBackend.h"
 
 

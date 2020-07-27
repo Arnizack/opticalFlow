@@ -1,17 +1,17 @@
 #include "CPUDataStructsFactory.hpp"
-#include"datastructures/Host_Mat.h"
-#include"datastructures/Host_Array.h"
+#include"datastructures/Host2DMatrix.h"
+#include"datastructures/HostArray.h"
 #include<memory>
 
 namespace cpu
 {
 	std::shared_ptr<datastructures::IDeviceArray<float>> CPUDataStructsFactory::createArray(float* data, int itemCount)
 	{
-		return std::make_shared<Host_Array<float>>(data, itemCount);
+		return std::make_shared<HostArray<float>>(data, itemCount);
 	}
 	std::shared_ptr<datastructures::IDeviceArray<int>> CPUDataStructsFactory::createArray(int* data, int itemCount)
 	{
-		return std::make_shared<Host_Array<int>>(data, itemCount);
+		return std::make_shared<HostArray<int>>(data, itemCount);
 	}
 	std::shared_ptr<datastructures::IDevice2DMatrix<float, 2>> CPUDataStructsFactory::createMatrix2D(float* data, int width, int heigth)
 	{

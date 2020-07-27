@@ -1,15 +1,13 @@
 #pragma once
 #include<vector>
 #include<array>
+#include<functional>
 
-#include"datastructures/Mat.h"
 #include"datastructures/Vec.h"
 #include"datastructures/Vec2D.h"
 #include"datastructures/Vec3D.h"
 #include"datastructures/Vec4D.h"
-#include"datastructures/Mat2D.h"
 #include"launchers/kernelInfo.h"
-#include<functional>
 
 #include"schedulers/gridStripScheduler.h"
 

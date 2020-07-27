@@ -9,19 +9,16 @@ namespace cpu
 	{
 		T x = 0;
 		T y = 0;
-
-		Vec2D()
-		{
-
-		}
-
-		Vec2D(Vec<T, 2>& other)
-			: x(other[0]), y(other[1])
-		{}
-
+		
 		Vec2D(T X, T Y)
 			: x(X), y(Y)
 		{}
+		
+		Vec2D(const Vec<T, 2>& other)
+			: x(other[0]), y(other[1])
+		{}	
+
+		Vec2D() = default;
 
 		inline Vec2D operator+(const Vec2D& a) const
 		{

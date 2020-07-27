@@ -30,13 +30,14 @@ namespace datastructures
 		const size_t Width;
 		const size_t Heigth;
 	};
-
+	
+	//no use add this point in time
 	class IDeviceTextureRGBA : public IDeviceObj
 	{
 	};
 
 	class IDeviceTextureGrayScale : public IDeviceObj
 	{
-		
 	};
+	
 }
