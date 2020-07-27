@@ -7,6 +7,9 @@
 #include"platforms/cuda/helper/CudaVecType.h"
 #include"platforms/cuda/datastructures/kernelInfo.cuh"
 #include"platforms/cuda/datastructures/VectorOperator.cuh"
+#include"platforms/cuda/datastructures/tilesBuffer.cuh"
+#include"platforms/cuda/datastructures/MatrixBuffer.h"
+#include"platforms/cuda/datastructures/ArrayBuffer.h"
 
 namespace cuda
 {
@@ -51,7 +54,32 @@ namespace cuda
 		using int2 = int2;
 		using int3 = int3;
 
+		template<typename T>
+		using TilesBuffer = tilesBufferRF<T>;
 
+		template<typename T>
+		static __device__ TilesBuffer<T> allovTilesBuffer(KernelInfo& kinfo, const int2& dimenions, const int2& tilesSize, const int2& padding)
+		{
+			return allocTilesBufferRF<T>(kinfo, dimenions, tilesSize, padding);
+		}
+
+		template<typename T>
+		using ArrayBuffer = T*;
+
+		template<typename T>
+		static __device__ ArrayBuffer<T> allocArrayBuffer(KernelInfo& kinfo, const int& count)
+		{
+			return cuda::allocArrayBufferRF(kinfo, count);
+		}
+
+		template<typename T>
+		using MatrixBuffer = cuda::MatrixBufferRF<T>;
+
+		template<typename T>
+		static __device__ MatrixBuffer<T> allocMatrixBuffer(KernelInfo& kinfo, const int& width, const int& heigth)
+		{
+			return cuda::allocMatrixBufferRF(kinfo, width, heigth);
+		}
 
 		using float2 = float2;
 		using float3 = float3;

@@ -34,6 +34,14 @@ public:
 	//returns true when successfully
 	bool considerTilesBuffer(const int& dataWidth, const int& dataHeigth, const int& tilesWidth, const int& tilesHeigth, const int& paddingXRadius, const int& paddingYRadius, const int& typeSize);
 
+	//args must be positiv
+	bool considerArrayBuffer(const int& count , const int& typeSize);
+
+	//args must be positiv
+	bool considerMatrixBuffer(const int& width, const int& heigth, const int& typeSize);
+
+
+
 	//kernel gets as first Argument KernelInfo
 	template<typename _kernel, typename... ARGS>
 	void launch(ARGS... args)

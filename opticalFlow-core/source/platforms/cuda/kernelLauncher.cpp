@@ -21,6 +21,26 @@ bool KernelLauncher::considerTilesBuffer(const int& dataWidth, const int& dataHe
 	return false;
 }
 
+bool KernelLauncher::considerArrayBuffer(const int& count, const int& typeSize)
+{
+	if (count > 0 && typeSize >= 0)
+	{
+		b_3 += count*typeSize;
+		return true;
+	}
+	return false;
+}
+
+bool KernelLauncher::considerMatrixBuffer(const int& width, const int& heigth, const int& typeSize)
+{
+	if (width > 0 && heigth > 0 && typeSize >= 0)
+	{
+		b_3 += width*heigth * typeSize;
+		return true;
+	}
+	return false;
+}
+
 void KernelLauncher::wait()
 {
 	cudaDeviceSynchronize();
