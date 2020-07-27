@@ -6,7 +6,7 @@ namespace datastructures
 	public:
 		IDeviceObj() = default;
 		IDeviceObj(const IDeviceObj& obj) = delete;
-		virtual ~IDeviceObj() = 0;
+		virtual ~IDeviceObj() = 0 {}
 	};
 	/*
 	needs Deconstructor body to compile, does not change abstraction

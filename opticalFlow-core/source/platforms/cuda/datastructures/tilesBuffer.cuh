@@ -1,5 +1,5 @@
 #pragma once
-#include"platforms/cuda/schedulers/tilesSchedular.cuh"
+#include"platforms/cuda/schedulers/tilesScheduler.cuh"
 #include"kernelInfo.cuh"
 
 template<class T>

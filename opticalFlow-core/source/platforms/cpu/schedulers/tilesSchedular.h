@@ -1,12 +1,12 @@
 #pragma once
 #include<memory>
-#include"platforms/cpu/datastructurs/Vec2D.h"
+#include"platforms/cpu/datastructures/Vec2D.h"
 
 namespace cpu
 {
 
 	template<typename... ARGS, typename _inst>
-	inline void tilesSchedular2DRF(int Info, const Vec2D<int>& dimenions, const Vec2D<int>& tilesSize, const Vec2D<int>& padding,
+	inline void tilesSchedular2D(int Info, const Vec2D<int>& dimenions, const Vec2D<int>& tilesSize, const Vec2D<int>& padding,
 		_inst Instruction, ARGS&&... args)
 	{
 		int2 idx;
@@ -20,7 +20,7 @@ namespace cpu
 		}
 
 	}
-
+	/*
 	template<typename... ARGS, typename _inst>
 	inline void tilesSchedular2DCF(int Info, const Vec2D<int>& dimenions, const Vec2D<int>& tilesSize, const Vec2D<int>& padding,
 		_inst Instruction, ARGS&&... args)
@@ -35,5 +35,5 @@ namespace cpu
 			}
 		}
 
-	}
+	}*/
 }

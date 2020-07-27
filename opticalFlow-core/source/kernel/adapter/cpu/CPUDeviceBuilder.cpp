@@ -2,6 +2,7 @@
 #include"CPUKernels.h"
 #include"platforms/cpu/CPUDataStructsFactory.hpp"
 #include"platforms/cpu/DeviceMemAccess.hpp"
+#include"kernel/adapter/cpu/CPUKernels.h"
 
 namespace kernel
 {
@@ -11,7 +12,7 @@ namespace kernel
 	}
 	std::unique_ptr<IKernels> CPUDeviceBuilder::createKernels()
 	{
-		return std::make_unique<CPUKernels>();
+		return std::make_unique<kernel::CPUKernels>();
 	}
 	std::unique_ptr<IDataStructuresFactory> CPUDeviceBuilder::createDataStrucFactory()
 	{

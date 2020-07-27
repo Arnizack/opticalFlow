@@ -7,7 +7,7 @@
 #include <stdio.h>
 #include<memory>
 #include<vector>
-#include"platforms/cuda/schedulers/tilesSchedular.cuh"
+#include"platforms/cuda/schedulers/tilesScheduler.cuh"
 
 #include"platforms/cuda/helper/errorCheckingMacro.cuh"
 #include<cuda_occupancy.h>
@@ -15,7 +15,7 @@
 #include"platforms/cuda/datastructures/tilesBuffer.cuh"
 
 #include"platforms/cuda/datastructures/kernelInfo.cuh"
-#include"platforms/cuda/kernelLauncher.h"
+#include"platforms/cuda/kernelLauncher.hpp"
 #include <assert.h>
 #include <cooperative_groups.h>
 
@@ -41,7 +41,7 @@ namespace cuda
             cooperative_groups::thread_block block = cooperative_groups::this_thread_block();
 
 
-            tilesSchedular2D(0, { dimX,dimY }, { 1,1 }, { x_padding,y_padding },
+            tilesScheduler2D(0, { dimX,dimY }, { 1,1 }, { x_padding,y_padding },
                 [](const int2& idx, int* src, int* dst, const int2& dim, tilesBufferRF<int>& buffer)
             {
 
@@ -53,7 +53,7 @@ namespace cuda
             
             }, src, dst, dim, buffer);
         
-            tilesSchedular2D(0, { dimX,dimY }, { 1,1 }, { x_padding,y_padding },
+            tilesScheduler2D(0, { dimX,dimY }, { 1,1 }, { x_padding,y_padding },
                 [](const int2& idx, int* src, int* dst, const int2& dim, tilesBufferRF<int>& buffer)
             {
 
@@ -66,7 +66,7 @@ namespace cuda
             }, src, dst, dim, buffer2);
         
             block.sync();
-            tilesSchedular2D(0, { dimX,dimY }, { 1,1 }, { 0,0 },
+            tilesScheduler2D(0, { dimX,dimY }, { 1,1 }, { 0,0 },
                 [](const int2& idx, int* src, int* dst, const int2& dim, tilesBufferRF<int>& buffer)
             {
 
@@ -76,7 +76,7 @@ namespace cuda
 
 
             }, src, dst, dim, buffer);
-            tilesSchedular2D(0, { dimX,dimY }, { 1,1 }, { 0,0 },
+            tilesScheduler2D(0, { dimX,dimY }, { 1,1 }, { 0,0 },
                 [](const int2& idx, int* src, int* dst, const int2& dim, tilesBufferRF<int>& buffer)
             {
 
@@ -163,13 +163,15 @@ namespace cuda
         for (int i = 0; i < dimY*dimX; i++)
         {
         
+            EXPECT_EQ(h_dst[i], h_src[i + y_padding * dimX + x_padding] * 2);
+            /*
             if (h_dst[i] != h_src[i+y_padding*dimX+x_padding] *2)
             {
                 count++;
                 printf("Fehler %d,%d i:%d\n", i%dimX,i/dimX,i);
 
                 //break;
-            }
+            }*/
         }
 
     
