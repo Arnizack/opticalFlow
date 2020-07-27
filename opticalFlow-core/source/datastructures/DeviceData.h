@@ -8,11 +8,6 @@ namespace datastructures
 		IDeviceObj(const IDeviceObj& obj) = delete;
 		virtual ~IDeviceObj() = 0 {}
 	};
-	/*
-	needs Deconstructor body to compile, does not change abstraction
-	else undifined Reference
-	*/
-	IDeviceObj::~IDeviceObj(){}
 
 	template<typename T>
 	class IDeviceArray : public IDeviceObj

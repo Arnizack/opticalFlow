@@ -1,6 +1,6 @@
 #include "DeviceMemAccess.hpp"
-#include"datastructures/Host_Array.h"
-#include"datastructures/Host_Mat.h"
+#include"datastructures/HostArray.h"
+#include"datastructures/Host2DMatrix.h"
 
 namespace cpu
 {
@@ -12,13 +12,13 @@ namespace cpu
 
 	void DeviceMemAccess::load(float* dst, const datastructures::IDeviceArray<float>& data)
 	{
-		const Host_Array<float>& arr = static_cast<const Host_Array<float>&>(data);
+		const HostArray<float>& arr = static_cast<const HostArray<float>&>(data);
 		loadArray(arr, dst);
 	}
 
 	void DeviceMemAccess::load(int* dst, const datastructures::IDeviceArray<int>& data)
 	{
-		const Host_Array<int>& arr = static_cast<const Host_Array<int>&>(data);
+		const HostArray<int>& arr = static_cast<const HostArray<int>&>(data);
 		loadArray(arr, dst);
 	}
 

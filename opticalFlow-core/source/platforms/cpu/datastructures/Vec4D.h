@@ -13,12 +13,14 @@ namespace cpu
 		T w;
 
 		Vec4D(const Vec<T, 4>& other)
-		{
-			x = other[0];
-			y = other[1];
-			z = other[2];
-			z = other[3];
-		}
+			:x(other[0]), y(other[1]), z(other[2]), w(other[3])
+		{}
+
+		Vec4D(const T& X, const T& Y, const T& Z, const T& W)
+			:x(X), y(Y), z(Z), w(W)
+		{}
+
+		Vec4D() = default;
 
 		inline Vec4D operator+(const Vec4D& a) const
 		{

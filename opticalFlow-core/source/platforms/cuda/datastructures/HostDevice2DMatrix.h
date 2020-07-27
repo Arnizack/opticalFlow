@@ -45,8 +45,9 @@ namespace datastructures
 		virtual void allocate_gpu()
 		{
 			//allocates Memory on the gpu for the matrix
+			//vlt auch ohne Vectordimensions sonst doppelt
 			checkCuda(
-				cudaMalloc(&device_matrix, Width*Heigth* VectorDimensions * sizeof(T)) // vlt (void**)
+				cudaMalloc(&device_matrix, ItemCount * VectorDimensions * sizeof(T)) // vlt (void**)
 			);
 		}
 
@@ -54,7 +55,7 @@ namespace datastructures
 		{
 			//copies the data to gpu
 			checkCuda(
-				cudaMemcpy(device_matrix, src, Width * Heigth * VectorDimensions * sizeof(T), cudaMemcpyHostToDevice)
+				cudaMemcpy(device_matrix, src, ItemCount * VectorDimensions * sizeof(T), cudaMemcpyHostToDevice)
 			);
 		}
 
@@ -62,7 +63,7 @@ namespace datastructures
 		{
 			//copies the data to cpu
 			checkCuda(
-				cudaMemcpy(dst, device_matrix, Width * Heigth * VectorDimensions * sizeof(T), cudaMemcpyDeviceToHost)
+				cudaMemcpy(dst, device_matrix, ItemCount * VectorDimensions * sizeof(T), cudaMemcpyDeviceToHost)
 			);
 		}
 

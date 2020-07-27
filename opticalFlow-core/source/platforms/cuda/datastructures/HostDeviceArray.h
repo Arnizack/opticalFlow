@@ -1,6 +1,6 @@
 #pragma once
 
-#include"datastructures/DeviceData.h"
+#include "datastructures/DeviceData.h"
 #include "HostDeviceObj.h"
 
 namespace datastructures
