@@ -43,7 +43,6 @@ namespace datastructures
 
 	class IDeviceTextureGrayScale : public IDeviceObj
 	{
-		
 	};
 	
 }

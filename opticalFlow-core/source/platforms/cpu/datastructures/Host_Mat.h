@@ -21,6 +21,10 @@ namespace cpu
 		std::vector <cpu::Vec<T, VectorDimension>> data;
 	};
 
+	template<typename T, 0>
+	class Host_Mat : public datastructures::IDevice2DMatrix<T, 0>
+	{};
+
 	/*
 	template<class T>
 	void __setVector(Vec2D<T>& vec, T* src)

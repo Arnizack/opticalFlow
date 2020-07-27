@@ -25,7 +25,9 @@ namespace cpu
         //copy
         Vec(const Vec& other)
             :length(other.length), data(other.data)
-        {}
+        {
+            
+        }
 
         inline T& operator[](const int& i)
         {
