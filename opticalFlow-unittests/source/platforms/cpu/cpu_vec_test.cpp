@@ -7,7 +7,7 @@
 
 TEST(cpu, Vec_nDim_Test)
 {
-	cpu::Vec<int, 7> test = { 1,2,3,4,5,6,7 };
+	cpu::Vec<int, 7> test ( 1,2,3,4,5,6,7 );
 	static const cpu::Vec<int, 7> temp = { 8,9,10,11,12,13,14 };
 
 	int count;

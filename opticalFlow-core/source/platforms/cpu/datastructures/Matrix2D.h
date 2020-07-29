@@ -20,6 +20,18 @@ namespace cpu
 			std::copy_n(src, ItemCount, matix.data());
 		}
 
+		Matrix2D(const T* const src, const size_t& Width, const size_t& ItemCount)
+			: matrix(ItemCount), width(Width)
+		{
+			for (auto i = 0; i < ItemCount; i += VectorDim)
+			{
+				for (auto j = 0; j < VectorDim; j++)
+				{
+					matrix[i][j] = src[i + j];
+				}
+			}
+		}
+
 		//acces
 		inline cpu::Vec<T, VectorDim>& operator[](const cpu::dataTypesCPU::index2& i)
 		{
@@ -60,6 +72,15 @@ namespace cpu
 			}
 		}
 
+		Matrix2D(const T* const src, const size_t& Width, const size_t& ItemCount)
+			: matrix(ItemCount), width(Width)
+		{
+			for (auto i = 0; i < ItemCount; i++)
+			{
+				matrix[i] = src[i];
+			}
+		}
+
 		//acces
 		inline T& operator[](const cpu::dataTypesCPU::index2& i)
 		{
@@ -96,6 +117,15 @@ namespace cpu
 			for (auto i = 0; i < ItemCount; i++)
 			{
 				matrix[i] = cpu::Vec2D<T>(src[i]);
+			}
+		}
+
+		Matrix2D(const T* const src, const size_t& Width, const size_t& ItemCount)
+			: matrix(ItemCount), width(Width)
+		{
+			for (auto i = 0; i < ItemCount; i += 2)
+			{
+				matrix[i] = cpu::Vec2D<T>(src[i], src[i+1]);
 			}
 		}
 
@@ -140,6 +170,15 @@ namespace cpu
 			}
 		}
 
+		Matrix2D(const T* const src, const size_t& Width, const size_t& ItemCount)
+			: matrix(ItemCount), width(Width)
+		{
+			for (auto i = 0; i < ItemCount; i += 3)
+			{
+				matrix[i] = cpu::Vec2D<T>(src[i], src[i + 1], src[i + 2]);
+			}
+		}
+
 		//acces
 		inline cpu::Vec3D<T>& operator[](const cpu::dataTypesCPU::index2& i)
 		{
@@ -176,6 +215,15 @@ namespace cpu
 			for (auto i = 0; i < ItemCount; i++)
 			{
 				matrix[i] = cpu::Vec4D<T>(src[i]);
+			}
+		}
+
+		Matrix2D(const T* const src, const size_t& Width, const size_t& ItemCount)
+			: matrix(ItemCount), width(Width)
+		{
+			for (auto i = 0; i < ItemCount; i += 4)
+			{
+				matrix[i] = cpu::Vec2D<T>(src[i], src[i + 1], src[i + 2], src[i + 3]);
 			}
 		}
 

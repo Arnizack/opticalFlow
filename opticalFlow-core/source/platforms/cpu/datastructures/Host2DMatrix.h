@@ -16,6 +16,10 @@ namespace cpu
 			: data(src, width, width*height), datastructures::IDevice2DMatrix<T, VectorDimension>(width, height)
 		{}
 
+		Host2DMatrix(const T* const src, const size_t& width, const size_t& height)
+			: data(src, width, width* height), datastructures::IDevice2DMatrix<T, VectorDimension>(width, height)
+		{}
+
 		void copyTo(T* dst) const
 		{
 			std::copy_n(data.data(), ItemCount, dst);
