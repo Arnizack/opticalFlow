@@ -9,7 +9,7 @@ namespace cuda
 	template<typename T>
 	struct MatrixBufferRF
 	{
-	private
+	private:
 		T* Data;
 		int Width;
 	
@@ -27,7 +27,7 @@ namespace cuda
 	template<class T>
 	MatrixBufferRF<T> allocMatrixBufferRF(KernelInfo& kinfo, const int& width, const int& heigth)
 	{
-		auto buffer = MatrixBufferRF(kinfo.SharedMemStart, width);
+		auto buffer = MatrixBufferRF<T>(kinfo.SharedMemStart, width);
 		kinfo.SharedMemStart += width * heigth * sizeof(T);
 		return buffer;
 	}

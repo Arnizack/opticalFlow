@@ -2,7 +2,7 @@
 #include "cuda_runtime.h"
 #include "platforms/cuda/CUDADataStructsFactory.hpp"
 #include "platforms/cuda/CUDADeviceMemAccess.hpp"
-#include"CUDAKernels.h"
+#include"CUDAKernels.cuh"
 
 bool kernel::CUDADeviceBuilder::isAvailable()
 {

@@ -7,9 +7,10 @@ find_package(CUDAToolkit)
 
 add_library(opticalFlow-core 
     ${SOURCE})
-    
+
+#$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/source/opticalFlow-core/opticalFlow>
 target_include_directories(opticalFlow-core PUBLIC
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/source/opticalFlow-core/opticalFlow>
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/source>
     $<INSTALL_INTERFACE:opticalFlow>
     PRIVATE source
 )

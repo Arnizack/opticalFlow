@@ -15,7 +15,7 @@
 #include"platforms/cuda/datastructures/tilesBuffer.cuh"
 
 #include"platforms/cuda/datastructures/kernelInfo.cuh"
-#include"platforms/cuda/kernelLauncher.hpp"
+#include"platforms/cuda/kernelLauncher.cuh"
 #include <assert.h>
 #include <cooperative_groups.h>
 

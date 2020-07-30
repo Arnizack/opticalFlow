@@ -43,7 +43,7 @@ inline __device__ tilesBufferRF<T> allocTilesBufferRF(KernelInfo& kInfo, const i
 {
 	int2 min;
 	int2 max;
-	_calcTilesBlockSize(std::forward<const int2&>(dimenions), std::forward<const int2&>(tilesSize),
+	cuda::_calcTilesBlockSize(std::forward<const int2&>(dimenions), std::forward<const int2&>(tilesSize),
 		std::forward<const int2&>(padding), min, max);
 
 	int size = (max.x - min.x) * (max.y - min.y);

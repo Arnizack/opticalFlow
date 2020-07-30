@@ -70,7 +70,7 @@ namespace cuda
 		template<typename T>
 		static __device__ ArrayBuffer<T> allocArrayBuffer(KernelInfo& kinfo, const int& count)
 		{
-			return cuda::allocArrayBufferRF(kinfo, count);
+			return cuda::allocArrayBufferRF<T>(kinfo, count);
 		}
 
 		template<typename T>
@@ -79,7 +79,7 @@ namespace cuda
 		template<typename T>
 		static __device__ MatrixBuffer<T> allocMatrixBuffer(KernelInfo& kinfo, const int& width, const int& heigth)
 		{
-			return cuda::allocMatrixBufferRF(kinfo, width, heigth);
+			return cuda::allocMatrixBufferRF<T>(kinfo, width, heigth);
 		}
 
 		using float2 = float2;
@@ -94,10 +94,17 @@ namespace cuda
 	struct schedularsCUDA
 	{
 		template<typename _inst, typename... ARGS>
-		static void gridStripSchedular(KernelInfo info, int itemCount, _inst Instruction, ARGS... args)
+		__device__ static void gridStripSchedular(KernelInfo& info, int itemCount, _inst Instruction, ARGS... args)
 		{
 			
 			gridStripSchedular(info, itemCount, Instruction, args...);
+		}
+
+		template<typename... ARGS, typename _inst>
+		__device__ static void tilesSchedular2D(KernelInfo& info, const int2& dimenions, const int2& tilesSize, const int2& padding,
+			_inst Instruction, ARGS&&... args)
+		{
+			cuda::tilesScheduler2D(0, dimenions, tilesSize, padding, Instruction, std::forward<ARGS>(args)...);
 		}
 	};
 	

@@ -2,6 +2,7 @@
 #include"platforms/cpu/launchers/kernelInfo.h"
 #include<functional>
 #include"platforms/cpu/CPUMacros.h"
+#include<memory>
 
 namespace cpu
 {
@@ -15,7 +16,8 @@ namespace cpu
 
 		for (int index = min; index < max; index++)
 		{
-			Instruction(index, std::forwad<ARGS>(args)...);
+			Instruction(index, std::forward<ARGS>(args)...);
+			
 		}
 	}
 }

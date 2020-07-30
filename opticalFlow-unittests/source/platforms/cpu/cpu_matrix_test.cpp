@@ -19,7 +19,9 @@ TEST(cpu, host_matrix_test)
 
 	for (int i = 0; i < 8; i++)
 	{
-		EXPECT_EQ(data[i][0], temp[cpu::dataTypesCPU::index2(i, 0)].x);
-		EXPECT_EQ(data[i][1], temp[cpu::dataTypesCPU::index2(i, 0)].y);
+		EXPECT_EQ(data[i][0], temp[cpu::dataTypesCPU::int2(i, 0)].x);
+		EXPECT_EQ(data[i][1], temp[cpu::dataTypesCPU::int2(i, 0)].y);
+		//EXPECT_EQ(data[i][0], temp[{i,0}].x);
+		//EXPECT_EQ(data[i][1], temp[{i, 0}].y);
 	}
 }

@@ -1,8 +1,9 @@
 #pragma once
 #include <vector>
 #include <algorithm>
-#include "platforms/cpu/CPUBackend.h"
-
+#include"Vec2D.h"
+#include"Vec3D.h"
+#include"Vec4D.h"
 
 namespace cpu
 {
@@ -33,12 +34,12 @@ namespace cpu
 		}
 
 		//acces
-		inline cpu::Vec<T, VectorDim>& operator[](const cpu::dataTypesCPU::index2& i)
+		inline cpu::Vec<T, VectorDim>& operator[](const Vec2D<int>& i)
 		{
 			return data[i.x + width * i.y];
 		}
 
-		inline const cpu::Vec<T, VectorDim>& operator[](const cpu::dataTypesCPU::index2& i) const
+		inline const cpu::Vec<T, VectorDim>& operator[](const Vec2D<int>& i) const
 		{
 			return data[i.x + width * i.y];
 		}
@@ -82,12 +83,12 @@ namespace cpu
 		}
 
 		//acces
-		inline T& operator[](const cpu::dataTypesCPU::index2& i)
+		inline T& operator[](const Vec2D<int>& i)
 		{
 			return data[i.x + width * i.y];
 		}
 
-		inline const T& operator[](const cpu::dataTypesCPU::index2& i) const
+		inline const T& operator[](const Vec2D<int>& i) const
 		{
 			return data[i.x + width * i.y];
 		}
@@ -130,13 +131,13 @@ namespace cpu
 		}
 
 		//acces
-		inline cpu::Vec2D<T>& operator[](const cpu::dataTypesCPU::index2& i)
+		inline cpu::Vec2D<T>& operator[](const Vec2D<int>& i)
 		{
 			//int pos = i.x + (width * i.y);
 			return this->matrix[i.x + (width * i.y)];
 		}
 
-		inline const cpu::Vec2D<T>& operator[](const cpu::dataTypesCPU::index2& i) const
+		inline const cpu::Vec2D<T>& operator[](const Vec2D<int>& i) const
 		{
 			//int pos = i.x + (width * i.y);
 			return this->matrix[i.x + (width * i.y)];
@@ -180,12 +181,12 @@ namespace cpu
 		}
 
 		//acces
-		inline cpu::Vec3D<T>& operator[](const cpu::dataTypesCPU::index2& i)
+		inline cpu::Vec3D<T>& operator[](const Vec2D<int>& i)
 		{
 			return data[i.x + width * i.y];
 		}
 
-		inline const cpu::Vec3D<T>& operator[](const cpu::dataTypesCPU::index2& i) const
+		inline const cpu::Vec3D<T>& operator[](const Vec2D<int>& i) const
 		{
 			return data[i.x + width * i.y];
 		}
@@ -228,12 +229,12 @@ namespace cpu
 		}
 
 		//acces
-		inline cpu::Vec4D<T>& operator[](const cpu::dataTypesCPU::index2& i)
+		inline cpu::Vec4D<T>& operator[](const Vec2D<int>& i)
 		{
 			return data[i.x + width * i.y];
 		}
 
-		inline const cpu::Vec4D<T>& operator[](const cpu::dataTypesCPU::index2& i) const
+		inline const cpu::Vec4D<T>& operator[](const Vec2D<int>& i) const
 		{
 			return data[i.x + width * i.y];
 		}

@@ -7,6 +7,9 @@
 #include"platforms/cuda/datastructures/kernelInfo.cuh"
 #include<tuple>
 
+template<class T>
+class TD;
+
 template<typename _kernel, typename... ARGS>
 __global__ void _main_kernel_shared_memory(ARGS... args)
 {
@@ -65,7 +68,7 @@ public:
 			dim3 gridDim;
 			gridDim.x = ceil(sqrt(minGridSize));
 			gridDim.y = ceil(sqrt(minGridSize));
-			_main_kernel_shared_memory<_kernel, ARGS...> << < gridDim, blockSize, SharedMemoryCount >> > (std::forward<ARGS>(args)...);
+			_main_kernel_shared_memory<_kernel, ARGS...> <<< gridDim, blockSize, SharedMemoryCount >>> (std::forward<ARGS>(args)...);
 
 		}
 	}
@@ -76,7 +79,7 @@ public:
 		dim3 gridDim;
 		gridDim.x = gridDimX;
 		gridDim.y = gridDimY;
-		_main_kernel<_kernel, ARGS...> << <gridDim, blockSize, SharedMemoryCount >> > (args...);
+		_main_kernel<_kernel, ARGS...> <<<gridDim, blockSize, SharedMemoryCount >>> (args...);
 	}
 
 	void wait();

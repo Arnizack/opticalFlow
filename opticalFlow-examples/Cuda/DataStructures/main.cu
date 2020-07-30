@@ -1,12 +1,13 @@
-#include "../../../opticalFlow-core/source/platforms/cuda/datastructures/HostDeviceArray.h"
+#include "platforms/cuda/datastructures/HostDeviceArray.h"
 
 #include <iostream>
 #include <cuda_runtime.h>
 #include <device_launch_parameters.h>
 
 __global__ 
-void kernelAusprobieren(datastructures::ThreadDeviceArray<int> temp, int length)
+void kernelAusprobieren(int* temp, int length)
 {
+	
 	if (threadIdx.x == 0 && threadIdx.y == 0)
 	{
 		for (int i = 0; i < length; i++)
@@ -29,7 +30,7 @@ int main()
 
 	std::cout << tempObj.size() << '\n';
 
-	datastructures::ThreadDeviceArray<int> testThreadArray = tempObj.getCudaArray();
+	int* testThreadArray = tempObj.getCudaArray();
 
 	dim3 grid = 1;
 
