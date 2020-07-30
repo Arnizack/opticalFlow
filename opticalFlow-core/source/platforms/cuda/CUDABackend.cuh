@@ -10,6 +10,7 @@
 #include"platforms/cuda/datastructures/tilesBuffer.cuh"
 #include"platforms/cuda/datastructures/MatrixBuffer.h"
 #include"platforms/cuda/datastructures/ArrayBuffer.h"
+#include"platforms/cuda/schedulers/tilesScheduler.cuh"
 
 namespace cuda
 {
@@ -58,7 +59,7 @@ namespace cuda
 		using TilesBuffer = tilesBufferRF<T>;
 
 		template<typename T>
-		static __device__ TilesBuffer<T> allovTilesBuffer(KernelInfo& kinfo, const int2& dimenions, const int2& tilesSize, const int2& padding)
+		static __device__ TilesBuffer<T> allocTilesBuffer(KernelInfo& kinfo, const int2& dimenions, const int2& tilesSize, const int2& padding)
 		{
 			return allocTilesBufferRF<T>(kinfo, dimenions, tilesSize, padding);
 		}
@@ -96,7 +97,7 @@ namespace cuda
 		static void gridStripSchedular(KernelInfo info, int itemCount, _inst Instruction, ARGS... args)
 		{
 			
-			cpu::gridStripSchedular(info, itemCount, Instruction, args...);
+			gridStripSchedular(info, itemCount, Instruction, args...);
 		}
 	};
 	
