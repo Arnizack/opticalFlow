@@ -7,15 +7,15 @@
 namespace kernels
 {
 
-template<class SBE>
+template<class Backend>
 class multKernel
 {
 	public:
 
 
-		typedef typename SBE::ds::template Array<float>			Array;
-		typedef typename SBE::dt::kernelInfo			kernInfo;
-		typedef typename SBE::sh						schedulars;
+		typedef typename Backend::ds::template Array<float>			Array;
+		typedef typename Backend::dt::kernelInfo			kernInfo;
+		typedef typename Backend::sh						schedulars;
 	
 		static DEVICE void instruction(int idx, Array src,
 			float scalar,
@@ -33,6 +33,7 @@ class multKernel
 		{
 			
 			schedulars::gridStripSchedular(kInfo, size, instruction, src,scalar,dst);
+			
 
 		}
 

@@ -40,7 +40,7 @@ namespace cuda
             int2 dim = { dimX,dimY };
             cooperative_groups::thread_block block = cooperative_groups::this_thread_block();
 
-
+            //fill buffer
             tilesScheduler2D(0, { dimX,dimY }, { 1,1 }, { x_padding,y_padding },
                 [](const int2& idx, int* src, int* dst, const int2& dim, tilesBufferRF<int>& buffer)
             {
@@ -49,6 +49,8 @@ namespace cuda
                 int& item = buffer[idx];
                 int res = src[idx.x + idx.y * dim.x] * 2;
                 item = res;
+                //buffer[idx] = src[idx.x + idx.y * dim.x] * 2;
+
             
             
             }, src, dst, dim, buffer);
@@ -70,7 +72,7 @@ namespace cuda
                 [](const int2& idx, int* src, int* dst, const int2& dim, tilesBufferRF<int>& buffer)
             {
 
-          
+                
                 dst[idx.x + idx.y * dim.x] = buffer[idx];
            
 
@@ -114,8 +116,8 @@ namespace cuda
         printf("gridSize: %d\n", minGridSize);
 
     
-        int dimX = 14;
-        int dimY = 13;
+        int dimX = 1920;
+        int dimY = 1080;
 
         //
         int x_padding = 5;
@@ -142,12 +144,13 @@ namespace cuda
 
         d_src += y_padding * dimX +x_padding;
 
-        KernelLauncher lauchner(1200,1);
-
+        KernelLauncher lauchner(1200,128);
+        
         lauchner.considerTilesBuffer(dimX, dimY, 1, 1, x_padding, y_padding, sizeof(int));
         lauchner.considerTilesBuffer(dimX, dimY, 1, 1, x_padding, y_padding, sizeof(int));
+        lauchner.considerArrayBuffer(5, sizeof(int));
         lauchner.launch<addKernelTilesSharedDev,int*,int*,int,int,int,int>(d_src, d_dst, dimX, dimY, x_padding, y_padding);
-
+        
 
     
 

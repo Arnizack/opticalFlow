@@ -7,7 +7,7 @@
 bool kernel::CUDADeviceBuilder::isAvailable()
 {
 	int count;
-	cudaGetDevice(&count);
+	cudaGetDeviceCount(&count);
 	if (count > 0)
 		return true;
 	return false;

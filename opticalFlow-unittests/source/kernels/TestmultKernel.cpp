@@ -19,8 +19,8 @@ namespace kernls
 		auto src = std::make_unique<std::array<float, size>>();
 		auto dst = std::make_unique<std::array<float, size>>();
 
-
-		auto srcB = dev->DataStructureFactory->createArray(src->data(), size);
+		auto data_src = src->data();
+		auto srcB = dev->DataStructureFactory->createArray(data_src, size);
 		auto dstB = dev->DataStructureFactory->createArray(dst->data(), size);
 
 		utilities::Timer t1("Kernel");

@@ -19,8 +19,7 @@ bool kernel::CUDAKernels::multArray(int size, std::shared_ptr<datastructures::ID
 	d_array dstD = dstH->getCudaArray();
 	KernelLauncher launcher(0,32);
 	launcher.launchWithParameters<kernels::multKernel<backend>,int,d_array,float,d_array>(2,2,12,srcH->size(),srcD,scalar,dstD);
-	
-		
+	launcher.wait();
 
 	return true;
 }
