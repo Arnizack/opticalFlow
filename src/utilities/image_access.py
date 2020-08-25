@@ -4,12 +4,12 @@ import matplotlib.pyplot as plt
 
 """
 Image Coordinate Space:
-(ColorSpace, Width, Heigth)
+(ColorSpace, Heigth, Width)
 """
 
 def _WHC_to_CWH_space(np_img):
     """
-    CWH Space = (ColorSpace, Width, Heigth)
+    CWH Space = (ColorSpace, Heigth, Width)
     :param np_img:
     :return:
     """
