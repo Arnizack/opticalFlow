@@ -14,5 +14,5 @@ def test_differentiate_image(img):
     plt.show()
 
 if __name__ == '__main__':
-    img = open_image(r"H:\dev\opticalFlow\Prototyp\Version 2\resources\calibration\RradialGradient.jpg")
+    img = open_image(r"..\..\..\resources\calibration\RradialGradient.jpg")
     test_differentiate_image(img)

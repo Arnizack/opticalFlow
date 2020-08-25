@@ -24,5 +24,5 @@ def test_image_pyramid(img,factors):
     plt.show()
 
 if __name__ == '__main__':
-    img = open_image(r"H:\dev\opticalFlow\Prototyp\Version 2\resources\eval-twoframes\Dimetrodon\frame10.png")
+    img = open_image(r"..\..\..\resources\eval-twoframes\Dimetrodon\frame10.png")
     test_image_pyramid(img,[0.8,0.5,0.5])
