@@ -36,6 +36,8 @@ def solve_layer(first_frame,second_frame,first_frame_derivative,
 
     A,b = setup_linear_system(first_frame,second_frame,first_frame_derivative,second_frame_derivative_warped,solver_settings.alpha)
 
+    M = precondition(A)
+
     print("Lg start")
     start = time()
 
@@ -57,3 +59,9 @@ def solve_layer(first_frame,second_frame,first_frame_derivative,
 
 
 
+def precondition(A):
+    start = time()
+
+    inv = splinalg.inv(A)
+    print("Inverse: ", time() - start)
+    return inv
