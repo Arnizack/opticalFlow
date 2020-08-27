@@ -16,12 +16,13 @@ class SolverSettings:
 
 
 
-def solve_layer(first_frame,second_frame,
+def solve_layer(first_frame,second_frame,first_frame_derivative,
                 second_frame_derivative, initial_flow_field, solver_settings):
     """
 
     :param first_frame: np.array(float) shape = (ColorChannel,Height,Width)
     :param second_frame: np.array(float) shape = (ColorChannel,Height,Width)
+    :param first_frame_derivative: np.array(float) shape = (ColorChannel,Derivative_Direction,Height,Width)
     :param second_frame_derivative: np.array(float) shape = (ColorChannel,Derivative_Direction,Height,Width)
     :param initial_flow_field: np.array(float) (Flow_Direction, Height,Width)
     :param solver_settings: SolverSettings
@@ -33,7 +34,7 @@ def solve_layer(first_frame,second_frame,
     plt.figure()
     show_image(second_frame_warped)
 
-    A,b = setup_linear_system(first_frame,second_frame,second_frame_derivative_warped,solver_settings.alpha)
+    A,b = setup_linear_system(first_frame,second_frame,first_frame_derivative,second_frame_derivative_warped,solver_settings.alpha)
 
     print("Lg start")
     start = time()

@@ -21,6 +21,14 @@ def show_flow_field(field,width,height,mode="RGB"):
     image=flowiz.convert_from_flow(flowiz_field,mode="RGB")
     plt.imshow(image)
 
+def show_flow_field_arrow(field,width,height):
+    X,Y =np.meshgrid(np.arange(width),np.arange(height))
+    resharped_flied = _reshape_flow(field, width, height)
+    coords = [X.flatten(),Y.flatten()]
+    directions = [resharped_flied[0].flatten(),resharped_flied[1].flatten()]
+    plt.quiver(*coords,*directions)
+
+
 def show_flow_difference(field1,field2,width,height):
     #crop Images
     diff_field = field1[:,0:width,0:height]-field2[:,0:width,0:height]
