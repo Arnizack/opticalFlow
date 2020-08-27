@@ -31,10 +31,12 @@ def solve_layer(first_frame,second_frame,first_frame_derivative,
     #wrap second image
     second_frame_warped = warp_image(second_frame,initial_flow_field)
     second_frame_derivative_warped = warp_derivative(second_frame_derivative,initial_flow_field)
-    plt.figure()
-    show_image(second_frame_warped)
+    first_frame_warped = warp_image(first_frame,initial_flow_field)
 
-    A,b = setup_linear_system(first_frame,second_frame,first_frame_derivative,second_frame_derivative_warped,solver_settings.alpha)
+    plt.figure(1)
+    show_image(first_frame_warped)
+
+    A,b = setup_linear_system(first_frame,second_frame_warped,first_frame_derivative,second_frame_derivative_warped,solver_settings.alpha)
 
     print("Lg start")
     start = time()
