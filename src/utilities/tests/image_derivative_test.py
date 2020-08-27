@@ -13,6 +13,9 @@ def test_differentiate_image(img):
     plt.imshow(diff_img[0, 1])
     plt.show()
 
+
+
 if __name__ == '__main__':
-    img = open_image(r"..\..\..\resources\calibration\RradialGradient.jpg")
+    #img = open_image(r"..\..\..\resources\calibration\RradialGradient.jpg")
+    img = open_image(r"..\..\..\resources\calibration\foatage1\frame11.jpg")
     test_differentiate_image(img)

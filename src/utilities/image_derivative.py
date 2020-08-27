@@ -1,4 +1,4 @@
-from scipy.ndimage.filters import convolve1d
+from scipy.ndimage.filters import convolve1d,gaussian_filter
 import numpy as np
 
 def differentiate_matrix(matrix2d):
@@ -9,9 +9,12 @@ def differentiate_matrix(matrix2d):
     """
     # Same Kernel as in A Quantitative Analysis of Current Practices in Optical Flow Estimation
     # and the Principles behind Them; Deqing Sun Stefan Roth Michael J. Black
-    kernel = 1/12 * np.array([-1,8,0,-8,1])
+    #kernel = 1/12 * np.array([-1,8,0,-8,1])
+    kernel =  np.array([-1, 8, 0, -8, 1])/12
     y_derivative = convolve1d(matrix2d,kernel,axis=0)
     x_derivative = convolve1d(matrix2d, kernel, axis=1)
+    y_derivative=gaussian_filter(y_derivative,sigma=1)
+    x_derivative = gaussian_filter(x_derivative, sigma=1)
     return np.array([y_derivative,x_derivative],copy=False)
 
 def differentiate_image(np_img):

@@ -20,7 +20,6 @@ def show_flow_field(field,width,height,mode="RGB"):
     flowiz_field[:, :, 1] = resharped_flied[1]
     image=flowiz.convert_from_flow(flowiz_field,mode="RGB")
     plt.imshow(image)
-    plt.show()
 
 def show_flow_difference(field1,field2,width,height):
     #crop Images
