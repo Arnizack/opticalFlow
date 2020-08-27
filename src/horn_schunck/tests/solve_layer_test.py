@@ -13,8 +13,8 @@ from src.utilities.image_pyramid import downscale_image
 def test_layer1(img1,img2):
 
 
-    img1 = downscale_image(img1, 0.1)
-    img2 = downscale_image(img2, 0.1)
+    img1 = downscale_image(img1, 0.3)
+    img2 = downscale_image(img2, 0.3)
 
     der_img2 = differentiate_image(img2)
     plt.imshow(der_img2[0,0])
