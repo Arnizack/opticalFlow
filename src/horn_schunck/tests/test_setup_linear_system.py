@@ -102,7 +102,7 @@ def test_setup_linear_system2():
     np_I_x = np.full(fill_value=I_x,shape=(height,width))
     np_I_y = np.full(fill_value=I_y,shape=(height,width))
     derivative = np.array([[np_I_y,np_I_x]])
-    actual_A,actual_b = setup_linear_system(np_img1,np_img2,derivative,alpha)
+    actual_A,actual_b = setup_linear_system(np_img1,np_img2,derivative,derivative,alpha)
 
     actual_A = np.array(actual_A.todense())
 
@@ -131,7 +131,7 @@ def test_setup_linear_system3():
     np_I_x = np.full(fill_value=1, shape=(5, 4))
     derivative[0, 1] = np_I_x
 
-    A,b = setup_linear_system(img1,img2,derivative,12)
+    A,b = setup_linear_system(img1,img2,derivative,derivative,12)
     plt.matshow(A.todense())
     plt.show()
 
