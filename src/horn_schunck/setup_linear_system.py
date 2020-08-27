@@ -1,5 +1,7 @@
 from src.utilities.warp_grid import warp_image,warp_derivative
 from src.utilities.image_access import open_image,show_image
+from src.horn_schunck.derivative_horn_schunck import get_I_x,get_I_y,get_I_t
+from src.utilities.image_derivative import differentiate_matrix
 from scipy import sparse
 import scipy.sparse.linalg as splinalg
 import numpy as np
@@ -105,11 +107,23 @@ def setup_linear_system(first_image,second_image,first_image_derivative,second_i
     I_xt = np.zeros(shape=(height * width), dtype=float)
     I_yt = np.zeros(shape=(height * width), dtype=float)
     for channel_idx in range(channel_count):
+
+        first_yx = differentiate_matrix(first_image[channel_idx])
+        channel_first_y,channel_first_x = first_yx
+        channel_first_x = channel_first_x.flatten()
+        channel_first_y = channel_first_y.flatten()
+
+        channel_second_y, channel_second_x = differentiate_matrix(second_image[channel_idx])
+        channel_second_x = channel_second_x.flatten()
+        channel_second_y = channel_second_y.flatten()
+
+        """
         channel_first_x = first_image_derivative[channel_idx][1].flatten()
         channel_first_y = first_image_derivative[channel_idx][0].flatten()
 
         channel_second_x = second_image_derivative[channel_idx][1].flatten()
         channel_second_y = second_image_derivative[channel_idx][0].flatten()
+        """
         #deriviative blending: see An Improved Algorithm for TV-L1 Optical Flow
         b=0.4
         channel_x = channel_first_x*b+channel_second_x*(1-b)
@@ -126,6 +140,12 @@ def setup_linear_system(first_image,second_image,first_image_derivative,second_i
 
         channel_t = second_image[channel_idx] - first_image[channel_idx]
         channel_t = channel_t.flatten()
+
+        channel_x = get_I_x(first_image[channel_idx],second_image[channel_idx]).flatten()
+        channel_y = get_I_y(first_image[channel_idx], second_image[channel_idx]).flatten()
+        channel_t = get_I_t(first_image[channel_idx], second_image[channel_idx]).flatten()
+
+
         I_xx += channel_x ** 2
         I_xy += channel_x * channel_y
         I_yy += channel_y ** 2
