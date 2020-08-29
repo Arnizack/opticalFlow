@@ -16,8 +16,7 @@ class SolverSettings:
 
 
 
-def solve_layer(first_frame,second_frame,first_frame_derivative,
-                second_frame_derivative, initial_flow_field, solver_settings):
+def solve_layer(first_frame,second_frame, initial_flow_field, solver_settings):
     """
 
     :param first_frame: np.array(float) shape = (ColorChannel,Height,Width)
@@ -30,13 +29,10 @@ def solve_layer(first_frame,second_frame,first_frame_derivative,
     """
     #wrap second image
     second_frame_warped = warp_image(second_frame,initial_flow_field)
-    second_frame_derivative_warped = warp_derivative(second_frame_derivative,initial_flow_field)
-    first_frame_warped = warp_image(first_frame,initial_flow_field)
 
     plt.figure(1)
-    show_image(first_frame_warped)
 
-    A,b = setup_linear_system(first_frame,second_frame_warped,first_frame_derivative,second_frame_derivative_warped,solver_settings.alpha)
+    A,b = setup_linear_system(first_frame,second_frame_warped,solver_settings.alpha)
 
     print("Lg start")
     start = time()
@@ -45,7 +41,7 @@ def solve_layer(first_frame,second_frame,first_frame_derivative,
     if(solver=="lsmr"):
           x,info = splinalg.lsmr(A,b,atol=0.0001)[:2]
     elif(solver=="cg"):
-        x,info = splinalg.cg(A,b)
+        x,info = splinalg.cg(A,b,maxiter=100)
     elif(solver=="bicgstab"):
         x,info =splinalg.bicgstab(A,b,atol=0.001)
 

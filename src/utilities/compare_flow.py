@@ -60,53 +60,58 @@ def compare_flow(computed_flow, real_flow,current_frame,next_frame, plot=True):
     else:
         raise Exception("False dimensions: flow_1: (", height_1, ", ", width_1, ") flow_2: (", height_2, ", ", width_2, ")" )
 
-    #rescale image
-    current_frame = scale_image(current_frame,width,height)
-    next_frame = scale_image(next_frame, width, height)
-
-    next_frame_warped = warp_image(next_frame,computed_flow)
-
-
-    plt.figure()
-    show_image(current_frame)
-    plt.title("Current frame")
-
-    plt.figure()
-    show_image(next_frame_warped)
-    plt.title("Next frame warped to current frame")
-
-    fig, axs = plt.subplots(1,2)
-    axs[0].set_title("Current frame - Next frame squared")
-    show_image((current_frame-next_frame)**2,axes=axs[0])
-
-    axs[1].set_title("Current frame - Next frame warped squared")
-    show_image((current_frame - next_frame_warped) ** 2,axes=axs[1])
-
-    plt.figure()
-    show_image(current_frame, axes=plt)
-    show_flow_field_arrow(computed_flow, width, height, axes=plt)
-    plt.title("Arrows")
-
-    fig, axs = plt.subplots(1,2)
-
-    show_flow_field(computed_flow,width,height,axes=axs[0])
-    axs[0].set_title("Computed_flow")
-    show_flow_field(real_flow, width, height, axes=axs[1])
-    axs[1].set_title("Ground Truth")
-
-
-    ang_error = angular_error(computed_flow,real_flow)
+    ang_error = angular_error(computed_flow, real_flow)
     abs_error = absolute_endpoint_error(computed_flow, real_flow)
-
-    fig, axs = plt.subplots(1,2)
-    axs[0].imshow(ang_error)
-    axs[0].set_title("Angular error")
-    axs[1].imshow(np.log(abs_error))
-    axs[1].set_title("log Absolute endpoint error")
 
     print("Average angular error:")
     print(np.mean(ang_error[~np.isnan(ang_error)]))
     print("Absolute endpoint error:")
     print(np.mean(abs_error[~np.isnan(abs_error)]))
 
-    plt.show()
+    if(plot):
+        #rescale image
+        current_frame = scale_image(current_frame,width,height)
+        next_frame = scale_image(next_frame, width, height)
+
+        next_frame_warped = warp_image(next_frame,computed_flow)
+
+
+        plt.figure()
+        show_image(current_frame)
+        plt.title("Current frame")
+
+        plt.figure()
+        show_image(next_frame_warped)
+        plt.title("Next frame warped to current frame")
+
+        fig, axs = plt.subplots(1,2)
+        axs[0].set_title("Current frame - Next frame squared")
+        show_image((current_frame-next_frame)**2,axes=axs[0])
+
+        axs[1].set_title("Current frame - Next frame warped squared")
+        show_image((current_frame - next_frame_warped) ** 2,axes=axs[1])
+
+        plt.figure()
+        show_image(current_frame, axes=plt)
+        show_flow_field_arrow(computed_flow, width, height, axes=plt)
+        plt.title("Arrows")
+
+        fig, axs = plt.subplots(1,2)
+
+        show_flow_field(computed_flow,width,height,axes=axs[0])
+        axs[0].set_title("Computed_flow")
+        show_flow_field(real_flow, width, height, axes=axs[1])
+        axs[1].set_title("Ground Truth")
+
+
+
+
+        fig, axs = plt.subplots(1,2)
+        axs[0].imshow(ang_error)
+        axs[0].set_title("Angular error")
+        axs[1].imshow(abs_error)
+        axs[1].set_title("Absolute endpoint error")
+
+        plt.show()
+
+

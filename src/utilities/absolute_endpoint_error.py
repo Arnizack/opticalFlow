@@ -12,4 +12,5 @@ def absolute_endpoint_error(flow1,flow2):
     Y2,X2 = flow2
 
     distance_error = np.sqrt((Y1-Y2)**2+(X1-X2)**2)
+    distance_error[distance_error >= 100] = -1
     return distance_error

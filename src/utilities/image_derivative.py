@@ -16,7 +16,7 @@ def differentiate_matrix(matrix2d):
     y_derivative = convolve2d(matrix2d,kernel_y,mode="same", boundary='symm')
     x_derivative = convolve2d(matrix2d, kernel_x,mode="same", boundary='symm')
     #y_derivative=median_filter(y_derivative,size=3)
-    #x_derivative = median_filter(x_derivative, size=3)
+    # = median_filter(x_derivative, size=3)
     return np.array([y_derivative,x_derivative],copy=False)
 
 def differentiate_image(np_img):
