@@ -2,6 +2,7 @@ from src.utilities.warp_grid import warp_image,warp_derivative
 from src.utilities.image_access import open_image,show_image
 from src.horn_schunck.derivative_horn_schunck import get_I_x,get_I_y,get_I_t
 from src.utilities.image_derivative import differentiate_matrix
+from src.horn_schunck.diagonal_image_components import get_img_diags,get_img_diags_color
 from scipy import sparse
 import scipy.sparse.linalg as splinalg
 import numpy as np
@@ -93,7 +94,7 @@ def setup_diagonals_image(width,height,I_xx,I_xy,I_yy,alpha):
     diags = [R,middle,R]
     return (diags,offset)
 
-def setup_linear_system(first_image,second_image,first_image_derivative,second_image_derivative,alpha):
+def setup_linear_system(first_image,second_image,alpha):
 
     channel_count = first_image.shape[0]
     height = first_image.shape[2] #switched height,width
@@ -101,73 +102,12 @@ def setup_linear_system(first_image,second_image,first_image_derivative,second_i
 
     # see Horn–Schunck Optical Flow with a Multi-Scale Strategy page 4 for reference
 
-    I_xx = np.zeros(shape=(height * width), dtype=float)
-    I_xy = np.zeros(shape=(height * width), dtype=float)
-    I_yy = np.zeros(shape=(height * width), dtype=float)
-    I_xt = np.zeros(shape=(height * width), dtype=float)
-    I_yt = np.zeros(shape=(height * width), dtype=float)
-    for channel_idx in range(channel_count):
+    color_mode = "gray"
+    if(color_mode=="gray"):
+        I_xx, I_xy, I_yy, I_xt, I_yt = get_img_diags(first_image,second_image)
+    else:
+        I_xx, I_xy, I_yy, I_xt, I_yt = get_img_diags_color(first_image, second_image)
 
-        first_yx = differentiate_matrix(first_image[channel_idx])
-        channel_first_y,channel_first_x = first_yx
-        channel_first_x = channel_first_x.flatten()
-        channel_first_y = channel_first_y.flatten()
-
-        channel_second_y, channel_second_x = differentiate_matrix(second_image[channel_idx])
-        channel_second_x = channel_second_x.flatten()
-        channel_second_y = channel_second_y.flatten()
-
-        """
-        channel_first_x = first_image_derivative[channel_idx][1].flatten()
-        channel_first_y = first_image_derivative[channel_idx][0].flatten()
-
-        channel_second_x = second_image_derivative[channel_idx][1].flatten()
-        channel_second_y = second_image_derivative[channel_idx][0].flatten()
-        """
-        #deriviative blending: see An Improved Algorithm for TV-L1 Optical Flow
-        b=0.4
-        channel_x = channel_first_x*b+channel_second_x*(1-b)
-        channel_y = channel_first_y*b+channel_second_y*(1-b)
-
-        """
-        print("channel_x, channel_y")
-        plt.figure()
-        plt.imshow(channel_x.reshape(height,width))
-        plt.figure()
-        plt.imshow(channel_y.reshape(height,width))
-        plt.show()
-        """
-
-        channel_t = second_image[channel_idx] - first_image[channel_idx]
-        channel_t = channel_t.flatten()
-
-        channel_x = get_I_x(first_image[channel_idx],second_image[channel_idx]).flatten()
-        channel_y = get_I_y(first_image[channel_idx], second_image[channel_idx]).flatten()
-        channel_t = get_I_t(first_image[channel_idx], second_image[channel_idx]).flatten()
-
-
-        I_xx += channel_x ** 2
-        I_xy += channel_x * channel_y
-        I_yy += channel_y ** 2
-        I_xt += channel_x * channel_t
-        I_yt += channel_y * channel_t
-
-    channel_count_squared = channel_count**2
-
-    I_xx/=channel_count_squared
-    I_xy /= channel_count_squared
-    I_yy /= channel_count_squared
-    I_xt /= channel_count_squared
-    I_yt /= channel_count_squared
-    """
-    print("I_xx, I_xy, I_yy, I_xt, I_yt")
-    plt.figure()
-    plt.imshow(I_xx.reshape(width,height))
-    plt.figure()
-    plt.imshow(I_xy.reshape(width,height))
-    plt.figure()
-    plt.imshow(I_yy.reshape(width,height))
-    plt.show()"""
 
     diags1,offset1 = setup_diagonals_image(width,height,I_xx,I_xy,I_yy,alpha)
 

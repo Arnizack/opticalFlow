@@ -29,6 +29,7 @@ def open_image(filepath):
 
     if(len(np_img.shape)==2):
         np_img.shape = (1, np_img.shape[0],np_img.shape[1])
+        np_img = np_img.astype(float)/255
         return np_img
 
     return _WHC_to_CWH_space(np_img)
@@ -39,10 +40,10 @@ def save_image(filepath, np_img):
     pil_img = Image.fromarray(np_img_WHC)
     pil_img.save(filepath)
 
-def show_image(np_img):
+def show_image(np_img, axes = plt):
     if(np_img.shape[0]!=1):
         np_img_WHC = _CWH_to_WHC_space(np_img)
     else:
-        np_img_WHC =  np_img[0]
+        np_img_WHC =  np_img[0]*255
     pil_img = Image.fromarray(np_img_WHC)
-    plt.imshow(pil_img)
+    axes.imshow(pil_img)

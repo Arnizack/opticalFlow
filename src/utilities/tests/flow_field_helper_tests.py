@@ -10,7 +10,9 @@ class FlowFieldHelperTest:
         flow_field2 = read_flow_field(
             r"..\..\..\resources\eval-twoframes-groundtruth\Grove2\flow10.flo")
         show_flow_difference(flow_field,flow_field2, width, height)
+        plt.show()
 
 
 if __name__ == '__main__':
     FlowFieldHelperTest().read_flow_field()
+
