@@ -21,10 +21,11 @@ def create_image_pyramid(np_img,factors):
     """
     :param np_img: (ColorSpace,Height,Width)
     :param factors:  Array of the downscale factors. They should be between 0 and 1
-    :return: Array of the Images
+    :return: Array of the Images (smallest first)
     """
     pyramid_levels = [np_img]
     for factor in factors:
         pyramid_levels.append(downscale_image(pyramid_levels[-1],factor))
 
+    pyramid_levels.reverse()
     return pyramid_levels

@@ -8,7 +8,7 @@ from src.utilities.image_derivative import differentiate_image
 from  src.utilities.flow_field_helper import show_flow_field,read_flow_field,show_flow_field_arrow
 from src.utilities.image_pyramid import downscale_image
 from src.utilities.warp_grid import warp_image
-from scipy.signal import medfilt2d
+
 from src.utilities.compare_flow import compare_flow
 
 def test_layer1(img1,img2):
@@ -30,9 +30,8 @@ def test_layer1(img1,img2):
     plt.figure()
     for iter in range(3):
         flow = solve_layer(img1,img2,init_flow,settings)
-        flow[0] = medfilt2d(flow[0],3)
-        flow[1] = medfilt2d(flow[1],3)
-        init_flow+=flow
+
+        init_flow=flow
     return init_flow
 
 

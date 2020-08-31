@@ -27,7 +27,7 @@ def scale_image(image, width, height):
     scale = (scale_x+scale_y)/2
     return downscale_image(image, scale)
 
-def compare_flow(computed_flow, real_flow,current_frame,next_frame, plot=True):
+def compare_flow(computed_flow, real_flow,current_frame,next_frame, plot=True,arrows=True):
     """
 
     :param computed_flow: np.array(float) (YX, height_1,width_1)
@@ -91,10 +91,11 @@ def compare_flow(computed_flow, real_flow,current_frame,next_frame, plot=True):
         axs[1].set_title("Current frame - Next frame warped squared")
         show_image((current_frame - next_frame_warped) ** 2,axes=axs[1])
 
-        plt.figure()
-        show_image(current_frame, axes=plt)
-        show_flow_field_arrow(computed_flow, width, height, axes=plt)
-        plt.title("Arrows")
+        if (arrows):
+            plt.figure()
+            show_image(current_frame, axes=plt)
+            show_flow_field_arrow(computed_flow, width, height, axes=plt)
+            plt.title("Arrows")
 
         fig, axs = plt.subplots(1,2)
 
