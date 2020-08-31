@@ -94,19 +94,24 @@ def setup_diagonals_image(width,height,I_xx,I_xy,I_yy,alpha):
     diags = [R,middle,R]
     return (diags,offset)
 
-def setup_linear_system(first_image,second_image,alpha):
+def setup_linear_system(first_image,second_image,settings):
 
     channel_count = first_image.shape[0]
     height = first_image.shape[2] #switched height,width
     width = first_image.shape[1]
 
+    derivative_mode = settings.derivative_mode
+    alpha = settings.alpha
+
     # see Horn–Schunck Optical Flow with a Multi-Scale Strategy page 4 for reference
 
-    color_mode = "gray"
+
+
+    color_mode = derivative_mode
     if(color_mode=="gray"):
-        I_xx, I_xy, I_yy, I_xt, I_yt = get_img_diags(first_image,second_image)
+        I_xx, I_xy, I_yy, I_xt, I_yt = get_img_diags(first_image,second_image,settings.derivative_typ)
     else:
-        I_xx, I_xy, I_yy, I_xt, I_yt = get_img_diags_color(first_image, second_image)
+        I_xx, I_xy, I_yy, I_xt, I_yt = get_img_diags_color(first_image, second_image,settings.derivative_typ)
 
 
     diags1,offset1 = setup_diagonals_image(width,height,I_xx,I_xy,I_yy,alpha)

@@ -6,13 +6,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 from time import time
-
+from scipy.signal import medfilt2d
 from src.horn_schunck.setup_linear_system import setup_linear_system
 
-class SolverSettings:
-    alpha = 0.1
-
-
+from src.horn_schunck.solver_settings import SolverSettings
 
 
 
@@ -30,14 +27,12 @@ def solve_layer(first_frame,second_frame, initial_flow_field, solver_settings):
     #wrap second image
     second_frame_warped = warp_image(second_frame,initial_flow_field)
 
-    plt.figure(1)
-
-    A,b = setup_linear_system(first_frame,second_frame_warped,solver_settings.alpha)
+    A,b = setup_linear_system(first_frame,second_frame_warped,solver_settings)
 
     print("Lg start")
     start = time()
 
-    solver = "cg"
+    solver = solver_settings.solver
     if(solver=="lsmr"):
           x,info = splinalg.lsmr(A,b,atol=0.0001)[:2]
     elif(solver=="cg"):
@@ -50,7 +45,14 @@ def solve_layer(first_frame,second_frame, initial_flow_field, solver_settings):
     width = first_frame.shape[2]
     height = first_frame.shape[1]
     x.shape = (2,height,width)
-    return x
+
+    flow = x+initial_flow_field
+    if(solver_settings.median_filter_size > 0 ):
+        flow[0] = medfilt2d(flow[0],solver_settings.median_filter_size)
+        flow[1] = medfilt2d(flow[1],solver_settings.median_filter_size)
+
+
+    return flow
 
 
 
