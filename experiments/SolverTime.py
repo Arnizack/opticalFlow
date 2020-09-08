@@ -10,8 +10,8 @@ import numpy as np
 from time import time
 
 
-width = 1920/4
-height = 1080/4
+width = 1920
+height = 1080
 
 count = int(width*height*2)
 
@@ -70,7 +70,11 @@ start = time()
 
 #approxInvB=sparse.spdiags(1/filterMitte,0,count,count)
 #invB = sparse.linalg.inv(A)
+#x = invB.dot(b)
+#x,info = sparse.linalg.bicgstab(A,b,atol = 0.01)
 x, istop, itn, normr  = sparse.linalg.lsmr(A,b,atol = 0.01)[:4]
+
+
 #x, info = sparse.linalg.cg(A,b,atol = 0.01,maxiter=20)
 
 
@@ -78,7 +82,7 @@ print("Zeit für LG: ",time()-start )
 
 #print("Info: ",istop, itn, normr)
 
-m = np.mean((A*x-b)**2)
+m = np.mean(np.sqrt((A*x-b)**2+0.001**2))
 print("Mean Error: ",m)
 
 

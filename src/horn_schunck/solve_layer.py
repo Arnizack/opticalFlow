@@ -2,13 +2,14 @@ from src.utilities.warp_grid import warp_image,warp_derivative
 from src.utilities.image_access import open_image,show_image
 from scipy import sparse
 import scipy.sparse.linalg as splinalg
+from scipy.signal import convolve2d
 import numpy as np
 import matplotlib.pyplot as plt
 
 from time import time
 from scipy.signal import medfilt2d
 from src.horn_schunck.setup_linear_system import setup_linear_system
-
+from pyamg.aggregation import smoothed_aggregation_solver
 from src.horn_schunck.solver_settings import SolverSettings
 
 
@@ -29,18 +30,34 @@ def solve_layer(first_frame,second_frame, initial_flow_field, solver_settings):
 
     A,b = setup_linear_system(first_frame,second_frame_warped,solver_settings)
 
-    print("Lg start")
+
     start = time()
 
     solver = solver_settings.solver
     if(solver=="lsmr"):
-          x,info = splinalg.lsmr(A,b,atol=0.0001)[:2]
+
+        x,info = splinalg.lsmr(A,b)[:2]
     elif(solver=="cg"):
-        x,info = splinalg.cg(A,b,maxiter=100)
+        #A = sparse.csr_matrix(A)
+        #multilevel = smoothed_aggregation_solver(A)
+
+        #M = multilevel.aspreconditioner(cycle='AMLI')
+
+        x,info = splinalg.cg(A,b,atol=0.001,maxiter=100)
+        print("Diff Ax-b: ", np.mean((A.dot(x)-b)**2))
     elif(solver=="bicgstab"):
-        x,info =splinalg.bicgstab(A,b,atol=0.001)
+        x,info =splinalg.bicgstab(A,b)
+    elif(solver=="minres"):
+        x,info = splinalg.minres(A,b,maxiter=100)[:2]
+    elif(solver=="spsolve"):
+        A = sparse.csr_matrix(A)
+        x = splinalg.spsolve(A,b)
 
     print("Lg: ",time()-start)
+
+
+
+
 
     width = first_frame.shape[2]
     height = first_frame.shape[1]

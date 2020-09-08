@@ -1,5 +1,5 @@
 class SolverSettings:
-    alpha = 15/200
+    alpha = 10/200
     #derivative = "Horn-Schunck"
     solver = "cg"
     derivative_mode = "gray"
