@@ -21,8 +21,8 @@ def dimetrodon():
 
 def test_bilateral_median_filter(img1,img2):
     settings = SolverSettings()
-    #img1 = downscale_image(img1, 0.2)
-    #img2 = downscale_image(img2, 0.2)
+    img1 = downscale_image(img1, 0.2)
+    img2 = downscale_image(img2, 0.2)
     init_flow = np.zeros(shape=(2, img1.shape[1], img1.shape[2]),dtype = np.float32)
 
     flow = solve_layer(img1, img2, init_flow, settings)
@@ -35,7 +35,8 @@ def test_bilateral_median_filter(img1,img2):
     start = time()
 
     flow = bilateral_median_filter(flow.astype(np.float32),occlusion.astype(np.float32),init_flow.astype(np.float32),img1.astype(np.float32),
-                                   weigth_auxiliary=float(5),weigth_filter=float(2))
+                                   weigth_auxiliary=1,weigth_filter=1, sigma_distance = 1, sigma_color = 1)
+
 
     print("Bilateral Median Filter Time: ",time()-start)
 

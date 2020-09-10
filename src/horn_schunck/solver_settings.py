@@ -5,6 +5,6 @@ class SolverSettings:
     derivative_mode = "gray"
     #"Horn-Schunck"
     derivative_typ = "Sun"
-    median_filter_size = 5
+    median_filter_size = 7
 
     scale_factors = [0.5,0.5]

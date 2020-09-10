@@ -1,5 +1,6 @@
 from src.utilities.warp_grid import warp_image,warp_derivative
 from src.utilities.image_access import open_image,show_image
+from src.utilities.flow_field_helper import show_flow_field
 from scipy import sparse
 import scipy.sparse.linalg as splinalg
 from scipy.signal import convolve2d
@@ -11,7 +12,8 @@ from scipy.signal import medfilt2d
 from src.horn_schunck.setup_linear_system import setup_linear_system
 from pyamg.aggregation import smoothed_aggregation_solver
 from src.horn_schunck.solver_settings import SolverSettings
-
+from src.filter.cython.bilateral_median import bilateral_median_filter
+from src.horn_schunck.compute_occlusion import compute_occlusion
 
 
 def solve_layer(first_frame,second_frame, initial_flow_field, solver_settings):
@@ -65,9 +67,22 @@ def solve_layer(first_frame,second_frame, initial_flow_field, solver_settings):
 
     flow = x+initial_flow_field
     if(solver_settings.median_filter_size > 0 ):
-        flow[0] = medfilt2d(flow[0],solver_settings.median_filter_size)
-        flow[1] = medfilt2d(flow[1],solver_settings.median_filter_size)
+        #flow[0] = medfilt2d(flow[0],solver_settings.median_filter_size)
+        #flow[1] = medfilt2d(flow[1],solver_settings.median_filter_size)
 
+        occlusion = compute_occlusion(first_frame, first_frame, flow)
+        init_flow = np.zeros(shape=(2, first_frame.shape[1], first_frame.shape[2]), dtype=np.float32)
+
+        #show_flow_field(flow,flow.shape[2],flow.shape[1])
+        #plt.show()
+        flow = bilateral_median_filter(flow.astype(np.float32), occlusion.astype(np.float32),
+                                       init_flow.astype(np.float32), first_frame.astype(np.float32),
+                                       weigth_auxiliary=0.001, weigth_filter=10, sigma_distance=5, sigma_color=20/255,filter_size = solver_settings.median_filter_size )
+        #show_flow_field(flow,flow.shape[2],flow.shape[1])
+        #plt.show()
+
+        #flow[0] = medfilt2d(flow[0], 3)
+        #flow[1] = medfilt2d(flow[1],3)
 
     return flow
 
