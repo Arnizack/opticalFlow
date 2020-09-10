@@ -1,85 +1,102 @@
 
 import numpy as np
 cimport numpy as np
-from libc.math cimport exp
+from libc.math cimport exp, floor,ceil
+from cython.parallel import prange
+
 from cpython.array cimport array
+from libc.stdlib cimport qsort
+from libc.stdlib cimport malloc, free
 
-
-cpdef float quickselect_median(float[:] l):
-    if len(l) % 2 == 1:
-        return quickselect(l, len(l) / 2)
+cdef int cmp_func(const void* a, const void* b) nogil:
+    cdef float a_v = (<float*>a)[0]
+    cdef float b_v = (<float*>b)[0]
+    if a_v < b_v:
+        return -1
+    elif a_v == b_v:
+        return 0
     else:
-        return 0.5 * (quickselect(l, len(l) / 2 - 1) +
-                      quickselect(l, len(l) / 2))
+        return 1
 
+cdef void sort_c(float* a, int length) nogil:
+    # a needn't be C continuous because strides helps
+    qsort(a, length, sizeof(float), &cmp_func)
 
-cdef float quickselect(float[:] l, size_t k):
-    """
-    Select the kth element in l (0 based)
-    :param l: List of numerics
-    :param k: Index
-    :param pivot_fn: Function to choose a pivot, defaults to random.choice
-    :return: The kth element of l
-    """
-    
-    cdef size_t length = len(l)
-    if length == 1:
-        assert k == 0
-        return l[0]
-    half = int(length/2)
-    pivot = l[half]
+cdef float quickselect_median(float* l, int length) nogil:
+    cdef int half = ( length -1 ) // 2
+    sort_c(l,length)
+    if(length % 2 == 0):
+        return l[half + 1] * 0.5 + l[half] *0.5
+    return l[half]
 
-    cdef float [:] lows = [el for el in l if el < pivot]
-    return 0.0
-    cdef float [:] highs = [el for el in l if el > pivot]
-    cdef float [:] pivots = [el for el in l if el == pivot]
+cdef int min(int a, int b) nogil:
+    if(a > b):
+        return b
+    return a
 
-    if k < len(lows):
-        return quickselect(lows, k)
-    elif k < len(lows) + len(pivots):
-        # We got lucky and guessed the median
-        return pivots[0]
-    else:
-        return quickselect(highs, k - len(lows) - len(pivots))
+cdef int max(int a, int b) nogil:
+    if(a > b):
+        return a
+    return b
 
-def bilateral_median_filter(flow, occlusen, auxiliary_field, image, weigth_auxiliary, weigth_filter,
-                            sigma_distance = 7, sigman_color = 7/200, filter_size=5):
+cpdef np.ndarray[np.float32_t, ndim=3] bilateral_median_filter(float[:,:, ::1] flow, float[:, ::1] occlusen, 
+                            float[:,:, ::1] auxiliary_field, float[:,:, ::1] image, 
+                            float weigth_auxiliary, float weigth_filter,
+                            float sigma_distance = 7, float sigma_color = float(7/200), int filter_size=5):
     """
 
     :param flow: np.float (YX,Height,Width)
     :param occlusen: (Height, Width)
-    :param auxiliary_field: np.array(float) (Y_flow X_flow , Y_coord X_coord, Height, Width)
+    :param auxiliary_field: np.array(float) (Y_flow X_flow , Height, Width)
     :param image: np.array(float) (ColorChannel, Height, Width)
     :param weigth_auxiliary: float > 0
     :param weigth_filter: float > 0
     :param sigma_distance: float
-    :param sigman_color: float
+    :param sigma_color: float
     :param filter_size: int
     :return: flow field
     """
     print("Cython Bilateral median filter")
-    width = flow.shape[2]
-    height = flow.shape[1]
-    color_channel_count = flow.shape[0]
+    cdef int width = flow.shape[2]
+    cdef int height = flow.shape[1]
+    cdef int color_channel_count = image.shape[0]
 
-    filter_half = int(filter_size / 2)
+    cdef int filter_half = int(filter_size / 2)
 
-    helper_list_size = filter_size ** 2 * 2
-    
-    c_helper_flow_x_list = np.empty(shape=(helper_list_size),dtype = np.float32)
-    c_helper_flow_y_list = np.empty(shape=(helper_list_size),dtype = np.float32)
+    cdef int helper_list_size = filter_size * filter_size * 2
+ 
 
-    cdef float [:] helper_flow_x_list = c_helper_flow_x_list
-    cdef float [:] helper_flow_y_list = c_helper_flow_y_list
-    weigths_list = [0.0] * helper_list_size
+    cpdef np.ndarray[np.float32_t, ndim=3] result_flow = np.empty(shape=(2, height, width), dtype=np.float32)
 
-    result_flow = np.empty(shape=(2, height, width), dtype=float)
+    cdef float* helper_flow_x_list
+    cdef float* helper_flow_y_list
+    cdef float* weigths_list 
+    cdef int min_x_compare
+    cdef int max_x_compare
+    cdef int min_y_compare
+    cdef int max_y_compare
+    cdef int counter
+    cdef float distance_squared_difference
+    cdef float color_squared_difference
+    cdef float exponent
+    cdef float occlusen_current
+    cdef float occlusen_compared
+    cdef float weigth
+    cdef float f_x
+    cdef float f_y
+    cdef float scalar
+    cdef float sum
+    cdef int channel_idx
+    cdef int n,x,y,x_compare,y_compare,idx_1,idx_2
 
+    #for y in prange(height, nogil=True):
     for y in range(height):
+        helper_flow_x_list =  <float *> malloc(helper_list_size * sizeof(float))
+        helper_flow_y_list = <float *> malloc(helper_list_size * sizeof(float))
+        weigths_list = <float *> malloc(helper_list_size * sizeof(float))
         for x in range(width):
             min_x_compare = max(0, x - filter_half)
             max_x_compare = min(width, x + filter_half + 1)
-
             min_y_compare = max(0, y - filter_half)
             max_y_compare = min(height, y + filter_half + 1)
 
@@ -89,20 +106,20 @@ def bilateral_median_filter(flow, occlusen, auxiliary_field, image, weigth_auxil
                 for x_compare in range(min_x_compare, max_x_compare):
                     distance_squared_difference = (y - y_compare) ** 2 + (x - x_compare) ** 2
                     color_squared_difference = 0
-                    for channel in image:
-                        color_squared_difference += (channel[y_compare][x_compare] - channel[y][x]) ** 2
+                    for channel_idx in range(color_channel_count):
+                        color_squared_difference += (image[channel_idx,y_compare,x_compare] - image[channel_idx,y,x]) ** 2
 
                     exponent = distance_squared_difference / 2 * sigma_distance
-                    exponent += color_squared_difference / 2 * sigman_color * color_channel_count
+                    exponent += color_squared_difference / 2 * sigma_color * color_channel_count
 
-                    occlusen_current = occlusen[y][x]
-                    occlusen_compared = occlusen[y_compare][x_compare]
+                    occlusen_current = occlusen[y,x]
+                    occlusen_compared = occlusen[y_compare,x_compare]
 
                     weigth = exp(-exponent) * occlusen_compared / occlusen_current
                     weigths_list[counter] = weigth
 
-                    helper_flow_x_list[counter] = flow[1][y_compare][x_compare]
-                    helper_flow_y_list[counter] = flow[0][y_compare][x_compare]
+                    helper_flow_x_list[counter] = flow[1,y_compare,x_compare]
+                    helper_flow_y_list[counter] = flow[0,y_compare,x_compare]
 
                     counter += 1
 
@@ -111,8 +128,8 @@ def bilateral_median_filter(flow, occlusen, auxiliary_field, image, weigth_auxil
 
             n = counter
 
-            f_x = auxiliary_field[1][y][x]
-            f_y = auxiliary_field[0][y][x]
+            f_x = auxiliary_field[1,y,x]
+            f_y = auxiliary_field[0,y,x]
             scalar = weigth_filter / weigth_auxiliary
 
             for idx_1 in range(n):
@@ -125,7 +142,10 @@ def bilateral_median_filter(flow, occlusen, auxiliary_field, image, weigth_auxil
                 helper_flow_x_list[n + idx_1] = f_x + scalar * sum
                 helper_flow_y_list[n + idx_1] = f_y + scalar * sum
 
-            result_flow[0][y][x] = quickselect_median(helper_flow_y_list[:n*2])
-            result_flow[1][y][x] = quickselect_median(helper_flow_x_list[:n*2])
+            result_flow[0,y,x] = quickselect_median(helper_flow_y_list,n*2)
+            result_flow[1,y,x] = quickselect_median(helper_flow_x_list,n*2)
+        free(helper_flow_x_list)
+        free(helper_flow_y_list)
+        free(weigths_list)
 
     return result_flow
