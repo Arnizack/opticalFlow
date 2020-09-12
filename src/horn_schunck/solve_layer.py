@@ -3,14 +3,15 @@ from src.utilities.image_access import open_image,show_image
 from src.utilities.flow_field_helper import show_flow_field
 from scipy import sparse
 import scipy.sparse.linalg as splinalg
-from scipy.signal import convolve2d
 import numpy as np
 import matplotlib.pyplot as plt
 
 from time import time
 from scipy.signal import medfilt2d
 from src.horn_schunck.setup_linear_system import setup_linear_system
+from src.utilities.cg_solver import cg
 from pyamg.aggregation import smoothed_aggregation_solver
+
 from src.horn_schunck.solver_settings import SolverSettings
 from src.filter.cython.bilateral_median import bilateral_median_filter
 from src.horn_schunck.compute_occlusion import compute_occlusion
@@ -40,13 +41,15 @@ def solve_layer(first_frame,second_frame, initial_flow_field, solver_settings):
 
         x,info = splinalg.lsmr(A,b)[:2]
     elif(solver=="cg"):
-        #A = sparse.csr_matrix(A)
-        #multilevel = smoothed_aggregation_solver(A)
+        # A = sparse.csr_matrix(A)
+        # multilevel = smoothed_aggregation_solver(A)
 
-        #M = multilevel.aspreconditioner(cycle='AMLI')
+        # M = multilevel.aspreconditioner(cycle='AMLI')
 
-        x,info = splinalg.cg(A,b,atol=0.001,maxiter=100)
-        print("Diff Ax-b: ", np.mean((A.dot(x)-b)**2))
+        x, info = splinalg.cg(A, b, atol=0.001, maxiter=100)
+        print("Diff Ax-b: ", np.mean((A.dot(x) - b) ** 2))
+    elif(solver=="cg_own"):
+        x, info = cg(A, b, maxiter=100)
     elif(solver=="bicgstab"):
         x,info =splinalg.bicgstab(A,b)
     elif(solver=="minres"):
@@ -55,11 +58,8 @@ def solve_layer(first_frame,second_frame, initial_flow_field, solver_settings):
         A = sparse.csr_matrix(A)
         x = splinalg.spsolve(A,b)
 
-    print("Lg: ",time()-start)
-
-
-
-
+    print("Lg with", solver_settings.solver,": ",time()-start)
+    print("Number of iterations: ", info, "\nMean error: ", (b - A.dot(x)).mean())
 
     width = first_frame.shape[2]
     height = first_frame.shape[1]
