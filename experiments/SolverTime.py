@@ -10,8 +10,8 @@ import numpy as np
 from time import time
 
 
-width = 1920/4
-height = 1080/4
+width = 1920/10
+height = 1080/10
 
 count = int(width*height*2)
 
@@ -70,15 +70,28 @@ start = time()
 
 #approxInvB=sparse.spdiags(1/filterMitte,0,count,count)
 #invB = sparse.linalg.inv(A)
-x, istop, itn, normr  = sparse.linalg.lsmr(A,b,atol = 0.01)[:4]
+x, istop, itn, normr  = sparse.linalg.lsmr(A, b, atol = 0.01)[:4]
 #x, info = sparse.linalg.cg(A,b,atol = 0.01,maxiter=20)
 
 
-print("Zeit für LG: ",time()-start )
+print("Zeit für LG mit least Squares matrix: ",time()-start )
 
 #print("Info: ",istop, itn, normr)
 
 m = np.mean((A*x-b)**2)
+print("Mean Error: ", m)
+
+# Test direct sparse Matrix solver from scipy
+start = time()
+
+sparse.linalg.dsolve.use_solver(useUmfpack=False)
+
+lu = sparse.linalg.splu(A)
+x = lu.solve(b)
+
+#x = sparse.linalg.isolve.cg(A, b)
+
+m = np.mean((A*x-b)**2)
+
+print("Zeit für LG mit SuperLu 4.0: ",time()-start)
 print("Mean Error: ",m)
-
-
