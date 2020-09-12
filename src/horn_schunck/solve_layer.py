@@ -8,10 +8,12 @@ import matplotlib.pyplot as plt
 from time import time
 from scipy.signal import medfilt2d
 from src.horn_schunck.setup_linear_system import setup_linear_system
+from src.utilities.cg_solver import cg
 
 from src.horn_schunck.solver_settings import SolverSettings
 
-
+import cupy as cp
+import cupyx as cpx
 
 def solve_layer(first_frame,second_frame, initial_flow_field, solver_settings):
     """
@@ -29,9 +31,10 @@ def solve_layer(first_frame,second_frame, initial_flow_field, solver_settings):
 
     A,b = setup_linear_system(first_frame,second_frame_warped,solver_settings)
 
-    #M = precondition(A)
-
     print("Lg start")
+    start = time()
+    test = A.dot(b)
+    print("Jetzt: ", time() - start)
     start = time()
 
     solver = solver_settings.solver
@@ -39,10 +42,13 @@ def solve_layer(first_frame,second_frame, initial_flow_field, solver_settings):
           x,info = splinalg.lsmr(A,b,atol=0.0001)[:2]
     elif(solver=="cg"):
         x,info = splinalg.cg(A,b,maxiter=100)
+    elif(solver=="cg_own"):
+        x, info = cg(A, b, maxiter=100)
     elif(solver=="bicgstab"):
         x,info =splinalg.bicgstab(A,b,atol=0.001)
 
-    print("Lg: ",time()-start)
+    print("Lg with", solver_settings.solver,": ",time()-start)
+    print("Number of iterations: ", info, "\nMean error: ", (b - A.dot(x)).mean())
 
     width = first_frame.shape[2]
     height = first_frame.shape[1]
@@ -58,10 +64,12 @@ def solve_layer(first_frame,second_frame, initial_flow_field, solver_settings):
 
 
 
-
 def precondition(A):
+    import scipy as sp
     start = time()
 
-    inv = splinalg.inv(A)
+    temp = splinalg.spilu(A)
     print("Inverse: ", time() - start)
+    inv = temp.L * temp.U
+    print(sp.sparse.issparse(inv))
     return inv

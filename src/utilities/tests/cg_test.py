@@ -11,7 +11,7 @@ from src.utilities.warp_grid import warp_image
 
 from src.utilities.compare_flow import compare_flow
 
-def test_layer1(img1,img2):
+def test_layer1(img1,img2, solver_settter = "cg"):
 
 
     img1 = downscale_image(img1, 1)
@@ -22,6 +22,7 @@ def test_layer1(img1,img2):
 
     settings = SolverSettings()
     settings.alpha=15/200
+    settings.solver = solver_settter
     init_flow = np.zeros(shape=(2, img1.shape[1], img1.shape[2]))
 
     width = img2.shape[2]
@@ -32,9 +33,22 @@ def test_layer1(img1,img2):
         flow = solve_layer(img1,img2,init_flow,settings)
 
         init_flow=flow
+        print("")
     return init_flow
 
+def compare(flow_scipy, flow_own):
+    if flow_scipy.shape != flow_own.shape:
+        print("Different Shapes")
+    print("Scipy:")
+    stats(flow_scipy)
+    print("Own:")
+    stats(flow_own)
+    print("Difference:")
+    err = flow_own - flow_scipy
+    stats(err)
 
+def stats(mat):
+    print("Min: ", mat.min(), ", Max: ", mat.max(), ", Mean: ", mat.mean())
 
 if __name__ == '__main__':
     #test_setup_linear_system()
@@ -49,10 +63,14 @@ if __name__ == '__main__':
     #img2 = img2[[0]]
     #img1 = open_image(r"..\..\..\resources\eval-twoframes\Dimetrodon\frame10.png")
     #img2 = open_image(r"..\..\..\resources\eval-twoframes\Dimetrodon\frame11.png")
-    computed_flow = test_layer1(img1,img2)
+
+    computed_flow = test_layer1(img1,img2, "cg")
+
+    computed_flow_own = test_layer1(img1,img2, "cg_own")
 
     ref_flow = read_flow_field(r"..\..\..\resources\eval-twoframes-groundtruth\Dimetrodon\flow10.flo")
 
-    compare_flow(computed_flow,ref_flow,img1,img2,plot=True)
+    compare(computed_flow, computed_flow_own)
 
-
+    #compare_flow(computed_flow, computed_flow_peer, img1, img2, plot=True)
+    #compare_flow(computed_flow,ref_flow,img1,img2,plot=True)
