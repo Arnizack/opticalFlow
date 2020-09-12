@@ -9,11 +9,11 @@ from time import time
 from scipy.signal import medfilt2d
 from src.horn_schunck.setup_linear_system import setup_linear_system
 from src.utilities.cg_solver import cg
+from pyamg.aggregation import smoothed_aggregation_solver
 
 from src.horn_schunck.solver_settings import SolverSettings
 
-import cupy as cp
-import cupyx as cpx
+
 
 def solve_layer(first_frame,second_frame, initial_flow_field, solver_settings):
     """
@@ -31,21 +31,30 @@ def solve_layer(first_frame,second_frame, initial_flow_field, solver_settings):
 
     A,b = setup_linear_system(first_frame,second_frame_warped,solver_settings)
 
-    print("Lg start")
-    start = time()
-    test = A.dot(b)
-    print("Jetzt: ", time() - start)
+
     start = time()
 
     solver = solver_settings.solver
     if(solver=="lsmr"):
-          x,info = splinalg.lsmr(A,b,atol=0.0001)[:2]
+
+        x,info = splinalg.lsmr(A,b)[:2]
     elif(solver=="cg"):
-        x,info = splinalg.cg(A,b,maxiter=100)
+        # A = sparse.csr_matrix(A)
+        # multilevel = smoothed_aggregation_solver(A)
+
+        # M = multilevel.aspreconditioner(cycle='AMLI')
+
+        x, info = splinalg.cg(A, b, atol=0.001, maxiter=100)
+        print("Diff Ax-b: ", np.mean((A.dot(x) - b) ** 2))
     elif(solver=="cg_own"):
         x, info = cg(A, b, maxiter=100)
     elif(solver=="bicgstab"):
-        x,info =splinalg.bicgstab(A,b,atol=0.001)
+        x,info =splinalg.bicgstab(A,b)
+    elif(solver=="minres"):
+        x,info = splinalg.minres(A,b,maxiter=100)[:2]
+    elif(solver=="spsolve"):
+        A = sparse.csr_matrix(A)
+        x = splinalg.spsolve(A,b)
 
     print("Lg with", solver_settings.solver,": ",time()-start)
     print("Number of iterations: ", info, "\nMean error: ", (b - A.dot(x)).mean())
@@ -64,12 +73,4 @@ def solve_layer(first_frame,second_frame, initial_flow_field, solver_settings):
 
 
 
-def precondition(A):
-    import scipy as sp
-    start = time()
 
-    temp = splinalg.spilu(A)
-    print("Inverse: ", time() - start)
-    inv = temp.L * temp.U
-    print(sp.sparse.issparse(inv))
-    return inv
