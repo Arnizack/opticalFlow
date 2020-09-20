@@ -1,7 +1,7 @@
 from scipy import sparse
 import numpy as np
 import matplotlib.pyplot as plt
-from src.sun_baker.setup_linear_system.convolution3x3 import diags_convolution3x3
+from src.sun_baker.setup_linear_system.convolution3x3 import convolution3x3
 
 def test_conv():
     expected_A = [
@@ -28,11 +28,9 @@ def test_conv():
     width = 3
     height = 4
 
-    diags_dict = diags_convolution3x3(kernel,width,height)
+    A = convolution3x3(kernel,width,height)
 
-    diags = list(diags_dict.values())
-    offsets = list(diags_dict.keys())
-    actual_A = sparse.spdiags(diags,offsets,width*height,width*height).todense()
+    actual_A = A.todense()
 
     plt.title("Actual A")
     plt.matshow(actual_A)

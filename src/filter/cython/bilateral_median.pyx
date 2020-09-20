@@ -92,7 +92,7 @@ cdef void inner_row_kernel(int y, float[:,:, ::1] flow, float[:, ::1] occlusen, 
                 occlusen_current = occlusen[y,x]
                 occlusen_compared = occlusen[y_compare,x_compare]
 
-                weigth = exp(-exponent) * occlusen_compared / occlusen_current
+                weigth = exp(-exponent) * (occlusen_compared+0.00001) / (occlusen_current+0.00001)
                 weigths_list[counter] = weigth
 
                 helper_flow_x_list[counter] = flow[1,y_compare,x_compare]
@@ -154,7 +154,7 @@ cpdef np.ndarray[np.float32_t, ndim=3] bilateral_median_filter(float[:,:, ::1] f
  
 
     cpdef np.ndarray[np.float32_t, ndim=3] result_flow = np.empty(shape=(2, height, width), dtype=np.float32)
-    #print("Channelcount: ", color_channel_count, " Sigma Color: ", sigma_color, " Sigma distance: ", sigma_distance)
+    print("Channelcount: ", color_channel_count, " Sigma Color: ", sigma_color, " Sigma distance: ", sigma_distance)
     cdef int y
     #for y in prange(height, nogil=True):
     for y in range(height):

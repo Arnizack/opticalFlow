@@ -1,7 +1,7 @@
 class SolverSettings:
     alpha = 10/200
     #derivative = "Horn-Schunck"
-    solver = "cg"
+    solver = "cg_own"
     derivative_mode = "gray"
     #"Horn-Schunck"
     derivative_typ = "Sun"

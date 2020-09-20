@@ -14,8 +14,8 @@ from src.utilities.compare_flow import compare_flow
 def test_layer1(img1,img2):
 
 
-    img1 = downscale_image(img1, 1)
-    img2 = downscale_image(img2, 1)
+    img1 = downscale_image(img1, 0.2)
+    img2 = downscale_image(img2, 0.2)
 
     der_img2 = differentiate_image(img2)
     der_img1 = differentiate_image(img1)

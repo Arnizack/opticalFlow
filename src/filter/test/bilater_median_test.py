@@ -1,14 +1,11 @@
 #from src.filter.bilater_median import bilateral_median_filter
 from src.filter.cython.bilateral_median import bilateral_median_filter
-from src.horn_schunck.compute_occlusion import compute_occlusion
+from src.utilities.compute_occlusion import compute_occlusion
 from src.horn_schunck.solve_layer import SolverSettings, solve_layer
 from src.utilities.image_access import open_image
-from src.utilities.compare_flow import compare_flow
-from src.utilities.flow_field_helper import read_flow_field
 from src.utilities.image_pyramid import downscale_image
 from src.utilities.flow_field_helper import show_flow_field
 
-import numpy as np
 import matplotlib.pyplot as plt
 import numpy as np
 from time import time

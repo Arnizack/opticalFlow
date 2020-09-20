@@ -5,7 +5,7 @@
     "distutils": {
         "depends": [],
         "extra_compile_args": [
-            "/O3",
+            "/Ox",
             "/openmp",
             "/MD",
             "/fp:fast"
@@ -2444,14 +2444,17 @@ static const char __pyx_k_pyx_vtable[] = "__pyx_vtable__";
 static const char __pyx_k_ImportError[] = "ImportError";
 static const char __pyx_k_MemoryError[] = "MemoryError";
 static const char __pyx_k_PickleError[] = "PickleError";
+static const char __pyx_k_Sigma_Color[] = " Sigma Color: ";
 static const char __pyx_k_filter_size[] = "filter_size";
 static const char __pyx_k_sigma_color[] = "sigma_color";
+static const char __pyx_k_Channelcount[] = "Channelcount: ";
 static const char __pyx_k_RuntimeError[] = "RuntimeError";
 static const char __pyx_k_pyx_checksum[] = "__pyx_checksum";
 static const char __pyx_k_stringsource[] = "stringsource";
 static const char __pyx_k_pyx_getbuffer[] = "__pyx_getbuffer";
 static const char __pyx_k_reduce_cython[] = "__reduce_cython__";
 static const char __pyx_k_weigth_filter[] = "weigth_filter";
+static const char __pyx_k_Sigma_distance[] = " Sigma distance: ";
 static const char __pyx_k_sigma_distance[] = "sigma_distance";
 static const char __pyx_k_View_MemoryView[] = "View.MemoryView";
 static const char __pyx_k_allocate_buffer[] = "allocate_buffer";
@@ -2499,6 +2502,7 @@ static PyObject *__pyx_kp_s_Can_only_create_a_buffer_that_is;
 static PyObject *__pyx_kp_s_Cannot_assign_to_read_only_memor;
 static PyObject *__pyx_kp_s_Cannot_create_writable_memory_vi;
 static PyObject *__pyx_kp_s_Cannot_index_with_type_s;
+static PyObject *__pyx_kp_s_Channelcount;
 static PyObject *__pyx_kp_s_Cython_Bilateral_median_filter;
 static PyObject *__pyx_n_s_Ellipsis;
 static PyObject *__pyx_kp_s_Empty_shape_tuple_for_cython_arr;
@@ -2518,6 +2522,8 @@ static PyObject *__pyx_n_b_O;
 static PyObject *__pyx_kp_s_Out_of_bounds_on_buffer_access_a;
 static PyObject *__pyx_n_s_PickleError;
 static PyObject *__pyx_n_s_RuntimeError;
+static PyObject *__pyx_kp_s_Sigma_Color;
+static PyObject *__pyx_kp_s_Sigma_distance;
 static PyObject *__pyx_n_s_TypeError;
 static PyObject *__pyx_kp_s_Unable_to_convert_item_to_object;
 static PyObject *__pyx_n_s_ValueError;
@@ -3102,6 +3108,7 @@ static void __pyx_f_16bilateral_median_inner_row_kernel(int __pyx_v_y, __Pyx_mem
   Py_ssize_t __pyx_t_18;
   float __pyx_t_19;
   double __pyx_t_20;
+  double __pyx_t_21;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -3316,7 +3323,7 @@ static void __pyx_f_16bilateral_median_inner_row_kernel(int __pyx_v_y, __Pyx_mem
  *                 occlusen_current = occlusen[y,x]
  *                 occlusen_compared = occlusen[y_compare,x_compare]             # <<<<<<<<<<<<<<
  * 
- *                 weigth = exp(-exponent) * occlusen_compared / occlusen_current
+ *                 weigth = exp(-exponent) * (occlusen_compared+0.00001) / (occlusen_current+0.00001)
  */
         __pyx_t_17 = __pyx_v_y_compare;
         __pyx_t_18 = __pyx_v_x_compare;
@@ -3325,12 +3332,13 @@ static void __pyx_f_16bilateral_median_inner_row_kernel(int __pyx_v_y, __Pyx_mem
         /* "bilateral_median.pyx":95
  *                 occlusen_compared = occlusen[y_compare,x_compare]
  * 
- *                 weigth = exp(-exponent) * occlusen_compared / occlusen_current             # <<<<<<<<<<<<<<
+ *                 weigth = exp(-exponent) * (occlusen_compared+0.00001) / (occlusen_current+0.00001)             # <<<<<<<<<<<<<<
  *                 weigths_list[counter] = weigth
  * 
  */
-        __pyx_t_20 = (exp((-__pyx_v_exponent)) * __pyx_v_occlusen_compared);
-        if (unlikely(__pyx_v_occlusen_current == 0)) {
+        __pyx_t_20 = (exp((-__pyx_v_exponent)) * (__pyx_v_occlusen_compared + 0.00001));
+        __pyx_t_21 = (__pyx_v_occlusen_current + 0.00001);
+        if (unlikely(__pyx_t_21 == 0)) {
           #ifdef WITH_THREAD
           PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
           #endif
@@ -3340,11 +3348,11 @@ static void __pyx_f_16bilateral_median_inner_row_kernel(int __pyx_v_y, __Pyx_mem
           #endif
           __PYX_ERR(0, 95, __pyx_L1_error)
         }
-        __pyx_v_weigth = (__pyx_t_20 / __pyx_v_occlusen_current);
+        __pyx_v_weigth = (__pyx_t_20 / __pyx_t_21);
 
         /* "bilateral_median.pyx":96
  * 
- *                 weigth = exp(-exponent) * occlusen_compared / occlusen_current
+ *                 weigth = exp(-exponent) * (occlusen_compared+0.00001) / (occlusen_current+0.00001)
  *                 weigths_list[counter] = weigth             # <<<<<<<<<<<<<<
  * 
  *                 helper_flow_x_list[counter] = flow[1,y_compare,x_compare]
@@ -3701,7 +3709,7 @@ static PyArrayObject *__pyx_f_16bilateral_median_bilateral_median_filter(__Pyx_m
  * 
  * 
  *     cpdef np.ndarray[np.float32_t, ndim=3] result_flow = np.empty(shape=(2, height, width), dtype=np.float32)             # <<<<<<<<<<<<<<
- *     #print("Channelcount: ", color_channel_count, " Sigma Color: ", sigma_color, " Sigma distance: ", sigma_distance)
+ *     print("Channelcount: ", color_channel_count, " Sigma Color: ", sigma_color, " Sigma distance: ", sigma_distance)
  *     cdef int y
  */
   __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 156, __pyx_L1_error)
@@ -3752,6 +3760,42 @@ static PyArrayObject *__pyx_f_16bilateral_median_bilateral_median_filter(__Pyx_m
   __pyx_t_6 = 0;
   __pyx_v_result_flow = ((PyArrayObject *)__pyx_t_4);
   __pyx_t_4 = 0;
+
+  /* "bilateral_median.pyx":157
+ * 
+ *     cpdef np.ndarray[np.float32_t, ndim=3] result_flow = np.empty(shape=(2, height, width), dtype=np.float32)
+ *     print("Channelcount: ", color_channel_count, " Sigma Color: ", sigma_color, " Sigma distance: ", sigma_distance)             # <<<<<<<<<<<<<<
+ *     cdef int y
+ *     #for y in prange(height, nogil=True):
+ */
+  __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_color_channel_count); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 157, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_sigma_color); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 157, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_sigma_distance); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 157, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_5 = PyTuple_New(6); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 157, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  __Pyx_INCREF(__pyx_kp_s_Channelcount);
+  __Pyx_GIVEREF(__pyx_kp_s_Channelcount);
+  PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_kp_s_Channelcount);
+  __Pyx_GIVEREF(__pyx_t_4);
+  PyTuple_SET_ITEM(__pyx_t_5, 1, __pyx_t_4);
+  __Pyx_INCREF(__pyx_kp_s_Sigma_Color);
+  __Pyx_GIVEREF(__pyx_kp_s_Sigma_Color);
+  PyTuple_SET_ITEM(__pyx_t_5, 2, __pyx_kp_s_Sigma_Color);
+  __Pyx_GIVEREF(__pyx_t_1);
+  PyTuple_SET_ITEM(__pyx_t_5, 3, __pyx_t_1);
+  __Pyx_INCREF(__pyx_kp_s_Sigma_distance);
+  __Pyx_GIVEREF(__pyx_kp_s_Sigma_distance);
+  PyTuple_SET_ITEM(__pyx_t_5, 4, __pyx_kp_s_Sigma_distance);
+  __Pyx_GIVEREF(__pyx_t_2);
+  PyTuple_SET_ITEM(__pyx_t_5, 5, __pyx_t_2);
+  __pyx_t_4 = 0;
+  __pyx_t_1 = 0;
+  __pyx_t_2 = 0;
+  if (__Pyx_PrintOne(0, __pyx_t_5) < 0) __PYX_ERR(0, 157, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
   /* "bilateral_median.pyx":160
  *     cdef int y
@@ -20059,6 +20103,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_s_Cannot_assign_to_read_only_memor, __pyx_k_Cannot_assign_to_read_only_memor, sizeof(__pyx_k_Cannot_assign_to_read_only_memor), 0, 0, 1, 0},
   {&__pyx_kp_s_Cannot_create_writable_memory_vi, __pyx_k_Cannot_create_writable_memory_vi, sizeof(__pyx_k_Cannot_create_writable_memory_vi), 0, 0, 1, 0},
   {&__pyx_kp_s_Cannot_index_with_type_s, __pyx_k_Cannot_index_with_type_s, sizeof(__pyx_k_Cannot_index_with_type_s), 0, 0, 1, 0},
+  {&__pyx_kp_s_Channelcount, __pyx_k_Channelcount, sizeof(__pyx_k_Channelcount), 0, 0, 1, 0},
   {&__pyx_kp_s_Cython_Bilateral_median_filter, __pyx_k_Cython_Bilateral_median_filter, sizeof(__pyx_k_Cython_Bilateral_median_filter), 0, 0, 1, 0},
   {&__pyx_n_s_Ellipsis, __pyx_k_Ellipsis, sizeof(__pyx_k_Ellipsis), 0, 0, 1, 1},
   {&__pyx_kp_s_Empty_shape_tuple_for_cython_arr, __pyx_k_Empty_shape_tuple_for_cython_arr, sizeof(__pyx_k_Empty_shape_tuple_for_cython_arr), 0, 0, 1, 0},
@@ -20078,6 +20123,8 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_s_Out_of_bounds_on_buffer_access_a, __pyx_k_Out_of_bounds_on_buffer_access_a, sizeof(__pyx_k_Out_of_bounds_on_buffer_access_a), 0, 0, 1, 0},
   {&__pyx_n_s_PickleError, __pyx_k_PickleError, sizeof(__pyx_k_PickleError), 0, 0, 1, 1},
   {&__pyx_n_s_RuntimeError, __pyx_k_RuntimeError, sizeof(__pyx_k_RuntimeError), 0, 0, 1, 1},
+  {&__pyx_kp_s_Sigma_Color, __pyx_k_Sigma_Color, sizeof(__pyx_k_Sigma_Color), 0, 0, 1, 0},
+  {&__pyx_kp_s_Sigma_distance, __pyx_k_Sigma_distance, sizeof(__pyx_k_Sigma_distance), 0, 0, 1, 0},
   {&__pyx_n_s_TypeError, __pyx_k_TypeError, sizeof(__pyx_k_TypeError), 0, 0, 1, 1},
   {&__pyx_kp_s_Unable_to_convert_item_to_object, __pyx_k_Unable_to_convert_item_to_object, sizeof(__pyx_k_Unable_to_convert_item_to_object), 0, 0, 1, 0},
   {&__pyx_n_s_ValueError, __pyx_k_ValueError, sizeof(__pyx_k_ValueError), 0, 0, 1, 1},
