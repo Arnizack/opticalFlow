@@ -1,5 +1,5 @@
 from src.utilities.image_pyramid import create_image_pyramid
-from src.utilities.upscale_flow_field import upscale_flow
+from src.utilities.scale_flow_field import upscale_flow
 from src.horn_schunck.solve_layer import solve_layer, SolverSettings
 
 import numpy as np
