@@ -72,9 +72,9 @@ def sun_baker_optical_flow(first_image : np.ndarray, second_image : np.ndarray,s
 
             #flow[0] = medfilt2d(flow[0], settings.median_filter_size)
             #flow[1] = medfilt2d(flow[1],settings.median_filter_size)
-        plt.title("At level: "+str(width) +","+str(height))
-        show_flow_field(flow, width, height)
-        plt.show()
+        #plt.title("At level: "+str(width) +","+str(height))
+        #show_flow_field(flow, width, height)
+        #plt.show()
 
     print("Sun Baker full time: ", time() - start_time)
     return flow
