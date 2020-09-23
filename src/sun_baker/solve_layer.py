@@ -5,7 +5,7 @@ from src.sun_baker.derivative_sun import derivative_sun
 from src.sun_baker.setup_linear_system.setup_linear_system import setup_linear_system
 from src.utilities.penalty_functions.IPenalty import IPenalty
 from src.filter.cython.bilateral_median import bilateral_median_filter
-from src.utilities.compute_occlusion import compute_occlusion
+from src.utilities.compute_occlusion import compute_occlusion,compute_occlusion_log
 from src.utilities.warp_grid import warp_image
 import scipy.sparse.linalg as splinalg
 import math
@@ -53,7 +53,7 @@ def solve_layer(first_image : np.ndarray, second_image : np.ndarray, initial_flo
 
 
 
-    relax_flow_field = np.zeros(shape=(width*height*2),dtype=np.float32)
+    relax_flow_field = np.zeros(shape=(width*height*2),dtype=np.double)
 
     relaxation_steps = settings.relaxation_steps
 
@@ -102,33 +102,36 @@ def solve_layer(first_image : np.ndarray, second_image : np.ndarray, initial_flo
 
 
         guess_vu = x
+        relax_flow_field = x
         flow = initial_flow_field+x.reshape(2,height,width)
 
         #plt.title("Before Filter")
         #show_flow_field(flow, width, height)
         #plt.show()
 
-        init_flow = np.zeros(shape=(2, height, width), dtype=np.float32)
+        if(settings.flow_filter_filter_size>3):
+            init_flow = np.zeros(shape=(2, height, width), dtype=np.double)
 
-        occlusion = compute_occlusion(first_image, first_image, flow)
-        #aux = np.zeros(shape=(2,height,width ))
-        flow = bilateral_median_filter(flow.astype(np.float32), occlusion.astype(np.float32),
-                                       flow.astype(np.float32), first_image.astype(np.float32),
-                                       weigth_auxiliary=lambda_relax, weigth_filter=1,
-                                       sigma_distance=settings.flow_filter_sigma_distance,
-                                       sigma_color=settings.flow_filter_sigma_color,
-                                       filter_size = settings.flow_filter_filter_size)
+            log_occlusion = compute_occlusion_log(first_image, first_image, flow)
+            #aux = np.zeros(shape=(2,height,width ))
+            #first_image= np.zeros(shape=(3, height, width), dtype=np.double)
+            flow = bilateral_median_filter(flow.astype(np.double), log_occlusion.astype(np.double),
+                                           flow.astype(np.double), first_image.astype(np.double),
+                                           weigth_auxiliary=0.001, weigth_filter=10,
+                                           sigma_distance=settings.flow_filter_sigma_distance,
+                                           sigma_color=settings.flow_filter_sigma_color,
+                                           filter_size = settings.flow_filter_filter_size)
 
 
-        #flow[0] = medfilt2d(flow[0], settings.median_filter_size)
-        #flow[1] = medfilt2d(flow[1],settings.median_filter_size)
+            #flow[0] = medfilt2d(flow[0], settings.median_filter_size)
+            #flow[1] = medfilt2d(flow[1],settings.median_filter_size)
 
-        #plt.title("After Filter")
-        #show_flow_field(flow, width, height)
-        #plt.show()
+            #plt.title("After Filter")
+            #show_flow_field(flow, width, height)
+            #plt.show()
 
-        relax_flow_field = flow.reshape(width*height*2)-initial_flow_field.reshape(width*height*2)
-        guess_vu = relax_flow_field
+            relax_flow_field = flow.reshape(width*height*2)-initial_flow_field.reshape(width*height*2)
+            guess_vu = relax_flow_field
         #relax_flow_field = x.reshape(width*height*2)
 
 

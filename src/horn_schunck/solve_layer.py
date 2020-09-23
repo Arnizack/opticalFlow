@@ -8,7 +8,7 @@ from src.horn_schunck.setup_linear_system import setup_linear_system
 from src.utilities.cg_solver import cg
 import matplotlib.pyplot as plt
 from src.filter.cython.bilateral_median import bilateral_median_filter
-from src.utilities.compute_occlusion import compute_occlusion
+from src.utilities.compute_occlusion import compute_occlusion, compute_occlusion_log
 from src.utilities.flow_field_helper import show_flow_field
 
 
@@ -70,12 +70,12 @@ def solve_layer(first_frame,second_frame, initial_flow_field, solver_settings):
         #flow[0] = medfilt2d(flow[0],solver_settings.median_filter_size)
         #flow[1] = medfilt2d(flow[1],solver_settings.median_filter_size)
 
-        occlusion = compute_occlusion(first_frame, first_frame, flow)
-        init_flow = np.zeros(shape=(2, first_frame.shape[1], first_frame.shape[2]), dtype=np.float32)
+        log_occlusion = compute_occlusion_log(first_frame, first_frame, flow)
+        init_flow = np.zeros(shape=(2, first_frame.shape[1], first_frame.shape[2]), dtype=np.double)
 
 
-        flow = bilateral_median_filter(flow.astype(np.float32), occlusion.astype(np.float32),
-                                       flow.astype(np.float32), first_frame.astype(np.float32),
+        flow = bilateral_median_filter(flow.astype(np.double), log_occlusion.astype(np.double),
+                                       flow.astype(np.double), first_frame.astype(np.double),
                                        weigth_auxiliary=0.1, weigth_filter=10, sigma_distance=2, sigma_color=10/255,filter_size = solver_settings.median_filter_size )
         plt.title("After Filter")
         show_flow_field(flow,flow.shape[2],flow.shape[1])

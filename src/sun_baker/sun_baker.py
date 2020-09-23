@@ -38,36 +38,34 @@ def sun_baker_optical_flow(first_image : np.ndarray, second_image : np.ndarray,s
         width = first_frame_scaled.shape[2]
         height = first_frame_scaled.shape[1]
         flow = upscale_flow(flow, width, height)
-        for iter in range(settings.steps_per_level):
-            for gnc_iter in range(gnc_steps):
-                #width = pyramid_levels_first_image[0].shape[2]
-                #height = pyramid_levels_first_image[0].shape[1]
+
+        for gnc_iter in range(gnc_steps):
+            #width = pyramid_levels_first_image[0].shape[2]
+            #height = pyramid_levels_first_image[0].shape[1]
 
 
-                print("-------- GNC: ", gnc_iter," --------")
+            print("-------- GNC: ", gnc_iter," --------")
 
-                if (gnc_steps > 1):
-                    mix_factor = gnc_iter / (gnc_steps - 1)
-                else:
-                    mix_factor = 0
+            if (gnc_steps > 1):
+                mix_factor = gnc_iter / (gnc_steps - 1)
+            else:
+                mix_factor = 0
 
-                penalty_func.mix_factor = mix_factor
-
-
-
-                if(mix_factor==0):
-                    settings.relaxation_steps = 1
-                    settings.maxiter_solve = 100
-                else:
-                    settings.relaxation_steps = relaxation_steps
-                    settings.maxiter_solve = maxiter_solve
-
-                #if(flow.shape[2] != width or flow.shape[1] != height):
-                #    flow = down_scale_flow(flow,width,height)
+            penalty_func.mix_factor = mix_factor
 
 
 
+            if(mix_factor==0):
+                settings.relaxation_steps = 1
+                settings.maxiter_solve = 100
+            else:
+                settings.relaxation_steps = relaxation_steps
+                settings.maxiter_solve = maxiter_solve
 
+            #if(flow.shape[2] != width or flow.shape[1] != height):
+            #    flow = down_scale_flow(flow,width,height)
+
+            for iter in range(settings.steps_per_level):
                 flow = solve_layer(first_frame_scaled,second_frame_scaled,flow, penalty_func,settings)
 
             #flow[0] = medfilt2d(flow[0], settings.median_filter_size)

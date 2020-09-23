@@ -1243,14 +1243,14 @@ struct __pyx_opt_args_16bilateral_median_bilateral_median_filter;
 /* "bilateral_median.pyx":128
  *     free(weigths_list)
  * 
- * cpdef np.ndarray[np.float32_t, ndim=3] bilateral_median_filter(float[:,:, ::1] flow, float[:, ::1] occlusen,             # <<<<<<<<<<<<<<
- *                             float[:,:, ::1] auxiliary_field, float[:,:, ::1] image,
- *                             float weigth_auxiliary, float weigth_filter,
+ * cpdef np.ndarray[np.double_t, ndim=3] bilateral_median_filter(double[:,:, ::1] flow, double[:, ::1] log_occlusen,             # <<<<<<<<<<<<<<
+ *                             double[:,:, ::1] auxiliary_field, double[:,:, ::1] image,
+ *                             double weigth_auxiliary, double weigth_filter,
  */
 struct __pyx_opt_args_16bilateral_median_bilateral_median_filter {
   int __pyx_n;
-  float sigma_distance;
-  float sigma_color;
+  double sigma_distance;
+  double sigma_color;
   int filter_size;
 };
 
@@ -2111,10 +2111,10 @@ static int __Pyx_ValidateAndInit_memviewslice(
                 PyObject *original_obj);
 
 /* ObjectToMemviewSlice.proto */
-static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_d_d_dc_float(PyObject *, int writable_flag);
+static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_d_d_dc_double(PyObject *, int writable_flag);
 
 /* ObjectToMemviewSlice.proto */
-static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_d_dc_float(PyObject *, int writable_flag);
+static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_d_dc_double(PyObject *, int writable_flag);
 
 /* CIntToPy.proto */
 static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value);
@@ -2122,15 +2122,15 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value);
 /* None.proto */
 static CYTHON_INLINE long __Pyx_pow_long(long, long);
 
+/* CIntToPy.proto */
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From_long(long value);
+
 /* Print.proto */
 static int __Pyx_Print(PyObject*, PyObject *, int);
 #if CYTHON_COMPILING_IN_PYPY || PY_MAJOR_VERSION >= 3
 static PyObject* __pyx_print = 0;
 static PyObject* __pyx_print_kwargs = 0;
 #endif
-
-/* CIntToPy.proto */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From_long(long value);
 
 /* RealImag.proto */
 #if CYTHON_CCOMPLEX
@@ -2327,12 +2327,12 @@ static PyObject *indirect_contiguous = 0;
 static int __pyx_memoryview_thread_locks_used;
 static PyThread_type_lock __pyx_memoryview_thread_locks[8];
 static int __pyx_f_16bilateral_median_cmp_func(void const *, void const *); /*proto*/
-static void __pyx_f_16bilateral_median_sort_c(float *, int); /*proto*/
-static float __pyx_f_16bilateral_median_quickselect_median(float *, int); /*proto*/
+static void __pyx_f_16bilateral_median_sort_c(double *, int); /*proto*/
+static double __pyx_f_16bilateral_median_quickselect_median(double *, int); /*proto*/
 static int __pyx_f_16bilateral_median_min(int, int); /*proto*/
 static int __pyx_f_16bilateral_median_max(int, int); /*proto*/
-static void __pyx_f_16bilateral_median_inner_row_kernel(int, __Pyx_memviewslice, __Pyx_memviewslice, __Pyx_memviewslice, __Pyx_memviewslice, __Pyx_memviewslice, float, float, int, int, float, float, int, int, int, int); /*proto*/
-static PyArrayObject *__pyx_f_16bilateral_median_bilateral_median_filter(__Pyx_memviewslice, __Pyx_memviewslice, __Pyx_memviewslice, __Pyx_memviewslice, float, float, int __pyx_skip_dispatch, struct __pyx_opt_args_16bilateral_median_bilateral_median_filter *__pyx_optional_args); /*proto*/
+static void __pyx_f_16bilateral_median_inner_row_kernel(int, __Pyx_memviewslice, __Pyx_memviewslice, __Pyx_memviewslice, __Pyx_memviewslice, __Pyx_memviewslice, double, double, int, int, double, double, int, int, int, int); /*proto*/
+static PyArrayObject *__pyx_f_16bilateral_median_bilateral_median_filter(__Pyx_memviewslice, __Pyx_memviewslice, __Pyx_memviewslice, __Pyx_memviewslice, double, double, int __pyx_skip_dispatch, struct __pyx_opt_args_16bilateral_median_bilateral_median_filter *__pyx_optional_args); /*proto*/
 static struct __pyx_array_obj *__pyx_array_new(PyObject *, Py_ssize_t, char *, char *, char *); /*proto*/
 static void *__pyx_align_pointer(void *, size_t); /*proto*/
 static PyObject *__pyx_memoryview_new(PyObject *, int, int, __Pyx_TypeInfo *); /*proto*/
@@ -2366,8 +2366,8 @@ static void __pyx_memoryview_refcount_objects_in_slice(char *, Py_ssize_t *, Py_
 static void __pyx_memoryview_slice_assign_scalar(__Pyx_memviewslice *, int, size_t, void *, int); /*proto*/
 static void __pyx_memoryview__slice_assign_scalar(char *, Py_ssize_t *, Py_ssize_t *, int, size_t, void *); /*proto*/
 static PyObject *__pyx_unpickle_Enum__set_state(struct __pyx_MemviewEnum_obj *, PyObject *); /*proto*/
-static __Pyx_TypeInfo __Pyx_TypeInfo_nn___pyx_t_5numpy_float32_t = { "float32_t", NULL, sizeof(__pyx_t_5numpy_float32_t), { 0 }, 0, 'R', 0, 0 };
-static __Pyx_TypeInfo __Pyx_TypeInfo_float = { "float", NULL, sizeof(float), { 0 }, 0, 'R', 0, 0 };
+static __Pyx_TypeInfo __Pyx_TypeInfo_nn___pyx_t_5numpy_double_t = { "double_t", NULL, sizeof(__pyx_t_5numpy_double_t), { 0 }, 0, 'R', 0, 0 };
+static __Pyx_TypeInfo __Pyx_TypeInfo_double = { "double", NULL, sizeof(double), { 0 }, 0, 'R', 0, 0 };
 #define __Pyx_MODULE_NAME "bilateral_median"
 extern int __pyx_module_is_main_bilateral_median;
 int __pyx_module_is_main_bilateral_median = 0;
@@ -2415,6 +2415,7 @@ static const char __pyx_k_print[] = "print";
 static const char __pyx_k_range[] = "range";
 static const char __pyx_k_shape[] = "shape";
 static const char __pyx_k_start[] = "start";
+static const char __pyx_k_double[] = "double";
 static const char __pyx_k_encode[] = "encode";
 static const char __pyx_k_format[] = "format";
 static const char __pyx_k_import[] = "__import__";
@@ -2424,13 +2425,11 @@ static const char __pyx_k_reduce[] = "__reduce__";
 static const char __pyx_k_struct[] = "struct";
 static const char __pyx_k_unpack[] = "unpack";
 static const char __pyx_k_update[] = "update";
-static const char __pyx_k_float32[] = "float32";
 static const char __pyx_k_fortran[] = "fortran";
 static const char __pyx_k_memview[] = "memview";
 static const char __pyx_k_Ellipsis[] = "Ellipsis";
 static const char __pyx_k_getstate[] = "__getstate__";
 static const char __pyx_k_itemsize[] = "itemsize";
-static const char __pyx_k_occlusen[] = "occlusen";
 static const char __pyx_k_pyx_type[] = "__pyx_type";
 static const char __pyx_k_setstate[] = "__setstate__";
 static const char __pyx_k_TypeError[] = "TypeError";
@@ -2449,6 +2448,7 @@ static const char __pyx_k_filter_size[] = "filter_size";
 static const char __pyx_k_sigma_color[] = "sigma_color";
 static const char __pyx_k_Channelcount[] = "Channelcount: ";
 static const char __pyx_k_RuntimeError[] = "RuntimeError";
+static const char __pyx_k_log_occlusen[] = "log_occlusen";
 static const char __pyx_k_pyx_checksum[] = "__pyx_checksum";
 static const char __pyx_k_stringsource[] = "stringsource";
 static const char __pyx_k_pyx_getbuffer[] = "__pyx_getbuffer";
@@ -2538,6 +2538,7 @@ static PyObject *__pyx_n_s_cline_in_traceback;
 static PyObject *__pyx_kp_s_contiguous_and_direct;
 static PyObject *__pyx_kp_s_contiguous_and_indirect;
 static PyObject *__pyx_n_s_dict;
+static PyObject *__pyx_n_s_double;
 static PyObject *__pyx_n_s_dtype;
 static PyObject *__pyx_n_s_dtype_is_object;
 static PyObject *__pyx_n_s_empty;
@@ -2548,7 +2549,6 @@ static PyObject *__pyx_n_s_error;
 static PyObject *__pyx_n_s_file;
 static PyObject *__pyx_n_s_filter_size;
 static PyObject *__pyx_n_s_flags;
-static PyObject *__pyx_n_s_float32;
 static PyObject *__pyx_n_s_flow;
 static PyObject *__pyx_n_s_format;
 static PyObject *__pyx_n_s_fortran;
@@ -2560,6 +2560,7 @@ static PyObject *__pyx_n_s_image;
 static PyObject *__pyx_n_s_import;
 static PyObject *__pyx_n_s_itemsize;
 static PyObject *__pyx_kp_s_itemsize_0_for_cython_array;
+static PyObject *__pyx_n_s_log_occlusen;
 static PyObject *__pyx_n_s_main;
 static PyObject *__pyx_n_s_memview;
 static PyObject *__pyx_n_s_mode;
@@ -2573,7 +2574,6 @@ static PyObject *__pyx_n_s_numpy;
 static PyObject *__pyx_kp_s_numpy_core_multiarray_failed_to;
 static PyObject *__pyx_kp_s_numpy_core_umath_failed_to_impor;
 static PyObject *__pyx_n_s_obj;
-static PyObject *__pyx_n_s_occlusen;
 static PyObject *__pyx_n_s_pack;
 static PyObject *__pyx_n_s_pickle;
 static PyObject *__pyx_n_s_print;
@@ -2611,7 +2611,7 @@ static PyObject *__pyx_n_s_unpack;
 static PyObject *__pyx_n_s_update;
 static PyObject *__pyx_n_s_weigth_auxiliary;
 static PyObject *__pyx_n_s_weigth_filter;
-static PyObject *__pyx_pf_16bilateral_median_bilateral_median_filter(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_flow, __Pyx_memviewslice __pyx_v_occlusen, __Pyx_memviewslice __pyx_v_auxiliary_field, __Pyx_memviewslice __pyx_v_image, float __pyx_v_weigth_auxiliary, float __pyx_v_weigth_filter, float __pyx_v_sigma_distance, float __pyx_v_sigma_color, int __pyx_v_filter_size); /* proto */
+static PyObject *__pyx_pf_16bilateral_median_bilateral_median_filter(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_flow, __Pyx_memviewslice __pyx_v_log_occlusen, __Pyx_memviewslice __pyx_v_auxiliary_field, __Pyx_memviewslice __pyx_v_image, double __pyx_v_weigth_auxiliary, double __pyx_v_weigth_filter, double __pyx_v_sigma_distance, double __pyx_v_sigma_color, int __pyx_v_filter_size); /* proto */
 static int __pyx_pf_7cpython_5array_5array___getbuffer__(arrayobject *__pyx_v_self, Py_buffer *__pyx_v_info, CYTHON_UNUSED int __pyx_v_flags); /* proto */
 static void __pyx_pf_7cpython_5array_5array_2__releasebuffer__(CYTHON_UNUSED arrayobject *__pyx_v_self, Py_buffer *__pyx_v_info); /* proto */
 static int __pyx_array___pyx_pf_15View_dot_MemoryView_5array___cinit__(struct __pyx_array_obj *__pyx_v_self, PyObject *__pyx_v_shape, Py_ssize_t __pyx_v_itemsize, PyObject *__pyx_v_format, PyObject *__pyx_v_mode, int __pyx_v_allocate_buffer); /* proto */
@@ -2665,7 +2665,7 @@ static PyObject *__pyx_int_1;
 static PyObject *__pyx_int_2;
 static PyObject *__pyx_int_184977713;
 static PyObject *__pyx_int_neg_1;
-static float __pyx_k_;
+static double __pyx_k_;
 static PyObject *__pyx_tuple__2;
 static PyObject *__pyx_tuple__3;
 static PyObject *__pyx_tuple__4;
@@ -2702,37 +2702,37 @@ static PyObject *__pyx_codeobj__31;
  * 
  * 
  * cdef int cmp_func(const void* a, const void* b) nogil:             # <<<<<<<<<<<<<<
- *     cdef float a_v = (<float*>a)[0]
- *     cdef float b_v = (<float*>b)[0]
+ *     cdef double a_v = (<double*>a)[0]
+ *     cdef double b_v = (<double*>b)[0]
  */
 
 static int __pyx_f_16bilateral_median_cmp_func(void const *__pyx_v_a, void const *__pyx_v_b) {
-  float __pyx_v_a_v;
-  float __pyx_v_b_v;
+  double __pyx_v_a_v;
+  double __pyx_v_b_v;
   int __pyx_r;
   int __pyx_t_1;
 
   /* "bilateral_median.pyx":14
  * 
  * cdef int cmp_func(const void* a, const void* b) nogil:
- *     cdef float a_v = (<float*>a)[0]             # <<<<<<<<<<<<<<
- *     cdef float b_v = (<float*>b)[0]
+ *     cdef double a_v = (<double*>a)[0]             # <<<<<<<<<<<<<<
+ *     cdef double b_v = (<double*>b)[0]
  *     if a_v < b_v:
  */
-  __pyx_v_a_v = (((float *)__pyx_v_a)[0]);
+  __pyx_v_a_v = (((double *)__pyx_v_a)[0]);
 
   /* "bilateral_median.pyx":15
  * cdef int cmp_func(const void* a, const void* b) nogil:
- *     cdef float a_v = (<float*>a)[0]
- *     cdef float b_v = (<float*>b)[0]             # <<<<<<<<<<<<<<
+ *     cdef double a_v = (<double*>a)[0]
+ *     cdef double b_v = (<double*>b)[0]             # <<<<<<<<<<<<<<
  *     if a_v < b_v:
  *         return -1
  */
-  __pyx_v_b_v = (((float *)__pyx_v_b)[0]);
+  __pyx_v_b_v = (((double *)__pyx_v_b)[0]);
 
   /* "bilateral_median.pyx":16
- *     cdef float a_v = (<float*>a)[0]
- *     cdef float b_v = (<float*>b)[0]
+ *     cdef double a_v = (<double*>a)[0]
+ *     cdef double b_v = (<double*>b)[0]
  *     if a_v < b_v:             # <<<<<<<<<<<<<<
  *         return -1
  *     elif a_v == b_v:
@@ -2741,7 +2741,7 @@ static int __pyx_f_16bilateral_median_cmp_func(void const *__pyx_v_a, void const
   if (__pyx_t_1) {
 
     /* "bilateral_median.pyx":17
- *     cdef float b_v = (<float*>b)[0]
+ *     cdef double b_v = (<double*>b)[0]
  *     if a_v < b_v:
  *         return -1             # <<<<<<<<<<<<<<
  *     elif a_v == b_v:
@@ -2751,8 +2751,8 @@ static int __pyx_f_16bilateral_median_cmp_func(void const *__pyx_v_a, void const
     goto __pyx_L0;
 
     /* "bilateral_median.pyx":16
- *     cdef float a_v = (<float*>a)[0]
- *     cdef float b_v = (<float*>b)[0]
+ *     cdef double a_v = (<double*>a)[0]
+ *     cdef double b_v = (<double*>b)[0]
  *     if a_v < b_v:             # <<<<<<<<<<<<<<
  *         return -1
  *     elif a_v == b_v:
@@ -2793,7 +2793,7 @@ static int __pyx_f_16bilateral_median_cmp_func(void const *__pyx_v_a, void const
  *     else:
  *         return 1             # <<<<<<<<<<<<<<
  * 
- * cdef void sort_c(float* a, int length) nogil:
+ * cdef void sort_c(double* a, int length) nogil:
  */
   /*else*/ {
     __pyx_r = 1;
@@ -2804,8 +2804,8 @@ static int __pyx_f_16bilateral_median_cmp_func(void const *__pyx_v_a, void const
  * 
  * 
  * cdef int cmp_func(const void* a, const void* b) nogil:             # <<<<<<<<<<<<<<
- *     cdef float a_v = (<float*>a)[0]
- *     cdef float b_v = (<float*>b)[0]
+ *     cdef double a_v = (<double*>a)[0]
+ *     cdef double b_v = (<double*>b)[0]
  */
 
   /* function exit code */
@@ -2816,49 +2816,49 @@ static int __pyx_f_16bilateral_median_cmp_func(void const *__pyx_v_a, void const
 /* "bilateral_median.pyx":23
  *         return 1
  * 
- * cdef void sort_c(float* a, int length) nogil:             # <<<<<<<<<<<<<<
+ * cdef void sort_c(double* a, int length) nogil:             # <<<<<<<<<<<<<<
  *     # a needn't be C continuous because strides helps
- *     qsort(a, length, sizeof(float), &cmp_func)
+ *     qsort(a, length, sizeof(double), &cmp_func)
  */
 
-static void __pyx_f_16bilateral_median_sort_c(float *__pyx_v_a, int __pyx_v_length) {
+static void __pyx_f_16bilateral_median_sort_c(double *__pyx_v_a, int __pyx_v_length) {
 
   /* "bilateral_median.pyx":25
- * cdef void sort_c(float* a, int length) nogil:
+ * cdef void sort_c(double* a, int length) nogil:
  *     # a needn't be C continuous because strides helps
- *     qsort(a, length, sizeof(float), &cmp_func)             # <<<<<<<<<<<<<<
+ *     qsort(a, length, sizeof(double), &cmp_func)             # <<<<<<<<<<<<<<
  * 
- * cdef float quickselect_median(float* l, int length) nogil:
+ * cdef double quickselect_median(double* l, int length) nogil:
  */
-  qsort(__pyx_v_a, __pyx_v_length, (sizeof(float)), (&__pyx_f_16bilateral_median_cmp_func));
+  qsort(__pyx_v_a, __pyx_v_length, (sizeof(double)), (&__pyx_f_16bilateral_median_cmp_func));
 
   /* "bilateral_median.pyx":23
  *         return 1
  * 
- * cdef void sort_c(float* a, int length) nogil:             # <<<<<<<<<<<<<<
+ * cdef void sort_c(double* a, int length) nogil:             # <<<<<<<<<<<<<<
  *     # a needn't be C continuous because strides helps
- *     qsort(a, length, sizeof(float), &cmp_func)
+ *     qsort(a, length, sizeof(double), &cmp_func)
  */
 
   /* function exit code */
 }
 
 /* "bilateral_median.pyx":27
- *     qsort(a, length, sizeof(float), &cmp_func)
+ *     qsort(a, length, sizeof(double), &cmp_func)
  * 
- * cdef float quickselect_median(float* l, int length) nogil:             # <<<<<<<<<<<<<<
+ * cdef double quickselect_median(double* l, int length) nogil:             # <<<<<<<<<<<<<<
  *     cdef int half = ( length -1 ) // 2
  *     sort_c(l,length)
  */
 
-static float __pyx_f_16bilateral_median_quickselect_median(float *__pyx_v_l, int __pyx_v_length) {
+static double __pyx_f_16bilateral_median_quickselect_median(double *__pyx_v_l, int __pyx_v_length) {
   int __pyx_v_half;
-  float __pyx_r;
+  double __pyx_r;
   int __pyx_t_1;
 
   /* "bilateral_median.pyx":28
  * 
- * cdef float quickselect_median(float* l, int length) nogil:
+ * cdef double quickselect_median(double* l, int length) nogil:
  *     cdef int half = ( length -1 ) // 2             # <<<<<<<<<<<<<<
  *     sort_c(l,length)
  *     if(length % 2 == 0):
@@ -2866,7 +2866,7 @@ static float __pyx_f_16bilateral_median_quickselect_median(float *__pyx_v_l, int
   __pyx_v_half = __Pyx_div_long((__pyx_v_length - 1), 2);
 
   /* "bilateral_median.pyx":29
- * cdef float quickselect_median(float* l, int length) nogil:
+ * cdef double quickselect_median(double* l, int length) nogil:
  *     cdef int half = ( length -1 ) // 2
  *     sort_c(l,length)             # <<<<<<<<<<<<<<
  *     if(length % 2 == 0):
@@ -2914,9 +2914,9 @@ static float __pyx_f_16bilateral_median_quickselect_median(float *__pyx_v_l, int
   goto __pyx_L0;
 
   /* "bilateral_median.pyx":27
- *     qsort(a, length, sizeof(float), &cmp_func)
+ *     qsort(a, length, sizeof(double), &cmp_func)
  * 
- * cdef float quickselect_median(float* l, int length) nogil:             # <<<<<<<<<<<<<<
+ * cdef double quickselect_median(double* l, int length) nogil:             # <<<<<<<<<<<<<<
  *     cdef int half = ( length -1 ) // 2
  *     sort_c(l,length)
  */
@@ -3057,30 +3057,30 @@ static int __pyx_f_16bilateral_median_max(int __pyx_v_a, int __pyx_v_b) {
 /* "bilateral_median.pyx":46
  * @cython.boundscheck(False)  # Deactivate bounds checking
  * @cython.wraparound(False)   # Deactivate negative indexing.
- * cdef void inner_row_kernel(int y, float[:,:, ::1] flow, float[:, ::1] occlusen, float[:,:, ::1] auxiliary_field, float[:,:, ::1] image,float[:,:,::1] result_flow,             # <<<<<<<<<<<<<<
- *                         float weigth_auxiliary, float weigth_filter, int width, int height,
- *                         float sigma_distance, float sigma_color, int filter_size, int color_channel_count, int filter_half, int helper_list_size
+ * cdef void inner_row_kernel(int y, double[:,:, ::1] flow, double[:, ::1] log_occlusen, double[:,:, ::1] auxiliary_field, double[:,:, ::1] image,double[:,:,::1] result_flow,             # <<<<<<<<<<<<<<
+ *                         double weigth_auxiliary, double weigth_filter, int width, int height,
+ *                         double sigma_distance, double sigma_color, int filter_size, int color_channel_count, int filter_half, int helper_list_size
  */
 
-static void __pyx_f_16bilateral_median_inner_row_kernel(int __pyx_v_y, __Pyx_memviewslice __pyx_v_flow, __Pyx_memviewslice __pyx_v_occlusen, __Pyx_memviewslice __pyx_v_auxiliary_field, __Pyx_memviewslice __pyx_v_image, __Pyx_memviewslice __pyx_v_result_flow, float __pyx_v_weigth_auxiliary, float __pyx_v_weigth_filter, int __pyx_v_width, int __pyx_v_height, float __pyx_v_sigma_distance, float __pyx_v_sigma_color, CYTHON_UNUSED int __pyx_v_filter_size, int __pyx_v_color_channel_count, int __pyx_v_filter_half, int __pyx_v_helper_list_size) {
-  float *__pyx_v_helper_flow_x_list;
-  float *__pyx_v_helper_flow_y_list;
-  float *__pyx_v_weigths_list;
+static void __pyx_f_16bilateral_median_inner_row_kernel(int __pyx_v_y, __Pyx_memviewslice __pyx_v_flow, __Pyx_memviewslice __pyx_v_log_occlusen, __Pyx_memviewslice __pyx_v_auxiliary_field, __Pyx_memviewslice __pyx_v_image, __Pyx_memviewslice __pyx_v_result_flow, double __pyx_v_weigth_auxiliary, double __pyx_v_weigth_filter, int __pyx_v_width, int __pyx_v_height, double __pyx_v_sigma_distance, double __pyx_v_sigma_color, CYTHON_UNUSED int __pyx_v_filter_size, int __pyx_v_color_channel_count, int __pyx_v_filter_half, int __pyx_v_helper_list_size) {
+  double *__pyx_v_helper_flow_x_list;
+  double *__pyx_v_helper_flow_y_list;
+  double *__pyx_v_weigths_list;
   int __pyx_v_min_x_compare;
   int __pyx_v_max_x_compare;
   int __pyx_v_min_y_compare;
   int __pyx_v_max_y_compare;
   int __pyx_v_counter;
-  float __pyx_v_distance_squared_difference;
-  float __pyx_v_color_squared_difference;
-  float __pyx_v_exponent;
-  float __pyx_v_occlusen_current;
-  float __pyx_v_occlusen_compared;
-  float __pyx_v_weigth;
-  float __pyx_v_f_x;
-  float __pyx_v_f_y;
-  float __pyx_v_scalar;
-  float __pyx_v_sum;
+  double __pyx_v_distance_squared_difference;
+  double __pyx_v_color_squared_difference;
+  double __pyx_v_exponent;
+  double __pyx_v_occlusen_current;
+  double __pyx_v_occlusen_compared;
+  double __pyx_v_weigth;
+  double __pyx_v_f_x;
+  double __pyx_v_f_y;
+  double __pyx_v_scalar;
+  double __pyx_v_sum;
   int __pyx_v_channel_idx;
   int __pyx_v_n;
   int __pyx_v_x;
@@ -3106,9 +3106,9 @@ static void __pyx_f_16bilateral_median_inner_row_kernel(int __pyx_v_y, __Pyx_mem
   Py_ssize_t __pyx_t_16;
   Py_ssize_t __pyx_t_17;
   Py_ssize_t __pyx_t_18;
-  float __pyx_t_19;
-  double __pyx_t_20;
-  double __pyx_t_21;
+  double __pyx_t_19;
+  long __pyx_t_20;
+  long __pyx_t_21;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -3116,33 +3116,33 @@ static void __pyx_f_16bilateral_median_inner_row_kernel(int __pyx_v_y, __Pyx_mem
   /* "bilateral_median.pyx":71
  *     cdef int n,x,x_compare,y_compare,idx_1,idx_2
  * 
- *     helper_flow_x_list =  <float *> malloc(helper_list_size * sizeof(float))             # <<<<<<<<<<<<<<
- *     helper_flow_y_list = <float *> malloc(helper_list_size * sizeof(float))
- *     weigths_list = <float *> malloc(helper_list_size * sizeof(float))
+ *     helper_flow_x_list =  <double *> malloc((helper_list_size+1) * sizeof(double))             # <<<<<<<<<<<<<<
+ *     helper_flow_y_list = <double *> malloc((helper_list_size+1) * sizeof(double))
+ *     weigths_list = <double *> malloc(helper_list_size * sizeof(double))
  */
-  __pyx_v_helper_flow_x_list = ((float *)malloc((__pyx_v_helper_list_size * (sizeof(float)))));
+  __pyx_v_helper_flow_x_list = ((double *)malloc(((__pyx_v_helper_list_size + 1) * (sizeof(double)))));
 
   /* "bilateral_median.pyx":72
  * 
- *     helper_flow_x_list =  <float *> malloc(helper_list_size * sizeof(float))
- *     helper_flow_y_list = <float *> malloc(helper_list_size * sizeof(float))             # <<<<<<<<<<<<<<
- *     weigths_list = <float *> malloc(helper_list_size * sizeof(float))
+ *     helper_flow_x_list =  <double *> malloc((helper_list_size+1) * sizeof(double))
+ *     helper_flow_y_list = <double *> malloc((helper_list_size+1) * sizeof(double))             # <<<<<<<<<<<<<<
+ *     weigths_list = <double *> malloc(helper_list_size * sizeof(double))
  *     for x in range(width):
  */
-  __pyx_v_helper_flow_y_list = ((float *)malloc((__pyx_v_helper_list_size * (sizeof(float)))));
+  __pyx_v_helper_flow_y_list = ((double *)malloc(((__pyx_v_helper_list_size + 1) * (sizeof(double)))));
 
   /* "bilateral_median.pyx":73
- *     helper_flow_x_list =  <float *> malloc(helper_list_size * sizeof(float))
- *     helper_flow_y_list = <float *> malloc(helper_list_size * sizeof(float))
- *     weigths_list = <float *> malloc(helper_list_size * sizeof(float))             # <<<<<<<<<<<<<<
+ *     helper_flow_x_list =  <double *> malloc((helper_list_size+1) * sizeof(double))
+ *     helper_flow_y_list = <double *> malloc((helper_list_size+1) * sizeof(double))
+ *     weigths_list = <double *> malloc(helper_list_size * sizeof(double))             # <<<<<<<<<<<<<<
  *     for x in range(width):
  *         min_x_compare = max(0, x - filter_half)
  */
-  __pyx_v_weigths_list = ((float *)malloc((__pyx_v_helper_list_size * (sizeof(float)))));
+  __pyx_v_weigths_list = ((double *)malloc((__pyx_v_helper_list_size * (sizeof(double)))));
 
   /* "bilateral_median.pyx":74
- *     helper_flow_y_list = <float *> malloc(helper_list_size * sizeof(float))
- *     weigths_list = <float *> malloc(helper_list_size * sizeof(float))
+ *     helper_flow_y_list = <double *> malloc((helper_list_size+1) * sizeof(double))
+ *     weigths_list = <double *> malloc(helper_list_size * sizeof(double))
  *     for x in range(width):             # <<<<<<<<<<<<<<
  *         min_x_compare = max(0, x - filter_half)
  *         max_x_compare = min(width, x + filter_half + 1)
@@ -3153,7 +3153,7 @@ static void __pyx_f_16bilateral_median_inner_row_kernel(int __pyx_v_y, __Pyx_mem
     __pyx_v_x = __pyx_t_3;
 
     /* "bilateral_median.pyx":75
- *     weigths_list = <float *> malloc(helper_list_size * sizeof(float))
+ *     weigths_list = <double *> malloc(helper_list_size * sizeof(double))
  *     for x in range(width):
  *         min_x_compare = max(0, x - filter_half)             # <<<<<<<<<<<<<<
  *         max_x_compare = min(width, x + filter_half + 1)
@@ -3264,7 +3264,7 @@ static void __pyx_f_16bilateral_median_inner_row_kernel(int __pyx_v_y, __Pyx_mem
           __pyx_t_16 = __pyx_v_channel_idx;
           __pyx_t_17 = __pyx_v_y;
           __pyx_t_18 = __pyx_v_x;
-          __pyx_v_color_squared_difference = (__pyx_v_color_squared_difference + powf(((*((float *) ( /* dim=2 */ ((char *) (((float *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_image.data + __pyx_t_13 * __pyx_v_image.strides[0]) ) + __pyx_t_14 * __pyx_v_image.strides[1]) )) + __pyx_t_15)) ))) - (*((float *) ( /* dim=2 */ ((char *) (((float *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_image.data + __pyx_t_16 * __pyx_v_image.strides[0]) ) + __pyx_t_17 * __pyx_v_image.strides[1]) )) + __pyx_t_18)) )))), 2.0));
+          __pyx_v_color_squared_difference = (__pyx_v_color_squared_difference + pow(((*((double *) ( /* dim=2 */ ((char *) (((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_image.data + __pyx_t_13 * __pyx_v_image.strides[0]) ) + __pyx_t_14 * __pyx_v_image.strides[1]) )) + __pyx_t_15)) ))) - (*((double *) ( /* dim=2 */ ((char *) (((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_image.data + __pyx_t_16 * __pyx_v_image.strides[0]) ) + __pyx_t_17 * __pyx_v_image.strides[1]) )) + __pyx_t_18)) )))), 2.0));
         }
 
         /* "bilateral_median.pyx":89
@@ -3292,7 +3292,7 @@ static void __pyx_f_16bilateral_median_inner_row_kernel(int __pyx_v_y, __Pyx_mem
  *                 exponent = distance_squared_difference / (2 * sigma_distance)
  *                 exponent += color_squared_difference / (2 * sigma_color * color_channel_count)             # <<<<<<<<<<<<<<
  * 
- *                 occlusen_current = occlusen[y,x]
+ *                 occlusen_current = log_occlusen[y,x]
  */
         __pyx_t_19 = ((2.0 * __pyx_v_sigma_color) * __pyx_v_color_channel_count);
         if (unlikely(__pyx_t_19 == 0)) {
@@ -3310,49 +3310,37 @@ static void __pyx_f_16bilateral_median_inner_row_kernel(int __pyx_v_y, __Pyx_mem
         /* "bilateral_median.pyx":92
  *                 exponent += color_squared_difference / (2 * sigma_color * color_channel_count)
  * 
- *                 occlusen_current = occlusen[y,x]             # <<<<<<<<<<<<<<
- *                 occlusen_compared = occlusen[y_compare,x_compare]
+ *                 occlusen_current = log_occlusen[y,x]             # <<<<<<<<<<<<<<
+ *                 occlusen_compared = log_occlusen[y_compare,x_compare]
  * 
  */
         __pyx_t_18 = __pyx_v_y;
         __pyx_t_17 = __pyx_v_x;
-        __pyx_v_occlusen_current = (*((float *) ( /* dim=1 */ ((char *) (((float *) ( /* dim=0 */ (__pyx_v_occlusen.data + __pyx_t_18 * __pyx_v_occlusen.strides[0]) )) + __pyx_t_17)) )));
+        __pyx_v_occlusen_current = (*((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_v_log_occlusen.data + __pyx_t_18 * __pyx_v_log_occlusen.strides[0]) )) + __pyx_t_17)) )));
 
         /* "bilateral_median.pyx":93
  * 
- *                 occlusen_current = occlusen[y,x]
- *                 occlusen_compared = occlusen[y_compare,x_compare]             # <<<<<<<<<<<<<<
+ *                 occlusen_current = log_occlusen[y,x]
+ *                 occlusen_compared = log_occlusen[y_compare,x_compare]             # <<<<<<<<<<<<<<
  * 
- *                 weigth = exp(-exponent) * (occlusen_compared+0.00001) / (occlusen_current+0.00001)
+ *                 weigth = exp(-exponent+occlusen_compared-occlusen_current)
  */
         __pyx_t_17 = __pyx_v_y_compare;
         __pyx_t_18 = __pyx_v_x_compare;
-        __pyx_v_occlusen_compared = (*((float *) ( /* dim=1 */ ((char *) (((float *) ( /* dim=0 */ (__pyx_v_occlusen.data + __pyx_t_17 * __pyx_v_occlusen.strides[0]) )) + __pyx_t_18)) )));
+        __pyx_v_occlusen_compared = (*((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_v_log_occlusen.data + __pyx_t_17 * __pyx_v_log_occlusen.strides[0]) )) + __pyx_t_18)) )));
 
         /* "bilateral_median.pyx":95
- *                 occlusen_compared = occlusen[y_compare,x_compare]
+ *                 occlusen_compared = log_occlusen[y_compare,x_compare]
  * 
- *                 weigth = exp(-exponent) * (occlusen_compared+0.00001) / (occlusen_current+0.00001)             # <<<<<<<<<<<<<<
+ *                 weigth = exp(-exponent+occlusen_compared-occlusen_current)             # <<<<<<<<<<<<<<
  *                 weigths_list[counter] = weigth
  * 
  */
-        __pyx_t_20 = (exp((-__pyx_v_exponent)) * (__pyx_v_occlusen_compared + 0.00001));
-        __pyx_t_21 = (__pyx_v_occlusen_current + 0.00001);
-        if (unlikely(__pyx_t_21 == 0)) {
-          #ifdef WITH_THREAD
-          PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
-          #endif
-          PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-          #ifdef WITH_THREAD
-          __Pyx_PyGILState_Release(__pyx_gilstate_save);
-          #endif
-          __PYX_ERR(0, 95, __pyx_L1_error)
-        }
-        __pyx_v_weigth = (__pyx_t_20 / __pyx_t_21);
+        __pyx_v_weigth = exp((((-__pyx_v_exponent) + __pyx_v_occlusen_compared) - __pyx_v_occlusen_current));
 
         /* "bilateral_median.pyx":96
  * 
- *                 weigth = exp(-exponent) * (occlusen_compared+0.00001) / (occlusen_current+0.00001)
+ *                 weigth = exp(-exponent+occlusen_compared-occlusen_current)
  *                 weigths_list[counter] = weigth             # <<<<<<<<<<<<<<
  * 
  *                 helper_flow_x_list[counter] = flow[1,y_compare,x_compare]
@@ -3369,7 +3357,7 @@ static void __pyx_f_16bilateral_median_inner_row_kernel(int __pyx_v_y, __Pyx_mem
         __pyx_t_18 = 1;
         __pyx_t_17 = __pyx_v_y_compare;
         __pyx_t_16 = __pyx_v_x_compare;
-        (__pyx_v_helper_flow_x_list[__pyx_v_counter]) = (*((float *) ( /* dim=2 */ ((char *) (((float *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_flow.data + __pyx_t_18 * __pyx_v_flow.strides[0]) ) + __pyx_t_17 * __pyx_v_flow.strides[1]) )) + __pyx_t_16)) )));
+        (__pyx_v_helper_flow_x_list[__pyx_v_counter]) = (*((double *) ( /* dim=2 */ ((char *) (((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_flow.data + __pyx_t_18 * __pyx_v_flow.strides[0]) ) + __pyx_t_17 * __pyx_v_flow.strides[1]) )) + __pyx_t_16)) )));
 
         /* "bilateral_median.pyx":99
  * 
@@ -3381,7 +3369,7 @@ static void __pyx_f_16bilateral_median_inner_row_kernel(int __pyx_v_y, __Pyx_mem
         __pyx_t_16 = 0;
         __pyx_t_17 = __pyx_v_y_compare;
         __pyx_t_18 = __pyx_v_x_compare;
-        (__pyx_v_helper_flow_y_list[__pyx_v_counter]) = (*((float *) ( /* dim=2 */ ((char *) (((float *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_flow.data + __pyx_t_16 * __pyx_v_flow.strides[0]) ) + __pyx_t_17 * __pyx_v_flow.strides[1]) )) + __pyx_t_18)) )));
+        (__pyx_v_helper_flow_y_list[__pyx_v_counter]) = (*((double *) ( /* dim=2 */ ((char *) (((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_flow.data + __pyx_t_16 * __pyx_v_flow.strides[0]) ) + __pyx_t_17 * __pyx_v_flow.strides[1]) )) + __pyx_t_18)) )));
 
         /* "bilateral_median.pyx":101
  *                 helper_flow_y_list[counter] = flow[0,y_compare,x_compare]
@@ -3408,33 +3396,33 @@ static void __pyx_f_16bilateral_median_inner_row_kernel(int __pyx_v_y, __Pyx_mem
  * 
  *         f_x = auxiliary_field[1,y,x]             # <<<<<<<<<<<<<<
  *         f_y = auxiliary_field[0,y,x]
- *         scalar = weigth_filter / weigth_auxiliary
+ *         scalar = 1/(2*(weigth_auxiliary / weigth_filter))
  */
     __pyx_t_18 = 1;
     __pyx_t_17 = __pyx_v_y;
     __pyx_t_16 = __pyx_v_x;
-    __pyx_v_f_x = (*((float *) ( /* dim=2 */ ((char *) (((float *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_auxiliary_field.data + __pyx_t_18 * __pyx_v_auxiliary_field.strides[0]) ) + __pyx_t_17 * __pyx_v_auxiliary_field.strides[1]) )) + __pyx_t_16)) )));
+    __pyx_v_f_x = (*((double *) ( /* dim=2 */ ((char *) (((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_auxiliary_field.data + __pyx_t_18 * __pyx_v_auxiliary_field.strides[0]) ) + __pyx_t_17 * __pyx_v_auxiliary_field.strides[1]) )) + __pyx_t_16)) )));
 
     /* "bilateral_median.pyx":109
  * 
  *         f_x = auxiliary_field[1,y,x]
  *         f_y = auxiliary_field[0,y,x]             # <<<<<<<<<<<<<<
- *         scalar = weigth_filter / weigth_auxiliary
+ *         scalar = 1/(2*(weigth_auxiliary / weigth_filter))
  * 
  */
     __pyx_t_16 = 0;
     __pyx_t_17 = __pyx_v_y;
     __pyx_t_18 = __pyx_v_x;
-    __pyx_v_f_y = (*((float *) ( /* dim=2 */ ((char *) (((float *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_auxiliary_field.data + __pyx_t_16 * __pyx_v_auxiliary_field.strides[0]) ) + __pyx_t_17 * __pyx_v_auxiliary_field.strides[1]) )) + __pyx_t_18)) )));
+    __pyx_v_f_y = (*((double *) ( /* dim=2 */ ((char *) (((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_auxiliary_field.data + __pyx_t_16 * __pyx_v_auxiliary_field.strides[0]) ) + __pyx_t_17 * __pyx_v_auxiliary_field.strides[1]) )) + __pyx_t_18)) )));
 
     /* "bilateral_median.pyx":110
  *         f_x = auxiliary_field[1,y,x]
  *         f_y = auxiliary_field[0,y,x]
- *         scalar = weigth_filter / weigth_auxiliary             # <<<<<<<<<<<<<<
+ *         scalar = 1/(2*(weigth_auxiliary / weigth_filter))             # <<<<<<<<<<<<<<
  * 
- *         for idx_1 in range(n):
+ *         for idx_1 in range(n+1):
  */
-    if (unlikely(__pyx_v_weigth_auxiliary == 0)) {
+    if (unlikely(__pyx_v_weigth_filter == 0)) {
       #ifdef WITH_THREAD
       PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
       #endif
@@ -3444,23 +3432,34 @@ static void __pyx_f_16bilateral_median_inner_row_kernel(int __pyx_v_y, __Pyx_mem
       #endif
       __PYX_ERR(0, 110, __pyx_L1_error)
     }
-    __pyx_v_scalar = (__pyx_v_weigth_filter / __pyx_v_weigth_auxiliary);
+    __pyx_t_19 = (2.0 * (__pyx_v_weigth_auxiliary / __pyx_v_weigth_filter));
+    if (unlikely(__pyx_t_19 == 0)) {
+      #ifdef WITH_THREAD
+      PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
+      #endif
+      PyErr_SetString(PyExc_ZeroDivisionError, "float division");
+      #ifdef WITH_THREAD
+      __Pyx_PyGILState_Release(__pyx_gilstate_save);
+      #endif
+      __PYX_ERR(0, 110, __pyx_L1_error)
+    }
+    __pyx_v_scalar = (1.0 / __pyx_t_19);
 
     /* "bilateral_median.pyx":112
- *         scalar = weigth_filter / weigth_auxiliary
+ *         scalar = 1/(2*(weigth_auxiliary / weigth_filter))
  * 
- *         for idx_1 in range(n):             # <<<<<<<<<<<<<<
+ *         for idx_1 in range(n+1):             # <<<<<<<<<<<<<<
  *             sum = 0
  *             for idx_2 in range(idx_1):
  */
-    __pyx_t_4 = __pyx_v_n;
-    __pyx_t_5 = __pyx_t_4;
-    for (__pyx_t_6 = 0; __pyx_t_6 < __pyx_t_5; __pyx_t_6+=1) {
-      __pyx_v_idx_1 = __pyx_t_6;
+    __pyx_t_20 = (__pyx_v_n + 1);
+    __pyx_t_21 = __pyx_t_20;
+    for (__pyx_t_4 = 0; __pyx_t_4 < __pyx_t_21; __pyx_t_4+=1) {
+      __pyx_v_idx_1 = __pyx_t_4;
 
       /* "bilateral_median.pyx":113
  * 
- *         for idx_1 in range(n):
+ *         for idx_1 in range(n+1):
  *             sum = 0             # <<<<<<<<<<<<<<
  *             for idx_2 in range(idx_1):
  *                 sum -= weigths_list[idx_2]
@@ -3468,16 +3467,16 @@ static void __pyx_f_16bilateral_median_inner_row_kernel(int __pyx_v_y, __Pyx_mem
       __pyx_v_sum = 0.0;
 
       /* "bilateral_median.pyx":114
- *         for idx_1 in range(n):
+ *         for idx_1 in range(n+1):
  *             sum = 0
  *             for idx_2 in range(idx_1):             # <<<<<<<<<<<<<<
  *                 sum -= weigths_list[idx_2]
  * 
  */
-      __pyx_t_7 = __pyx_v_idx_1;
-      __pyx_t_8 = __pyx_t_7;
-      for (__pyx_t_9 = 0; __pyx_t_9 < __pyx_t_8; __pyx_t_9+=1) {
-        __pyx_v_idx_2 = __pyx_t_9;
+      __pyx_t_5 = __pyx_v_idx_1;
+      __pyx_t_6 = __pyx_t_5;
+      for (__pyx_t_7 = 0; __pyx_t_7 < __pyx_t_6; __pyx_t_7+=1) {
+        __pyx_v_idx_2 = __pyx_t_7;
 
         /* "bilateral_median.pyx":115
  *             sum = 0
@@ -3496,10 +3495,10 @@ static void __pyx_f_16bilateral_median_inner_row_kernel(int __pyx_v_y, __Pyx_mem
  *                 sum += weigths_list[idx_2]
  *             helper_flow_x_list[n + idx_1] = f_x + scalar * sum
  */
-      __pyx_t_7 = __pyx_v_n;
-      __pyx_t_8 = __pyx_t_7;
-      for (__pyx_t_9 = __pyx_v_idx_1; __pyx_t_9 < __pyx_t_8; __pyx_t_9+=1) {
-        __pyx_v_idx_2 = __pyx_t_9;
+      __pyx_t_5 = __pyx_v_n;
+      __pyx_t_6 = __pyx_t_5;
+      for (__pyx_t_7 = __pyx_v_idx_1; __pyx_t_7 < __pyx_t_6; __pyx_t_7+=1) {
+        __pyx_v_idx_2 = __pyx_t_7;
 
         /* "bilateral_median.pyx":118
  * 
@@ -3525,7 +3524,7 @@ static void __pyx_f_16bilateral_median_inner_row_kernel(int __pyx_v_y, __Pyx_mem
  *             helper_flow_x_list[n + idx_1] = f_x + scalar * sum
  *             helper_flow_y_list[n + idx_1] = f_y + scalar * sum             # <<<<<<<<<<<<<<
  * 
- *         result_flow[0,y,x] = quickselect_median(helper_flow_y_list,n*2)
+ *         result_flow[0,y,x] = quickselect_median(helper_flow_y_list,n*2+1)
  */
       (__pyx_v_helper_flow_y_list[(__pyx_v_n + __pyx_v_idx_1)]) = (__pyx_v_f_y + (__pyx_v_scalar * __pyx_v_sum));
     }
@@ -3533,31 +3532,31 @@ static void __pyx_f_16bilateral_median_inner_row_kernel(int __pyx_v_y, __Pyx_mem
     /* "bilateral_median.pyx":122
  *             helper_flow_y_list[n + idx_1] = f_y + scalar * sum
  * 
- *         result_flow[0,y,x] = quickselect_median(helper_flow_y_list,n*2)             # <<<<<<<<<<<<<<
- *         result_flow[1,y,x] = quickselect_median(helper_flow_x_list,n*2)
+ *         result_flow[0,y,x] = quickselect_median(helper_flow_y_list,n*2+1)             # <<<<<<<<<<<<<<
+ *         result_flow[1,y,x] = quickselect_median(helper_flow_x_list,n*2+1)
  *     free(helper_flow_x_list)
  */
     __pyx_t_18 = 0;
     __pyx_t_17 = __pyx_v_y;
     __pyx_t_16 = __pyx_v_x;
-    *((float *) ( /* dim=2 */ ((char *) (((float *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_result_flow.data + __pyx_t_18 * __pyx_v_result_flow.strides[0]) ) + __pyx_t_17 * __pyx_v_result_flow.strides[1]) )) + __pyx_t_16)) )) = __pyx_f_16bilateral_median_quickselect_median(__pyx_v_helper_flow_y_list, (__pyx_v_n * 2));
+    *((double *) ( /* dim=2 */ ((char *) (((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_result_flow.data + __pyx_t_18 * __pyx_v_result_flow.strides[0]) ) + __pyx_t_17 * __pyx_v_result_flow.strides[1]) )) + __pyx_t_16)) )) = __pyx_f_16bilateral_median_quickselect_median(__pyx_v_helper_flow_y_list, ((__pyx_v_n * 2) + 1));
 
     /* "bilateral_median.pyx":123
  * 
- *         result_flow[0,y,x] = quickselect_median(helper_flow_y_list,n*2)
- *         result_flow[1,y,x] = quickselect_median(helper_flow_x_list,n*2)             # <<<<<<<<<<<<<<
+ *         result_flow[0,y,x] = quickselect_median(helper_flow_y_list,n*2+1)
+ *         result_flow[1,y,x] = quickselect_median(helper_flow_x_list,n*2+1)             # <<<<<<<<<<<<<<
  *     free(helper_flow_x_list)
  *     free(helper_flow_y_list)
  */
     __pyx_t_16 = 1;
     __pyx_t_17 = __pyx_v_y;
     __pyx_t_18 = __pyx_v_x;
-    *((float *) ( /* dim=2 */ ((char *) (((float *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_result_flow.data + __pyx_t_16 * __pyx_v_result_flow.strides[0]) ) + __pyx_t_17 * __pyx_v_result_flow.strides[1]) )) + __pyx_t_18)) )) = __pyx_f_16bilateral_median_quickselect_median(__pyx_v_helper_flow_x_list, (__pyx_v_n * 2));
+    *((double *) ( /* dim=2 */ ((char *) (((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_result_flow.data + __pyx_t_16 * __pyx_v_result_flow.strides[0]) ) + __pyx_t_17 * __pyx_v_result_flow.strides[1]) )) + __pyx_t_18)) )) = __pyx_f_16bilateral_median_quickselect_median(__pyx_v_helper_flow_x_list, ((__pyx_v_n * 2) + 1));
   }
 
   /* "bilateral_median.pyx":124
- *         result_flow[0,y,x] = quickselect_median(helper_flow_y_list,n*2)
- *         result_flow[1,y,x] = quickselect_median(helper_flow_x_list,n*2)
+ *         result_flow[0,y,x] = quickselect_median(helper_flow_y_list,n*2+1)
+ *         result_flow[1,y,x] = quickselect_median(helper_flow_x_list,n*2+1)
  *     free(helper_flow_x_list)             # <<<<<<<<<<<<<<
  *     free(helper_flow_y_list)
  *     free(weigths_list)
@@ -3565,7 +3564,7 @@ static void __pyx_f_16bilateral_median_inner_row_kernel(int __pyx_v_y, __Pyx_mem
   free(__pyx_v_helper_flow_x_list);
 
   /* "bilateral_median.pyx":125
- *         result_flow[1,y,x] = quickselect_median(helper_flow_x_list,n*2)
+ *         result_flow[1,y,x] = quickselect_median(helper_flow_x_list,n*2+1)
  *     free(helper_flow_x_list)
  *     free(helper_flow_y_list)             # <<<<<<<<<<<<<<
  *     free(weigths_list)
@@ -3578,16 +3577,16 @@ static void __pyx_f_16bilateral_median_inner_row_kernel(int __pyx_v_y, __Pyx_mem
  *     free(helper_flow_y_list)
  *     free(weigths_list)             # <<<<<<<<<<<<<<
  * 
- * cpdef np.ndarray[np.float32_t, ndim=3] bilateral_median_filter(float[:,:, ::1] flow, float[:, ::1] occlusen,
+ * cpdef np.ndarray[np.double_t, ndim=3] bilateral_median_filter(double[:,:, ::1] flow, double[:, ::1] log_occlusen,
  */
   free(__pyx_v_weigths_list);
 
   /* "bilateral_median.pyx":46
  * @cython.boundscheck(False)  # Deactivate bounds checking
  * @cython.wraparound(False)   # Deactivate negative indexing.
- * cdef void inner_row_kernel(int y, float[:,:, ::1] flow, float[:, ::1] occlusen, float[:,:, ::1] auxiliary_field, float[:,:, ::1] image,float[:,:,::1] result_flow,             # <<<<<<<<<<<<<<
- *                         float weigth_auxiliary, float weigth_filter, int width, int height,
- *                         float sigma_distance, float sigma_color, int filter_size, int color_channel_count, int filter_half, int helper_list_size
+ * cdef void inner_row_kernel(int y, double[:,:, ::1] flow, double[:, ::1] log_occlusen, double[:,:, ::1] auxiliary_field, double[:,:, ::1] image,double[:,:,::1] result_flow,             # <<<<<<<<<<<<<<
+ *                         double weigth_auxiliary, double weigth_filter, int width, int height,
+ *                         double sigma_distance, double sigma_color, int filter_size, int color_channel_count, int filter_half, int helper_list_size
  */
 
   /* function exit code */
@@ -3600,15 +3599,15 @@ static void __pyx_f_16bilateral_median_inner_row_kernel(int __pyx_v_y, __Pyx_mem
 /* "bilateral_median.pyx":128
  *     free(weigths_list)
  * 
- * cpdef np.ndarray[np.float32_t, ndim=3] bilateral_median_filter(float[:,:, ::1] flow, float[:, ::1] occlusen,             # <<<<<<<<<<<<<<
- *                             float[:,:, ::1] auxiliary_field, float[:,:, ::1] image,
- *                             float weigth_auxiliary, float weigth_filter,
+ * cpdef np.ndarray[np.double_t, ndim=3] bilateral_median_filter(double[:,:, ::1] flow, double[:, ::1] log_occlusen,             # <<<<<<<<<<<<<<
+ *                             double[:,:, ::1] auxiliary_field, double[:,:, ::1] image,
+ *                             double weigth_auxiliary, double weigth_filter,
  */
 
 static PyObject *__pyx_pw_16bilateral_median_1bilateral_median_filter(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyArrayObject *__pyx_f_16bilateral_median_bilateral_median_filter(__Pyx_memviewslice __pyx_v_flow, __Pyx_memviewslice __pyx_v_occlusen, __Pyx_memviewslice __pyx_v_auxiliary_field, __Pyx_memviewslice __pyx_v_image, float __pyx_v_weigth_auxiliary, float __pyx_v_weigth_filter, CYTHON_UNUSED int __pyx_skip_dispatch, struct __pyx_opt_args_16bilateral_median_bilateral_median_filter *__pyx_optional_args) {
-  float __pyx_v_sigma_distance = ((float)7.0);
-  float __pyx_v_sigma_color = __pyx_k_;
+static PyArrayObject *__pyx_f_16bilateral_median_bilateral_median_filter(__Pyx_memviewslice __pyx_v_flow, __Pyx_memviewslice __pyx_v_log_occlusen, __Pyx_memviewslice __pyx_v_auxiliary_field, __Pyx_memviewslice __pyx_v_image, double __pyx_v_weigth_auxiliary, double __pyx_v_weigth_filter, CYTHON_UNUSED int __pyx_skip_dispatch, struct __pyx_opt_args_16bilateral_median_bilateral_median_filter *__pyx_optional_args) {
+  double __pyx_v_sigma_distance = ((double)7.0);
+  double __pyx_v_sigma_color = __pyx_k_;
   int __pyx_v_filter_size = ((int)5);
   int __pyx_v_width;
   int __pyx_v_height;
@@ -3708,7 +3707,7 @@ static PyArrayObject *__pyx_f_16bilateral_median_bilateral_median_filter(__Pyx_m
   /* "bilateral_median.pyx":156
  * 
  * 
- *     cpdef np.ndarray[np.float32_t, ndim=3] result_flow = np.empty(shape=(2, height, width), dtype=np.float32)             # <<<<<<<<<<<<<<
+ *     cpdef np.ndarray[np.double_t, ndim=3] result_flow = np.empty(shape=(2, height, width), dtype=np.double)             # <<<<<<<<<<<<<<
  *     print("Channelcount: ", color_channel_count, " Sigma Color: ", sigma_color, " Sigma distance: ", sigma_distance)
  *     cdef int y
  */
@@ -3738,7 +3737,7 @@ static PyArrayObject *__pyx_f_16bilateral_median_bilateral_median_filter(__Pyx_m
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 156, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_float32); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 156, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_double); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 156, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_dtype, __pyx_t_4) < 0) __PYX_ERR(0, 156, __pyx_L1_error)
@@ -3751,7 +3750,7 @@ static PyArrayObject *__pyx_f_16bilateral_median_bilateral_median_filter(__Pyx_m
   __pyx_t_6 = ((PyArrayObject *)__pyx_t_4);
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
-    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_result_flow.rcbuffer->pybuffer, (PyObject*)__pyx_t_6, &__Pyx_TypeInfo_nn___pyx_t_5numpy_float32_t, PyBUF_FORMAT| PyBUF_STRIDES, 3, 0, __pyx_stack) == -1)) {
+    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_result_flow.rcbuffer->pybuffer, (PyObject*)__pyx_t_6, &__Pyx_TypeInfo_nn___pyx_t_5numpy_double_t, PyBUF_FORMAT| PyBUF_STRIDES, 3, 0, __pyx_stack) == -1)) {
       __pyx_v_result_flow = ((PyArrayObject *)Py_None); __Pyx_INCREF(Py_None); __pyx_pybuffernd_result_flow.rcbuffer->pybuffer.buf = NULL;
       __PYX_ERR(0, 156, __pyx_L1_error)
     } else {__pyx_pybuffernd_result_flow.diminfo[0].strides = __pyx_pybuffernd_result_flow.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_result_flow.diminfo[0].shape = __pyx_pybuffernd_result_flow.rcbuffer->pybuffer.shape[0]; __pyx_pybuffernd_result_flow.diminfo[1].strides = __pyx_pybuffernd_result_flow.rcbuffer->pybuffer.strides[1]; __pyx_pybuffernd_result_flow.diminfo[1].shape = __pyx_pybuffernd_result_flow.rcbuffer->pybuffer.shape[1]; __pyx_pybuffernd_result_flow.diminfo[2].strides = __pyx_pybuffernd_result_flow.rcbuffer->pybuffer.strides[2]; __pyx_pybuffernd_result_flow.diminfo[2].shape = __pyx_pybuffernd_result_flow.rcbuffer->pybuffer.shape[2];
@@ -3763,7 +3762,7 @@ static PyArrayObject *__pyx_f_16bilateral_median_bilateral_median_filter(__Pyx_m
 
   /* "bilateral_median.pyx":157
  * 
- *     cpdef np.ndarray[np.float32_t, ndim=3] result_flow = np.empty(shape=(2, height, width), dtype=np.float32)
+ *     cpdef np.ndarray[np.double_t, ndim=3] result_flow = np.empty(shape=(2, height, width), dtype=np.double)
  *     print("Channelcount: ", color_channel_count, " Sigma Color: ", sigma_color, " Sigma distance: ", sigma_distance)             # <<<<<<<<<<<<<<
  *     cdef int y
  *     #for y in prange(height, nogil=True):
@@ -3801,7 +3800,7 @@ static PyArrayObject *__pyx_f_16bilateral_median_bilateral_median_filter(__Pyx_m
  *     cdef int y
  *     #for y in prange(height, nogil=True):
  *     for y in range(height):             # <<<<<<<<<<<<<<
- *         inner_row_kernel(y,flow, occlusen, auxiliary_field, image,result_flow,
+ *         inner_row_kernel(y,flow, log_occlusen, auxiliary_field, image,result_flow,
  *                         weigth_auxiliary, weigth_filter,width,height,
  */
   __pyx_t_7 = __pyx_v_height;
@@ -3812,20 +3811,20 @@ static PyArrayObject *__pyx_f_16bilateral_median_bilateral_median_filter(__Pyx_m
     /* "bilateral_median.pyx":161
  *     #for y in prange(height, nogil=True):
  *     for y in range(height):
- *         inner_row_kernel(y,flow, occlusen, auxiliary_field, image,result_flow,             # <<<<<<<<<<<<<<
+ *         inner_row_kernel(y,flow, log_occlusen, auxiliary_field, image,result_flow,             # <<<<<<<<<<<<<<
  *                         weigth_auxiliary, weigth_filter,width,height,
  *                         sigma_distance, sigma_color , filter_size, color_channel_count,filter_half, helper_list_size)
  */
-    __pyx_t_10 = __Pyx_PyObject_to_MemoryviewSlice_d_d_dc_float(((PyObject *)__pyx_v_result_flow), PyBUF_WRITABLE); if (unlikely(!__pyx_t_10.memview)) __PYX_ERR(0, 161, __pyx_L1_error)
+    __pyx_t_10 = __Pyx_PyObject_to_MemoryviewSlice_d_d_dc_double(((PyObject *)__pyx_v_result_flow), PyBUF_WRITABLE); if (unlikely(!__pyx_t_10.memview)) __PYX_ERR(0, 161, __pyx_L1_error)
 
     /* "bilateral_median.pyx":163
- *         inner_row_kernel(y,flow, occlusen, auxiliary_field, image,result_flow,
+ *         inner_row_kernel(y,flow, log_occlusen, auxiliary_field, image,result_flow,
  *                         weigth_auxiliary, weigth_filter,width,height,
  *                         sigma_distance, sigma_color , filter_size, color_channel_count,filter_half, helper_list_size)             # <<<<<<<<<<<<<<
  * 
  *     return result_flow
  */
-    __pyx_f_16bilateral_median_inner_row_kernel(__pyx_v_y, __pyx_v_flow, __pyx_v_occlusen, __pyx_v_auxiliary_field, __pyx_v_image, __pyx_t_10, __pyx_v_weigth_auxiliary, __pyx_v_weigth_filter, __pyx_v_width, __pyx_v_height, __pyx_v_sigma_distance, __pyx_v_sigma_color, __pyx_v_filter_size, __pyx_v_color_channel_count, __pyx_v_filter_half, __pyx_v_helper_list_size);
+    __pyx_f_16bilateral_median_inner_row_kernel(__pyx_v_y, __pyx_v_flow, __pyx_v_log_occlusen, __pyx_v_auxiliary_field, __pyx_v_image, __pyx_t_10, __pyx_v_weigth_auxiliary, __pyx_v_weigth_filter, __pyx_v_width, __pyx_v_height, __pyx_v_sigma_distance, __pyx_v_sigma_color, __pyx_v_filter_size, __pyx_v_color_channel_count, __pyx_v_filter_half, __pyx_v_helper_list_size);
     __PYX_XDEC_MEMVIEW(&__pyx_t_10, 1);
     __pyx_t_10.memview = NULL;
     __pyx_t_10.data = NULL;
@@ -3844,9 +3843,9 @@ static PyArrayObject *__pyx_f_16bilateral_median_bilateral_median_filter(__Pyx_m
   /* "bilateral_median.pyx":128
  *     free(weigths_list)
  * 
- * cpdef np.ndarray[np.float32_t, ndim=3] bilateral_median_filter(float[:,:, ::1] flow, float[:, ::1] occlusen,             # <<<<<<<<<<<<<<
- *                             float[:,:, ::1] auxiliary_field, float[:,:, ::1] image,
- *                             float weigth_auxiliary, float weigth_filter,
+ * cpdef np.ndarray[np.double_t, ndim=3] bilateral_median_filter(double[:,:, ::1] flow, double[:, ::1] log_occlusen,             # <<<<<<<<<<<<<<
+ *                             double[:,:, ::1] auxiliary_field, double[:,:, ::1] image,
+ *                             double weigth_auxiliary, double weigth_filter,
  */
 
   /* function exit code */
@@ -3877,16 +3876,16 @@ static PyArrayObject *__pyx_f_16bilateral_median_bilateral_median_filter(__Pyx_m
 
 /* Python wrapper */
 static PyObject *__pyx_pw_16bilateral_median_1bilateral_median_filter(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_16bilateral_median_bilateral_median_filter[] = "\n\n    :param flow: np.float (YX,Height,Width)\n    :param occlusen: (Height, Width)\n    :param auxiliary_field: np.array(float) (Y_flow X_flow , Height, Width)\n    :param image: np.array(float) (ColorChannel, Height, Width)\n    :param weigth_auxiliary: float > 0\n    :param weigth_filter: float > 0\n    :param sigma_distance: float\n    :param sigma_color: float\n    :param filter_size: int\n    :return: flow field\n    ";
+static char __pyx_doc_16bilateral_median_bilateral_median_filter[] = "\n\n    :param flow: np.double (YX,Height,Width)\n    :param log_occlusen: (Height, Width)\n    :param auxiliary_field: np.array(double) (Y_flow X_flow , Height, Width)\n    :param image: np.array(double) (ColorChannel, Height, Width)\n    :param weigth_auxiliary: double > 0\n    :param weigth_filter: double > 0\n    :param sigma_distance: double\n    :param sigma_color: double\n    :param filter_size: int\n    :return: flow field\n    ";
 static PyObject *__pyx_pw_16bilateral_median_1bilateral_median_filter(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   __Pyx_memviewslice __pyx_v_flow = { 0, 0, { 0 }, { 0 }, { 0 } };
-  __Pyx_memviewslice __pyx_v_occlusen = { 0, 0, { 0 }, { 0 }, { 0 } };
+  __Pyx_memviewslice __pyx_v_log_occlusen = { 0, 0, { 0 }, { 0 }, { 0 } };
   __Pyx_memviewslice __pyx_v_auxiliary_field = { 0, 0, { 0 }, { 0 }, { 0 } };
   __Pyx_memviewslice __pyx_v_image = { 0, 0, { 0 }, { 0 }, { 0 } };
-  float __pyx_v_weigth_auxiliary;
-  float __pyx_v_weigth_filter;
-  float __pyx_v_sigma_distance;
-  float __pyx_v_sigma_color;
+  double __pyx_v_weigth_auxiliary;
+  double __pyx_v_weigth_filter;
+  double __pyx_v_sigma_distance;
+  double __pyx_v_sigma_color;
   int __pyx_v_filter_size;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
@@ -3895,7 +3894,7 @@ static PyObject *__pyx_pw_16bilateral_median_1bilateral_median_filter(PyObject *
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("bilateral_median_filter (wrapper)", 0);
   {
-    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_flow,&__pyx_n_s_occlusen,&__pyx_n_s_auxiliary_field,&__pyx_n_s_image,&__pyx_n_s_weigth_auxiliary,&__pyx_n_s_weigth_filter,&__pyx_n_s_sigma_distance,&__pyx_n_s_sigma_color,&__pyx_n_s_filter_size,0};
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_flow,&__pyx_n_s_log_occlusen,&__pyx_n_s_auxiliary_field,&__pyx_n_s_image,&__pyx_n_s_weigth_auxiliary,&__pyx_n_s_weigth_filter,&__pyx_n_s_sigma_distance,&__pyx_n_s_sigma_color,&__pyx_n_s_filter_size,0};
     PyObject* values[9] = {0,0,0,0,0,0,0,0,0};
     if (unlikely(__pyx_kwds)) {
       Py_ssize_t kw_args;
@@ -3929,7 +3928,7 @@ static PyObject *__pyx_pw_16bilateral_median_1bilateral_median_filter(PyObject *
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
-        if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_occlusen)) != 0)) kw_args--;
+        if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_log_occlusen)) != 0)) kw_args--;
         else {
           __Pyx_RaiseArgtupleInvalid("bilateral_median_filter", 0, 6, 9, 1); __PYX_ERR(0, 128, __pyx_L3_error)
         }
@@ -3997,19 +3996,19 @@ static PyObject *__pyx_pw_16bilateral_median_1bilateral_median_filter(PyObject *
         default: goto __pyx_L5_argtuple_error;
       }
     }
-    __pyx_v_flow = __Pyx_PyObject_to_MemoryviewSlice_d_d_dc_float(values[0], PyBUF_WRITABLE); if (unlikely(!__pyx_v_flow.memview)) __PYX_ERR(0, 128, __pyx_L3_error)
-    __pyx_v_occlusen = __Pyx_PyObject_to_MemoryviewSlice_d_dc_float(values[1], PyBUF_WRITABLE); if (unlikely(!__pyx_v_occlusen.memview)) __PYX_ERR(0, 128, __pyx_L3_error)
-    __pyx_v_auxiliary_field = __Pyx_PyObject_to_MemoryviewSlice_d_d_dc_float(values[2], PyBUF_WRITABLE); if (unlikely(!__pyx_v_auxiliary_field.memview)) __PYX_ERR(0, 129, __pyx_L3_error)
-    __pyx_v_image = __Pyx_PyObject_to_MemoryviewSlice_d_d_dc_float(values[3], PyBUF_WRITABLE); if (unlikely(!__pyx_v_image.memview)) __PYX_ERR(0, 129, __pyx_L3_error)
-    __pyx_v_weigth_auxiliary = __pyx_PyFloat_AsFloat(values[4]); if (unlikely((__pyx_v_weigth_auxiliary == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 130, __pyx_L3_error)
-    __pyx_v_weigth_filter = __pyx_PyFloat_AsFloat(values[5]); if (unlikely((__pyx_v_weigth_filter == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 130, __pyx_L3_error)
+    __pyx_v_flow = __Pyx_PyObject_to_MemoryviewSlice_d_d_dc_double(values[0], PyBUF_WRITABLE); if (unlikely(!__pyx_v_flow.memview)) __PYX_ERR(0, 128, __pyx_L3_error)
+    __pyx_v_log_occlusen = __Pyx_PyObject_to_MemoryviewSlice_d_dc_double(values[1], PyBUF_WRITABLE); if (unlikely(!__pyx_v_log_occlusen.memview)) __PYX_ERR(0, 128, __pyx_L3_error)
+    __pyx_v_auxiliary_field = __Pyx_PyObject_to_MemoryviewSlice_d_d_dc_double(values[2], PyBUF_WRITABLE); if (unlikely(!__pyx_v_auxiliary_field.memview)) __PYX_ERR(0, 129, __pyx_L3_error)
+    __pyx_v_image = __Pyx_PyObject_to_MemoryviewSlice_d_d_dc_double(values[3], PyBUF_WRITABLE); if (unlikely(!__pyx_v_image.memview)) __PYX_ERR(0, 129, __pyx_L3_error)
+    __pyx_v_weigth_auxiliary = __pyx_PyFloat_AsDouble(values[4]); if (unlikely((__pyx_v_weigth_auxiliary == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 130, __pyx_L3_error)
+    __pyx_v_weigth_filter = __pyx_PyFloat_AsDouble(values[5]); if (unlikely((__pyx_v_weigth_filter == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 130, __pyx_L3_error)
     if (values[6]) {
-      __pyx_v_sigma_distance = __pyx_PyFloat_AsFloat(values[6]); if (unlikely((__pyx_v_sigma_distance == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 131, __pyx_L3_error)
+      __pyx_v_sigma_distance = __pyx_PyFloat_AsDouble(values[6]); if (unlikely((__pyx_v_sigma_distance == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 131, __pyx_L3_error)
     } else {
-      __pyx_v_sigma_distance = ((float)7.0);
+      __pyx_v_sigma_distance = ((double)7.0);
     }
     if (values[7]) {
-      __pyx_v_sigma_color = __pyx_PyFloat_AsFloat(values[7]); if (unlikely((__pyx_v_sigma_color == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 131, __pyx_L3_error)
+      __pyx_v_sigma_color = __pyx_PyFloat_AsDouble(values[7]); if (unlikely((__pyx_v_sigma_color == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 131, __pyx_L3_error)
     } else {
       __pyx_v_sigma_color = __pyx_k_;
     }
@@ -4027,14 +4026,14 @@ static PyObject *__pyx_pw_16bilateral_median_1bilateral_median_filter(PyObject *
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_16bilateral_median_bilateral_median_filter(__pyx_self, __pyx_v_flow, __pyx_v_occlusen, __pyx_v_auxiliary_field, __pyx_v_image, __pyx_v_weigth_auxiliary, __pyx_v_weigth_filter, __pyx_v_sigma_distance, __pyx_v_sigma_color, __pyx_v_filter_size);
+  __pyx_r = __pyx_pf_16bilateral_median_bilateral_median_filter(__pyx_self, __pyx_v_flow, __pyx_v_log_occlusen, __pyx_v_auxiliary_field, __pyx_v_image, __pyx_v_weigth_auxiliary, __pyx_v_weigth_filter, __pyx_v_sigma_distance, __pyx_v_sigma_color, __pyx_v_filter_size);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_16bilateral_median_bilateral_median_filter(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_flow, __Pyx_memviewslice __pyx_v_occlusen, __Pyx_memviewslice __pyx_v_auxiliary_field, __Pyx_memviewslice __pyx_v_image, float __pyx_v_weigth_auxiliary, float __pyx_v_weigth_filter, float __pyx_v_sigma_distance, float __pyx_v_sigma_color, int __pyx_v_filter_size) {
+static PyObject *__pyx_pf_16bilateral_median_bilateral_median_filter(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_flow, __Pyx_memviewslice __pyx_v_log_occlusen, __Pyx_memviewslice __pyx_v_auxiliary_field, __Pyx_memviewslice __pyx_v_image, double __pyx_v_weigth_auxiliary, double __pyx_v_weigth_filter, double __pyx_v_sigma_distance, double __pyx_v_sigma_color, int __pyx_v_filter_size) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -4045,14 +4044,14 @@ static PyObject *__pyx_pf_16bilateral_median_bilateral_median_filter(CYTHON_UNUS
   __Pyx_RefNannySetupContext("bilateral_median_filter", 0);
   __Pyx_XDECREF(__pyx_r);
   if (unlikely(!__pyx_v_flow.memview)) { __Pyx_RaiseUnboundLocalError("flow"); __PYX_ERR(0, 128, __pyx_L1_error) }
-  if (unlikely(!__pyx_v_occlusen.memview)) { __Pyx_RaiseUnboundLocalError("occlusen"); __PYX_ERR(0, 128, __pyx_L1_error) }
+  if (unlikely(!__pyx_v_log_occlusen.memview)) { __Pyx_RaiseUnboundLocalError("log_occlusen"); __PYX_ERR(0, 128, __pyx_L1_error) }
   if (unlikely(!__pyx_v_auxiliary_field.memview)) { __Pyx_RaiseUnboundLocalError("auxiliary_field"); __PYX_ERR(0, 128, __pyx_L1_error) }
   if (unlikely(!__pyx_v_image.memview)) { __Pyx_RaiseUnboundLocalError("image"); __PYX_ERR(0, 128, __pyx_L1_error) }
   __pyx_t_2.__pyx_n = 3;
   __pyx_t_2.sigma_distance = __pyx_v_sigma_distance;
   __pyx_t_2.sigma_color = __pyx_v_sigma_color;
   __pyx_t_2.filter_size = __pyx_v_filter_size;
-  __pyx_t_1 = ((PyObject *)__pyx_f_16bilateral_median_bilateral_median_filter(__pyx_v_flow, __pyx_v_occlusen, __pyx_v_auxiliary_field, __pyx_v_image, __pyx_v_weigth_auxiliary, __pyx_v_weigth_filter, 0, &__pyx_t_2)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 128, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_16bilateral_median_bilateral_median_filter(__pyx_v_flow, __pyx_v_log_occlusen, __pyx_v_auxiliary_field, __pyx_v_image, __pyx_v_weigth_auxiliary, __pyx_v_weigth_filter, 0, &__pyx_t_2)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 128, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -4065,7 +4064,7 @@ static PyObject *__pyx_pf_16bilateral_median_bilateral_median_filter(CYTHON_UNUS
   __pyx_r = NULL;
   __pyx_L0:;
   __PYX_XDEC_MEMVIEW(&__pyx_v_flow, 1);
-  __PYX_XDEC_MEMVIEW(&__pyx_v_occlusen, 1);
+  __PYX_XDEC_MEMVIEW(&__pyx_v_log_occlusen, 1);
   __PYX_XDEC_MEMVIEW(&__pyx_v_auxiliary_field, 1);
   __PYX_XDEC_MEMVIEW(&__pyx_v_image, 1);
   __Pyx_XGIVEREF(__pyx_r);
@@ -20139,6 +20138,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_s_contiguous_and_direct, __pyx_k_contiguous_and_direct, sizeof(__pyx_k_contiguous_and_direct), 0, 0, 1, 0},
   {&__pyx_kp_s_contiguous_and_indirect, __pyx_k_contiguous_and_indirect, sizeof(__pyx_k_contiguous_and_indirect), 0, 0, 1, 0},
   {&__pyx_n_s_dict, __pyx_k_dict, sizeof(__pyx_k_dict), 0, 0, 1, 1},
+  {&__pyx_n_s_double, __pyx_k_double, sizeof(__pyx_k_double), 0, 0, 1, 1},
   {&__pyx_n_s_dtype, __pyx_k_dtype, sizeof(__pyx_k_dtype), 0, 0, 1, 1},
   {&__pyx_n_s_dtype_is_object, __pyx_k_dtype_is_object, sizeof(__pyx_k_dtype_is_object), 0, 0, 1, 1},
   {&__pyx_n_s_empty, __pyx_k_empty, sizeof(__pyx_k_empty), 0, 0, 1, 1},
@@ -20149,7 +20149,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_file, __pyx_k_file, sizeof(__pyx_k_file), 0, 0, 1, 1},
   {&__pyx_n_s_filter_size, __pyx_k_filter_size, sizeof(__pyx_k_filter_size), 0, 0, 1, 1},
   {&__pyx_n_s_flags, __pyx_k_flags, sizeof(__pyx_k_flags), 0, 0, 1, 1},
-  {&__pyx_n_s_float32, __pyx_k_float32, sizeof(__pyx_k_float32), 0, 0, 1, 1},
   {&__pyx_n_s_flow, __pyx_k_flow, sizeof(__pyx_k_flow), 0, 0, 1, 1},
   {&__pyx_n_s_format, __pyx_k_format, sizeof(__pyx_k_format), 0, 0, 1, 1},
   {&__pyx_n_s_fortran, __pyx_k_fortran, sizeof(__pyx_k_fortran), 0, 0, 1, 1},
@@ -20161,6 +20160,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_import, __pyx_k_import, sizeof(__pyx_k_import), 0, 0, 1, 1},
   {&__pyx_n_s_itemsize, __pyx_k_itemsize, sizeof(__pyx_k_itemsize), 0, 0, 1, 1},
   {&__pyx_kp_s_itemsize_0_for_cython_array, __pyx_k_itemsize_0_for_cython_array, sizeof(__pyx_k_itemsize_0_for_cython_array), 0, 0, 1, 0},
+  {&__pyx_n_s_log_occlusen, __pyx_k_log_occlusen, sizeof(__pyx_k_log_occlusen), 0, 0, 1, 1},
   {&__pyx_n_s_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
   {&__pyx_n_s_memview, __pyx_k_memview, sizeof(__pyx_k_memview), 0, 0, 1, 1},
   {&__pyx_n_s_mode, __pyx_k_mode, sizeof(__pyx_k_mode), 0, 0, 1, 1},
@@ -20174,7 +20174,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_s_numpy_core_multiarray_failed_to, __pyx_k_numpy_core_multiarray_failed_to, sizeof(__pyx_k_numpy_core_multiarray_failed_to), 0, 0, 1, 0},
   {&__pyx_kp_s_numpy_core_umath_failed_to_impor, __pyx_k_numpy_core_umath_failed_to_impor, sizeof(__pyx_k_numpy_core_umath_failed_to_impor), 0, 0, 1, 0},
   {&__pyx_n_s_obj, __pyx_k_obj, sizeof(__pyx_k_obj), 0, 0, 1, 1},
-  {&__pyx_n_s_occlusen, __pyx_k_occlusen, sizeof(__pyx_k_occlusen), 0, 0, 1, 1},
   {&__pyx_n_s_pack, __pyx_k_pack, sizeof(__pyx_k_pack), 0, 0, 1, 1},
   {&__pyx_n_s_pickle, __pyx_k_pickle, sizeof(__pyx_k_pickle), 0, 0, 1, 1},
   {&__pyx_n_s_print, __pyx_k_print, sizeof(__pyx_k_print), 0, 0, 1, 1},
@@ -20949,22 +20948,22 @@ if (!__Pyx_RefNanny) {
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "bilateral_median.pyx":131
- *                             float[:,:, ::1] auxiliary_field, float[:,:, ::1] image,
- *                             float weigth_auxiliary, float weigth_filter,
- *                             float sigma_distance = 7, float sigma_color = <float> 7.0/200, int filter_size=5):             # <<<<<<<<<<<<<<
+ *                             double[:,:, ::1] auxiliary_field, double[:,:, ::1] image,
+ *                             double weigth_auxiliary, double weigth_filter,
+ *                             double sigma_distance = 7, double sigma_color = <double> 7.0/200, int filter_size=5):             # <<<<<<<<<<<<<<
  *     """
  * 
  */
-  __pyx_k_ = (((float)7.0) / 200.0);
+  __pyx_k_ = (((double)7.0) / 200.0);
 
   /* "bilateral_median.pyx":128
  *     free(weigths_list)
  * 
- * cpdef np.ndarray[np.float32_t, ndim=3] bilateral_median_filter(float[:,:, ::1] flow, float[:, ::1] occlusen,             # <<<<<<<<<<<<<<
- *                             float[:,:, ::1] auxiliary_field, float[:,:, ::1] image,
- *                             float weigth_auxiliary, float weigth_filter,
+ * cpdef np.ndarray[np.double_t, ndim=3] bilateral_median_filter(double[:,:, ::1] flow, double[:, ::1] log_occlusen,             # <<<<<<<<<<<<<<
+ *                             double[:,:, ::1] auxiliary_field, double[:,:, ::1] image,
+ *                             double weigth_auxiliary, double weigth_filter,
  */
-  __pyx_k_ = (((float)7.0) / 200.0);
+  __pyx_k_ = (((double)7.0) / 200.0);
 
   /* "bilateral_median.pyx":2
  * 
@@ -24272,7 +24271,7 @@ no_fail:
 }
 
 /* ObjectToMemviewSlice */
-  static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_d_d_dc_float(PyObject *obj, int writable_flag) {
+  static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_d_d_dc_double(PyObject *obj, int writable_flag) {
     __Pyx_memviewslice result = { 0, 0, { 0 }, { 0 }, { 0 } };
     __Pyx_BufFmt_StackElem stack[1];
     int axes_specs[] = { (__Pyx_MEMVIEW_DIRECT | __Pyx_MEMVIEW_FOLLOW), (__Pyx_MEMVIEW_DIRECT | __Pyx_MEMVIEW_FOLLOW), (__Pyx_MEMVIEW_DIRECT | __Pyx_MEMVIEW_CONTIG) };
@@ -24283,7 +24282,7 @@ no_fail:
     }
     retcode = __Pyx_ValidateAndInit_memviewslice(axes_specs, __Pyx_IS_C_CONTIG,
                                                  (PyBUF_C_CONTIGUOUS | PyBUF_FORMAT) | writable_flag, 3,
-                                                 &__Pyx_TypeInfo_float, stack,
+                                                 &__Pyx_TypeInfo_double, stack,
                                                  &result, obj);
     if (unlikely(retcode == -1))
         goto __pyx_fail;
@@ -24295,7 +24294,7 @@ __pyx_fail:
 }
 
 /* ObjectToMemviewSlice */
-  static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_d_dc_float(PyObject *obj, int writable_flag) {
+  static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_d_dc_double(PyObject *obj, int writable_flag) {
     __Pyx_memviewslice result = { 0, 0, { 0 }, { 0 }, { 0 } };
     __Pyx_BufFmt_StackElem stack[1];
     int axes_specs[] = { (__Pyx_MEMVIEW_DIRECT | __Pyx_MEMVIEW_FOLLOW), (__Pyx_MEMVIEW_DIRECT | __Pyx_MEMVIEW_CONTIG) };
@@ -24306,7 +24305,7 @@ __pyx_fail:
     }
     retcode = __Pyx_ValidateAndInit_memviewslice(axes_specs, __Pyx_IS_C_CONTIG,
                                                  (PyBUF_C_CONTIGUOUS | PyBUF_FORMAT) | writable_flag, 2,
-                                                 &__Pyx_TypeInfo_float, stack,
+                                                 &__Pyx_TypeInfo_double, stack,
                                                  &result, obj);
     if (unlikely(retcode == -1))
         goto __pyx_fail;
@@ -24395,6 +24394,37 @@ __pyx_fail:
         e >>= 1;
     }
     return t;
+}
+
+/* CIntToPy */
+  static CYTHON_INLINE PyObject* __Pyx_PyInt_From_long(long value) {
+    const long neg_one = (long) ((long) 0 - (long) 1), const_zero = (long) 0;
+    const int is_unsigned = neg_one > const_zero;
+    if (is_unsigned) {
+        if (sizeof(long) < sizeof(long)) {
+            return PyInt_FromLong((long) value);
+        } else if (sizeof(long) <= sizeof(unsigned long)) {
+            return PyLong_FromUnsignedLong((unsigned long) value);
+#ifdef HAVE_LONG_LONG
+        } else if (sizeof(long) <= sizeof(unsigned PY_LONG_LONG)) {
+            return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
+#endif
+        }
+    } else {
+        if (sizeof(long) <= sizeof(long)) {
+            return PyInt_FromLong((long) value);
+#ifdef HAVE_LONG_LONG
+        } else if (sizeof(long) <= sizeof(PY_LONG_LONG)) {
+            return PyLong_FromLongLong((PY_LONG_LONG) value);
+#endif
+        }
+    }
+    {
+        int one = 1; int little = (int)*(unsigned char *)&one;
+        unsigned char *bytes = (unsigned char *)&value;
+        return _PyLong_FromByteArray(bytes, sizeof(long),
+                                     little, !is_unsigned);
+    }
 }
 
 /* Print */
@@ -24502,37 +24532,6 @@ bad:
     return -1;
 }
 #endif
-
-/* CIntToPy */
-  static CYTHON_INLINE PyObject* __Pyx_PyInt_From_long(long value) {
-    const long neg_one = (long) ((long) 0 - (long) 1), const_zero = (long) 0;
-    const int is_unsigned = neg_one > const_zero;
-    if (is_unsigned) {
-        if (sizeof(long) < sizeof(long)) {
-            return PyInt_FromLong((long) value);
-        } else if (sizeof(long) <= sizeof(unsigned long)) {
-            return PyLong_FromUnsignedLong((unsigned long) value);
-#ifdef HAVE_LONG_LONG
-        } else if (sizeof(long) <= sizeof(unsigned PY_LONG_LONG)) {
-            return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
-#endif
-        }
-    } else {
-        if (sizeof(long) <= sizeof(long)) {
-            return PyInt_FromLong((long) value);
-#ifdef HAVE_LONG_LONG
-        } else if (sizeof(long) <= sizeof(PY_LONG_LONG)) {
-            return PyLong_FromLongLong((PY_LONG_LONG) value);
-#endif
-        }
-    }
-    {
-        int one = 1; int little = (int)*(unsigned char *)&one;
-        unsigned char *bytes = (unsigned char *)&value;
-        return _PyLong_FromByteArray(bytes, sizeof(long),
-                                     little, !is_unsigned);
-    }
-}
 
 /* Declarations */
   #if CYTHON_CCOMPLEX
