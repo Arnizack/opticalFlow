@@ -9,6 +9,8 @@ from time import time
 from src.utilities.penalty_functions.SquaredPenalty import SquaredPenalty
 from src.utilities.penalty_functions.MixPenalty import MixPenalty
 from src.utilities.penalty_functions.GeneralizedCharbonnierPenalty import GeneralizedCharbonnierPenalty
+from src.utilities.color2grayscale import color2grayscale
+from src.preprocessing.rof import denoising_chambolle
 from scipy.signal import medfilt2d
 
 
@@ -38,6 +40,8 @@ def sun_baker_optical_flow(first_image : np.ndarray, second_image : np.ndarray,s
         width = first_frame_scaled.shape[2]
         height = first_frame_scaled.shape[1]
         flow = upscale_flow(flow, width, height)
+        first_gray_frame_scaled = color2grayscale(first_frame_scaled)
+        second_gray_frame_scaled = color2grayscale(second_frame_scaled)
 
         for gnc_iter in range(gnc_steps):
             #width = pyramid_levels_first_image[0].shape[2]
@@ -66,7 +70,7 @@ def sun_baker_optical_flow(first_image : np.ndarray, second_image : np.ndarray,s
             #    flow = down_scale_flow(flow,width,height)
 
             for iter in range(settings.steps_per_level):
-                flow = solve_layer(first_frame_scaled,second_frame_scaled,flow, penalty_func,settings)
+                flow = solve_layer(first_frame_scaled,second_frame_scaled,first_gray_frame_scaled,second_gray_frame_scaled,flow, penalty_func,settings)
 
             #flow[0] = medfilt2d(flow[0], settings.median_filter_size)
             #flow[1] = medfilt2d(flow[1],settings.median_filter_size)

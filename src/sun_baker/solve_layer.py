@@ -6,7 +6,7 @@ from src.sun_baker.setup_linear_system.setup_linear_system import setup_linear_s
 from src.utilities.penalty_functions.IPenalty import IPenalty
 from src.filter.cython.bilateral_median import bilateral_median_filter
 from src.utilities.compute_occlusion import compute_occlusion,compute_occlusion_log
-from src.utilities.warp_grid import warp_image
+from src.utilities.warp_grid import warp_image, warp_matrix
 import scipy.sparse.linalg as splinalg
 import math
 from src.utilities.flow_field_helper import show_flow_field
@@ -16,11 +16,14 @@ from scipy.signal import medfilt2d
 
 
 
-def solve_layer(first_image : np.ndarray, second_image : np.ndarray, initial_flow_field : np.ndarray,
+def solve_layer(first_image : np.ndarray, second_image : np.ndarray,first_gray_image : np.ndarray, second_gray_image : np.ndarray,
+                initial_flow_field : np.ndarray,
                 penalty_func : IPenalty, settings : SolverSettings ):
     """
 
     :param first_image: (ColorChannel, Height, Width)
+    :param gray_first_image: (Height, Width)
+    :param gray_second_image: (Height, Width)
     :param second_image:  (ColorChannel, Height, Width)
     :param settings: SolverSettings
     :return: Flowfield
@@ -29,10 +32,10 @@ def solve_layer(first_image : np.ndarray, second_image : np.ndarray, initial_flo
     width = first_image.shape[2]
     height = first_image.shape[1]
 
-    second_image_warped = warp_image(second_image, initial_flow_field)
+    #second_image_warped = warp_image(second_image, initial_flow_field)
 
     first_gray_image = color2grayscale(first_image)
-    second_gray_image_warped = color2grayscale(second_image_warped)
+    second_gray_image_warped = warp_matrix(second_gray_image, initial_flow_field)
 
     I_x, I_y, I_t =  derivative_sun(first_gray_image,second_gray_image_warped)
 
@@ -126,9 +129,9 @@ def solve_layer(first_image : np.ndarray, second_image : np.ndarray, initial_flo
             #flow[0] = medfilt2d(flow[0], settings.median_filter_size)
             #flow[1] = medfilt2d(flow[1],settings.median_filter_size)
 
-            #plt.title("After Filter")
-            #show_flow_field(flow, width, height)
-            #plt.show()
+            plt.title("After Filter")
+            show_flow_field(flow, width, height)
+            plt.show()
 
             relax_flow_field = flow.reshape(width*height*2)-initial_flow_field.reshape(width*height*2)
             guess_vu = relax_flow_field

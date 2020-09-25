@@ -17,7 +17,7 @@ def denoising_chambolle_test():
 
     std = img1.std()
 
-    structured, textured = denoising_chambolle(img1, lambda0=0.125, std_dev=std)
+    structured, textured = denoising_chambolle(img1, lambda0=0.125, std_dev=std,iter=20)
 
     diff = img1[0] - structured
 
