@@ -1,4 +1,6 @@
 from src.utilities.image_derivative import differentiate_matrix
+from src.utilities.warp_grid import warp_matrix
+
 
 def derivative_sun(gray_first_image,gray_second_image):
     #See: A Quantitative Analysis of Current Practices in Optical Flow Estimation

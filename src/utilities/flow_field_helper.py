@@ -12,15 +12,25 @@ def _reshape_flow(field,width,height):
 def show_flow_field(field,width,height, axes = plt,mode="RGB"):
     """
     Displays a Flow Field
-    mode = "RGB"
+    mode = "RGB" | "Split"
     :return: None
     """
-    resharped_flied = _reshape_flow(field,width,height)
-    flowiz_field = np.empty(shape=(height,width,2),dtype=float)
-    flowiz_field[:,:,0]=resharped_flied[0]
-    flowiz_field[:, :, 1] = resharped_flied[1]
-    image=flowiz.convert_from_flow(flowiz_field,mode="RGB")
-    axes.imshow(image)
+    resharped_flied = _reshape_flow(field, width, height)
+    if(mode=="RGB"):
+
+        flowiz_field = np.empty(shape=(height,width,2),dtype=float)
+        flowiz_field[:,:,0]=resharped_flied[0]
+        flowiz_field[:, :, 1] = resharped_flied[1]
+        image=flowiz.convert_from_flow(flowiz_field,mode="RGB")
+        axes.imshow(image)
+    elif(mode=="Split"):
+        fig,axs = axes.subplots(1,2)
+        ax1,ax2 = axs
+        ax1.set_title("X FLow")
+        ax1.imshow(resharped_flied[1])
+
+        ax2.set_title("Y Flow")
+        ax2.imshow(resharped_flied[0])
 
 def show_flow_field_arrow(field,width,height, axes = plt):
     X,Y =np.meshgrid(np.arange(width),np.arange(height))

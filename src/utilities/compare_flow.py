@@ -6,9 +6,11 @@ from src.utilities.image_access import show_image
 from src.utilities.flow_field_helper import show_flow_field,show_flow_field_arrow
 from src.utilities.absolute_endpoint_error import absolute_endpoint_error
 from src.utilities.angular_error import angular_error
+from src.utilities.scale_flow_field import down_scale_flow
 import scipy.ndimage as ndimage
 from scipy import signal
 from math import sqrt
+
 
 def scale_flow(flow,width,height):
     scale_x = width/flow.shape[2]
@@ -17,6 +19,8 @@ def scale_flow(flow,width,height):
     sigma = 1 / sqrt(2 * factor)
     #flow_blur_y = ndimage.gaussian_filter(flow[0],sigma)
     #flow_blur_x = ndimage.gaussian_filter(flow[1], sigma)
+
+
     scaled_flow_Y = ndimage.zoom(flow[0], factor, order=0)
     scaled_flow_X = ndimage.zoom(flow[1], factor, order=0)
     return np.array([scaled_flow_Y,scaled_flow_X])
@@ -46,11 +50,11 @@ def compare_flow(computed_flow, real_flow,current_frame,next_frame, plot=True,ar
     height = -1
 
     if(height_1>height_2 and width_1>width_2):
-        computed_flow = scale_flow(computed_flow, width_2, height_2)
+        computed_flow = down_scale_flow(computed_flow, width_2, height_2)
         width = width_2
         height = height_2
     elif (height_2>height_1 and width_2>width_1):
-        real_flow = scale_flow(real_flow, width_1, height_1)
+        real_flow = down_scale_flow(real_flow, width_1, height_1)
         width = width_1
         height = height_1
 
@@ -65,8 +69,14 @@ def compare_flow(computed_flow, real_flow,current_frame,next_frame, plot=True,ar
 
     print("Average angular error:")
     print(np.mean(ang_error[~np.isnan(ang_error)]))
+    print("Median angular error:")
+    print(np.mean(ang_error[~np.isnan(ang_error)]))
+
     print("Absolute endpoint error:")
     print(np.mean(abs_error[~np.isnan(abs_error)]))
+    print("Median endpoint error:")
+    print(np.median(abs_error[~np.isnan(abs_error)]))
+
 
     if(plot):
         #rescale image

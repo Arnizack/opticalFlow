@@ -4,8 +4,8 @@ from statistics import median
 from src.filter.median import quickselect_median
 
 
-def bilateral_median_filter(flow, occlusen, auxiliary_field, image, weigth_auxiliary, weigth_filter,
-                            sigma_distance = 7, sigman_color = 7/200, filter_size=5):
+def bilateral_median_filter(flow, log_occlusen, auxiliary_field, image, weigth_auxiliary, weigth_filter,
+                            sigma_distance = 7, sigma_color =7 / 200, filter_size=5):
     """
 
     :param flow: np.float (YX,Height,Width)
@@ -15,7 +15,7 @@ def bilateral_median_filter(flow, occlusen, auxiliary_field, image, weigth_auxil
     :param weigth_auxiliary: float > 0
     :param weigth_filter: float > 0
     :param sigma_distance: float
-    :param sigman_color: float
+    :param sigma_color: float
     :param filter_size: int
     :return: flow field
     """
@@ -26,8 +26,8 @@ def bilateral_median_filter(flow, occlusen, auxiliary_field, image, weigth_auxil
     filter_half = int(filter_size / 2)
 
     helper_list_size = filter_size ** 2 * 2
-    helper_flow_x_list = [0.0] * helper_list_size
-    helper_flow_y_list = [0.0] * helper_list_size
+    helper_flow_x_list = [0.0] * (helper_list_size+1)
+    helper_flow_y_list = [0.0] * (helper_list_size+1)
     weigths_list = [0.0] * helper_list_size
 
     result_flow = np.empty(shape=(2, height, width), dtype=float)
@@ -50,12 +50,13 @@ def bilateral_median_filter(flow, occlusen, auxiliary_field, image, weigth_auxil
                         color_squared_difference += (channel[y_compare][x_compare] - channel[y][x]) ** 2
 
                     exponent = distance_squared_difference / 2 * sigma_distance
-                    exponent += color_squared_difference / 2 * sigman_color * color_channel_count
+                    exponent += color_squared_difference / 2 * sigma_color * color_channel_count
 
-                    occlusen_current = occlusen[y][x]
-                    occlusen_compared = occlusen[y_compare][x_compare]
+                    occlusen_current = log_occlusen[y][x]
+                    occlusen_compared = log_occlusen[y_compare][x_compare]
 
-                    weigth = math.exp(-exponent) * occlusen_compared / occlusen_current
+                    #weigth = math.exp(-exponent) * occlusen_compared / occlusen_current
+                    weigth = math.exp(-exponent+occlusen_compared-occlusen_current)
                     weigths_list[counter] = weigth
 
                     helper_flow_x_list[counter] = flow[1][y_compare][x_compare]
@@ -70,9 +71,9 @@ def bilateral_median_filter(flow, occlusen, auxiliary_field, image, weigth_auxil
 
             f_x = auxiliary_field[1][y][x]
             f_y = auxiliary_field[0][y][x]
-            scalar = weigth_filter / weigth_auxiliary
+            scalar = 1/(2*(weigth_auxiliary / weigth_filter))
 
-            for idx_1 in range(n):
+            for idx_1 in range(n+1):
                 sum = 0
                 for idx_2 in range(idx_1):
                     sum -= weigths_list[idx_2]
@@ -82,7 +83,7 @@ def bilateral_median_filter(flow, occlusen, auxiliary_field, image, weigth_auxil
                 helper_flow_x_list[n + idx_1] = f_x + scalar * sum
                 helper_flow_y_list[n + idx_1] = f_y + scalar * sum
 
-            result_flow[0][y][x] = quickselect_median(helper_flow_y_list[:n*2])
-            result_flow[1][y][x] = quickselect_median(helper_flow_x_list[:n*2])
+            result_flow[0][y][x] = median(helper_flow_y_list[:n*2+1])
+            result_flow[1][y][x] = median(helper_flow_x_list[:n*2+1])
 
     return result_flow
