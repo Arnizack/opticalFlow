@@ -13,13 +13,14 @@ def denoising_chambolle_test():
 
     if img1.shape[0] != 1:
         img1 = color2grayscale(img1)
-        img1.shape = (1, img1.shape[0], img1.shape[1])
+
+    print(img1.shape)
 
     std = img1.std()
 
     structured, textured = denoising_chambolle(img1, lambda0=0.125, std_dev=std)
 
-    diff = img1[0] - structured
+    diff = img1 - structured
 
     statistics(img1, "Image")
     statistics(structured, "Denoised")
@@ -27,14 +28,17 @@ def denoising_chambolle_test():
     statistics(textured, "Textured")
 
     plt.figure()
+    img1.shape = (1, img1.shape[0], img1.shape[1])
     show_image(img1)
     plt.title("Standard")
 
     plt.figure()
+    structured.shape = (1, structured.shape[0], structured.shape[1])
     show_image(structured)
     plt.title("Denoised")
 
     plt.figure()
+    textured.shape = (1, textured.shape[0], textured.shape[1])
     show_image(textured)
     plt.title("Textured")
 
@@ -70,7 +74,6 @@ def div_func_test():
         print("delta_func: correct")
 
 def pi_gradient_descent_test():
-    mat = np.array([[[1, 2, 3], [4, 5, 6], [7, 8, 9]]])
     img1, img2, ref_flow = dimetrodon()
     lambda0 = 1
 
