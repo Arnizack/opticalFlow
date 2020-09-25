@@ -7,7 +7,7 @@ def denoising_chambolle(img, lambda0=0.125, std_dev = None, iter=100, text_facto
     """
     denoises the Image and calculates the textured part (difference)
     reference: "An algorithm for total variation minimization and applications" (Antonin Chambolle) Chapter 4
-    :param img: gray scale CHW image
+    :param img: gray scale HW image
     :param lambda0: lambda factor > 0
     :param std_dev: approximated std of the Image Noise
     :param iter: number of maximum Iterations
@@ -18,6 +18,7 @@ def denoising_chambolle(img, lambda0=0.125, std_dev = None, iter=100, text_facto
     start = time()
     if std_dev == None:
         std_dev = np.std(img)
+
     size = img.size
     perfect_solution = np.sqrt(size * std_dev)
     max_solution = np.linalg.norm(img - img.mean())
@@ -63,7 +64,7 @@ def pi_gradient_descent(img, lambda0, perfect_solution, tau = 0.25, iter = 100):
     """
     start = time()
 
-    p = np.array([ np.zeros(img.shape[1:]), np.zeros(img.shape[1:]) ])
+    p = np.array([ np.zeros(img.shape), np.zeros(img.shape) ])
 
     for i in range(iter):
         #temp values
@@ -103,12 +104,12 @@ def delta_func(mat):
     """
     # x gradient
     kernel = np.array([[1, -1, 0], [0, 0, 0]])
-    x = signal.convolve(mat[0], kernel, mode='same')
+    x = signal.convolve(mat, kernel, mode='same')
     x[:, -1] = 0
 
     # y gradient
     kernel = np.array([[1], [-1], [0]])
-    y = signal.convolve(mat[0], kernel, mode='same')
+    y = signal.convolve(mat, kernel, mode='same')
     y[-1] = 0
 
     return np.array([x,y])
@@ -144,9 +145,7 @@ def img_subtract(minuend, subtrahend, factor = 0.95):
     :param factor: for impact of denoising
     :return: weighted difference
     """
-    difference = minuend[0] - factor * subtrahend
-    if difference.shape[0] != 1:
-        difference.shape = (1, difference.shape[0], difference.shape[1])
+    difference = minuend - factor * subtrahend
     return difference
 
 def convert(img):
@@ -157,6 +156,4 @@ def convert(img):
     """
     converted = img + (-1) * img.min()
     converted /= converted.max() # oder 2
-    if converted.shape[0] != 1:
-        converted.shape = (1, converted.shape[0], converted.shape[1])
     return converted
