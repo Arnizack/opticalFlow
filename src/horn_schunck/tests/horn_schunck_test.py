@@ -36,6 +36,12 @@ def MiniCooper():
     ref_flow = np.zeros(shape=(2,img1.shape[1],img1.shape[2]))
     return img1,img2,ref_flow
 
+def RubberWhale():
+    img1 = open_image(r"..\..\..\resources\eval-twoframes\RubberWhale\frame10.png")
+    img2 = open_image(r"..\..\..\resources\eval-twoframes\RubberWhale\frame11.png")
+
+    ref_flow = np.zeros(shape=(2, img1.shape[1], img1.shape[2]))
+    return img1, img2, ref_flow
 
 if __name__ == '__main__':
     img1, img2, ref_flow = dimetrodon()

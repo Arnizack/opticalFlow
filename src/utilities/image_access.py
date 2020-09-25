@@ -29,7 +29,7 @@ def open_image(filepath):
 
     if(len(np_img.shape)==2):
         np_img.shape = (1, np_img.shape[0],np_img.shape[1])
-        np_img = np_img.astype(float)/255
+        #np_img = np_img.astype(float)/255
         return np_img
 
     return _WHC_to_CWH_space(np_img)
