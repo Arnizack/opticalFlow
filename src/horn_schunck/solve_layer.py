@@ -76,7 +76,7 @@ def solve_layer(first_frame,second_frame, initial_flow_field, solver_settings):
 
         flow = bilateral_median_filter(flow.astype(np.double), log_occlusion.astype(np.double),
                                        flow.astype(np.double), first_frame.astype(np.double),
-                                       weigth_auxiliary=0.1, weigth_filter=10, sigma_distance=2, sigma_color=10/255,filter_size = solver_settings.median_filter_size )
+                                       weigth_auxiliary=0.1, weigth_filter=10, sigma_distance=7, sigma_color=4/255,filter_size = solver_settings.median_filter_size )
         plt.title("After Filter")
         show_flow_field(flow,flow.shape[2],flow.shape[1])
         plt.show()

@@ -1,7 +1,29 @@
 import numpy as np
 from scipy import signal
 from time import time
+from typing import Tuple
 
+def denoising_chambolle_image(img: np.ndarray,lambda0=0.125, std_dev=None, iter=1) -> Tuple[np.ndarray,np.ndarray]:
+    """
+
+    :param img: 3D np.ndarray
+    :return: (structure of the image, texture of the image)
+    """
+    width = img.shape[2]
+    height = img.shape[1]
+    channel_count = img.shape[0]
+    structured_img = np.zeros(shape=(channel_count,height,width),dtype=np.double)
+    textured_img = np.zeros(shape=(channel_count,height,width),dtype=np.double)
+
+    for idx,channel in enumerate(img):
+        if(std_dev is None):
+            std_dev = channel.std()
+        structured, textured = denoising_chambolle(channel, lambda0=lambda0, std_dev=std_dev, iter=iter)
+
+        structured_img[idx] = structured
+        textured_img[idx] = textured
+
+    return (structured_img,textured_img)
 
 def denoising_chambolle(img, lambda0=0.125, std_dev = None, iter=100, text_factor = 0.95):
     """

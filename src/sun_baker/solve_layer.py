@@ -16,45 +16,47 @@ from scipy.signal import medfilt2d
 
 
 
-def solve_layer(first_image : np.ndarray, second_image : np.ndarray,first_gray_image : np.ndarray, second_gray_image : np.ndarray,
+def solve_layer(filter_image : np.ndarray,first_gray_image : np.ndarray, second_gray_image : np.ndarray,
                 initial_flow_field : np.ndarray,
                 penalty_func : IPenalty, settings : SolverSettings ):
     """
 
-    :param first_image: (ColorChannel, Height, Width)
-    :param gray_first_image: (Height, Width)
-    :param gray_second_image: (Height, Width)
-    :param second_image:  (ColorChannel, Height, Width)
+    :param filter_image: (ColorChannel, Height, Width)
+    :param first_gray_image: (Height, Width)
+    :param second_gray_image: (Height, Width)
+    :param initial_flow_field: (YX,Height,Width)
+    :param penalty_func: IPenalty
     :param settings: SolverSettings
     :return: Flowfield
     """
 
-    width = first_image.shape[2]
-    height = first_image.shape[1]
+    width = filter_image.shape[2]
+    height = filter_image.shape[1]
 
-    #second_image_warped = warp_image(second_image, initial_flow_field)
-
-    first_gray_image = color2grayscale(first_image)
     second_gray_image_warped = warp_matrix(second_gray_image, initial_flow_field)
 
     I_x, I_y, I_t =  derivative_sun(first_gray_image,second_gray_image_warped)
 
-    """
-    plt.imshow(I_x)
-    plt.figure()
-    plt.imshow(I_y)
-    plt.figure()
-    plt.imshow(I_t)
 
-    plt.show()
-    """
+    #plt.imshow(first_gray_image)
+    #plt.figure()
+    #plt.imshow(second_gray_image)
+    #plt.figure()
+    #plt.imshow(second_gray_image_warped)
+    #plt.figure()
+    #plt.imshow(I_x)
+    #plt.figure()
+    #plt.imshow(I_y)
+    #plt.figure()
+    #plt.imshow(I_t)
+    #plt.figure()
+    #plt.imshow(second_gray_image_warped-first_gray_image)
+
+    #plt.show()
+
     I_x.shape = (height * width)
     I_y.shape = (height * width)
     I_t.shape = (height * width)
-
-
-
-
 
     relax_flow_field = np.zeros(shape=(width*height*2),dtype=np.double)
 
@@ -77,13 +79,15 @@ def solve_layer(first_image : np.ndarray, second_image : np.ndarray,first_gray_i
 
     for relaxation_iter in range(relaxation_steps):
         lambda_relax = lambda_relax_func(relaxation_iter)
+
         print("Lambda relax: ",lambda_relax)
+
         A,b = setup_linear_system(I_x, I_y, I_t, guess_vu, relax_flow_field, settings.kernel, width,height,
                             lambda_relax, lambda_k**2, penalty_func)
 
         start = time()
 
-        x,info=splinalg.cg(A,b,tol = 0.001,maxiter=settings.maxiter_solve ,x0=guess_vu)[:2]
+        x,info= splinalg.cg(A, b, tol = 0.001, maxiter=settings.max_iter_solve, x0=guess_vu)[:2]
 
 
 
@@ -100,10 +104,6 @@ def solve_layer(first_image : np.ndarray, second_image : np.ndarray,first_gray_i
             break
 
 
-
-        #x,info=splinalg.lsmr(A,b)[:2]
-
-
         guess_vu = x
         relax_flow_field = x
         flow = initial_flow_field+x.reshape(2,height,width)
@@ -115,27 +115,21 @@ def solve_layer(first_image : np.ndarray, second_image : np.ndarray,first_gray_i
         if(settings.flow_filter_filter_size>3):
             init_flow = np.zeros(shape=(2, height, width), dtype=np.double)
 
-            log_occlusion = compute_occlusion_log(first_image, first_image, flow)
-            #aux = np.zeros(shape=(2,height,width ))
-            #first_image= np.zeros(shape=(3, height, width), dtype=np.double)
+            log_occlusion = compute_occlusion_log(filter_image, filter_image, flow)
+
             flow = bilateral_median_filter(flow.astype(np.double), log_occlusion.astype(np.double),
-                                           flow.astype(np.double), first_image.astype(np.double),
-                                           weigth_auxiliary=0.001, weigth_filter=10,
+                                           flow.astype(np.double), filter_image.astype(np.double),
+                                           weigth_auxiliary=lambda_relax, weigth_filter=10,
                                            sigma_distance=settings.flow_filter_sigma_distance,
                                            sigma_color=settings.flow_filter_sigma_color,
                                            filter_size = settings.flow_filter_filter_size)
 
-
-            #flow[0] = medfilt2d(flow[0], settings.median_filter_size)
-            #flow[1] = medfilt2d(flow[1],settings.median_filter_size)
-
-            plt.title("After Filter")
-            show_flow_field(flow, width, height)
-            plt.show()
+            #plt.title("After Filter")
+            #show_flow_field(flow, width, height)
+            #plt.show()
 
             relax_flow_field = flow.reshape(width*height*2)-initial_flow_field.reshape(width*height*2)
             guess_vu = relax_flow_field
-        #relax_flow_field = x.reshape(width*height*2)
 
 
     return flow.reshape(2,height,width)

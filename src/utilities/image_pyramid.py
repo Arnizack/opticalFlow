@@ -29,3 +29,16 @@ def create_image_pyramid(np_img,factors):
 
     pyramid_levels.reverse()
     return pyramid_levels
+
+def create_matrix_pyramid(matrix,factors):
+    """
+    :param matrix: (Height,Width)
+    :param factors:  Array of the downscale factors. They should be between 0 and 1
+    :return: Array of the Images (smallest first)
+    """
+    pyramid_levels = [matrix]
+    for factor in factors:
+        pyramid_levels.append(downscale(pyramid_levels[-1],factor))
+
+    pyramid_levels.reverse()
+    return pyramid_levels

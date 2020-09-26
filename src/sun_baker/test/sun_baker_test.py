@@ -66,7 +66,7 @@ def Urban3():
     return img1, img2, ref_flow
 
 if __name__ == '__main__':
-    img1, img2, ref_flow = Grove2()
+    img1, img2, ref_flow = RubberWhale()
     computed_flow = test_sun_baker(img1,img2)
     error = test_condition(img1,img2,computed_flow,GeneralizedCharbonnierPenalty(),SolverSettings())
 

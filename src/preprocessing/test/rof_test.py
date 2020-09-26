@@ -1,5 +1,5 @@
 from src.utilities.image_access import open_image
-from src.horn_schunck.tests.horn_schunck_test import dimetrodon,grove3, RubberWhale
+from src.horn_schunck.tests.horn_schunck_test import dimetrodon,grove3, RubberWhale,grove2
 from src.preprocessing.rof import denoising_chambolle, div_func, delta_func, pi_gradient_descent, img_subtract
 from src.utilities.image_access import show_image
 from src.utilities.color2grayscale import color2grayscale
@@ -9,7 +9,7 @@ import numpy as np
 
 def denoising_chambolle_test():
 
-    img1, img2, ref_flow = RubberWhale()
+    img1, img2, ref_flow = grove2()
 
     if img1.shape[0] != 1:
         img1 = color2grayscale(img1)
@@ -18,7 +18,7 @@ def denoising_chambolle_test():
 
     std = img1.std()
 
-    structured, textured = denoising_chambolle(img1, lambda0=0.125, std_dev=std,iter=20)
+    structured, textured = denoising_chambolle(img1, lambda0=0.125, std_dev=0.5,iter=20)
 
     diff = img1 - structured
 
@@ -28,18 +28,18 @@ def denoising_chambolle_test():
     statistics(textured, "Textured")
 
     plt.figure()
-    img1.shape = (1, img1.shape[0], img1.shape[1])
-    show_image(img1)
+    #img1.shape = (1, img1.shape[0], img1.shape[1])
+    plt.imshow(img1)
     plt.title("Standard")
 
     plt.figure()
-    structured.shape = (1, structured.shape[0], structured.shape[1])
-    show_image(structured)
+    #structured.shape = (1, structured.shape[0], structured.shape[1])
+    plt.imshow(structured)
     plt.title("Denoised")
 
     plt.figure()
-    textured.shape = (1, textured.shape[0], textured.shape[1])
-    show_image(textured)
+    #textured.shape = (1, textured.shape[0], textured.shape[1])
+    plt.imshow(textured/textured.std())
     plt.title("Textured")
 
     plt.show()
