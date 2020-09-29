@@ -8,7 +8,7 @@ namespace core
 	{
 	public:
 		IArray(size_t(&shape)[DimCount]);
-		size_t Shape[DimCount];
+		const size_t Shape[DimCount];
 	};
 	
 	template<class InnerTyp, size_t DimCount>

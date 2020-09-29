@@ -9,15 +9,14 @@ namespace core
 
 		
 
-		template<class InnerTyp, size_t InputDimCount,size_t OuputDimCount>
+		template<class InputTyp, class OutputTyp, class TransposeTyp>
 		class ILinearOperator
 		{
-			using InVector = std::shared_ptr<IArray<InnerTyp, InputDimCount>>;
-			using OutVector = std::shared_ptr<IArray<InnerTyp, OuputDimCount>>;
-
 		public:
-			virtual OutVector operator()(const InVector vec) = 0;
-			
+			virtual OutputTyp MultVec(const InputTyp vec) = 0;
+			virtual void MultVecTo(OutputTyp dst,const InputTyp vec) = 0;
+			virtual TransposeTyp Transpose() = 0;
+			virtual bool IsSymetric() = 0;
 		};
 
 		

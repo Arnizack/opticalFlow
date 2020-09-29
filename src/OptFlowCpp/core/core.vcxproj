@@ -22,12 +22,14 @@
     <ClInclude Include="IArray.h" />
     <ClInclude Include="IArrayFactory.h" />
     <ClInclude Include="IContainer.h" />
+    <ClInclude Include="image\IConvolution.h" />
     <ClInclude Include="IPenalty.h" />
     <ClInclude Include="IStatistics.h" />
     <ClInclude Include="linalg\IArithmeticBasic.h" />
     <ClInclude Include="linalg\IArithmeticChained.h" />
     <ClInclude Include="linalg\ILinearOperator.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="solver\IFlowFieldSolver.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
