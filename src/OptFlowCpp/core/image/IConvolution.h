@@ -10,7 +10,7 @@ namespace core
 		
 		class IConvolution : 
 			linalg::ILinearOperator< std::shared_ptr < IArray< InnerTyp, DimCount>>,
-			std::shared_ptr<IArray< InnerTyp, DimCount>>, IConvolution<InnerTyp,DimCount> >
+			std::shared_ptr<IArray< InnerTyp, DimCount>>>
 		{
 		};
 	}
