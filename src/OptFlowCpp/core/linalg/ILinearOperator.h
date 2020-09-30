@@ -1,7 +1,5 @@
 #pragma once
-#include"../IContainer.h"
-#include"../IArray.h"
-#include<memory>
+#include"IOperator.h"
 
 namespace core
 {
@@ -11,11 +9,9 @@ namespace core
 		
 
 		template<class InputTyp, class OutputTyp>
-		class ILinearOperator
+		class ILinearOperator : public IOperator<InputTyp, OutputTyp>
 		{
 		public:
-			virtual OutputTyp MultVec(const InputTyp vec) = 0;
-			virtual void MultVecTo(OutputTyp dst,const InputTyp vec) = 0;
 			virtual ILinearOperator<OutputTyp,InputTyp> Transpose() = 0;
 			virtual bool IsSymetric() = 0;
 		};

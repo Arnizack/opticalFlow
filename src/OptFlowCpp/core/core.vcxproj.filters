@@ -45,13 +45,25 @@
     <ClInclude Include="solver\IFlowFieldSolver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="image\IConvolution.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="solver\IImageSolver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="solver\ILinearSolver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="linalg\IOperator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="image\IGrayscaleFilter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="image\IColorFilter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="image\IGrayscaleConvolution.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="image\IColorConvolution.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
