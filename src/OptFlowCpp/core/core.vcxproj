@@ -30,8 +30,12 @@
     <ClInclude Include="linalg\ILinearOperator.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="solver\IFlowFieldSolver.h" />
-    <ClInclude Include="solver\IImageSolver.h" />
     <ClInclude Include="solver\ILinearSolver.h" />
+    <ClInclude Include="solver\problem\IColor2FrameProblem.h" />
+    <ClInclude Include="solver\problem\IGray2FrameProblem.h" />
+    <ClInclude Include="solver\problem\IGrayCrossFilterProblem.h" />
+    <ClInclude Include="solver\problem\IGrayPenaltyCrossProblem.h" />
+    <ClInclude Include="solver\problem\IGrayPenaltyProblem.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">

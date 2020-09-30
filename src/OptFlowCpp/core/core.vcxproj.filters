@@ -42,16 +42,28 @@
     <ClInclude Include="linalg\ILinearOperator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="solver\IFlowFieldSolver.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="image\IConvolution.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="solver\IImageSolver.h">
+    <ClInclude Include="solver\ILinearSolver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="solver\ILinearSolver.h">
+    <ClInclude Include="solver\problem\IColor2FrameProblem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="solver\problem\IGray2FrameProblem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="solver\problem\IGrayCrossFilterProblem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="solver\problem\IGrayPenaltyProblem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="solver\problem\IGrayPenaltyCrossProblem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="solver\IFlowFieldSolver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

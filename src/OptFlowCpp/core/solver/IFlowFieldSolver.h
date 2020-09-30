@@ -1,27 +1,23 @@
 #pragma once
-#include"../IArray.h"
-#include<memory>
+#include"problem/IColor2FrameProblem.h"
+#include"problem/IGray2FrameProblem.h"
+#include"problem/IGrayCrossFilterProblem.h"
+#include"problem/IGrayPenaltyCrossProblem.h"
+#include"problem/IGrayPenaltyProblem.h"
 
 namespace core
 {
 	namespace solver
 	{
-		template<class InnerTyp,size_t DimCount,class SettingsTyp>
+		template<class ProblemTyp>
 		class IFlowFieldSolver
 		{
-
 		public:
-			using PtrFlowField = std::shared_ptr<IArray<double, 3>>;
-			using PtrImage = std::shared_ptr<IArray<InnerTyp, DimCount>>;
+			using PtrFlowField = std::shared_ptr<IArray<double, 3> >;
+			
+			virtual PtrFlowField Solve(const ProblemTyp problem) = 0;
 
-			virtual PtrFlowField Solve(const PtrImage first_frame, 
-				const PtrImage second_frame,
-				SettingsTyp settings) = 0;
-			virtual PtrFlowField Solve(const PtrImage first_frame, 
-				const PtrImage second_frame, 
-				const PtrFlowField InitialGuess,
-				SettingsTyp settings) = 0;
-
+			virtual PtrFlowField Solve(const ProblemTyp problem, PtrFlowField initial_guess) = 0;
 		};
 	}
 }
