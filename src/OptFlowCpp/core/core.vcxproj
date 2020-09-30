@@ -22,12 +22,16 @@
     <ClInclude Include="IArray.h" />
     <ClInclude Include="IArrayFactory.h" />
     <ClInclude Include="IContainer.h" />
-    <ClInclude Include="image\IConvolution.h" />
+    <ClInclude Include="image\IColorConvolution.h" />
+    <ClInclude Include="image\IGrayscaleConvolution.h" />
+    <ClInclude Include="image\IGrayscaleFilter.h" />
+    <ClInclude Include="image\IColorFilter.h" />
     <ClInclude Include="IPenalty.h" />
     <ClInclude Include="IStatistics.h" />
     <ClInclude Include="linalg\IArithmeticBasic.h" />
     <ClInclude Include="linalg\IArithmeticChained.h" />
     <ClInclude Include="linalg\ILinearOperator.h" />
+    <ClInclude Include="linalg\IOperator.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="solver\IFlowFieldSolver.h" />
     <ClInclude Include="solver\ILinearSolver.h" />

@@ -8,9 +8,8 @@ namespace core
 	{
 		template<class InnerTyp, size_t DimCount>
 		
-		class IConvolution : 
-			linalg::ILinearOperator< std::shared_ptr < IArray< InnerTyp, DimCount>>,
-			std::shared_ptr<IArray< InnerTyp, DimCount>>>
+		class IGrayscaleConvolution :
+			 public linalg::ILinearOperator< std::shared_ptr < IArray< InnerTyp, 2>>, std::shared_ptr<IArray< InnerTyp, 2>>>
 		{
 		};
 	}
