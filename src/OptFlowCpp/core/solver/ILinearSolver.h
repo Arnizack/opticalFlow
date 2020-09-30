@@ -11,7 +11,7 @@ namespace core
 		{
 		public:
 			using PtrVector = std::shared_ptr<IArray<InnerTyp, 1>>;
-			using PtrMatrix = std::shared_ptr<linalg::ILinearOperator<std::shared_ptr<IArray<InnerTyp, DimCount>>, PtrVector, PtrVector>>;
+			using PtrMatrix = std::shared_ptr<linalg::ILinearOperator<PtrVector, PtrVector>>;
 
 			virtual PtrVector Solve(const PtrMatrix input_matrix, const PtrVector input_vector) = 0; Solve(const PtrMatrix input_matrix, const PtrVector input_vector) = 0;
 			virtual PtrVector Solve(const PtrMatrix input_matrix, const PtrVector input_vector, const PtrMatrix preconditioner_matrix, const PtrVector initial_guess) = 0;
