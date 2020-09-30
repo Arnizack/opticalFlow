@@ -30,6 +30,8 @@
     <ClInclude Include="linalg\ILinearOperator.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="solver\IFlowFieldSolver.h" />
+    <ClInclude Include="solver\IImageSolver.h" />
+    <ClInclude Include="solver\ILinearSolver.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
