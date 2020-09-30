@@ -12,8 +12,8 @@ namespace core
 			using PtrMatrix = std::shared_ptr<IContainer<InnerTyp>>;
 			using PtrVector = std::shared_ptr<IContainer<InnerTyp>>;
 
-			virtual Solve(const PtrMatrix input_matrix, const PtrVector input_vector) = 0;
-			virtual Solve(const PtrMatrix input_matrix, const PtrVector input_vector, const PtrMatrix preconditioner_matrix, const PtrVector initial_guess) = 0;
+			virtual PtrVector Solve(const PtrMatrix input_matrix, const PtrVector input_vector) = 0; Solve(const PtrMatrix input_matrix, const PtrVector input_vector) = 0;
+			virtual PtrVector Solve(const PtrMatrix input_matrix, const PtrVector input_vector, const PtrMatrix preconditioner_matrix, const PtrVector initial_guess) = 0;
 		};
 	}
 }

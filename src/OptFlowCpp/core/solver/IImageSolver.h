@@ -11,7 +11,7 @@ namespace core
 		public:
 			using PtrImage = std::shared_ptr<IArray<InnerTyp, DimCount>>;
 
-			virtual Solve(const PtrImage image) = 0;
+			virtual PtrImage Solve(const PtrImage image) = 0;
 		};
 	}
 }
