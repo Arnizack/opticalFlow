@@ -48,6 +48,12 @@
     <ClInclude Include="image\IConvolution.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="solver\IImageSolver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="solver\ILinearSolver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
