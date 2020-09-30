@@ -1,7 +1,7 @@
 #pragma once
-#include"../pch.h"
 #include"IArithmeticBasic.h"
 #include"../IContainer.h"
+#include<memory>
 
 namespace core
 {

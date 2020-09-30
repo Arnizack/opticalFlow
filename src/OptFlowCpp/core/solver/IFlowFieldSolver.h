@@ -1,6 +1,7 @@
 #pragma once
 #include"../IArray.h"
-#include"../pch.h"
+#include<memory>
+
 namespace core
 {
 	namespace solver
@@ -13,8 +14,13 @@ namespace core
 			using PtrFlowField = std::shared_ptr<IArray<double, 3>>;
 			using PtrImage = std::shared_ptr<IArray<InnerTyp, DimCount>>;
 
-			virtual PtrFlowField Solve(const PtrImage first_frame, const PtrImage second_frame) = 0;
-			virtual PtrFlowField Solve(const PtrImage first_frame, const PtrImage second_frame, const PtrFlowField InitialGuess) = 0;
+			virtual PtrFlowField Solve(const PtrImage first_frame, 
+				const PtrImage second_frame,
+				SettingsTyp settings) = 0;
+			virtual PtrFlowField Solve(const PtrImage first_frame, 
+				const PtrImage second_frame, 
+				const PtrFlowField InitialGuess,
+				SettingsTyp settings) = 0;
 
 		};
 	}

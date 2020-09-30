@@ -1,6 +1,6 @@
 #pragma once
 #include"../IContainer.h"
-#include"../pch.h"
+#include<memory>
 namespace core
 {
 	namespace linalg

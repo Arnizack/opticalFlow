@@ -1,6 +1,7 @@
 #pragma once
 #include"IArray.h"
-#include"pch.h"
+#include<memory>
+
 namespace core
 {
 	template<class InnerTyp,size_t DimCount>

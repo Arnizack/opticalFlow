@@ -1,7 +1,7 @@
 #pragma once
 #include"../linalg/ILinearOperator.h"
 #include"../IArray.h"
-#include"../pch.h"
+#include<memory>
 namespace core
 {
 	namespace image

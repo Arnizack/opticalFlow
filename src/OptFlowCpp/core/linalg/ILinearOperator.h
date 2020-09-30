@@ -1,7 +1,8 @@
 #pragma once
 #include"../IContainer.h"
 #include"../IArray.h"
-#include"../pch.h"
+#include<memory>
+
 namespace core
 {
 	namespace linalg
