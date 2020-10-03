@@ -1,6 +1,7 @@
 #pragma once
 #include"IContainer.h"
 #include<memory>
+#include<array>
 
 namespace core
 {
@@ -9,8 +10,14 @@ namespace core
 	class IArray : public IContainer<InnerTyp>
 	{
 	public:
-		virtual size_t[DimCount] Shape() = 0;
+		IArray(std::array<const size_t, DimCount> shape);
+		std::array<const size_t, DimCount> Shape;
 
 	};
 	
+	template<class InnerTyp, size_t DimCount>
+	inline IArray<InnerTyp, DimCount>::IArray(std::array<const size_t, DimCount> shape)
+		: Shape(shape)
+	{
+	}
 }
