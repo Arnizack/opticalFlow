@@ -7,7 +7,8 @@ namespace core
 	{
 		namespace problem
 		{
-			class IGrayPenaltyCrossProblem : public IGrayCrossFilterProblem, public IGrayPenaltyProblem
+			class IGrayPenaltyCrossProblem : public IGray2FrameProblem, 
+				public IColorCrossFilterProblem, public IPenaltyProblem
 			{};
 		}
 	}
