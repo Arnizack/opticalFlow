@@ -12,7 +12,7 @@ namespace core
 			class IColorCrossFilterProblem
 			{
 			public:
-				std::shared_ptr<IArray<float, 3>> CrossFilterImage;
+				std::shared_ptr<IArray<float, 3>> CrossFilterImage = nullptr;
 			};
 		}
 	}
