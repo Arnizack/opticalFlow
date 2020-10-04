@@ -1,12 +1,11 @@
 #pragma once
 #include"IContainer.h"
-#include<memory>
 #include<array>
 
 namespace core
 {
 
-	template<class InnerTyp,size_t DimCount>
+	template<class InnerTyp, size_t DimCount>
 	class IArray : public IContainer<InnerTyp>
 	{
 	public:
@@ -14,7 +13,7 @@ namespace core
 		std::array<const size_t, DimCount> Shape;
 
 	};
-	
+
 	template<class InnerTyp, size_t DimCount>
 	inline IArray<InnerTyp, DimCount>::IArray(std::array<const size_t, DimCount> shape)
 		: Shape(shape)
