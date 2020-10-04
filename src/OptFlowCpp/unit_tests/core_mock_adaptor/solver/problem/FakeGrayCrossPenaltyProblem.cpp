@@ -1,11 +1,14 @@
 #include "FakeGrayCrossPenaltyProblem.h"
+#include"../../penalty/MockIPenalty.h"
 using PtrGrayImg = std::shared_ptr < core::IArray<float, 2>>;
 
 core::solver::problem::testing::FakeGrayCrossPenaltyProblem::FakeGrayCrossPenaltyProblem()
 	:FirstMockImage(), SecondMockImage(), CrossMockImage(), PenaltyMockFunc() , IGrayPenaltyCrossProblem()
 {
-	FirstFrame = std::shared_ptr < core::IArray<float, 2>>(&FirstMockImage);
-	SecondFrame = std::shared_ptr < core::IArray<float, 2>>(&SecondMockImage);
-	CrossFilterImage = std::shared_ptr < core::IArray<float, 3>>(&CrossMockImage);
-	PenaltyFunc = std::shared_ptr<core::penalty::IPenalty< PtrGrayImg>>(&PenaltyMockFunc);
+	FirstFrame = std::make_shared< core::testing::MockIArray<float, 2>>();
+	SecondFrame = std::make_shared < core::testing::MockIArray<float, 2>>();
+	CrossFilterImage = std::make_shared < core::testing::MockIArray<float, 3>>();
+	PenaltyFunc = std::make_shared < core::penalty::testing::MockIPenalty<
+		std::shared_ptr<core::IArray<float, 2>>>>();
+
 }

@@ -1,11 +1,12 @@
 #include "FakeGrayCrossProblem.h"
+#include"../../MockIArray.h"
 
 using PtrGrayImg = std::shared_ptr < core::IArray<float, 2>>;
 
 core::solver::problem::testing::FakeGrayCrossProblem::FakeGrayCrossProblem()
 	:FirstMockImage(), SecondMockImage(), CrossMockImage(), IGrayCrossFilterProblem()
 {
-	FirstFrame = std::shared_ptr < core::IArray<float, 2>>(&FirstMockImage);
-	SecondFrame = std::shared_ptr < core::IArray<float, 2>>(&SecondMockImage);
-	CrossFilterImage = std::shared_ptr < core::IArray<float, 3>>(&CrossMockImage);
+	FirstFrame = std::make_shared< core::testing::MockIArray<float,2>>();
+	SecondFrame = std::make_shared < core::testing::MockIArray<float, 2>>();
+	CrossFilterImage = std::make_shared < core::testing::MockIArray<float, 3>>();
 }

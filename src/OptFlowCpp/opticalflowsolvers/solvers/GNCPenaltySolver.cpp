@@ -51,7 +51,7 @@ namespace opticalflow_solvers
     double GNCPenaltySolver::ComputeBlendFactor(int gnc_iter, int gnc_steps)
     {
         if (gnc_steps > 1)
-            return gnc_iter / (gnc_steps - 1);
+            return (double)gnc_iter / (double)(gnc_steps - 1);
         
         return 0;
             

@@ -11,8 +11,8 @@ namespace core
 			class IGray2FrameProblem
 			{
 			public:
-				std::shared_ptr<core::IArray<float, 2>> FirstFrame;
-				std::shared_ptr<core::IArray<float, 2>> SecondFrame;
+				std::shared_ptr<core::IArray<float, 2>> FirstFrame{nullptr};
+				std::shared_ptr<core::IArray<float, 2>> SecondFrame{nullptr};
 			};
 		}
 	}
