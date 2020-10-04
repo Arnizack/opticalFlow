@@ -1,9 +1,8 @@
-#include "pch.h"
 #include "..\cpu_backend\Array.h"
 #include "..\core\IContainer.h"
 #include "..\cpu_backend\ArrayFactory.h"
 #include <array>
-
+#include"gtest/gtest.h"
 
 namespace cpu_utext
 {

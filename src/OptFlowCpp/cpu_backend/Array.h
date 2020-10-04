@@ -2,6 +2,7 @@
 #include "..\core\IArray.h"
 #include <algorithm>
 #include <vector>
+#include<algorithm>
 
 namespace cpu
 {
@@ -50,9 +51,10 @@ namespace cpu
 			return _size;
 		}
 
-		virtual bool CopyDataTo(InnerTyp*& destination) override
+		virtual bool CopyDataTo(InnerTyp* destination) override
 		{
-			destination = _data.data();
+			std::copy_n(_data.data(), _size, destination);
+			//destination = _data.data();
 			return true;
 		}
 	protected:

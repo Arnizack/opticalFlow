@@ -2,6 +2,7 @@
 #include "..\IArray.h"
 #include "..\linalg\ILinearOperator.h"
 #include <memory>
+
 namespace core
 {
 	namespace solver
@@ -15,6 +16,8 @@ namespace core
 
 			virtual PtrVector Solve(const PtrMatrix input_matrix, const PtrVector input_vector) = 0;
 			virtual PtrVector Solve(const PtrMatrix input_matrix, const PtrVector input_vector, const PtrVector initial_guess) = 0;
+			
+			
 		};
 	}
 }

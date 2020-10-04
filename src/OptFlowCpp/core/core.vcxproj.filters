@@ -90,6 +90,18 @@
     <ClInclude Include="solver\problem\IProblemFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="image\IColorScalable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="image\IGrayscaleScalable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="image\IScalable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="pyramid\IPyramid.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
