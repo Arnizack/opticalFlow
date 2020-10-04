@@ -87,6 +87,9 @@
     <ClInclude Include="solver\problem\IPenaltyProblem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="solver\problem\IProblemFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">

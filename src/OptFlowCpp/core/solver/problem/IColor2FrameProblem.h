@@ -10,8 +10,8 @@ namespace core
 			class IColor2FrameProblem
 			{
 			public:
-				std::shared_ptr<core::IArray<float, 3>> first_frame;
-				std::shared_ptr<core::IArray<float, 3>> second_frame;
+				std::shared_ptr<core::IArray<float, 3>> first_frame{ nullptr };
+				std::shared_ptr<core::IArray<float, 3>> second_frame{nullptr};
 
 			};
 		}

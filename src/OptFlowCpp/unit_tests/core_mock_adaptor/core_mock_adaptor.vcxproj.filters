@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="test.cpp" />
+    <ClCompile Include="solver\problem\FakeGrayCrossProblem.cpp" />
+    <ClCompile Include="solver\problem\FakeGrayCrossPenaltyProblem.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="MockIArray.h" />
+    <ClInclude Include="solver\MockIFlowFieldSolver.h" />
+    <ClInclude Include="penalty\MockIBlenablePenalty.h" />
+    <ClInclude Include="penalty\MockIPenalty.h" />
+    <ClInclude Include="MockIArrayFactoryD3.h" />
+    <ClInclude Include="solver\problem\FakeGrayCrossProblem.h" />
+    <ClInclude Include="solver\problem\MockIProblemFactory.h" />
+    <ClInclude Include="solver\problem\FakeGrayCrossPenaltyProblem.h" />
+  </ItemGroup>
+</Project>
