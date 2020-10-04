@@ -161,8 +161,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="CpuArray.h" />
-    <ClInclude Include="CpuContainer.h" />
+    <ClInclude Include="Array.h" />
+    <ClInclude Include="linalg\ArithmeticBasic.h" />
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>

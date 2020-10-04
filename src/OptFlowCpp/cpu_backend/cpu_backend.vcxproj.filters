@@ -18,10 +18,10 @@
     <ClInclude Include="pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CpuArray.h">
+    <ClInclude Include="linalg\ArithmeticBasic.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CpuContainer.h">
+    <ClInclude Include="Array.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
