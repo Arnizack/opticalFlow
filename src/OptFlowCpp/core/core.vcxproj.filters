@@ -27,9 +27,6 @@
     <ClInclude Include="IContainer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IPenalty.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="IStatistics.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -43,9 +40,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="solver\IFlowFieldSolver.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="solver\IImageSolver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="solver\ILinearSolver.h">
@@ -64,6 +58,33 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="image\IColorConvolution.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="solver\problem\IColor2FrameProblem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="solver\problem\IGray2FrameProblem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="solver\problem\IGrayCrossFilterProblem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="solver\problem\IGrayPenaltyCrossProblem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="solver\problem\IGrayPenaltyProblem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="penalty\IPenalty.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="penalty\IBlendablePenalty.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="solver\problem\IColorCrossFilterProblem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="solver\problem\IPenaltyProblem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

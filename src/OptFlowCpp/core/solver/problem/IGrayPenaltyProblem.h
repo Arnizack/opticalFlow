@@ -1,6 +1,7 @@
 #pragma once
 #include"IGray2FrameProblem.h"
-#include"../../IPenalty.h"
+#include"../../penalty/IPenalty.h"
+#include"IPenaltyProblem.h"
 
 namespace core
 {
@@ -8,10 +9,8 @@ namespace core
 	{
 		namespace problem
 		{
-			class IGrayPenaltyProblem : public IGray2FrameProblem
+			class IGrayPenaltyProblem : public IGray2FrameProblem, public IPenaltyProblem
 			{
-			public:
-				std::shared_ptr < penalty::IPenalty<IArray<float, 2>>> PenaltyFunc;
 			};
 		}
 	}

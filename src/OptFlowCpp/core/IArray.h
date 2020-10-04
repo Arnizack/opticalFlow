@@ -9,12 +9,8 @@ namespace core
 	class IArray : public IContainer<InnerTyp>
 	{
 	public:
-		IArray(size_t(&shape)[DimCount]);
-		const size_t Shape[DimCount];
+		virtual size_t[DimCount] Shape() = 0;
+
 	};
 	
-	template<class InnerTyp, size_t DimCount>
-	inline IArray<InnerTyp, DimCount>::IArray(size_t(&shape)[DimCount]) : Shape(shape)
-	{
-	}
 }
