@@ -162,6 +162,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Array.h" />
+    <ClInclude Include="ArrayFactory.h" />
     <ClInclude Include="linalg\ArithmeticBasic.h" />
     <ClInclude Include="pch.h" />
   </ItemGroup>

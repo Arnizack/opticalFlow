@@ -15,7 +15,7 @@ namespace cpu
 		template<class InnerTyp, size_t DimCount>
 		class ArithmeticBasic : public core::linalg::IArithmeticBasic<InnerTyp>
 		{
-			using PtrVector = std::shared_ptr<cpu::Array<InnerTyp,1>>;
+			using PtrVector = std::shared_ptr<core::IContainer<InnerTyp>>;
 
 		public:
 
@@ -296,7 +296,7 @@ namespace cpu
 		template<size_t DimCount>
 		class ArithmeticBasic<double, DimCount> : public core::linalg::IArithmeticBasic<double>
 		{
-			using PtrVector = std::shared_ptr<cpu::Array<double, 1>>;
+			using PtrVector = std::shared_ptr<core::IContainer<double>>;
 
 		public:
 
@@ -551,7 +551,7 @@ namespace cpu
 		template<size_t DimCount>
 		class ArithmeticBasic<float, DimCount> : public core::linalg::IArithmeticBasic<float>
 		{
-			using PtrVector = std::shared_ptr<cpu::Array<float, 1>>;
+			using PtrVector = std::shared_ptr<core::IContainer<float>>;
 
 		public:
 
@@ -801,7 +801,7 @@ namespace cpu
 		private:
 			static PtrVector return_data(std::array<const size_t, DimCount> shape, const size_t& size, const float* const data)
 			{
-				cpu::Array<float, DimCount> out_temp(shape, size, data);
+				cpu::Array<float, 1> out_temp(shape, size, data);
 				return std::make_shared<cpu::Array<float, 1>>(out_temp);
 			}
 		};

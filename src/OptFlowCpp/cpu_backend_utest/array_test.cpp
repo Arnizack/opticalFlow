@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "..\cpu_backend\Array.h"
 #include "..\core\IContainer.h"
+#include "..\cpu_backend\ArrayFactory.h"
 #include <array>
 
 
@@ -54,6 +55,53 @@ namespace cpu_utext
 		for (auto i = 0; i < size; i++)
 		{
 			EXPECT_EQ(arr[i], obj[i]);
+		}
+	}
+
+	TEST(CpuArrayFactoryTest, Zeros)
+	{
+		const int dim = 2;
+		const int size = 4;
+		std::array<const size_t, dim> shape = { 2,2 };
+		cpu::ArrayFactory<int, dim> factory;
+		std::shared_ptr<core::IArray<int, dim>> test_obj = factory.Zeros(shape);
+
+		auto shape_copied = test_obj.get()->Shape;
+		for (auto i = 0; i < dim; i++)
+		{
+			EXPECT_EQ(shape[i], shape_copied[i]);
+		}
+
+		int* ptr;
+		test_obj.get()->CopyDataTo(ptr);
+
+		for (auto i = 0; i < size; i++)
+		{
+			EXPECT_EQ(ptr[i], 0);
+		}
+	}
+
+	TEST(CpuArrayFactoryTest, Full)
+	{
+		const int fill_value = 22;
+		const int dim = 2;
+		const int size = 4;
+		std::array<const size_t, dim> shape = { 2,2 };
+		cpu::ArrayFactory<int, dim> factory;
+		std::shared_ptr<core::IArray<int, dim>> test_obj = factory.Full(fill_value, shape);
+
+		auto shape_copied = test_obj.get()->Shape;
+		for (auto i = 0; i < dim; i++)
+		{
+			EXPECT_EQ(shape[i], shape_copied[i]);
+		}
+
+		int* ptr;
+		test_obj.get()->CopyDataTo(ptr);
+
+		for (auto i = 0; i < size; i++)
+		{
+			EXPECT_EQ(ptr[i], fill_value);
 		}
 	}
 }
