@@ -1,10 +1,11 @@
-#include "pch.h"
 #include "..\cpu_backend\linalg\ArithmeticBasic.h"
 #include "..\core\linalg\IArithmeticBasic.h"
 #include "..\cpu_backend\Array.h"
 #include "..\core\IContainer.h"
 #include <array>
 #include <memory>
+#include"gtest/gtest.h"
+#include"gmock/gmock.h"
 
 namespace cpu_utext
 {

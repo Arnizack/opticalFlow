@@ -17,7 +17,7 @@ namespace core
 			{}
 
 			MOCK_METHOD(size_t,Size,(),(override));
-			MOCK_METHOD(bool, CopyDataTo, (T * destination), (override));
+			MOCK_METHOD(bool, CopyDataTo, (T* destination), (override));
 		};
 	}
 }
