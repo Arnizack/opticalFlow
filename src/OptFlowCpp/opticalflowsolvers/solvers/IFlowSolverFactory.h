@@ -14,11 +14,11 @@ namespace opticalflow_solvers
 
 		using PtrPenaltyFlowSolver = std::shared_ptr<cs::IFlowFieldSolver<std::shared_ptr<csp::IGrayCrossFilterProblem>>>;
 
-		virtual PtrPenaltyFlowSolver CreateGNCPenaltySolver(int gnc_steps, std::vector<PtrStandardFlowSolver> inner_solvers) = 0;
+		virtual PtrPenaltyFlowSolver CreateGNCPenaltySolver() = 0;
 
-		virtual PtrStandardFlowSolver CreatePyramidSolver(PtrStandardFlowSolver inner_solver) = 0;
+		virtual PtrStandardFlowSolver CreatePyramidSolver() = 0;
 
-		virtual PtrStandardFlowSolver CreateIncreamentalSolver(PtrStandardFlowSolver inner_solver) = 0;
+		virtual PtrStandardFlowSolver CreateIncreamentalSolver() = 0;
 
 		virtual PtrStandardFlowSolver CreateRelaxationFilterSolver() = 0;
 

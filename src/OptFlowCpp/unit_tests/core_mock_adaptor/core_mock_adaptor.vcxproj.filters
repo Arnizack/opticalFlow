@@ -4,6 +4,9 @@
     <ClCompile Include="test.cpp" />
     <ClCompile Include="solver\problem\FakeGrayCrossProblem.cpp" />
     <ClCompile Include="solver\problem\FakeGrayCrossPenaltyProblem.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\lib\native\src\gtest\gtest-all.cc" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\lib\native\src\gmock\gmock-all.cc" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MockIArray.h" />
@@ -14,5 +17,8 @@
     <ClInclude Include="solver\problem\FakeGrayCrossProblem.h" />
     <ClInclude Include="solver\problem\MockIProblemFactory.h" />
     <ClInclude Include="solver\problem\FakeGrayCrossPenaltyProblem.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>

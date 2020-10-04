@@ -21,10 +21,13 @@
     <ClInclude Include="pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="solvers\GNCPenaltySolver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="solvers\IFlowSolverFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="solvers\GNCPenaltySolver.h">
+    <ClInclude Include="solvers\PyramidSolver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -33,6 +36,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="solvers\GNCPenaltySolver.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="solvers\PyramidSolver.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
