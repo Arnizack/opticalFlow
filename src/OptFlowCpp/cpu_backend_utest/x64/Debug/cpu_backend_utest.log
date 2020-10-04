@@ -1,0 +1,13 @@
+﻿  array_test.cpp
+E:\dev\opticalFlow\OptFlowCpp\opticalFlow\src\OptFlowCpp\cpu_backend\CpuArray.h(35,1): error C2440: '=': cannot convert from 'Eigen::Array<int,-1,-1,0,-1,-1> *' to 'InnerTyp *'
+          with
+          [
+              InnerTyp=int
+          ]
+E:\dev\opticalFlow\OptFlowCpp\opticalFlow\src\OptFlowCpp\cpu_backend\CpuArray.h(35,18): message : Types pointed to are unrelated; conversion requires reinterpret_cast, C-style cast or function-style cast
+E:\dev\opticalFlow\OptFlowCpp\opticalFlow\src\OptFlowCpp\cpu_backend\CpuArray.h(34): message : while compiling class template member function 'bool cpu::Array<int,3>::CopyDataTo(InnerTyp *&)'
+          with
+          [
+              InnerTyp=int
+          ]
+E:\dev\opticalFlow\OptFlowCpp\opticalFlow\src\OptFlowCpp\cpu_backend_utest\array_test.cpp(13): message : see reference to class template instantiation 'cpu::Array<int,3>' being compiled
