@@ -1,19 +1,30 @@
 #include "pch.h"
 #include "GNCPenaltySolver.h"
-namespace opticalflow_solvers
+namespace optflow_solvers
 {
-    using ProblemTyp = std::shared_ptr<cs::problem::IGrayCrossFilterProblem>;
+    using ProblemTyp = std::shared_ptr<core::IGrayCrossFilterProblem>;
+    
     using PtrFlowField = std::shared_ptr < core::IArray<double, 3> >;
-    using PtrStandardFlowSolver = std::shared_ptr<cs::IFlowFieldSolver<std::shared_ptr<cs::problem::IGrayPenaltyCrossProblem>>>;
-    using PtrBlendPenalty = std::shared_ptr<cp::IBlendablePenalty<core::IArray<float, 2>>>;
+    
+    using PtrStandardFlowSolver = 
+        std::shared_ptr<core::IFlowFieldSolver<
+        std::shared_ptr<core::IGrayPenaltyCrossProblem>>>;
+    
+    using PtrBlendPenalty = std::shared_ptr<
+        core::IBlendablePenalty<core::IArray<float, 2>>>;
+    
     using PtrFlowFactory = std::shared_ptr<core::IArrayFactory<double, 3>>;
-    using PtrProblemFactory = std::shared_ptr<cs::problem::IProblemFactory>;
 
-    using PtrPenaltyProblem = std::shared_ptr<cs::problem::IGrayPenaltyCrossProblem>;
+    using PtrProblemFactory = std::shared_ptr<core::IProblemFactory>;
 
-    GNCPenaltySolver::GNCPenaltySolver(int gnc_steps, std::vector<PtrStandardFlowSolver> inner_solvers, 
-        PtrBlendPenalty penalty_func, PtrFlowFactory flow_factory, PtrProblemFactory problem_factory)
-        : _gnc_steps(gnc_steps), _inner_solvers(inner_solvers), _flow_factory(flow_factory), _penalty_func(penalty_func),
+    using PtrPenaltyProblem = std::shared_ptr<core::IGrayPenaltyCrossProblem>;
+
+    GNCPenaltySolver::GNCPenaltySolver(int gnc_steps, 
+        std::vector<PtrStandardFlowSolver> inner_solvers, 
+        PtrBlendPenalty penalty_func, PtrFlowFactory flow_factory, 
+        PtrProblemFactory problem_factory)
+        : _gnc_steps(gnc_steps), _inner_solvers(inner_solvers), 
+        _flow_factory(flow_factory), _penalty_func(penalty_func),
         _problem_factory(problem_factory)
     {
     }

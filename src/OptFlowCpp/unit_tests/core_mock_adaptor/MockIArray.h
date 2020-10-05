@@ -16,8 +16,9 @@ namespace core
 			MockIArray() : IArray({ 0 })
 			{}
 
-			MOCK_METHOD(size_t,Size,(),(override));
+			MOCK_METHOD(size_t,Size,(),(const, override));
 			MOCK_METHOD(bool, CopyDataTo, (T* destination), (override));
+
 		};
 	}
 }

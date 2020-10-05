@@ -3,13 +3,9 @@
 #include"IGrayPenaltyProblem.h"
 namespace core
 {
-	namespace solver
-	{
-		namespace problem
-		{
-			class IGrayPenaltyCrossProblem : public IGray2FrameProblem, 
-				public IColorCrossFilterProblem, public IPenaltyProblem
-			{};
-		}
-	}
+
+	class IGrayPenaltyCrossProblem : public IGray2FrameProblem,
+		public IColorCrossFilterProblem, public IPenaltyProblem
+	{};
+
 }

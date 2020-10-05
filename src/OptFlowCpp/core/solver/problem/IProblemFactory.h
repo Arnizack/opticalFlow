@@ -3,16 +3,11 @@
 
 namespace core
 {
-	namespace solver
+
+	class IProblemFactory
 	{
-		namespace problem
-		{
-			namespace csp = core::solver::problem;
-			class IProblemFactory
-			{
-			public:
-				virtual std::shared_ptr<csp::IGrayPenaltyCrossProblem> CreateGrayPenaltyCrossProblem() = 0;
-			};
-		}
-	}
+	public:
+		virtual std::shared_ptr<IGrayPenaltyCrossProblem> CreateGrayPenaltyCrossProblem() = 0;
+
+	};
 }

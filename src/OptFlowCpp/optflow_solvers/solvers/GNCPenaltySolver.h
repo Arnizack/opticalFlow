@@ -5,34 +5,41 @@
 #include"core/IArrayFactory.h"
 #include"core/solver/problem/IProblemFactory.h"
 
-namespace opticalflow_solvers
+namespace optflow_solvers
 {
 
-	namespace cs = core::solver;
-	namespace cp = core::penalty;
+	
 
-	using ProblemTyp = std::shared_ptr<cs::problem::IGrayCrossFilterProblem>;
+	using ProblemTyp = std::shared_ptr<core::IGrayCrossFilterProblem>;
 
-	class GNCPenaltySolver : public cs::IFlowFieldSolver<ProblemTyp>
+	class GNCPenaltySolver : public core::IFlowFieldSolver<ProblemTyp>
 	{
-	public:
 
-		
 		using PtrFlowField = std::shared_ptr < core::IArray<double, 3> > ;
-		using PtrStandardFlowSolver = std::shared_ptr<cs::IFlowFieldSolver<std::shared_ptr<cs::problem::IGrayPenaltyCrossProblem>>>;
-		using PtrGrayScale = std::shared_ptr <core::IArray<float, 2>>;
-		using PtrBlendPenalty = std::shared_ptr<cp::IBlendablePenalty<PtrGrayScale>>;
-		using PtrFlowFactory = std::shared_ptr<core::IArrayFactory<double, 3>>;
-		using PtrProblemFactory = std::shared_ptr<cs::problem::IProblemFactory>;
 
+		using PtrStandardFlowSolver = std::shared_ptr<
+			core::IFlowFieldSolver<std::shared_ptr<
+			core::IGrayPenaltyCrossProblem>>>;
+		
+		using PtrGrayScale = std::shared_ptr <core::IArray<float, 2>>;
+
+		using PtrBlendPenalty = std::shared_ptr<
+			core::IBlendablePenalty<PtrGrayScale>>;
+
+		using PtrFlowFactory = std::shared_ptr<core::IArrayFactory<double, 3>>;
+
+		using PtrProblemFactory = std::shared_ptr<core::IProblemFactory>;
+
+	public:
+	
 		GNCPenaltySolver(int gnc_steps, std::vector<PtrStandardFlowSolver> inner_solvers, 
 			PtrBlendPenalty penalty_func,
 			PtrFlowFactory flow_factory, PtrProblemFactory problem_factory);
 
-		// Inherited via IFlowFieldSolver
 		virtual PtrFlowField Solve(const ProblemTyp problem) override;
 
-		virtual PtrFlowField Solve(const ProblemTyp problem, PtrFlowField initial_guess) override;
+		virtual PtrFlowField Solve(
+			const ProblemTyp problem, PtrFlowField initial_guess) override;
 
 
 	private:

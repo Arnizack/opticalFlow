@@ -7,17 +7,16 @@
 
 namespace core
 {
-	namespace solver
-	{
-		template<class ProblemTyp>
-		class IFlowFieldSolver
-		{
-		public:
-			using PtrFlowField = std::shared_ptr<IArray<double, 3> >;
-			
-			virtual PtrFlowField Solve(const ProblemTyp problem) = 0;
 
-			virtual PtrFlowField Solve(const ProblemTyp problem, PtrFlowField initial_guess) = 0;
-		};
-	}
+	template<class ProblemTyp>
+	class IFlowFieldSolver
+	{
+	public:
+		using PtrFlowField = std::shared_ptr<IArray<double, 3> >;
+			
+		virtual PtrFlowField Solve(const ProblemTyp problem) = 0;
+
+		virtual PtrFlowField Solve(const ProblemTyp problem, PtrFlowField initial_guess) = 0;
+	};
+	
 }

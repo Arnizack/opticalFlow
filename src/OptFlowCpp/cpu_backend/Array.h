@@ -1,10 +1,10 @@
 #pragma once
-#include "..\core\IArray.h"
+#include "core\IArray.h"
 #include <algorithm>
 #include <vector>
 #include<algorithm>
 
-namespace cpu
+namespace cpu_backend
 {
 	template<class InnerTyp, size_t DimCount>
 	class Array : public core::IArray<InnerTyp, DimCount>

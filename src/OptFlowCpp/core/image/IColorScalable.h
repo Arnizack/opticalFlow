@@ -3,9 +3,8 @@
 
 namespace core
 {
-	namespace image
-	{
-		class IColorScalable : public IScalable<float, 3>
-		{};
-	}
+
+	class IColorScalable : public IScalable<float, 3>
+	{};
+	
 }

@@ -3,9 +3,8 @@
 
 namespace core
 {
-	namespace image
-	{
-		class IGrayscaleScalable : public IScalable<float, 2>
-		{};
-	}
+
+	class IGrayscaleScalable : public IScalable<float, 2>
+	{};
+	
 }

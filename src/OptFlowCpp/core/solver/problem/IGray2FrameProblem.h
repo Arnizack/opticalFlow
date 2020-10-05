@@ -4,16 +4,13 @@
 
 namespace core
 {
-	namespace solver
+
+
+	class IGray2FrameProblem
 	{
-		namespace problem
-		{
-			class IGray2FrameProblem
-			{
-			public:
-				std::shared_ptr<core::IArray<float, 2>> FirstFrame{nullptr};
-				std::shared_ptr<core::IArray<float, 2>> SecondFrame{nullptr};
-			};
-		}
-	}
+	public:
+		std::shared_ptr<IArray<float, 2>> FirstFrame{ nullptr };
+		std::shared_ptr<IArray<float, 2>> SecondFrame{ nullptr };
+	};
+
 }

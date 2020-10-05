@@ -5,11 +5,11 @@
 
 namespace core
 {
-	namespace image
+
+	class IGrayscaleFilter : 
+		public IOperator<std::shared_ptr<IArray<float, 2>>, 
+		std::shared_ptr<IArray<float, 2>>>
 	{
-		class IGrayscaleFilter : 
-			public linalg::IOperator<std::shared_ptr<IArray<float, 2>>, std::shared_ptr<IArray<float, 2>>>
-		{
-		};
-	}
+	};
+	
 }

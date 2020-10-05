@@ -5,15 +5,11 @@
 
 namespace core
 {
-	namespace solver
+
+	class IColorCrossFilterProblem
 	{
-		namespace problem
-		{
-			class IColorCrossFilterProblem
-			{
-			public:
-				std::shared_ptr<IArray<float, 3>> CrossFilterImage{ nullptr };
-			};
-		}
-	}
+	public:
+		std::shared_ptr<IArray<float, 3>> CrossFilterImage{ nullptr };
+	};
+
 }

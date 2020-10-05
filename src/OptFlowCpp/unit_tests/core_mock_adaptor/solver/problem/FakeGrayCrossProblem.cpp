@@ -3,7 +3,7 @@
 
 using PtrGrayImg = std::shared_ptr < core::IArray<float, 2>>;
 
-core::solver::problem::testing::FakeGrayCrossProblem::FakeGrayCrossProblem()
+core::testing::FakeGrayCrossProblem::FakeGrayCrossProblem()
 	:FirstMockImage(), SecondMockImage(), CrossMockImage(), IGrayCrossFilterProblem()
 {
 	FirstFrame = std::make_shared< core::testing::MockIArray<float,2>>();

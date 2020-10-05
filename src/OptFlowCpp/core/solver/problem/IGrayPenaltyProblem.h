@@ -5,13 +5,9 @@
 
 namespace core
 {
-	namespace solver
+
+	class IGrayPenaltyProblem : public IGray2FrameProblem, public IPenaltyProblem
 	{
-		namespace problem
-		{
-			class IGrayPenaltyProblem : public IGray2FrameProblem, public IPenaltyProblem
-			{
-			};
-		}
-	}
+	};
+
 }

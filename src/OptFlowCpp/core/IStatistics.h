@@ -14,6 +14,5 @@ namespace core
 		virtual InnerTyp Sum(ConstPtrArray x) = 0;
 		virtual InnerTyp Mean(ConstPtrArray x) = 0;
 	};
-
-};
+}
 

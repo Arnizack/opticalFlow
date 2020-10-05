@@ -6,20 +6,18 @@
 
 namespace opticalflow_solvers
 {
-	namespace cs = core::solver;
-	namespace csp = core::solver::problem;
-	using PtrProblemTyp = std::shared_ptr<csp::IGrayPenaltyCrossProblem>;
+
+	using PtrProblemTyp = std::shared_ptr<core::IGrayPenaltyCrossProblem>;
 	using PtrFlowField = std::shared_ptr<core::IArray<double, 3> >;
 
-	class PyramidSolver : cs::IFlowFieldSolver<PtrProblemTyp>
+	class PyramidSolver : core::IFlowFieldSolver<PtrProblemTyp>
 	{
 	public:
 
-
-
-		// Inherited via IFlowFieldSolver
 		virtual PtrFlowField Solve(const PtrProblemTyp problem) override;
-		virtual PtrFlowField Solve(const PtrProblemTyp problem, PtrFlowField initial_guess) override;
+
+		virtual PtrFlowField Solve(
+			const PtrProblemTyp problem, PtrFlowField initial_guess) override;
 	
 	private:
 		std::shared_ptr<core::IArrayFactory<double, 3>> _flow_factory;
