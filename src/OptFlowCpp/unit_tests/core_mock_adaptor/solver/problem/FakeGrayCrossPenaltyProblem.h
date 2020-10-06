@@ -5,29 +5,23 @@
 
 namespace core
 {
-	namespace solver
+	namespace testing
 	{
-		namespace problem
+		class FakeGrayCrossPenaltyProblem : public IGrayPenaltyCrossProblem
 		{
-			namespace testing
-			{
-				class FakeGrayCrossPenaltyProblem : public IGrayPenaltyCrossProblem
-				{
-				public:
-					using MockGrayImg = core::testing::MockIArray<float, 2>;
-					using MockColorImg = core::testing::MockIArray<float, 3>;
-					using MockPenaltyFunc = core::penalty::testing::MockIPenalty<
-						std::shared_ptr<core::IArray<float,2>>>;
+		public:
+			using MockGrayImg = MockIArray<float, 2>;
+			using MockColorImg = MockIArray<float, 3>;
+			using MockPenaltyFunc = MockIPenalty<
+				std::shared_ptr<IArray<float, 2>>>;
 
-					FakeGrayCrossPenaltyProblem();
+			FakeGrayCrossPenaltyProblem();
 
-					MockGrayImg FirstMockImage;
-					MockGrayImg SecondMockImage;
-					MockColorImg CrossMockImage;
-					MockPenaltyFunc PenaltyMockFunc;
-				};
-			}
-		}
+			MockGrayImg FirstMockImage;
+			MockGrayImg SecondMockImage;
+			MockColorImg CrossMockImage;
+			MockPenaltyFunc PenaltyMockFunc;
+		};
 	}
 }
 

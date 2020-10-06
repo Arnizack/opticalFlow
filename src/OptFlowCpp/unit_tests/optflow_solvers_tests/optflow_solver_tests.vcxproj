@@ -25,6 +25,8 @@
     <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
+    <ProjectName>optflow_solvers_tests</ProjectName>
+    <RootNamespace>optflow_solvers</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
@@ -56,8 +58,8 @@
     <ProjectReference Include="..\..\core\core.vcxproj">
       <Project>{f7e80072-58dd-410b-827e-f95e620af895}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\..\opticalflowsolvers\opticalflowsolvers.vcxproj">
-      <Project>{510e3b9f-5135-45f3-b4d5-72c556774401}</Project>
+    <ProjectReference Include="..\..\optflow_solvers\optflow_solvers.vcxproj">
+      <Project>{7fb25f03-7d47-4fe3-8eaa-1776578ae8ff}</Project>
     </ProjectReference>
     <ProjectReference Include="..\core_mock_adaptor\core_mock_adaptor.vcxproj">
       <Project>{2b35496f-b03b-4769-8adf-468e179d33fd}</Project>

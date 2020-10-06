@@ -4,28 +4,20 @@
 
 namespace core
 {
-	namespace solver
+	namespace testing
 	{
-		namespace problem
+		class FakeGrayCrossProblem : public IGrayCrossFilterProblem
 		{
-			namespace testing
-			{
-				class FakeGrayCrossProblem : public IGrayCrossFilterProblem
-				{
-				public:
-					using MockGrayImg = core::testing::MockIArray<float, 2>;
-					using MockColorImg = core::testing::MockIArray<float, 3>;
+		public:
+			using MockGrayImg = MockIArray<float, 2>;
+			using MockColorImg = MockIArray<float, 3>;
 
-					FakeGrayCrossProblem();
+			FakeGrayCrossProblem();
 
-					MockGrayImg FirstMockImage;
-					MockGrayImg SecondMockImage;
-					MockColorImg CrossMockImage;
+			MockGrayImg FirstMockImage;
+			MockGrayImg SecondMockImage;
+			MockColorImg CrossMockImage;
 
-					
-
-				};
-			}
-		}
+		};
 	}
 }

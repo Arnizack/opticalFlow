@@ -3,16 +3,18 @@
 #include"../framework.h"
 namespace opticalflow_solvers
 {
-	namespace cs = core::solver;
-	namespace csp = core::solver::problem;
 
 	class IFlowSolverFactory
 	{
 	public:
 		
-		using PtrStandardFlowSolver = std::shared_ptr<cs::IFlowFieldSolver<std::shared_ptr<csp::IGrayPenaltyCrossProblem>>>;
+		using PtrStandardFlowSolver = 
+			std::shared_ptr<core::IFlowFieldSolver<
+			std::shared_ptr<core::IGrayPenaltyCrossProblem>>>;
 
-		using PtrPenaltyFlowSolver = std::shared_ptr<cs::IFlowFieldSolver<std::shared_ptr<csp::IGrayCrossFilterProblem>>>;
+		using PtrPenaltyFlowSolver = 
+			std::shared_ptr<core::IFlowFieldSolver<
+			std::shared_ptr<core::IGrayCrossFilterProblem>>>;
 
 		virtual PtrPenaltyFlowSolver CreateGNCPenaltySolver() = 0;
 

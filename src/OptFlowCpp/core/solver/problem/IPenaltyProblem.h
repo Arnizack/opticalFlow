@@ -5,16 +5,12 @@
 
 namespace core
 {
-	namespace solver
+
+	class IPenaltyProblem
 	{
-		namespace problem
-		{
-			class IPenaltyProblem
-			{
-			public:
-				std::shared_ptr < penalty::IPenalty<std::shared_ptr <IArray<float, 2>>>> 
-					PenaltyFunc{ nullptr };
-			};
-		}
-	}
+	public:
+		std::shared_ptr < IPenalty<std::shared_ptr <IArray<float, 2>>>>
+			PenaltyFunc{ nullptr };
+	};
+
 }

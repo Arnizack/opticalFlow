@@ -4,14 +4,10 @@
 
 namespace core
 {
-	namespace solver
-	{
-		namespace problem
-		{
-			class IGrayCrossFilterProblem : public IGray2FrameProblem, public IColorCrossFilterProblem
-			{
 
-			};
-		}
-	}
+	class IGrayCrossFilterProblem : public IGray2FrameProblem, public IColorCrossFilterProblem
+	{
+
+	};
+
 }

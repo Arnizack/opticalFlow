@@ -3,13 +3,12 @@
 
 namespace core
 {
-	namespace penalty
+
+	template<class T>
+	class IBlendablePenalty : public IPenalty<T>
 	{
-		template<class T>
-		class IBlendablePenalty : public IPenalty<T> 
-		{
-		public:
-			virtual void SetBlendFactor(double blend_factor) = 0;
-		};
-	}
+	public:
+		virtual void SetBlendFactor(double blend_factor) = 0;
+	};
+
 }

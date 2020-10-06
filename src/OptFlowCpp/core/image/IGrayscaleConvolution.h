@@ -4,13 +4,14 @@
 #include<memory>
 namespace core
 {
-	namespace image
-	{
-		template<class InnerTyp, size_t DimCount>
+
+	template<class InnerTyp, size_t DimCount>
 		
-		class IGrayscaleConvolution :
-			 public linalg::ILinearOperator< std::shared_ptr < IArray< InnerTyp, 2>>, std::shared_ptr<IArray< InnerTyp, 2>>>
-		{
-		};
-	}
+	class IGrayscaleConvolution :
+			public linalg::ILinearOperator< 
+		std::shared_ptr < IArray< InnerTyp, 2>>, 
+		std::shared_ptr<IArray< InnerTyp, 2>>>
+	{
+	};
+	
 }
