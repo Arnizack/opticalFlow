@@ -1,13 +1,13 @@
 #pragma once
-#include"../IContainer.h"
+#include"../IArray.h"
 #include<memory>
 namespace core
 {
 
-	template<class InnerTyp,size_t DimCount>
+	template<class InnerTyp, size_t DimCount>
 	class IArithmeticBasic
 	{
-		using PtrVector = std::shared_ptr<IArray<InnerTyp,DimCount>>;
+		using PtrVector = std::shared_ptr<IArray<InnerTyp, DimCount>>;
 	public:
 		//a+b
 		virtual PtrVector Add(const PtrVector a, const PtrVector b) = 0;
@@ -25,25 +25,25 @@ namespace core
 		virtual PtrVector Mul(const PtrVector a, const PtrVector b) = 0;
 
 		//x = a*b
-		virtual void MulTo(InnerTyp& x, const PtrVector a, const PtrVector b) = 0;
+		virtual void MulTo(PtrVector& x, const PtrVector a, const PtrVector b) = 0;
 
 		//a/b
 		virtual PtrVector Div(const PtrVector a, const PtrVector b) = 0;
 
 		//x = a/b
 		virtual void DivTo(PtrVector x, const PtrVector a, const PtrVector b) = 0;
-
+		
 		//a**b
-		virtual PtrVector Pow(const PtrVector a, const PtrVector b);
+		virtual PtrVector Pow(const PtrVector a, const PtrVector b) = 0;
 
 		//x = a**b
-		virtual void PowTo(PtrVector x, const PtrVector a, const PtrVector b);
+		virtual void PowTo(PtrVector x, const PtrVector a, const PtrVector b) = 0;
 
 		//a**b
-		virtual PtrVector Pow(const PtrVector a, const double& b);
+		virtual PtrVector Pow(const PtrVector a, const double& b) = 0;
 
 		//x = a**b
-		virtual void PowTo(PtrVector x, const PtrVector a, const double& b);
+		virtual void PowTo(PtrVector x, const PtrVector a, const double& b) = 0;
 	};
 	
 }

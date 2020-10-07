@@ -2,7 +2,6 @@
 #include "core\IArray.h"
 #include <algorithm>
 #include <vector>
-#include<algorithm>
 
 namespace cpu_backend
 {
@@ -12,7 +11,7 @@ namespace cpu_backend
 	public:
 		Array() = default;
 
-		Array(std::array<const size_t, DimCount> shape, const size_t size, const InnerTyp *const src) : core::IArray<InnerTyp, DimCount>(shape), _size(size), _data(std::vector<InnerTyp>(size))
+		Array(std::array<const size_t, DimCount> shape, const size_t& size, const InnerTyp *const src) : core::IArray<InnerTyp, DimCount>(shape), _size(size), _data(std::vector<InnerTyp>(size))
 		{
 			std::copy_n(src, _size, _data.data());
 		}
@@ -28,6 +27,14 @@ namespace cpu_backend
 			std::copy_n(src, _size, _data.data());
 		}
 
+		Array(std::array<const size_t, DimCount> shape, const size_t& size, const InnerTyp& single_value) : core::IArray<InnerTyp, DimCount>(shape), _size(size), _data(std::vector<InnerTyp>(size))
+		{
+			for (size_t i = 0; i < size; i++)
+			{
+				_data[i] = single_value;
+			}
+		}
+
 		inline InnerTyp& operator[](const size_t i)
 		{
 			return _data[i];
@@ -38,7 +45,7 @@ namespace cpu_backend
 			return _data[i];
 		}
 
-		virtual size_t Size() override
+		virtual size_t Size() const override
 		{
 			return _size;
 		}
@@ -46,7 +53,6 @@ namespace cpu_backend
 		virtual bool CopyDataTo(InnerTyp* destination) override
 		{
 			std::copy_n(_data.data(), _size, destination);
-			//destination = _data.data();
 			return true;
 		}
 	protected:
