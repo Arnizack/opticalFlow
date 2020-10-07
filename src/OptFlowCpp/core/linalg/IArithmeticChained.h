@@ -1,15 +1,14 @@
 #pragma once
 #include"IArithmeticBasic.h"
-#include"../IContainer.h"
 #include<memory>
 
 namespace core
 {
 
-	template<class InnerTyp>
-	class IArithmeticChained : public IArithmeticBasic<InnerTyp>
+	template<class InnerTyp, size_t DimCount>
+	class IArithmeticChained : public IArithmeticBasic<InnerTyp, DimCount>
 	{
-		using PtrVector = std::shared_ptr<IContainer<InnerTyp>>;
+		using PtrVector = std::shared_ptr<IArray<InnerTyp, DimCount>>;
 	public:
 		//a*b+c
 		virtual PtrVector MulAdd(const PtrVector a, const PtrVector b,const PtrVector c) = 0;

@@ -4,6 +4,9 @@
     <ClCompile Include="ArithmeticBasic_test.cpp" />
     <ClCompile Include="array_test.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\lib\native\src\gtest\gtest-all.cc" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\lib\native\src\gmock\gmock-all.cc" />
+    <ClCompile Include="ArithmeticChained_Test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -1,8 +1,7 @@
 #pragma once
 #include "core\linalg\IArithmeticBasic.h"
 
-#include "..\Array.h"
-#include"core/IArray.h"
+#include "../Array.h"
 
 #include <math.h>
 #include <cblas.h>
@@ -11,284 +10,320 @@ namespace cpu_backend
 {
 
 	/*
-	* OTHER
+	* All Types
 	*/
 	template<class InnerTyp, size_t DimCount>
-	class ArithmeticBasic : public core::IArithmeticBasic<InnerTyp,DimCount>
+	class ArithmeticBasic : public core::IArithmeticBasic<InnerTyp, DimCount>
 	{
 		using PtrVector = std::shared_ptr<core::IArray<InnerTyp, DimCount>>;
 
 	public:
 
 		//a+b
-		static PtrVector Add(const PtrVector a, const PtrVector b)
+		virtual PtrVector Add(const PtrVector a, const PtrVector b) override
 		{
-			
 			//a+b
-			InnerTyp* ptr_a;
-			a.get()->CopyDataTo(ptr_a);
-
-			InnerTyp* ptr_b;
-			b.get()->CopyDataTo(ptr_b);
-
 			const size_t size = a.get()->Size();
 
-			InnerTyp ptr_c[size];
+			std::unique_ptr<InnerTyp[]> ptr_a(new InnerTyp[size]);
+			a.get()->CopyDataTo(ptr_a.get());
+
+			std::unique_ptr<InnerTyp[]> ptr_b(new InnerTyp[b.get()->Size()]);
+			b.get()->CopyDataTo(ptr_b.get());
+
+			std::unique_ptr<InnerTyp[]> ptr_c(new InnerTyp[size]);
 
 			for (int i = 0; i < size; i++)
 			{
 				ptr_c[i] = ptr_a[i] + ptr_b[i];
 			}
 
-			return return_data(a.get()->Shape, size, ptr_c);
+			PtrVector out = return_data(a.get()->Shape, size, ptr_c.get());
+
+			return out;
 		}
 
 		//x = a+b
-		static void AddTo(PtrVector x, const PtrVector a, const PtrVector b)
+		virtual void AddTo(PtrVector x, const PtrVector a, const PtrVector b) override
 		{
 			//x = a+b
-			InnerTyp* ptr_a;
-			a.get()->CopyDataTo(ptr_a);
-
-			InnerTyp* ptr_b;
-			b.get()->CopyDataTo(ptr_b);
-
 			const size_t size = a.get()->Size();
 
-			InnerTyp ptr_c[size];
+			std::unique_ptr<InnerTyp[]> ptr_a(new InnerTyp[size]);
+			a.get()->CopyDataTo(ptr_a.get());
+
+			std::unique_ptr<InnerTyp[]> ptr_b(new InnerTyp[b.get()->Size()]);
+			b.get()->CopyDataTo(ptr_b.get());
+
+			std::unique_ptr<InnerTyp[]> ptr_c(new InnerTyp[size]);
 
 			for (int i = 0; i < size; i++)
 			{
 				ptr_c[i] = ptr_a[i] * ptr_b[i];
 			}
 
-			x = return_data(a.get()->Shape, size, ptr_c);
+			x = return_data(a.get()->Shape, size, ptr_c.get());
+
 			return;
 		}
 
 		//a-b
-		static PtrVector Sub(const PtrVector a, const PtrVector b)
+		virtual PtrVector Sub(const PtrVector a, const PtrVector b) override
 		{
 			//a-b
-			InnerTyp* ptr_a;
-			a.get()->CopyDataTo(ptr_a);
-
-			InnerTyp* ptr_b;
-			b.get()->CopyDataTo(ptr_b);
-
 			const size_t size = a.get()->Size();
 
-			InnerTyp ptr_c[size];
+			std::unique_ptr<InnerTyp[]> ptr_a(new InnerTyp[size]);
+			a.get()->CopyDataTo(ptr_a.get());
+
+			std::unique_ptr<InnerTyp[]> ptr_b(new InnerTyp[b.get()->Size()]);
+			b.get()->CopyDataTo(ptr_b.get());
+
+			std::unique_ptr<InnerTyp[]> ptr_c(new InnerTyp[size]);
 
 			for (int i = 0; i < size; i++)
 			{
 				ptr_c[i] = ptr_a[i] - ptr_b[i];
 			}
 
-			return return_data(a.get()->Shape, size, ptr_c);
+			PtrVector out = return_data(a.get()->Shape, size, ptr_c.get());
+
+			return out;
 		}
 
 		//x = a-b
-		static void SubTo(PtrVector x, const PtrVector a, const PtrVector& b)
+		virtual void SubTo(PtrVector x, const PtrVector a, const PtrVector& b) override
 		{
 			//x = a+b
-			InnerTyp* ptr_a;
-			a.get()->CopyDataTo(ptr_a);
-
-			InnerTyp* ptr_b;
-			b.get()->CopyDataTo(ptr_b);
-
 			const size_t size = a.get()->Size();
 
-			InnerTyp ptr_c[size];
+			std::unique_ptr<InnerTyp[]> ptr_a(new InnerTyp[size]);
+			a.get()->CopyDataTo(ptr_a.get());
+
+			std::unique_ptr<InnerTyp[]> ptr_b(new InnerTyp[b.get()->Size()]);
+			b.get()->CopyDataTo(ptr_b.get());
+
+			std::unique_ptr<InnerTyp[]> ptr_c(new InnerTyp[size]);
 
 			for (int i = 0; i < size; i++)
 			{
 				ptr_c[i] = ptr_a[i] - ptr_b[i];
 			}
 
-			x = return_data(a.get()->Shape, size, ptr_c);
+			x = return_data(a.get()->Shape, size, ptr_c.get());
+
 			return;
 		}
 
 		//a*b
-		static PtrVector Mul(const PtrVector a, const PtrVector b)
+		virtual PtrVector Mul(const PtrVector a, const PtrVector b) override
 		{
-			InnerTyp* ptr_a;
-			a.get()->CopyDataTo(ptr_a);
-
-			InnerTyp* ptr_b;
-			b.get()->CopyDataTo(ptr_b);
-
+			//a*b
 			const size_t size = a.get()->Size();
 
-			InnerTyp ptr_c[size];
+			std::unique_ptr<InnerTyp[]> ptr_a(new InnerTyp[size]);
+			a.get()->CopyDataTo(ptr_a.get());
+
+			std::unique_ptr<InnerTyp[]> ptr_b(new InnerTyp[b.get()->Size()]);
+			b.get()->CopyDataTo(ptr_b.get());
+
+			std::unique_ptr<InnerTyp[]> ptr_c(new InnerTyp[size]);
 
 			for (int i = 0; i < size; i++)
 			{
 				ptr_c[i] = ptr_a[i] * ptr_b[i];
 			}
 
-			return return_data(a.get()->Shape, size, ptr_c);
+			PtrVector out = return_data(a.get()->Shape, size, ptr_c.get());
+
+			return out;
 		}
 
 		//x = a*b
-		static void MulTo(PtrVector& x, const PtrVector a, const PtrVector b)
+		virtual void MulTo(PtrVector& x, const PtrVector a, const PtrVector b) override
 		{
 			//x = a*b
-			InnerTyp* ptr_a;
-			a.get()->CopyDataTo(ptr_a);
-
-			InnerTyp* ptr_b;
-			b.get()->CopyDataTo(ptr_b);
-
 			const size_t size = a.get()->Size();
 
-			InnerTyp ptr_c[size];
+			std::unique_ptr<InnerTyp[]> ptr_a(new InnerTyp[size]);
+			a.get()->CopyDataTo(ptr_a.get());
+
+			std::unique_ptr<InnerTyp[]> ptr_b(new InnerTyp[b.get()->Size()]);
+			b.get()->CopyDataTo(ptr_b.get());
+
+			std::unique_ptr<InnerTyp[]> ptr_c(new InnerTyp[size]);
 
 			for (int i = 0; i < size; i++)
 			{
 				ptr_c[i] = ptr_a[i] * ptr_b[i];
 			}
 
-			x = return_data(a.get()->Shape, size, ptr_c);
+			x = return_data(a.get()->Shape, size, ptr_c.get());
+
 			return;
 		}
 
 		//a/b
-		static PtrVector Div(const PtrVector a, const PtrVector b)
+		virtual PtrVector Div(const PtrVector a, const PtrVector b) override
 		{
 			//a/b
-			InnerTyp* ptr_a;
-			a.get()->CopyDataTo(ptr_a);
-
-			InnerTyp* ptr_b;
-			b.get()->CopyDataTo(ptr_b);
-
 			const size_t size = a.get()->Size();
 
-			InnerTyp ptr_c[size];
+			std::unique_ptr<InnerTyp[]> ptr_a(new InnerTyp[size]);
+			a.get()->CopyDataTo(ptr_a.get());
+
+			std::unique_ptr<InnerTyp[]> ptr_b(new InnerTyp[b.get()->Size()]);
+			b.get()->CopyDataTo(ptr_b.get());
+
+			std::unique_ptr<InnerTyp[]> ptr_c(new InnerTyp[size]);
 
 			for (int i = 0; i < size; i++)
 			{
-				ptr_c[i] = ptr_a[i] / ptr_b[i];
+				if (ptr_b[i] == 0)
+				{
+					ptr_c[i] = (InnerTyp)INFINITY;
+				}
+				else
+				{
+					ptr_c[i] = (InnerTyp)(ptr_a[i] / ptr_b[i]);
+				}
 			}
 
-			return return_data(a.get()->Shape, size, ptr_c);
+			PtrVector out = return_data(a.get()->Shape, size, ptr_c.get());
+
+			return out;
 		}
 
 		//x = a/b
-		static void DivTo(PtrVector x, const PtrVector a, const PtrVector b)
+		virtual void DivTo(PtrVector x, const PtrVector a, const PtrVector b) override
 		{
 			//x = a/b
-			InnerTyp* ptr_a;
-			a.get()->CopyDataTo(ptr_a);
-
-			InnerTyp* ptr_b;
-			b.get()->CopyDataTo(ptr_b);
-
 			const size_t size = a.get()->Size();
 
-			InnerTyp ptr_c[size];
+			std::unique_ptr<InnerTyp[]> ptr_a(new InnerTyp[size]);
+			a.get()->CopyDataTo(ptr_a.get());
+
+			std::unique_ptr<InnerTyp[]> ptr_b(new InnerTyp[b.get()->Size()]);
+			b.get()->CopyDataTo(ptr_b.get());
+
+			std::unique_ptr<InnerTyp[]> ptr_c(new InnerTyp[size]);
 
 			for (int i = 0; i < size; i++)
 			{
-				ptr_c[i] = ptr_a[i] / ptr_b[i];
+				if (ptr_b[i] == 0)
+				{
+					ptr_c[i] = (InnerTyp)INFINITY;
+				}
+				else
+				{
+					ptr_c[i] = (InnerTyp)(ptr_a[i] / ptr_b[i]);
+				}
 			}
 
-			x = return_data(a.get()->Shape, size, ptr_c);
+			x = return_data(a.get()->Shape, size, ptr_c.get());
+
+			return;
+		}
+		
+		//a**b
+		virtual PtrVector Pow(const PtrVector a, const PtrVector b) override
+		{
+			//a^b
+			const size_t size = a.get()->Size();
+
+			std::unique_ptr<InnerTyp[]> ptr_a(new InnerTyp[size]);
+			a.get()->CopyDataTo(ptr_a.get());
+
+			std::unique_ptr<InnerTyp[]> ptr_b(new InnerTyp[b.get()->Size()]);
+			b.get()->CopyDataTo(ptr_b.get());
+
+			std::unique_ptr<InnerTyp[]> ptr_c(new InnerTyp[size]);
+
+			for (int i = 0; i < size; i++)
+			{
+				ptr_c[i] = (InnerTyp) pow((double)ptr_a[i], (double)ptr_b[i]);
+			}
+
+			PtrVector out = return_data(a.get()->Shape, size, ptr_c.get());
+
+			return out;
+		}
+
+		//x = a**b
+		virtual void PowTo(PtrVector x, const PtrVector a, const PtrVector b) override
+		{
+			//a^b
+			const size_t size = a.get()->Size();
+
+			std::unique_ptr<InnerTyp[]> ptr_a(new InnerTyp[size]);
+			a.get()->CopyDataTo(ptr_a.get());
+
+			std::unique_ptr<InnerTyp[]> ptr_b(new InnerTyp[b.get()->Size()]);
+			b.get()->CopyDataTo(ptr_b.get());
+
+			std::unique_ptr<InnerTyp[]> ptr_c(new InnerTyp[size]);
+
+			for (int i = 0; i < size; i++)
+			{
+				ptr_c[i] = (InnerTyp)pow((double)ptr_a[i], (double)ptr_b[i]);
+			}
+
+			x = return_data(a.get()->Shape, size, ptr_c.get());
+
 			return;
 		}
 
 		//a**b
-		static PtrVector Pow(const PtrVector a, const PtrVector b)
+		virtual PtrVector Pow(const PtrVector a, const double& b) override
 		{
 			//a^b
-			InnerTyp* ptr_a;
-			a.get()->CopyDataTo(ptr_a);
-
-			InnerTyp* ptr_b;
-			b.get()->CopyDataTo(ptr_b);
-
 			const size_t size = a.get()->Size();
 
-			InnerTyp ptr_c[size];
+			std::unique_ptr<InnerTyp[]> ptr_a(new InnerTyp[size]);
+			a.get()->CopyDataTo(ptr_a.get());
+
+			double b_conv = (double)b;
+
+			std::unique_ptr<InnerTyp[]> ptr_c(new InnerTyp[size]);
 
 			for (int i = 0; i < size; i++)
 			{
-				ptr_c[i] = pow(ptr_a[i], ptr_b[i]);
+				ptr_c[i] = (InnerTyp)pow((double)ptr_a[i], b_conv);
 			}
 
-			return return_data(a.get()->Shape, size, ptr_c);
+			PtrVector out = return_data(a.get()->Shape, size, ptr_c.get());
+
+			return out;
 		}
 
 		//x = a**b
-		static void PowTo(PtrVector x, const PtrVector a, const PtrVector b)
+		virtual void PowTo(PtrVector x, const PtrVector a, const double& b) override
 		{
 			//a^b
-			InnerTyp* ptr_a;
-			a.get()->CopyDataTo(ptr_a);
-
-			InnerTyp* ptr_b;
-			b.get()->CopyDataTo(ptr_b);
-
 			const size_t size = a.get()->Size();
 
-			InnerTyp ptr_c[size];
+			std::unique_ptr<InnerTyp[]> ptr_a(new InnerTyp[size]);
+			a.get()->CopyDataTo(ptr_a.get());
+
+			double b_conv = (double)b;
+
+			std::unique_ptr<InnerTyp[]> ptr_c(new InnerTyp[size]);
 
 			for (int i = 0; i < size; i++)
 			{
-				ptr_c[i] = pow(ptr_a[i], ptr_b[i]);
+				ptr_c[i] = (InnerTyp)pow((double)ptr_a[i], b_conv);
 			}
 
-			x = return_data(a.get()->Shape, size, ptr_c);
+			x = return_data(a.get()->Shape, size, ptr_c.get());
+
 			return;
 		}
-
-		//a**b
-		static PtrVector Pow(const PtrVector a, const InnerTyp& b)
-		{
-			//a^b
-			InnerTyp* ptr_a;
-			a.get()->CopyDataTo(ptr_a);
-
-			const size_t size = a.get()->Size();
-
-			InnerTyp ptr_c[size];
-
-			for (int i = 0; i < size; i++)
-			{
-				ptr_c[i] = pow(ptr_a[i], b);
-			}
-
-			return return_data(a.get()->Shape, size, ptr_c);
-		}
-
-		//x = a**b
-		static void PowTo(PtrVector x, const PtrVector a, const InnerTyp& b)
-		{
-			//a^b
-			InnerTyp* ptr_a;
-			a.get()->CopyDataTo(ptr_a);
-
-			const size_t size = a.get()->Size();
-
-			InnerTyp ptr_c[size];
-
-			for (int i = 0; i < size; i++)
-			{
-				ptr_c[i] = pow(ptr_a[i], b);
-			}
-
-			x = return_data(a.get()->Shape, size, ptr_c);
-			return;
-		}
-
+		
 	private:
-		static PtrVector return_data(std::array<const size_t, DimCount> shape, const size_t& size, const InnerTyp* const data)
+		PtrVector return_data(std::array<const size_t, DimCount> shape, const size_t& size, const InnerTyp* const data)
 		{
-			Array<InnerTyp, DimCount> out_temp(shape, size, data);
-			return std::make_shared<Array<InnerTyp, 1>>(out_temp);
+			cpu_backend::Array<InnerTyp, DimCount> out_temp(shape, size, data);
+			return std::make_shared<cpu_backend::Array<InnerTyp, DimCount>>(out_temp);
 		}
 	};
 
@@ -296,254 +331,280 @@ namespace cpu_backend
 	* DOUBLE
 	*/
 	template<size_t DimCount>
-	class ArithmeticBasic<double, DimCount> : public core::IArithmeticBasic<double>
+	class ArithmeticBasic<double, DimCount> : public core::IArithmeticBasic<double, DimCount>
 	{
-		using PtrVector = std::shared_ptr<Array<double, 1>>;
+		using PtrVector = std::shared_ptr<core::IArray<double, DimCount>>;
 
 	public:
 
 		//a+b
-		static PtrVector Add(const PtrVector a, const PtrVector b)
+		virtual PtrVector Add(const PtrVector a, const PtrVector b) override
 		{
 			//a+b
-			double* ptr_a;
-			a.get()->CopyDataTo(ptr_a);
-
-			double* ptr_b;
-			b.get()->CopyDataTo(ptr_b);
-
 			const size_t size = a.get()->Size();
 
-			cblas_daxpby(size, 1, ptr_a, 1, 1, ptr_b, 1);
+			std::unique_ptr<double[]> ptr_a(new double[size]);
+			a.get()->CopyDataTo(ptr_a.get());
 
-			return return_data(a.get()->Shape, size, ptr_b);
+			std::unique_ptr<double[]> ptr_b(new double[b.get()->Size()]);
+			b.get()->CopyDataTo(ptr_b.get());
+
+			cblas_daxpby(size, 1, ptr_a.get(), 1, 1, ptr_b.get(), 1);
+
+			PtrVector out = return_data(a.get()->Shape, size, ptr_b.get());
+
+			return out;
 		}
 
 		//x = a+b
-		static void AddTo(PtrVector x, const PtrVector a, const PtrVector b)
+		virtual void AddTo(PtrVector x, const PtrVector a, const PtrVector b) override
 		{
 			//x = a+b
-			double* ptr_a;
-			a.get()->CopyDataTo(ptr_a);
-
-			double* ptr_b;
-			b.get()->CopyDataTo(ptr_b);
-
 			const size_t size = a.get()->Size();
 
-			cblas_daxpby(size, 1, ptr_a, 1, 1, ptr_b, 1);
+			std::unique_ptr<double[]> ptr_a(new double[size]);
+			a.get()->CopyDataTo(ptr_a.get());
 
-			x = return_data(a.get()->Shape, size, ptr_b);
+			std::unique_ptr<double[]> ptr_b(new double[b.get()->Size()]);
+			b.get()->CopyDataTo(ptr_b.get());
+
+			cblas_daxpby(size, 1, ptr_a.get(), 1, 1, ptr_b.get(), 1);
+
+			x = return_data(a.get()->Shape, size, ptr_b.get());
+
 			return;
 		}
 
 		//a-b
-		static PtrVector Sub(const PtrVector a, const PtrVector b)
+		virtual PtrVector Sub(const PtrVector a, const PtrVector b) override
 		{
 			//a-b
-			double* ptr_a;
-			a.get()->CopyDataTo(ptr_a);
-
-			double* ptr_b;
-			b.get()->CopyDataTo(ptr_b);
-
 			const size_t size = a.get()->Size();
 
-			cblas_daxpby(size, 1, ptr_a, 1, -1, ptr_b, 1);
+			std::unique_ptr<double[]> ptr_a(new double[size]);
+			a.get()->CopyDataTo(ptr_a.get());
 
-			return return_data(a.get()->Shape, size, ptr_b);
+			std::unique_ptr<double[]> ptr_b(new double[b.get()->Size()]);
+			b.get()->CopyDataTo(ptr_b.get());
+
+			cblas_daxpby(size, 1, ptr_a.get(), 1, -1, ptr_b.get(), 1);
+
+			PtrVector out = return_data(a.get()->Shape, size, ptr_b.get());
+
+			return out;
 		}
 
 		//x = a-b
-		static void SubTo(PtrVector x, const PtrVector a, const PtrVector& b)
+		virtual void SubTo(PtrVector x, const PtrVector a, const PtrVector& b) override
 		{
 			//x = a-b
-			double* ptr_a;
-			a.get()->CopyDataTo(ptr_a);
-
-			double* ptr_b;
-			b.get()->CopyDataTo(ptr_b);
 
 			const size_t size = a.get()->Size();
 
-			cblas_daxpby(size, 1, ptr_a, 1, -1, ptr_b, 1);
+			std::unique_ptr<double[]> ptr_a(new double[size]);
+			a.get()->CopyDataTo(ptr_a.get());
 
-			x = return_data(a.get()->Shape, size, ptr_b);
+			std::unique_ptr<double[]> ptr_b(new double[b.get()->Size()]);
+			b.get()->CopyDataTo(ptr_b.get());
+
+			cblas_daxpby(size, 1, ptr_a.get(), 1, -1, ptr_b.get(), 1);
+
+			x = return_data(a.get()->Shape, size, ptr_b.get());
+
 			return;
 		}
 
 		//a*b
-		static PtrVector Mul(const PtrVector a, const PtrVector b)
+		virtual PtrVector Mul(const PtrVector a, const PtrVector b) override
 		{
-			double* ptr_a;
-			a.get()->CopyDataTo(ptr_a);
-
-			double* ptr_b;
-			b.get()->CopyDataTo(ptr_b);
-
+			//a*b
 			const size_t size = a.get()->Size();
+
+			std::unique_ptr<double[]> ptr_a(new double[size]);
+			a.get()->CopyDataTo(ptr_a.get());
+
+			std::unique_ptr<double[]> ptr_b(new double[b.get()->Size()]);
+			b.get()->CopyDataTo(ptr_b.get());
+
+			std::unique_ptr<double[]> ptr_c(new double[size]);
 
 			for (int i = 0; i < size; i++)
 			{
-				ptr_b[i] = ptr_a[i] * ptr_b[i];
+				ptr_c[i] = ptr_a[i] * ptr_b[i];
 			}
 
-			return return_data(a.get()->Shape, size, ptr_b);
+			PtrVector out = return_data(a.get()->Shape, size, ptr_c.get());
+
+			return out;
 		}
 
 		//x = a*b
-		static void MulTo(PtrVector& x, const PtrVector a, const PtrVector b)
+		virtual void MulTo(PtrVector& x, const PtrVector a, const PtrVector b) override
 		{
 			//x = a*b
-			double* ptr_a;
-			a.get()->CopyDataTo(ptr_a);
-
-			double* ptr_b;
-			b.get()->CopyDataTo(ptr_b);
-
 			const size_t size = a.get()->Size();
+
+			std::unique_ptr<double[]> ptr_a(new double[size]);
+			a.get()->CopyDataTo(ptr_a.get());
+
+			std::unique_ptr<double[]> ptr_b(new double[b.get()->Size()]);
+			b.get()->CopyDataTo(ptr_b.get());
+
+			std::unique_ptr<double[]> ptr_c(new double[size]);
 
 			for (int i = 0; i < size; i++)
 			{
-				ptr_b[i] = ptr_a[i] * ptr_b[i];
+				ptr_c[i] = ptr_a[i] * ptr_b[i];
 			}
 
-			x = return_data(a.get()->Shape, size, ptr_b);
+			x = return_data(a.get()->Shape, size, ptr_c.get());
+
 			return;
 		}
 
 		//a/b
-		static PtrVector Div(const PtrVector a, const PtrVector b)
+		virtual PtrVector Div(const PtrVector a, const PtrVector b) override
 		{
 			//a/b
-			double* ptr_a;
-			a.get()->CopyDataTo(ptr_a);
-
-			double* ptr_b;
-			b.get()->CopyDataTo(ptr_b);
-
 			const size_t size = a.get()->Size();
+
+			std::unique_ptr<double[]> ptr_a(new double[size]);
+			a.get()->CopyDataTo(ptr_a.get());
+
+			std::unique_ptr<double[]> ptr_b(new double[b.get()->Size()]);
+			b.get()->CopyDataTo(ptr_b.get());
+
+			std::unique_ptr<double[]> ptr_c(new double[size]);
 
 			for (int i = 0; i < size; i++)
 			{
-				ptr_b[i] = ptr_a[i] / ptr_b[i];
+				ptr_c[i] = ptr_a[i] / ptr_b[i];
 			}
 
-			return return_data(a.get()->Shape, size, ptr_b);
+			PtrVector out = return_data(a.get()->Shape, size, ptr_c.get());
+
+			return out;
 		}
 
 		//x = a/b
-		static void DivTo(PtrVector x, const PtrVector a, const PtrVector b)
+		virtual void DivTo(PtrVector x, const PtrVector a, const PtrVector b) override
 		{
 			//x = a/b
-			double* ptr_a;
-			a.get()->CopyDataTo(ptr_a);
-
-			double* ptr_b;
-			b.get()->CopyDataTo(ptr_b);
-
 			const size_t size = a.get()->Size();
 
-			//double* ptr_c[size];
+			std::unique_ptr<double[]> ptr_a(new double[size]);
+			a.get()->CopyDataTo(ptr_a.get());
+
+			std::unique_ptr<double[]> ptr_b(new double[b.get()->Size()]);
+			b.get()->CopyDataTo(ptr_b.get());
+
+			std::unique_ptr<double[]> ptr_c(new double[size]);
 
 			for (int i = 0; i < size; i++)
 			{
-				ptr_b[i] = ptr_a[i] / ptr_b[i];
+				ptr_c[i] = ptr_a[i] / ptr_b[i];
 			}
 
-			x = return_data(a.get()->Shape, size, ptr_b);
+			x = return_data(a.get()->Shape, size, ptr_c.get());
+
 			return;
 		}
 
 		//a**b
-		static PtrVector Pow(const PtrVector a, const PtrVector b)
+		virtual PtrVector Pow(const PtrVector a, const PtrVector b) override
 		{
 			//a^b
-			double* ptr_a;
-			a.get()->CopyDataTo(ptr_a);
-
-			double* ptr_b;
-			b.get()->CopyDataTo(ptr_b);
-
 			const size_t size = a.get()->Size();
 
-			//double ptr_c[size];
+			std::unique_ptr<double[]> ptr_a(new double[size]);
+			a.get()->CopyDataTo(ptr_a.get());
+
+			std::unique_ptr<double[]> ptr_b(new double[b.get()->Size()]);
+			b.get()->CopyDataTo(ptr_b.get());
+
+			std::unique_ptr<double[]> ptr_c(new double[size]);
 
 			for (int i = 0; i < size; i++)
 			{
-				ptr_b[i] = pow(ptr_a[i], ptr_b[i]);
+				ptr_c[i] = pow(ptr_a[i], ptr_b[i]);
 			}
 
-			return return_data(a.get()->Shape, size, ptr_b);
+			PtrVector out = return_data(a.get()->Shape, size, ptr_c.get());
+
+			return out;
 		}
 
 		//x = a**b
-		static void PowTo(PtrVector x, const PtrVector a, const PtrVector b)
+		virtual void PowTo(PtrVector x, const PtrVector a, const PtrVector b) override
 		{
 			//a^b
-			double* ptr_a;
-			a.get()->CopyDataTo(ptr_a);
-
-			double* ptr_b;
-			b.get()->CopyDataTo(ptr_b);
-
 			const size_t size = a.get()->Size();
 
-			//double ptr_c[size];
+			std::unique_ptr<double[]> ptr_a(new double[size]);
+			a.get()->CopyDataTo(ptr_a.get());
+
+			std::unique_ptr<double[]> ptr_b(new double[b.get()->Size()]);
+			b.get()->CopyDataTo(ptr_b.get());
+
+			std::unique_ptr<double[]> ptr_c(new double[size]);
 
 			for (int i = 0; i < size; i++)
 			{
-				ptr_b[i] = pow(ptr_a[i], ptr_b[i]);
+				ptr_c[i] = pow(ptr_a[i], ptr_b[i]);
 			}
 
-			x = return_data(a.get()->Shape, size, ptr_b);
+			x = return_data(a.get()->Shape, size, ptr_c.get());
+
 			return;
 		}
 
 		//a**b
-		static PtrVector Pow(const PtrVector a, const double& b)
+		virtual PtrVector Pow(const PtrVector a, const double& b) override
 		{
 			//a^b
-			double* ptr_a;
-			a.get()->CopyDataTo(ptr_a);
-
 			const size_t size = a.get()->Size();
 
-			//double ptr_c[size];
+			std::unique_ptr<double[]> ptr_a(new double[size]);
+			a.get()->CopyDataTo(ptr_a.get());
+
+			std::unique_ptr<double[]> ptr_c(new double[size]);
 
 			for (int i = 0; i < size; i++)
 			{
-				ptr_a[i] = pow(ptr_a[i], b);
+				ptr_c[i] = pow(ptr_a[i], b);
 			}
 
-			return return_data(a.get()->Shape, size, ptr_a);
+			PtrVector out = return_data(a.get()->Shape, size, ptr_c.get());
+
+			return out;
 		}
 
 		//x = a**b
-		static void PowTo(PtrVector x, const PtrVector a, const double& b)
+		virtual void PowTo(PtrVector x, const PtrVector a, const double& b) override
 		{
 			//a^b
-			double* ptr_a;
-			a.get()->CopyDataTo(ptr_a);
-
 			const size_t size = a.get()->Size();
 
-			//double ptr_c[size];
+			std::unique_ptr<double[]> ptr_a(new double[size]);
+			a.get()->CopyDataTo(ptr_a.get());
+
+			std::unique_ptr<double[]> ptr_c(new double[size]);
 
 			for (int i = 0; i < size; i++)
 			{
-				ptr_a[i] = pow(ptr_a[i], b);
+				ptr_c[i] = pow(ptr_a[i], b);
 			}
 
-			x = return_data(a.get()->Shape, size, ptr_a);
+			x = return_data(a.get()->Shape, size, ptr_c.get());
+
 			return;
 		}
 
 	private:
-		static PtrVector return_data(std::array<const size_t, DimCount> shape, const size_t& size, const double* const data)
+		PtrVector return_data(std::array<const size_t, DimCount> shape, const size_t& size, const double* const data)
 		{
-			Array<double, DimCount> out_temp(shape, size, data);
-			return std::make_shared<Array<double, 1>>(out_temp);
+			cpu_backend::Array<double, DimCount> out_temp(shape, size, data);
+			return std::make_shared<Array<double, DimCount>>(out_temp);
 		}
 	};
 
@@ -551,260 +612,280 @@ namespace cpu_backend
 	* FLOAT
 	*/
 	template<size_t DimCount>
-	class ArithmeticBasic<float, DimCount> : public core::IArithmeticBasic<float>
+	class ArithmeticBasic<float, DimCount> : public core::IArithmeticBasic<float, DimCount>
 	{
-		using PtrVector = std::shared_ptr<Array<float, 1>>;
+		using PtrVector = std::shared_ptr<core::IArray<float, DimCount>>;
 
 	public:
 
 		//a+b
-		static PtrVector Add(const PtrVector a, const PtrVector b)
+		virtual PtrVector Add(const PtrVector a, const PtrVector b) override
 		{
 			//a+b
-			float* ptr_a;
-			a.get()->CopyDataTo(ptr_a);
-
-			float* ptr_b;
-			b.get()->CopyDataTo(ptr_b);
-
 			const size_t size = a.get()->Size();
 
-			cblas_saxpby(size, 1, ptr_a, 1, 1, ptr_b, 1);
+			std::unique_ptr<float[]> ptr_a(new float[size]);
+			a.get()->CopyDataTo(ptr_a.get());
 
-			return return_data(a.get()->Shape, size, ptr_b);
+			std::unique_ptr<float[]> ptr_b(new float[b.get()->Size()]);
+			b.get()->CopyDataTo(ptr_b.get());
+
+			cblas_saxpby(size, 1, ptr_a.get(), 1, 1, ptr_b.get(), 1);
+
+			PtrVector out = return_data(a.get()->Shape, size, ptr_b.get());
+
+			return out;
 		}
 
 		//x = a+b
-		static void AddTo(PtrVector x, const PtrVector a, const PtrVector b)
+		virtual void AddTo(PtrVector x, const PtrVector a, const PtrVector b) override
 		{
 			//x = a+b
-			float* ptr_a;
-			a.get()->CopyDataTo(ptr_a);
-
-			float* ptr_b;
-			b.get()->CopyDataTo(ptr_b);
-
 			const size_t size = a.get()->Size();
 
-			cblas_saxpby(size, 1, ptr_a, 1, 1, ptr_b, 1);
+			std::unique_ptr<float[]> ptr_a(new float[size]);
+			a.get()->CopyDataTo(ptr_a.get());
 
-			x = return_data(a.get()->Shape, size, ptr_b);
+			std::unique_ptr<float[]> ptr_b(new float[b.get()->Size()]);
+			b.get()->CopyDataTo(ptr_b.get());
+
+			cblas_saxpby(size, 1, ptr_a.get(), 1, 1, ptr_b.get(), 1);
+
+			x = return_data(a.get()->Shape, size, ptr_b.get());
+
 			return;
 		}
 
 		//a-b
-		static PtrVector Sub(const PtrVector a, const PtrVector b)
+		virtual PtrVector Sub(const PtrVector a, const PtrVector b) override
 		{
 			//a-b
-			float* ptr_a;
-			a.get()->CopyDataTo(ptr_a);
-
-			float* ptr_b;
-			b.get()->CopyDataTo(ptr_b);
-
 			const size_t size = a.get()->Size();
 
-			cblas_saxpby(size, 1, ptr_a, 1, -1, ptr_b, 1);
+			std::unique_ptr<float[]> ptr_a(new float[size]);
+			a.get()->CopyDataTo(ptr_a.get());
 
-			return return_data(a.get()->Shape, size, ptr_b);
+			std::unique_ptr<float[]> ptr_b(new float[b.get()->Size()]);
+			b.get()->CopyDataTo(ptr_b.get());
+
+			cblas_saxpby(size, 1, ptr_a.get(), 1, -1, ptr_b.get(), 1);
+
+			PtrVector out = return_data(a.get()->Shape, size, ptr_b.get());
+
+			return out;
 		}
 
 		//x = a-b
-		static void SubTo(PtrVector x, const PtrVector a, const PtrVector& b)
+		virtual void SubTo(PtrVector x, const PtrVector a, const PtrVector& b) override
 		{
 			//x = a-b
-			float* ptr_a;
-			a.get()->CopyDataTo(ptr_a);
-
-			float* ptr_b;
-			b.get()->CopyDataTo(ptr_b);
 
 			const size_t size = a.get()->Size();
 
-			cblas_saxpby(size, 1, ptr_a, 1, -1, ptr_b, 1);
+			std::unique_ptr<float[]> ptr_a(new float[size]);
+			a.get()->CopyDataTo(ptr_a.get());
 
-			x = return_data(a.get()->Shape, size, ptr_b);
+			std::unique_ptr<float[]> ptr_b(new float[b.get()->Size()]);
+			b.get()->CopyDataTo(ptr_b.get());
+
+			cblas_saxpby(size, 1, ptr_a.get(), 1, -1, ptr_b.get(), 1);
+
+			x = return_data(a.get()->Shape, size, ptr_b.get());
+
 			return;
 		}
 
 		//a*b
-		static PtrVector Mul(const PtrVector a, const PtrVector b)
+		virtual PtrVector Mul(const PtrVector a, const PtrVector b) override
 		{
-			float* ptr_a;
-			a.get()->CopyDataTo(ptr_a);
-
-			float* ptr_b;
-			b.get()->CopyDataTo(ptr_b);
-
+			//a*b
 			const size_t size = a.get()->Size();
 
-			float ptr_c[size];
+			std::unique_ptr<float[]> ptr_a(new float[size]);
+			a.get()->CopyDataTo(ptr_a.get());
+
+			std::unique_ptr<float[]> ptr_b(new float[b.get()->Size()]);
+			b.get()->CopyDataTo(ptr_b.get());
+
+			std::unique_ptr<float[]> ptr_c(new float[size]);
 
 			for (int i = 0; i < size; i++)
 			{
 				ptr_c[i] = ptr_a[i] * ptr_b[i];
 			}
 
-			return return_data(a.get()->Shape, size, ptr_c);
+			PtrVector out = return_data(a.get()->Shape, size, ptr_c.get());
+
+			return out;
 		}
 
 		//x = a*b
-		static void MulTo(PtrVector& x, const PtrVector a, const PtrVector b)
+		virtual void MulTo(PtrVector& x, const PtrVector a, const PtrVector b) override
 		{
 			//x = a*b
-			float* ptr_a;
-			a.get()->CopyDataTo(ptr_a);
-
-			float* ptr_b;
-			b.get()->CopyDataTo(ptr_b);
-
 			const size_t size = a.get()->Size();
 
-			float ptr_c[size];
+			std::unique_ptr<float[]> ptr_a(new float[size]);
+			a.get()->CopyDataTo(ptr_a.get());
+
+			std::unique_ptr<float[]> ptr_b(new float[b.get()->Size()]);
+			b.get()->CopyDataTo(ptr_b.get());
+
+			std::unique_ptr<float[]> ptr_c(new float[size]);
 
 			for (int i = 0; i < size; i++)
 			{
 				ptr_c[i] = ptr_a[i] * ptr_b[i];
 			}
 
-			x = return_data(a.get()->Shape, size, ptr_c);
+			x = return_data(a.get()->Shape, size, ptr_c.get());
+
 			return;
 		}
 
 		//a/b
-		static PtrVector Div(const PtrVector a, const PtrVector b)
+		virtual PtrVector Div(const PtrVector a, const PtrVector b) override
 		{
 			//a/b
-			float* ptr_a;
-			a.get()->CopyDataTo(ptr_a);
-
-			float* ptr_b;
-			b.get()->CopyDataTo(ptr_b);
-
 			const size_t size = a.get()->Size();
 
-			float ptr_c[size];
+			std::unique_ptr<float[]> ptr_a(new float[size]);
+			a.get()->CopyDataTo(ptr_a.get());
+
+			std::unique_ptr<float[]> ptr_b(new float[b.get()->Size()]);
+			b.get()->CopyDataTo(ptr_b.get());
+
+			std::unique_ptr<float[]> ptr_c(new float[size]);
 
 			for (int i = 0; i < size; i++)
 			{
 				ptr_c[i] = ptr_a[i] / ptr_b[i];
 			}
 
-			return return_data(a.get()->Shape, size, ptr_c);
+			PtrVector out = return_data(a.get()->Shape, size, ptr_c.get());
+
+			return out;
 		}
 
 		//x = a/b
-		static void DivTo(PtrVector x, const PtrVector a, const PtrVector b)
+		virtual void DivTo(PtrVector x, const PtrVector a, const PtrVector b) override
 		{
 			//x = a/b
-			float* ptr_a;
-			a.get()->CopyDataTo(ptr_a);
-
-			float* ptr_b;
-			b.get()->CopyDataTo(ptr_b);
-
 			const size_t size = a.get()->Size();
 
-			float ptr_c[size];
+			std::unique_ptr<float[]> ptr_a(new float[size]);
+			a.get()->CopyDataTo(ptr_a.get());
+
+			std::unique_ptr<float[]> ptr_b(new float[b.get()->Size()]);
+			b.get()->CopyDataTo(ptr_b.get());
+
+			std::unique_ptr<float[]> ptr_c(new float[size]);
 
 			for (int i = 0; i < size; i++)
 			{
 				ptr_c[i] = ptr_a[i] / ptr_b[i];
 			}
 
-			x = return_data(a.get()->Shape, size, ptr_c);
+			x = return_data(a.get()->Shape, size, ptr_c.get());
+
 			return;
 		}
 
 		//a**b
-		static PtrVector Pow(const PtrVector a, const PtrVector b)
+		virtual PtrVector Pow(const PtrVector a, const PtrVector b) override
 		{
 			//a^b
-			float* ptr_a;
-			a.get()->CopyDataTo(ptr_a);
-
-			float* ptr_b;
-			b.get()->CopyDataTo(ptr_b);
-
 			const size_t size = a.get()->Size();
 
-			float ptr_c[size];
+			std::unique_ptr<float[]> ptr_a(new float[size]);
+			a.get()->CopyDataTo(ptr_a.get());
+
+			std::unique_ptr<float[]> ptr_b(new float[b.get()->Size()]);
+			b.get()->CopyDataTo(ptr_b.get());
+
+			std::unique_ptr<float[]> ptr_c(new float[size]);
 
 			for (int i = 0; i < size; i++)
 			{
 				ptr_c[i] = pow(ptr_a[i], ptr_b[i]);
 			}
 
-			return return_data(a.get()->Shape, size, ptr_c);
+			PtrVector out = return_data(a.get()->Shape, size, ptr_c.get());
+
+			return out;
 		}
 
 		//x = a**b
-		static void PowTo(PtrVector x, const PtrVector a, const PtrVector b)
+		virtual void PowTo(PtrVector x, const PtrVector a, const PtrVector b) override
 		{
 			//a^b
-			float* ptr_a;
-			a.get()->CopyDataTo(ptr_a);
-
-			float* ptr_b;
-			b.get()->CopyDataTo(ptr_b);
-
 			const size_t size = a.get()->Size();
 
-			float ptr_c[size];
+			std::unique_ptr<float[]> ptr_a(new float[size]);
+			a.get()->CopyDataTo(ptr_a.get());
+
+			std::unique_ptr<float[]> ptr_b(new float[b.get()->Size()]);
+			b.get()->CopyDataTo(ptr_b.get());
+
+			std::unique_ptr<float[]> ptr_c(new float[size]);
 
 			for (int i = 0; i < size; i++)
 			{
 				ptr_c[i] = pow(ptr_a[i], ptr_b[i]);
 			}
 
-			x = return_data(a.get()->Shape, size, ptr_c);
+			x = return_data(a.get()->Shape, size, ptr_c.get());
+
 			return;
 		}
 
 		//a**b
-		static PtrVector Pow(const PtrVector a, const float& b)
+		virtual PtrVector Pow(const PtrVector a, const double& b) override
 		{
 			//a^b
-			float* ptr_a;
-			a.get()->CopyDataTo(ptr_a);
-
 			const size_t size = a.get()->Size();
 
-			float ptr_c[size];
+			std::unique_ptr<float[]> ptr_a(new float[size]);
+			a.get()->CopyDataTo(ptr_a.get());
+
+			std::unique_ptr<float[]> ptr_c(new float[size]);
 
 			for (int i = 0; i < size; i++)
 			{
 				ptr_c[i] = pow(ptr_a[i], b);
 			}
 
-			return return_data(a.get()->Shape, size, ptr_c);
+			PtrVector out = return_data(a.get()->Shape, size, ptr_c.get());
+
+			return out;
 		}
 
 		//x = a**b
-		static void PowTo(PtrVector x, const PtrVector a, const float& b)
+		virtual void PowTo(PtrVector x, const PtrVector a, const double& b) override
 		{
 			//a^b
-			float* ptr_a;
-			a.get()->CopyDataTo(ptr_a);
-
 			const size_t size = a.get()->Size();
 
-			float ptr_c[size];
+			std::unique_ptr<float[]> ptr_a(new float[size]);
+			a.get()->CopyDataTo(ptr_a.get());
+
+			std::unique_ptr<float[]> ptr_c(new float[size]);
 
 			for (int i = 0; i < size; i++)
 			{
 				ptr_c[i] = pow(ptr_a[i], b);
 			}
 
-			x = return_data(a.get()->Shape, size, ptr_c);
+			x = return_data(a.get()->Shape, size, ptr_c.get());
+
 			return;
 		}
 
 	private:
-		static PtrVector return_data(std::array<const size_t, DimCount> shape, const size_t& size, const float* const data)
+		PtrVector return_data(std::array<const size_t, DimCount> shape, const size_t& size, const float* const data)
 		{
-			Array<float, DimCount> out_temp(shape, size, data);
-			return std::make_shared<Array<float, 1>>(out_temp);
+			cpu_backend::Array<float, DimCount> out_temp(shape, size, data);
+			return std::make_shared<Array<float, DimCount>>(out_temp);
 		}
 	};
 

@@ -2,7 +2,6 @@
 #include "core\IArray.h"
 #include <algorithm>
 #include <vector>
-#include<algorithm>
 
 namespace cpu_backend
 {
@@ -36,17 +35,6 @@ namespace cpu_backend
 			}
 		}
 
-		Array(const size_t& size, const InnerTyp* const src) : _size(size), _data(std::vector<InnerTyp>(size)), Shape(std::array<const size_t, DimCount>())
-		{
-			Shape[0] = _size;
-			for (size_t i = 1; i < DimCount; i++)
-			{
-				Shape[i] = 1;
-			}
-
-			std::copy_n(src, _size, _data.data());
-		}
-
 		inline InnerTyp& operator[](const size_t i)
 		{
 			return _data[i];
@@ -57,14 +45,13 @@ namespace cpu_backend
 			return _data[i];
 		}
 
-		virtual size_t Size() override
+		virtual size_t Size() const override
 		{
 			return _size;
 		}
 
 		virtual bool CopyDataTo(InnerTyp* destination) override
 		{
-			destination = InnerTyp[_size];
 			std::copy_n(_data.data(), _size, destination);
 			return true;
 		}

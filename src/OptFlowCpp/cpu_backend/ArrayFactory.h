@@ -1,8 +1,8 @@
 #pragma once
-#include "..\core\IArrayFactory.h"
+#include "core\IArrayFactory.h"
 #include "Array.h"
 
-namespace cpu
+namespace cpu_backend
 {
 	template<class InnerTyp, size_t DimCount>
 	class ArrayFactory : public core::IArrayFactory<InnerTyp, DimCount>
@@ -18,7 +18,7 @@ namespace cpu
 				size *= shape[i];
 			}
 
-			return std::make_shared<cpu::Array<InnerTyp, DimCount>>(cpu::Array<InnerTyp, DimCount>(shape, size, fill_value));
+			return std::make_shared<cpu_backend::Array<InnerTyp, DimCount>>(cpu_backend::Array<InnerTyp, DimCount>(shape, size, fill_value));
 		}
 
 		virtual PtrArray Zeros(std::array<const size_t, DimCount> shape) override

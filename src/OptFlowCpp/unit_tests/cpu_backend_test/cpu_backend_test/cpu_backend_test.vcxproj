@@ -152,6 +152,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ArithmeticBasic_test.cpp" />
+    <ClCompile Include="ArithmeticChained_Test.cpp" />
     <ClCompile Include="array_test.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
