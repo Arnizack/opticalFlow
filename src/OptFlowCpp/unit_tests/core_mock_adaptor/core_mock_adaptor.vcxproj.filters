@@ -7,6 +7,8 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\lib\native\src\gtest\gtest-all.cc" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\lib\native\src\gmock\gmock-all.cc" />
+    <ClCompile Include="pyramid\FakeIPyramid.cpp" />
+    <ClCompile Include="pyramid\FakeIPyramidBuilder.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MockIArray.h" />
@@ -17,6 +19,9 @@
     <ClInclude Include="solver\problem\FakeGrayCrossProblem.h" />
     <ClInclude Include="solver\problem\MockIProblemFactory.h" />
     <ClInclude Include="solver\problem\FakeGrayCrossPenaltyProblem.h" />
+    <ClInclude Include="flow\MockIFlowScaler.h" />
+    <ClInclude Include="pyramid\FakeIPyramid.h" />
+    <ClInclude Include="pyramid\FakeIPyramidBuilder.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -53,6 +53,7 @@
   <ItemGroup>
     <ClCompile Include="GNCPenaltySolverTest.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="PyramidSolverTest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\core\core.vcxproj">

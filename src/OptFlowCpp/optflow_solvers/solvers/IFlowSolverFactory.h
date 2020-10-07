@@ -1,7 +1,7 @@
 #pragma once
 #include"core/solver/IFlowFieldSolver.h"
 #include"../framework.h"
-namespace opticalflow_solvers
+namespace optflow_solvers
 {
 
 	class IFlowSolverFactory

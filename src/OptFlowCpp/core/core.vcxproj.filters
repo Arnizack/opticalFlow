@@ -90,16 +90,28 @@
     <ClInclude Include="solver\problem\IProblemFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="image\IColorScalable.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="image\IGrayscaleScalable.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="image\IScalable.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="pyramid\IPyramid.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="image\IGrayscaleScaler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="image\IColorScaler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="pyramid\IPyramidBuilder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IScaler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="flow\IFlowScaler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="flow\ICrossFlowFilter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="solver\problem\ILinearProblem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

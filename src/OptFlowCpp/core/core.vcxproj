@@ -19,16 +19,24 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="flow\ICrossFlowFilter.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="flow\IFlowScaler.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="IArray.h" />
     <ClInclude Include="IArrayFactory.h" />
     <ClInclude Include="IContainer.h" />
     <ClInclude Include="image\IColorConvolution.h" />
-    <ClInclude Include="image\IColorScalable.h" />
+    <ClInclude Include="image\IColorScaler.h" />
     <ClInclude Include="image\IGrayscaleConvolution.h" />
     <ClInclude Include="image\IGrayscaleFilter.h" />
     <ClInclude Include="image\IColorFilter.h" />
-    <ClInclude Include="image\IGrayscaleScalable.h" />
-    <ClInclude Include="image\IScalable.h" />
+    <ClInclude Include="image\IGrayscaleScaler.h" />
+    <ClInclude Include="IScaler.h" />
     <ClInclude Include="pyramid\IPyramid.h" />
     <ClInclude Include="penalty\IBlendablePenalty.h" />
     <ClInclude Include="penalty\IPenalty.h" />
@@ -38,6 +46,10 @@
     <ClInclude Include="linalg\ILinearOperator.h" />
     <ClInclude Include="linalg\IOperator.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="pyramid\IPyramidBuilder.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="solver\IFlowFieldSolver.h" />
     <ClInclude Include="solver\ILinearSolver.h" />
     <ClInclude Include="solver\problem\IColor2FrameProblem.h" />
@@ -46,6 +58,10 @@
     <ClInclude Include="solver\problem\IGrayCrossFilterProblem.h" />
     <ClInclude Include="solver\problem\IGrayPenaltyCrossProblem.h" />
     <ClInclude Include="solver\problem\IGrayPenaltyProblem.h" />
+    <ClInclude Include="solver\problem\ILinearProblem.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="solver\problem\IPenaltyProblem.h" />
     <ClInclude Include="solver\problem\IProblemFactory.h" />
   </ItemGroup>

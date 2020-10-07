@@ -2,19 +2,20 @@
 #include "..\IArray.h"
 #include "..\linalg\ILinearOperator.h"
 #include <memory>
+#include"problem/ILinearProblem.h"
 
 namespace core
 {
 
-	template<class InnerTyp, size_t DimCount, class SettingsTyp>
+	template<class InnerTyp>
 	class ILinearSolver
 	{
 	public:
 		using PtrVector = std::shared_ptr<IArray<InnerTyp, 1>>;
-		using PtrMatrix = std::shared_ptr<linalg::ILinearOperator<PtrVector, PtrVector>>;
+		
 
-		virtual PtrVector Solve(const PtrMatrix input_matrix, const PtrVector input_vector) = 0;
-		virtual PtrVector Solve(const PtrMatrix input_matrix, const PtrVector input_vector, const PtrVector initial_guess) = 0;
+		virtual PtrVector Solve(std::shared_ptr < ILinearProblem<InnerTyp>> problem) = 0;
+		virtual PtrVector Solve(std::shared_ptr < ILinearProblem<InnerTyp>> problem, const PtrVector initial_guess) = 0;
 
 
 	};

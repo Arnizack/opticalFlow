@@ -50,6 +50,18 @@
     <IntDir>$(SolutionDir)\bin\intermediates\$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
   </PropertyGroup>
   <ItemGroup>
+    <ClInclude Include="flow\MockIFlowScaler.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="pyramid\FakeIPyramid.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="pyramid\FakeIPyramidBuilder.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="solver\problem\FakeGrayCrossPenaltyProblem.h" />
     <ClInclude Include="MockIArray.h" />
     <ClInclude Include="penalty\MockIBlenablePenalty.h" />
@@ -60,6 +72,11 @@
     <ClInclude Include="solver\problem\MockIProblemFactory.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="pyramid\FakeIPyramid.cpp" />
+    <ClCompile Include="pyramid\FakeIPyramidBuilder.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="solver\problem\FakeGrayCrossPenaltyProblem.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="solver\problem\FakeGrayCrossProblem.cpp" />

@@ -164,9 +164,21 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
+    <ClInclude Include="linearsystems\ISunBakerLSBuilder.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="solvers\GNCPenaltySolver.h" />
     <ClInclude Include="solvers\IFlowSolverFactory.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="solvers\IncrementalSolver.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="solvers\LinearizationSolver.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="solvers\PyramidSolver.h" />
   </ItemGroup>
   <ItemGroup>
@@ -177,11 +189,20 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="solvers\IncrementalSolver.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="solvers\LinearizationSolver.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="solvers\PyramidSolver.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\core\core.vcxproj">
       <Project>{f7e80072-58dd-410b-827e-f95e620af895}</Project>
+      <LinkLibraryDependencies>true</LinkLibraryDependencies>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
