@@ -12,6 +12,6 @@ namespace optflow_solvers
 		
 		virtual void SetFramePair(PtrGrayImg first_image, PtrGrayImg second_image) = 0;
 		virtual void UpdateParameter(PtrFlowField linearizazion_points, double relaxation) = 0;
-		virtual std::shared_ptr<core::ILinearProblem<float>> Create() = 0;
+		virtual std::shared_ptr<core::ILinearProblem<double>> Create() = 0;
 	};
 }

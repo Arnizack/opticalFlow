@@ -52,6 +52,7 @@
   </PropertyGroup>
   <ItemGroup>
     <ClCompile Include="GNCPenaltySolverTest.cpp" />
+    <ClCompile Include="LinearizationSolverTest.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PyramidSolverTest.cpp" />
   </ItemGroup>

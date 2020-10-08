@@ -19,73 +19,25 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="flow\ICrossFlowFilter.h">
+    <ClInclude Include="linearsystems\FakeISunBakerLSBuilder.h">
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="flow\IFlowScaler.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="IArray.h" />
-    <ClInclude Include="IArrayFactory.h" />
-    <ClInclude Include="IContainer.h" />
-    <ClInclude Include="image\IColorConvolution.h" />
-    <ClInclude Include="image\IColorScaler.h" />
-    <ClInclude Include="image\IGrayscaleConvolution.h" />
-    <ClInclude Include="image\IGrayscaleFilter.h" />
-    <ClInclude Include="image\IColorFilter.h" />
-    <ClInclude Include="image\IGrayscaleScaler.h" />
-    <ClInclude Include="image\IGrayWarper.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="IReshaper.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="IScaler.h" />
-    <ClInclude Include="pyramid\IPyramid.h" />
-    <ClInclude Include="penalty\IBlendablePenalty.h" />
-    <ClInclude Include="penalty\IPenalty.h" />
-    <ClInclude Include="IStatistics.h" />
-    <ClInclude Include="linalg\IArithmeticBasic.h" />
-    <ClInclude Include="linalg\IArithmeticChained.h" />
-    <ClInclude Include="linalg\ILinearOperator.h" />
-    <ClInclude Include="linalg\IOperator.h" />
-    <ClInclude Include="pch.h" />
-    <ClInclude Include="pyramid\IPyramidBuilder.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="solver\IFlowFieldSolver.h" />
-    <ClInclude Include="solver\ILinearSolver.h" />
-    <ClInclude Include="solver\problem\IColor2FrameProblem.h" />
-    <ClInclude Include="solver\problem\IColorCrossFilterProblem.h" />
-    <ClInclude Include="solver\problem\IGray2FrameProblem.h" />
-    <ClInclude Include="solver\problem\IGrayCrossFilterProblem.h" />
-    <ClInclude Include="solver\problem\IGrayPenaltyCrossProblem.h" />
-    <ClInclude Include="solver\problem\IGrayPenaltyProblem.h" />
-    <ClInclude Include="solver\problem\ILinearProblem.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="solver\problem\IPenaltyProblem.h" />
-    <ClInclude Include="solver\problem\IProblemFactory.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="pch.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    <ClCompile Include="linearsystems\FakeISunBakerLSBuilder.cpp">
+      <SubType>
+      </SubType>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{f7e80072-58dd-410b-827e-f95e620af895}</ProjectGuid>
-    <RootNamespace>core</RootNamespace>
+    <ProjectGuid>{12cf47a0-0502-485f-bdb0-72d80f35f3e0}</ProjectGuid>
+    <RootNamespace>optflow_solvers</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -159,8 +111,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -175,8 +126,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -191,8 +141,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -207,8 +156,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -219,5 +167,12 @@
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
+    <Import Project="..\..\packages\gmock.1.10.0\build\native\gmock.targets" Condition="Exists('..\..\packages\gmock.1.10.0\build\native\gmock.targets')" />
   </ImportGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\packages\gmock.1.10.0\build\native\gmock.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\gmock.1.10.0\build\native\gmock.targets'))" />
+  </Target>
 </Project>

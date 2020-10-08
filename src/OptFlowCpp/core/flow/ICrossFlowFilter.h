@@ -6,7 +6,7 @@
 namespace core
 {
 	using PtrFlowField = std::shared_ptr<IArray<double, 3>>;
-	using PtrColorImage = std::shared_ptr<IArray<double, 3>>;
+	using PtrColorImage = std::shared_ptr<IArray<float, 3>>;
 	class ICrossFlowFilter : public IOperator<PtrFlowField,PtrFlowField>
 	{
 	public:

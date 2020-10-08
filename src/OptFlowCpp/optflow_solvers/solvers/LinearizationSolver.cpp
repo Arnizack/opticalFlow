@@ -7,33 +7,88 @@ namespace optflow_solvers
 {
     using PtrFlowField = std::shared_ptr<core::IArray<double, 3> >;
     using PtrProblemTyp = std::shared_ptr<core::IGrayPenaltyCrossProblem>;
+
+    LinearizationSolver::LinearizationSolver(
+        double start_relaxation, double end_relaxation, double relaxation_steps, 
+        std::shared_ptr<core::ICrossFlowFilter> cross_filter, 
+        std::shared_ptr<ISunBakerLSBuilder> linear_system_builder, 
+        PtrLinearSolver linear_solver, 
+        std::shared_ptr<core::IReshaper<double>> flow_reshaper, 
+        std::shared_ptr<core::IGrayWarper> warper, 
+        std::shared_ptr<core::IArrayFactory<double, 3>> flow_factory, 
+        std::shared_ptr<core::IArithmeticBasic<double, 3>> flow_arithmetic)
+
+        :
+        _start_relaxation(start_relaxation),
+        _end_relaxation(end_relaxation),
+        _relaxation_steps(relaxation_steps),
+        _cross_filter(cross_filter),
+        _linear_system_builder(linear_system_builder),
+        _linear_solver(linear_solver),
+        _flow_reshaper(flow_reshaper),
+        _warper(warper),
+        _flow_factory(flow_factory),
+        _flow_arithmetic(flow_arithmetic)
+    {
+    }
+
     PtrFlowField LinearizationSolver::Solve(const PtrProblemTyp problem)
     {
-        return PtrFlowField();
+        size_t width = problem->FirstFrame->Shape[1];
+        size_t height = problem->FirstFrame->Shape[0];
+        PtrFlowField initial_guess = _flow_factory->Zeros({ 2,height,width });
+
+        return Solve(problem, initial_guess);
     }
     PtrFlowField LinearizationSolver::Solve(const PtrProblemTyp problem, PtrFlowField initial_guess)
     {
-        _linear_system_builder->SetFramePair(problem->FirstFrame, problem->SecondFrame);
+        size_t width = problem->FirstFrame->Shape[1];
+        size_t height = problem->FirstFrame->Shape[0];
+
+        auto warped_img = _warper->Warp(problem->SecondFrame, initial_guess);
+        _linear_system_builder->SetFramePair(problem->FirstFrame, warped_img);
+
+        auto delta_initial_flow = _flow_factory->Zeros({ 2,height,width });
+        auto flow_before_filter = _flow_factory->Zeros({ 2,height,width });
+        auto flow_after_filter = _flow_factory->Zeros({ 2,height,width });
+
+        _cross_filter->SetCrossFilterImage(problem->CrossFilterImage);
+
         for (size_t relaxation_iter = 0; relaxation_iter < _relaxation_steps; relaxation_iter++)
         {
             double relaxation = ComputeRelaxation(relaxation_iter);
-            _linear_system_builder->UpdateParameter(initial_guess, relaxation);
-            auto linear_problem = _linear_system_builder->Create();
-            _flow_reshaper->Reshape1D(initial_guess)
-            //_linear_solver->Solve(linear_problem, initial_guess);
+            _linear_system_builder->UpdateParameter(delta_initial_flow, relaxation);
+            std::shared_ptr<core::ILinearProblem<double>> linear_problem 
+                = _linear_system_builder->Create();
+
+            using PtrVector = std::shared_ptr<core::IArray<double, 1>>;
+
+            PtrVector guess_vector = _flow_reshaper->Reshape1D(delta_initial_flow);
+            PtrVector result_vector = _linear_solver->Solve(linear_problem, guess_vector);
             
+            delta_initial_flow = _flow_reshaper->Reshape3D(result_vector, {2,height,width});
+
+             _flow_arithmetic->AddTo(flow_before_filter, initial_guess, delta_initial_flow);
+             _cross_filter->SetFilterInfluence(relaxation);
+             _cross_filter->ApplyTo(flow_after_filter, flow_before_filter);
+
+             _flow_arithmetic->SubTo(delta_initial_flow, flow_after_filter, initial_guess);
         }
-        return nullptr;
+        return flow_after_filter;
     }
     double LinearizationSolver::ComputeRelaxation(size_t relaxation_iter)
     {
-        double exponent = exp(_start_relaxation);
-        double bruch_oben =  exp(_end_relaxation) - exp(_start_relaxation);
-        double bruch_unten = _relaxation_steps - 1;
-        double x = relaxation_iter;
+        if(_relaxation_steps >1)
+        {
+            double exponent = exp(_start_relaxation);
+            double bruch_oben =  exp(_end_relaxation) - exp(_start_relaxation);
+            double bruch_unten = _relaxation_steps - 1;
+            double x = relaxation_iter;
 
-        exponent += (bruch_oben / bruch_unten) * x;
+            exponent += (bruch_oben / bruch_unten) * x;
 
-        return log(exponent);
+            return log(exponent);
+        }
+        return _start_relaxation;
     }
 }
