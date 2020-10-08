@@ -22,6 +22,12 @@
     <ClInclude Include="flow\MockIFlowScaler.h" />
     <ClInclude Include="pyramid\FakeIPyramid.h" />
     <ClInclude Include="pyramid\FakeIPyramidBuilder.h" />
+    <ClInclude Include="flow\MockICrossFlowFilter.h" />
+    <ClInclude Include="solver\problem\MockILinearProblem.h" />
+    <ClInclude Include="image\MockIGrayWarper.h" />
+    <ClInclude Include="linalg\MockIArithmeticBasic.h" />
+    <ClInclude Include="MockIReshaperD.h" />
+    <ClInclude Include="solver\MockILinearSolverD.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -5,6 +5,10 @@
 #include"core/solver/ILinearSolver.h"
 #include"../linearsystems/ISunBakerLSBuilder.h"
 #include"core/IReshaper.h"
+#include"core/image/IGrayWarper.h"
+#include"core/IArrayFactory.h"
+#include"core/linalg/IArithmeticBasic.h"
+#include"core/flow/ICrossFlowFilter.h"
 
 namespace optflow_solvers
 {
@@ -12,8 +16,20 @@ namespace optflow_solvers
 
 	class LinearizationSolver : public core::IFlowFieldSolver<PtrProblemTyp>
 	{
+		using PtrLinearSolver = std::shared_ptr<core::ILinearSolver<double>>;
 	public:
-		LinearizationSolver(double min_relaxation, double max_relaxtion);
+		LinearizationSolver(
+			double start_relaxation,
+			double end_relaxation,
+			double relaxation_steps,
+			std::shared_ptr<core::ICrossFlowFilter> cross_filter,
+			std::shared_ptr<ISunBakerLSBuilder> linear_system_builder,
+			PtrLinearSolver linear_solver,
+			std::shared_ptr<core::IReshaper<double>> flow_reshaper,
+			std::shared_ptr<core::IGrayWarper> warper,
+			std::shared_ptr<core::IArrayFactory<double, 3>> flow_factory,
+			std::shared_ptr<core::IArithmeticBasic<double, 3>> flow_arithmetic
+		);
 
 		// Inherited via IFlowFieldSolver
 		virtual PtrFlowField Solve(const PtrProblemTyp problem) override;
@@ -27,10 +43,12 @@ namespace optflow_solvers
 		double _end_relaxation;
 		double _relaxation_steps;
 
-		std::shared_ptr<core::IColorCrossFilterProblem> _cross_filter;
+		std::shared_ptr<core::ICrossFlowFilter> _cross_filter;
 		std::shared_ptr<ISunBakerLSBuilder> _linear_system_builder;
-		using PtrLinearSolver = std::shared_ptr<core::ILinearSolver<float>>;
 		PtrLinearSolver _linear_solver;
-		std::shared_ptr<core::IReshaper<float>> _flow_reshaper;
+		std::shared_ptr<core::IReshaper<double>> _flow_reshaper;
+		std::shared_ptr<core::IGrayWarper> _warper;
+		std::shared_ptr<core::IArrayFactory<double, 3>> _flow_factory;
+		std::shared_ptr<core::IArithmeticBasic<double, 3>> _flow_arithmetic;
 	};
 }
