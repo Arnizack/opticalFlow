@@ -30,5 +30,6 @@ namespace optflow_solvers
 		std::shared_ptr<ISunBakerLSBuilder> _linear_system_builder;
 		using PtrLinearSolver = std::shared_ptr<core::ILinearSolver<float>>;
 		PtrLinearSolver _linear_solver;
+
 	};
 }

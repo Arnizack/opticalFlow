@@ -114,6 +114,9 @@
     <ClInclude Include="solver\problem\ILinearProblem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="IReshaper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
