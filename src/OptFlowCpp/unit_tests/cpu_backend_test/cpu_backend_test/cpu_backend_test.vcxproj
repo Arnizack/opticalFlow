@@ -155,6 +155,7 @@
     <ClCompile Include="ArithmeticChained_Test.cpp" />
     <ClCompile Include="array_test.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Reshape_Test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\core\core.vcxproj">

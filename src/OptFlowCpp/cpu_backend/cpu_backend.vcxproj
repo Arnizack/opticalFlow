@@ -168,6 +168,7 @@
     <ClInclude Include="linalg\ArithmeticBasic.h" />
     <ClInclude Include="linalg\ArithmeticChained.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="Reshaper.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
