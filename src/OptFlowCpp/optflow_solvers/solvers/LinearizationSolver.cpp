@@ -19,7 +19,7 @@ namespace optflow_solvers
             double relaxation = ComputeRelaxation(relaxation_iter);
             _linear_system_builder->UpdateParameter(initial_guess, relaxation);
             auto linear_problem = _linear_system_builder->Create();
-
+            _flow_reshaper->Reshape1D(initial_guess)
             //_linear_solver->Solve(linear_problem, initial_guess);
             
         }

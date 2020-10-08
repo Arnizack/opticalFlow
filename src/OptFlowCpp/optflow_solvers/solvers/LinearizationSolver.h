@@ -4,6 +4,7 @@
 #include"core/flow/ICrossFlowFilter.h"
 #include"core/solver/ILinearSolver.h"
 #include"../linearsystems/ISunBakerLSBuilder.h"
+#include"core/IReshaper.h"
 
 namespace optflow_solvers
 {
@@ -30,6 +31,6 @@ namespace optflow_solvers
 		std::shared_ptr<ISunBakerLSBuilder> _linear_system_builder;
 		using PtrLinearSolver = std::shared_ptr<core::ILinearSolver<float>>;
 		PtrLinearSolver _linear_solver;
-
+		std::shared_ptr<core::IReshaper<float>> _flow_reshaper;
 	};
 }
