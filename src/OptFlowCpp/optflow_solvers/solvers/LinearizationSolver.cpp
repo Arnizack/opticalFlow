@@ -45,7 +45,8 @@ namespace optflow_solvers
         size_t width = problem->FirstFrame->Shape[1];
         size_t height = problem->FirstFrame->Shape[0];
 
-        auto warped_img = _warper->Warp(problem->SecondFrame, initial_guess);
+        _warper->SetImage(problem->SecondFrame);
+        auto warped_img = _warper->Warp(initial_guess);
         _linear_system_builder->SetFramePair(problem->FirstFrame, warped_img);
 
         auto delta_initial_flow = _flow_factory->Zeros({ 2,height,width });

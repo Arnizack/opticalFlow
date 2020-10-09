@@ -83,7 +83,8 @@ namespace optflow_solvers
 			EXPECT_CALL(*mock_flow_reshaper, Reshape3D(_,_)).Times(3);
 
 			EXPECT_CALL(*mock_linear_solver, Solve(_, _)).Times(3);
-			EXPECT_CALL(*mock_warper, Warp(_,_)).Times(1);
+			EXPECT_CALL(*mock_warper, Warp(_)).Times(1);
+			EXPECT_CALL(*mock_warper, SetImage(_)).Times(1);
 
 			solver.Solve(fake_flow_problem);
 		}
