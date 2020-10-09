@@ -179,6 +179,7 @@
     </ClInclude>
     <ClInclude Include="linalg\ArithmeticBasic.h" />
     <ClInclude Include="linalg\ArithmeticChained.h" />
+    <ClInclude Include="linalg\Norm.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Reshaper.h" />
     <ClInclude Include="Statistics.h" />

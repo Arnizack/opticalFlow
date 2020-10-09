@@ -11,7 +11,7 @@ namespace cpu_backend
 		virtual std::shared_ptr < core::IArray<InnerTyp, 1>>
 			Reshape1D(std::shared_ptr<core::IContainer<InnerTyp>> container) override
 		{
-			std::array<const size_t, 1> shape = { container.get()->Size() };
+			std::array<const size_t, 1> shape = { (*container).Size() };
 			return return_data<1>(shape, container);
 		}
 
@@ -32,13 +32,7 @@ namespace cpu_backend
 		template<size_t DimCount>
 		std::shared_ptr < core::IArray<InnerTyp, DimCount>> return_data(std::array<const size_t, DimCount>& shape, std::shared_ptr<core::IContainer<InnerTyp>>& container)
 		{
-			const size_t size = container.get()->Size();
-
-			std::unique_ptr<InnerTyp[]> ptr(new InnerTyp[size]);
-			container.get()->CopyDataTo(ptr.get());
-
-			Array<InnerTyp, DimCount> out(shape, size, ptr.get());
-			return std::make_shared<Array<InnerTyp, DimCount>>(out);
+			return std::make_shared<Array<InnerTyp, DimCount>>(Array<InnerTyp, DimCount>(shape, *container));
 		}
 	};
 }
