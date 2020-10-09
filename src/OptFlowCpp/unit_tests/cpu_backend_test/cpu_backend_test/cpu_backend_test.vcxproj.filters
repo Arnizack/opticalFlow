@@ -8,6 +8,8 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\lib\native\src\gmock\gmock-all.cc" />
     <ClCompile Include="ArithmeticChained_Test.cpp" />
     <ClCompile Include="Reshape_Test.cpp" />
+    <ClCompile Include="image\BicubicScalarTest.cpp" />
+    <ClCompile Include="image\inner\convolution1DTest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

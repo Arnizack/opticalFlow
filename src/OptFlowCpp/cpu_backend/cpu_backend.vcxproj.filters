@@ -36,6 +36,12 @@
     <ClInclude Include="image\warper\InterpolateBicubic.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Reshaper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="image\inner\convolution1D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">

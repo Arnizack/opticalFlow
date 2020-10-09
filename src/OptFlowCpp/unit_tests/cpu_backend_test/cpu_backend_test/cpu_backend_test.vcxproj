@@ -154,6 +154,11 @@
     <ClCompile Include="ArithmeticBasic_test.cpp" />
     <ClCompile Include="ArithmeticChained_Test.cpp" />
     <ClCompile Include="array_test.cpp" />
+    <ClCompile Include="image\BicubicScalarTest.cpp" />
+    <ClCompile Include="image\inner\convolution1DTest.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Reshape_Test.cpp" />
   </ItemGroup>

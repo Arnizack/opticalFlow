@@ -15,11 +15,11 @@ namespace core
 			MOCK_METHOD2(
 				Reshape2D,
 				std::shared_ptr < IArray<double, 2>>(std::shared_ptr<IContainer<double>> container,
-					std::array<size_t, 2> shape));
+					std::array<const size_t, 2> shape));
 
 			MOCK_METHOD2(
 				Reshape3D, std::shared_ptr < IArray<double, 3>>(std::shared_ptr<IContainer<double>>  container,
-					std::array<size_t, 3> shape) );
+					std::array<const size_t, 3> shape) );
 		};
 	}
 }
