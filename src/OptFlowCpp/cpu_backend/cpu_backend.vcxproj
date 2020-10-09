@@ -165,11 +165,23 @@
   <ItemGroup>
     <ClInclude Include="Array.h" />
     <ClInclude Include="ArrayFactory.h" />
+    <ClInclude Include="image\warper\GrayWarper.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="image\warper\InterpolateBicubic.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="linalg\ArithmeticBasic.h" />
     <ClInclude Include="linalg\ArithmeticChained.h" />
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="image\warper\GrayWarper.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

@@ -30,9 +30,18 @@
     <ClInclude Include="linalg\ArithmeticChained.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="image\warper\GrayWarper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="image\warper\InterpolateBicubic.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="image\warper\GrayWarper.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

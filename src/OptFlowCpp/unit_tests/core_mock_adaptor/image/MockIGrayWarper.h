@@ -11,7 +11,8 @@ namespace core
 		public:
 			using PtrGrayImg = std::shared_ptr<IArray<float, 2>>;
 			using PtrFlowField = std::shared_ptr<IArray<double, 3>>;
-			MOCK_METHOD2(Warp, PtrGrayImg(PtrGrayImg Image, PtrFlowField Flow));
+			MOCK_METHOD1(Warp, PtrGrayImg(PtrFlowField Flow));
+			MOCK_METHOD1(SetImage, void(PtrGrayImg Image));
 
 		};
 	}

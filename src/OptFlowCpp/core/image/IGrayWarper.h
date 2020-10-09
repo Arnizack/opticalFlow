@@ -10,7 +10,9 @@ namespace core
 		using PtrGrayImg = std::shared_ptr<IArray<float, 2>>;
 		using PtrFlowField = std::shared_ptr<IArray<double, 3>>;
 
-		virtual PtrGrayImg Warp(PtrGrayImg Image, PtrFlowField Flow) = 0;
+		virtual void SetImage(PtrGrayImg Image) = 0;
+
+		virtual PtrGrayImg Warp(PtrFlowField Flow) = 0;
 
 	};
 }
