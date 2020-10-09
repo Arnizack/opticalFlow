@@ -169,6 +169,7 @@
     <ClInclude Include="linalg\ArithmeticChained.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Reshaper.h" />
+    <ClInclude Include="Statistics.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">

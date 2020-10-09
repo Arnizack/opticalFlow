@@ -19,7 +19,7 @@ namespace core
 		virtual PtrVector Sub(const PtrVector a, const PtrVector b) = 0;
 
 		//x = a-b
-		virtual void SubTo(PtrVector x, const PtrVector a, const PtrVector& b) = 0;
+		virtual void SubTo(PtrVector x, const PtrVector a, const PtrVector b) = 0;
 
 		//a*b
 		virtual PtrVector Mul(const PtrVector a, const PtrVector b) = 0;
