@@ -40,5 +40,20 @@ namespace cpu_backend
 				EXPECT_EQ(actual[i], expected[i]);
 
 		}
+
+		TEST(InnerConv1DTest, Speed)
+		{
+			const int width = 1920;
+			const int heigth = 1080;
+			auto img = std::make_shared<std::array<float, width * heigth>>()  ;
+			std::array<float, 5> kernel;
+			auto dst = std::make_shared<std::array<float, width* heigth>>() ;
+			Convolute1D<float, Padding::ZEROS, Direction::Y>(img->data(), width, heigth, kernel.data(), 4, dst->data());
+			printf("Speed Test\n");
+			EXPECT_EQ(1, 1);
+
+		}
+
+
 	}
 }

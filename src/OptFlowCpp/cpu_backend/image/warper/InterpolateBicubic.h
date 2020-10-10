@@ -84,4 +84,46 @@ namespace cpu_backend
 		//{ {a, c, -3 a + 3 b - 2 c - d, 2 a - 2 b + c + d}, { i, k, -3 i + 3 j - 2 k - l, 2 i - 2 j + k + l }, { -3 a + 3 e - 2 i - m, -3 c + 3 g - 2 k - o, 3 d - 3 h + 2 l - 3 (-3 a + 3 e - 2 i - m) + 3 (-3 b + 3 f - 2 j - n) - 2 (-3 c + 3 g - 2 k - o) + p, -3 c - 3 d + 3 g + 3 h - 2 k - 2 l + 2 (-3 a + 3 e - 2 i - m) - 2 (-3 b + 3 f - 2 j - n) - o - p }, 
 		
 	}
+
+	inline float BicubicApplyScalars(float* scalars, float x, float y)
+	{
+		/*
+		x \in [0,1]
+		y \in [0,1]
+
+		Formular
+			| a_00 a_01 a_02 a_03 |
+		S =	| a_10 a_11 a_12 a_13 |
+			| a_20 a_21 a_22 a_23 |
+			| a_30 a_31 a_32 a_33 |
+
+									|1  |
+		result = 	[1,x,x^2,x^3] S |y  |
+									|y^2|
+									|y^3|
+
+
+		*/
+
+		float& a = scalars[0];
+		float& b = scalars[1];
+		float& c = scalars[2];
+		float& d = scalars[3];
+		float& e = scalars[4];
+		float& f = scalars[5];
+		float& g = scalars[6];
+		float& h = scalars[7];
+		float& i = scalars[8];
+		float& j = scalars[9];
+		float& k = scalars[10];
+		float& l = scalars[11];
+		float& m = scalars[12];
+		float& n = scalars[13];
+		float& o = scalars[14];
+		float& p = scalars[15];
+
+		return a + b * y + c * y * y + d * y * y * y + x * (e + f * y + g * y * y + h * y * y * y) +
+			x * x * (i + j * y + k * y * y + l * y * y * y) + x * x * x * (m + n * y + o * y * y + p * y * y * y);
+	
+	}
 }

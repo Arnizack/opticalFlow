@@ -42,12 +42,18 @@
     <ClInclude Include="image\inner\convolution1D.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="image\inner\DerivativeCalculator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="image\warper\GrayWarper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="image\inner\DerivativeCalculator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

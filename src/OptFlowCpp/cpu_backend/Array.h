@@ -35,6 +35,16 @@ namespace cpu_backend
 			}
 		}
 
+		Array(const std::array<const size_t, DimCount>& shape) : core::IArray<InnerTyp, DimCount>(shape), _size(1), _data(std::vector<InnerTyp>())
+		{
+			for(const size_t& dim : shape)
+			{
+				_size*=dim;
+			}
+
+			_data = std::vector<InnerTyp>(_size);
+		}
+
 		inline InnerTyp& operator[](const size_t i)
 		{
 			return _data[i];
@@ -55,6 +65,12 @@ namespace cpu_backend
 			std::copy_n(_data.data(), _size, destination);
 			return true;
 		}
+
+		InnerTyp* Data()
+		{
+			return _data.data();
+		}
+
 	protected:
 	private:
 		size_t _size;

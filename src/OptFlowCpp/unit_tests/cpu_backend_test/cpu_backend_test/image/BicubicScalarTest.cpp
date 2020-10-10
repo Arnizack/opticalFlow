@@ -88,5 +88,37 @@ namespace cpu_backend
 				EXPECT_EQ(expected[i], dst[i]);
 			}
 		}
+
+		TEST(BicubicScalarTest, test2)
+		{
+			float scalars[16] = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
+			float x = 0.5;
+			float y = 0.8;
+			/*
+				  | a_00 a_01 a_02 a_03 |
+				  | a_10 a_11 a_12 a_13 |
+			S =   | a_20 a_21 a_22 a_23 |
+				  | a_30 a_31 a_32 a_33 |
+
+				| 1 2 9  10 |
+			  =	| 3 4 11 12 |
+				| 5 6 13 14 |
+				| 7 8 15 16 |
+
+
+										|1  |
+			result = 	[1,x,x^2,x^3] S |y  |
+										|y^2|
+										|y^3|
+
+			*/
+
+			float expected = 23.016000000000002;
+
+			float actual = BicubicApplyScalars(scalars, x, y);
+
+			EXPECT_NEAR(expected, actual, 0.00001);
+			
+		}
 	}
 }

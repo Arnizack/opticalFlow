@@ -1,5 +1,7 @@
 #pragma once
 #include"core/image/IGrayWarper.h"
+#include<vector>
+#include"../inner/DerivativeCalculator.h"
 
 namespace cpu_backend
 {
@@ -10,11 +12,14 @@ namespace cpu_backend
 	public:
 
 		// Inherited via IGrayWarper
-		virtual void SetImage(PtrGrayImg Image) override;
-		virtual PtrGrayImg Warp(PtrFlowField Flow) override;
+		virtual void SetImage(PtrGrayImg image) override;
+		virtual PtrGrayImg Warp(PtrFlowField flow) override;
 
+		std::unique_ptr<std::vector<std::array<float, 16>>> CreateBicubicLookup(
+			std::shared_ptr<Array<float, 2>> image);
 	private:
-		PtrGrayImg _image;
-
+		std::shared_ptr<DerivativeCalculator> _derivative_calculator;
+		std::unique_ptr<std::vector<std::array<float, 16>>> _lookup;
+		
 	};
 }
