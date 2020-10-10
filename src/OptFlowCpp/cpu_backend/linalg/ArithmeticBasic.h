@@ -23,46 +23,38 @@ namespace cpu_backend
 		virtual PtrVector Add(const PtrVector a, const PtrVector b) override
 		{
 			//a+b
-			const size_t size = a.get()->Size();
+			const size_t size = (*a).Size();
 
-			std::unique_ptr<InnerTyp[]> ptr_a(new InnerTyp[size]);
-			a.get()->CopyDataTo(ptr_a.get());
+			std::shared_ptr<Array<InnerTyp, DimCount>> a_obj = std::dynamic_pointer_cast<Array<InnerTyp, DimCount>>(a);
+			std::shared_ptr<Array<InnerTyp, DimCount>> b_obj = std::dynamic_pointer_cast<Array<InnerTyp, DimCount>>(b);
 
-			std::unique_ptr<InnerTyp[]> ptr_b(new InnerTyp[b.get()->Size()]);
-			b.get()->CopyDataTo(ptr_b.get());
-
-			std::unique_ptr<InnerTyp[]> ptr_c(new InnerTyp[size]);
+			Array<InnerTyp, DimCount> out(a.get()->Shape, size);
 
 			for (int i = 0; i < size; i++)
 			{
-				ptr_c[i] = ptr_a[i] + ptr_b[i];
+				out[i] = (*a_obj)[i] + (*b_obj)[i];
 			}
 
-			PtrVector out = return_data(a.get()->Shape, size, ptr_c.get());
-
-			return out;
+			return std::make_shared<Array<InnerTyp, DimCount>>(out);
 		}
 
 		//x = a+b
 		virtual void AddTo(PtrVector x, const PtrVector a, const PtrVector b) override
 		{
 			//x = a+b
-			const size_t size = a.get()->Size();
+			const size_t size = (*a).Size();
 
-			std::unique_ptr<InnerTyp[]> ptr_a(new InnerTyp[size]);
-			a.get()->CopyDataTo(ptr_a.get());
+			std::shared_ptr<Array<InnerTyp, DimCount>> a_obj = std::dynamic_pointer_cast<Array<InnerTyp, DimCount>>(a);
+			std::shared_ptr<Array<InnerTyp, DimCount>> b_obj = std::dynamic_pointer_cast<Array<InnerTyp, DimCount>>(b);
 
-			std::unique_ptr<InnerTyp[]> ptr_b(new InnerTyp[b.get()->Size()]);
-			b.get()->CopyDataTo(ptr_b.get());
-
-			std::unique_ptr<InnerTyp[]> ptr_c(new InnerTyp[size]);
+			std::shared_ptr<Array<InnerTyp, DimCount>> out = std::make_shared<Array<InnerTyp, DimCount>>(Array<InnerTyp, DimCount>((*a).Shape, size));
 
 			for (int i = 0; i < size; i++)
 			{
-				ptr_c[i] = ptr_a[i] * ptr_b[i];
+				(*out)[i] = (*a_obj)[i] + (*b_obj)[i];
 			}
 
-			x = return_data(a.get()->Shape, size, ptr_c.get());
+			x = std::static_pointer_cast<core::IArray<InnerTyp, DimCount>>(out);
 
 			return;
 		}
@@ -71,46 +63,38 @@ namespace cpu_backend
 		virtual PtrVector Sub(const PtrVector a, const PtrVector b) override
 		{
 			//a-b
-			const size_t size = a.get()->Size();
+			const size_t size = (*a).Size();
 
-			std::unique_ptr<InnerTyp[]> ptr_a(new InnerTyp[size]);
-			a.get()->CopyDataTo(ptr_a.get());
+			std::shared_ptr<Array<InnerTyp, DimCount>> a_obj = std::dynamic_pointer_cast<Array<InnerTyp, DimCount>>(a);
+			std::shared_ptr<Array<InnerTyp, DimCount>> b_obj = std::dynamic_pointer_cast<Array<InnerTyp, DimCount>>(b);
 
-			std::unique_ptr<InnerTyp[]> ptr_b(new InnerTyp[b.get()->Size()]);
-			b.get()->CopyDataTo(ptr_b.get());
-
-			std::unique_ptr<InnerTyp[]> ptr_c(new InnerTyp[size]);
+			Array<InnerTyp, DimCount> out(a.get()->Shape, size);
 
 			for (int i = 0; i < size; i++)
 			{
-				ptr_c[i] = ptr_a[i] - ptr_b[i];
+				out[i] = (*a_obj)[i] - (*b_obj)[i];
 			}
 
-			PtrVector out = return_data(a.get()->Shape, size, ptr_c.get());
-
-			return out;
+			return std::make_shared<Array<InnerTyp, DimCount>>(out);
 		}
 
 		//x = a-b
-		virtual void SubTo(PtrVector x, const PtrVector a, const PtrVector& b) override
+		virtual void SubTo(PtrVector x, const PtrVector a, const PtrVector b) override
 		{
 			//x = a+b
-			const size_t size = a.get()->Size();
+			const size_t size = (*a).Size();
 
-			std::unique_ptr<InnerTyp[]> ptr_a(new InnerTyp[size]);
-			a.get()->CopyDataTo(ptr_a.get());
+			std::shared_ptr<Array<InnerTyp, DimCount>> a_obj = std::dynamic_pointer_cast<Array<InnerTyp, DimCount>>(a);
+			std::shared_ptr<Array<InnerTyp, DimCount>> b_obj = std::dynamic_pointer_cast<Array<InnerTyp, DimCount>>(b);
 
-			std::unique_ptr<InnerTyp[]> ptr_b(new InnerTyp[b.get()->Size()]);
-			b.get()->CopyDataTo(ptr_b.get());
-
-			std::unique_ptr<InnerTyp[]> ptr_c(new InnerTyp[size]);
+			std::shared_ptr<Array<InnerTyp, DimCount>> out = std::make_shared<Array<InnerTyp, DimCount>>(Array<InnerTyp, DimCount>((*a).Shape, size));
 
 			for (int i = 0; i < size; i++)
 			{
-				ptr_c[i] = ptr_a[i] - ptr_b[i];
+				(*out)[i] = (*a_obj)[i] - (*b_obj)[i];
 			}
 
-			x = return_data(a.get()->Shape, size, ptr_c.get());
+			x = std::static_pointer_cast<core::IArray<InnerTyp, DimCount>>(out);
 
 			return;
 		}
@@ -119,46 +103,38 @@ namespace cpu_backend
 		virtual PtrVector Mul(const PtrVector a, const PtrVector b) override
 		{
 			//a*b
-			const size_t size = a.get()->Size();
+			const size_t size = (*a).Size();
 
-			std::unique_ptr<InnerTyp[]> ptr_a(new InnerTyp[size]);
-			a.get()->CopyDataTo(ptr_a.get());
+			std::shared_ptr<Array<InnerTyp, DimCount>> a_obj = std::dynamic_pointer_cast<Array<InnerTyp, DimCount>>(a);
+			std::shared_ptr<Array<InnerTyp, DimCount>> b_obj = std::dynamic_pointer_cast<Array<InnerTyp, DimCount>>(b);
 
-			std::unique_ptr<InnerTyp[]> ptr_b(new InnerTyp[b.get()->Size()]);
-			b.get()->CopyDataTo(ptr_b.get());
-
-			std::unique_ptr<InnerTyp[]> ptr_c(new InnerTyp[size]);
+			Array<InnerTyp, DimCount> out(a.get()->Shape, size);
 
 			for (int i = 0; i < size; i++)
 			{
-				ptr_c[i] = ptr_a[i] * ptr_b[i];
+				out[i] = (*a_obj)[i] * (*b_obj)[i];
 			}
 
-			PtrVector out = return_data(a.get()->Shape, size, ptr_c.get());
-
-			return out;
+			return std::make_shared<Array<InnerTyp, DimCount>>(out);
 		}
 
 		//x = a*b
 		virtual void MulTo(PtrVector& x, const PtrVector a, const PtrVector b) override
 		{
 			//x = a*b
-			const size_t size = a.get()->Size();
+			const size_t size = (*a).Size();
 
-			std::unique_ptr<InnerTyp[]> ptr_a(new InnerTyp[size]);
-			a.get()->CopyDataTo(ptr_a.get());
+			std::shared_ptr<Array<InnerTyp, DimCount>> a_obj = std::dynamic_pointer_cast<Array<InnerTyp, DimCount>>(a);
+			std::shared_ptr<Array<InnerTyp, DimCount>> b_obj = std::dynamic_pointer_cast<Array<InnerTyp, DimCount>>(b);
 
-			std::unique_ptr<InnerTyp[]> ptr_b(new InnerTyp[b.get()->Size()]);
-			b.get()->CopyDataTo(ptr_b.get());
-
-			std::unique_ptr<InnerTyp[]> ptr_c(new InnerTyp[size]);
+			std::shared_ptr<Array<InnerTyp, DimCount>> out = std::make_shared<Array<InnerTyp, DimCount>>(Array<InnerTyp, DimCount>((*a).Shape, size));
 
 			for (int i = 0; i < size; i++)
 			{
-				ptr_c[i] = ptr_a[i] * ptr_b[i];
+				(*out)[i] = (*a_obj)[i] * (*b_obj)[i];
 			}
 
-			x = return_data(a.get()->Shape, size, ptr_c.get());
+			x = std::static_pointer_cast<core::IArray<InnerTyp, DimCount>>(out);
 
 			return;
 		}
@@ -167,60 +143,52 @@ namespace cpu_backend
 		virtual PtrVector Div(const PtrVector a, const PtrVector b) override
 		{
 			//a/b
-			const size_t size = a.get()->Size();
+			const size_t size = (*a).Size();
 
-			std::unique_ptr<InnerTyp[]> ptr_a(new InnerTyp[size]);
-			a.get()->CopyDataTo(ptr_a.get());
+			std::shared_ptr<Array<InnerTyp, DimCount>> a_obj = std::dynamic_pointer_cast<Array<InnerTyp, DimCount>>(a);
+			std::shared_ptr<Array<InnerTyp, DimCount>> b_obj = std::dynamic_pointer_cast<Array<InnerTyp, DimCount>>(b);
 
-			std::unique_ptr<InnerTyp[]> ptr_b(new InnerTyp[b.get()->Size()]);
-			b.get()->CopyDataTo(ptr_b.get());
-
-			std::unique_ptr<InnerTyp[]> ptr_c(new InnerTyp[size]);
+			Array<InnerTyp, DimCount> out(a.get()->Shape, size);
 
 			for (int i = 0; i < size; i++)
 			{
-				if (ptr_b[i] == 0)
+				if ((*b_obj)[i] == 0)
 				{
-					ptr_c[i] = (InnerTyp)INFINITY;
+					out[i] = (InnerTyp)INFINITY;
 				}
 				else
 				{
-					ptr_c[i] = (InnerTyp)(ptr_a[i] / ptr_b[i]);
+					out[i] = (InnerTyp)((*a_obj)[i] / (*b_obj)[i]);
 				}
 			}
 
-			PtrVector out = return_data(a.get()->Shape, size, ptr_c.get());
-
-			return out;
+			return std::make_shared<Array<InnerTyp, DimCount>>(out);
 		}
 
 		//x = a/b
 		virtual void DivTo(PtrVector x, const PtrVector a, const PtrVector b) override
 		{
 			//x = a/b
-			const size_t size = a.get()->Size();
+			const size_t size = (*a).Size();
 
-			std::unique_ptr<InnerTyp[]> ptr_a(new InnerTyp[size]);
-			a.get()->CopyDataTo(ptr_a.get());
+			std::shared_ptr<Array<InnerTyp, DimCount>> a_obj = std::dynamic_pointer_cast<Array<InnerTyp, DimCount>>(a);
+			std::shared_ptr<Array<InnerTyp, DimCount>> b_obj = std::dynamic_pointer_cast<Array<InnerTyp, DimCount>>(b);
 
-			std::unique_ptr<InnerTyp[]> ptr_b(new InnerTyp[b.get()->Size()]);
-			b.get()->CopyDataTo(ptr_b.get());
-
-			std::unique_ptr<InnerTyp[]> ptr_c(new InnerTyp[size]);
+			std::shared_ptr<Array<InnerTyp, DimCount>> out = std::make_shared<Array<InnerTyp, DimCount>>(Array<InnerTyp, DimCount>((*a).Shape, size));
 
 			for (int i = 0; i < size; i++)
 			{
-				if (ptr_b[i] == 0)
+				if ((*b_obj)[i] == 0)
 				{
-					ptr_c[i] = (InnerTyp)INFINITY;
+					(*out)[i] = (InnerTyp)INFINITY;
 				}
 				else
 				{
-					ptr_c[i] = (InnerTyp)(ptr_a[i] / ptr_b[i]);
+					(*out)[i] = (InnerTyp)((*a_obj)[i] / (*b_obj)[i]);
 				}
 			}
 
-			x = return_data(a.get()->Shape, size, ptr_c.get());
+			x = std::static_pointer_cast<core::IArray<InnerTyp, DimCount>>(out);
 
 			return;
 		}
@@ -229,46 +197,38 @@ namespace cpu_backend
 		virtual PtrVector Pow(const PtrVector a, const PtrVector b) override
 		{
 			//a^b
-			const size_t size = a.get()->Size();
+			const size_t size = (*a).Size();
 
-			std::unique_ptr<InnerTyp[]> ptr_a(new InnerTyp[size]);
-			a.get()->CopyDataTo(ptr_a.get());
+			std::shared_ptr<Array<InnerTyp, DimCount>> a_obj = std::dynamic_pointer_cast<Array<InnerTyp, DimCount>>(a);
+			std::shared_ptr<Array<InnerTyp, DimCount>> b_obj = std::dynamic_pointer_cast<Array<InnerTyp, DimCount>>(b);
 
-			std::unique_ptr<InnerTyp[]> ptr_b(new InnerTyp[b.get()->Size()]);
-			b.get()->CopyDataTo(ptr_b.get());
-
-			std::unique_ptr<InnerTyp[]> ptr_c(new InnerTyp[size]);
+			Array<InnerTyp, DimCount> out(a.get()->Shape, size);
 
 			for (int i = 0; i < size; i++)
 			{
-				ptr_c[i] = (InnerTyp) pow((double)ptr_a[i], (double)ptr_b[i]);
+				out[i] = (InnerTyp) pow((double)(*a_obj)[i], (double)(*b_obj)[i]);
 			}
 
-			PtrVector out = return_data(a.get()->Shape, size, ptr_c.get());
-
-			return out;
+			return std::make_shared<Array<InnerTyp, DimCount>>(out);
 		}
 
 		//x = a**b
 		virtual void PowTo(PtrVector x, const PtrVector a, const PtrVector b) override
 		{
 			//a^b
-			const size_t size = a.get()->Size();
+			const size_t size = (*a).Size();
 
-			std::unique_ptr<InnerTyp[]> ptr_a(new InnerTyp[size]);
-			a.get()->CopyDataTo(ptr_a.get());
+			std::shared_ptr<Array<InnerTyp, DimCount>> a_obj = std::dynamic_pointer_cast<Array<InnerTyp, DimCount>>(a);
+			std::shared_ptr<Array<InnerTyp, DimCount>> b_obj = std::dynamic_pointer_cast<Array<InnerTyp, DimCount>>(b);
 
-			std::unique_ptr<InnerTyp[]> ptr_b(new InnerTyp[b.get()->Size()]);
-			b.get()->CopyDataTo(ptr_b.get());
-
-			std::unique_ptr<InnerTyp[]> ptr_c(new InnerTyp[size]);
+			std::shared_ptr<Array<InnerTyp, DimCount>> out = std::make_shared<Array<InnerTyp, DimCount>>(Array<InnerTyp, DimCount>((*a).Shape, size));
 
 			for (int i = 0; i < size; i++)
 			{
-				ptr_c[i] = (InnerTyp)pow((double)ptr_a[i], (double)ptr_b[i]);
+				(*out)[i] = (InnerTyp)pow((double)(*a_obj)[i], (double)(*b_obj)[i]);
 			}
 
-			x = return_data(a.get()->Shape, size, ptr_c.get());
+			x = std::static_pointer_cast<core::IArray<InnerTyp, DimCount>>(out);
 
 			return;
 		}
@@ -277,59 +237,49 @@ namespace cpu_backend
 		virtual PtrVector Pow(const PtrVector a, const double& b) override
 		{
 			//a^b
-			const size_t size = a.get()->Size();
+			const size_t size = (*a).Size();
 
-			std::unique_ptr<InnerTyp[]> ptr_a(new InnerTyp[size]);
-			a.get()->CopyDataTo(ptr_a.get());
+			std::shared_ptr<Array<InnerTyp, DimCount>> a_obj = std::dynamic_pointer_cast<Array<InnerTyp, DimCount>>(a);
 
 			double b_conv = (double)b;
 
-			std::unique_ptr<InnerTyp[]> ptr_c(new InnerTyp[size]);
+			Array<InnerTyp, DimCount> out(a.get()->Shape, size);
 
 			for (int i = 0; i < size; i++)
 			{
-				ptr_c[i] = (InnerTyp)pow((double)ptr_a[i], b_conv);
+				out[i] = (InnerTyp)pow((double)(*a_obj)[i], b_conv);
 			}
 
-			PtrVector out = return_data(a.get()->Shape, size, ptr_c.get());
-
-			return out;
+			return std::make_shared<Array<InnerTyp, DimCount>>(out);
 		}
 
 		//x = a**b
 		virtual void PowTo(PtrVector x, const PtrVector a, const double& b) override
 		{
 			//a^b
-			const size_t size = a.get()->Size();
+			const size_t size = (*a).Size();
 
-			std::unique_ptr<InnerTyp[]> ptr_a(new InnerTyp[size]);
-			a.get()->CopyDataTo(ptr_a.get());
+			std::shared_ptr<Array<InnerTyp, DimCount>> a_obj = std::dynamic_pointer_cast<Array<InnerTyp, DimCount>>(a);
 
 			double b_conv = (double)b;
 
-			std::unique_ptr<InnerTyp[]> ptr_c(new InnerTyp[size]);
+			std::shared_ptr<Array<InnerTyp, DimCount>> out = std::make_shared<Array<InnerTyp, DimCount>>(Array<InnerTyp, DimCount>((*a).Shape, size));
 
 			for (int i = 0; i < size; i++)
 			{
-				ptr_c[i] = (InnerTyp)pow((double)ptr_a[i], b_conv);
+				(*out)[i] = (InnerTyp)pow((double)(*a_obj)[i], b_conv);
 			}
 
-			x = return_data(a.get()->Shape, size, ptr_c.get());
+			x = std::static_pointer_cast<core::IArray<InnerTyp, DimCount>>(out);
 
 			return;
 		}
-		
-	private:
-		PtrVector return_data(std::array<const size_t, DimCount> shape, const size_t& size, const InnerTyp* const data)
-		{
-			cpu_backend::Array<InnerTyp, DimCount> out_temp(shape, size, data);
-			return std::make_shared<cpu_backend::Array<InnerTyp, DimCount>>(out_temp);
-		}
 	};
-
+	
 	/*
 	* DOUBLE
 	*/
+	
 	template<size_t DimCount>
 	class ArithmeticBasic<double, DimCount> : public core::IArithmeticBasic<double, DimCount>
 	{
@@ -341,36 +291,30 @@ namespace cpu_backend
 		virtual PtrVector Add(const PtrVector a, const PtrVector b) override
 		{
 			//a+b
-			const size_t size = a.get()->Size();
+			const size_t size = (*a).Size();
 
-			std::unique_ptr<double[]> ptr_a(new double[size]);
-			a.get()->CopyDataTo(ptr_a.get());
+			std::shared_ptr<Array<double, DimCount>> a_obj = std::dynamic_pointer_cast<Array<double, DimCount>>(a);
 
-			std::unique_ptr<double[]> ptr_b(new double[b.get()->Size()]);
-			b.get()->CopyDataTo(ptr_b.get());
+			std::shared_ptr<Array<double, DimCount>> out = std::make_shared<Array<double, DimCount>>(Array<double, DimCount>((*a).Shape, (*b)));
 
-			cblas_daxpby(size, 1, ptr_a.get(), 1, 1, ptr_b.get(), 1);
+			cblas_daxpby(size, 1, &(*a_obj)[0], 1, 1, &(*out)[0], 1);
 
-			PtrVector out = return_data(a.get()->Shape, size, ptr_b.get());
-
-			return out;
+			return std::static_pointer_cast<core::IArray<double, DimCount>>(out);
 		}
 
 		//x = a+b
 		virtual void AddTo(PtrVector x, const PtrVector a, const PtrVector b) override
 		{
 			//x = a+b
-			const size_t size = a.get()->Size();
+			const size_t size = (*a).Size();
 
-			std::unique_ptr<double[]> ptr_a(new double[size]);
-			a.get()->CopyDataTo(ptr_a.get());
+			std::shared_ptr<Array<double, DimCount>> a_obj = std::dynamic_pointer_cast<Array<double, DimCount>>(a);
 
-			std::unique_ptr<double[]> ptr_b(new double[b.get()->Size()]);
-			b.get()->CopyDataTo(ptr_b.get());
+			std::shared_ptr<Array<double, DimCount>> out = std::make_shared<Array<double, DimCount>>(Array<double, DimCount>((*a).Shape, (*b)));
 
-			cblas_daxpby(size, 1, ptr_a.get(), 1, 1, ptr_b.get(), 1);
+			cblas_daxpby(size, 1, &(*a_obj)[0], 1, 1, &(*out)[0], 1);
 
-			x = return_data(a.get()->Shape, size, ptr_b.get());
+			x = std::static_pointer_cast<core::IArray<double, DimCount>>(out);
 
 			return;
 		}
@@ -379,37 +323,30 @@ namespace cpu_backend
 		virtual PtrVector Sub(const PtrVector a, const PtrVector b) override
 		{
 			//a-b
-			const size_t size = a.get()->Size();
+			const size_t size = (*a).Size();
 
-			std::unique_ptr<double[]> ptr_a(new double[size]);
-			a.get()->CopyDataTo(ptr_a.get());
+			std::shared_ptr<Array<double, DimCount>> a_obj = std::dynamic_pointer_cast<Array<double, DimCount>>(a);
 
-			std::unique_ptr<double[]> ptr_b(new double[b.get()->Size()]);
-			b.get()->CopyDataTo(ptr_b.get());
+			std::shared_ptr<Array<double, DimCount>> out = std::make_shared<Array<double, DimCount>>(Array<double, DimCount>((*a).Shape, (*b)));
 
-			cblas_daxpby(size, 1, ptr_a.get(), 1, -1, ptr_b.get(), 1);
+			cblas_daxpby(size, 1, &(*a_obj)[0], 1, -1, &(*out)[0], 1);
 
-			PtrVector out = return_data(a.get()->Shape, size, ptr_b.get());
-
-			return out;
+			return std::static_pointer_cast<core::IArray<double, DimCount>>(out);
 		}
 
 		//x = a-b
-		virtual void SubTo(PtrVector x, const PtrVector a, const PtrVector& b) override
+		virtual void SubTo(PtrVector x, const PtrVector a, const PtrVector b) override
 		{
 			//x = a-b
+			const size_t size = (*a).Size();
 
-			const size_t size = a.get()->Size();
+			std::shared_ptr<Array<double, DimCount>> a_obj = std::dynamic_pointer_cast<Array<double, DimCount>>(a);
 
-			std::unique_ptr<double[]> ptr_a(new double[size]);
-			a.get()->CopyDataTo(ptr_a.get());
+			std::shared_ptr<Array<double, DimCount>> out = std::make_shared<Array<double, DimCount>>(Array<double, DimCount>((*a).Shape, (*b)));
 
-			std::unique_ptr<double[]> ptr_b(new double[b.get()->Size()]);
-			b.get()->CopyDataTo(ptr_b.get());
+			cblas_daxpby(size, 1, &(*a_obj)[0], 1, -1, &(*out)[0], 1);
 
-			cblas_daxpby(size, 1, ptr_a.get(), 1, -1, ptr_b.get(), 1);
-
-			x = return_data(a.get()->Shape, size, ptr_b.get());
+			x = std::static_pointer_cast<core::IArray<double, DimCount>>(out);
 
 			return;
 		}
@@ -418,47 +355,38 @@ namespace cpu_backend
 		virtual PtrVector Mul(const PtrVector a, const PtrVector b) override
 		{
 			//a*b
-			const size_t size = a.get()->Size();
+			const size_t size = (*a).Size();
 
-			std::unique_ptr<double[]> ptr_a(new double[size]);
-			a.get()->CopyDataTo(ptr_a.get());
+			std::shared_ptr<Array<double, DimCount>> a_obj = std::dynamic_pointer_cast<Array<double, DimCount>>(a);
+			std::shared_ptr<Array<double, DimCount>> b_obj = std::dynamic_pointer_cast<Array<double, DimCount>>(b);
 
-			std::unique_ptr<double[]> ptr_b(new double[b.get()->Size()]);
-			b.get()->CopyDataTo(ptr_b.get());
-
-			std::unique_ptr<double[]> ptr_c(new double[size]);
+			std::shared_ptr<Array<double, DimCount>> out = std::make_shared<Array<double, DimCount>>(Array<double, DimCount>((*a).Shape, size));
 
 			for (int i = 0; i < size; i++)
 			{
-				ptr_c[i] = ptr_a[i] * ptr_b[i];
+				(*out)[i] = (*a_obj)[i] * (*b_obj)[i];
 			}
 
-			PtrVector out = return_data(a.get()->Shape, size, ptr_c.get());
-
-			return out;
+			return std::static_pointer_cast<core::IArray<double, DimCount>>(out);
 		}
 
 		//x = a*b
 		virtual void MulTo(PtrVector& x, const PtrVector a, const PtrVector b) override
 		{
 			//x = a*b
-			const size_t size = a.get()->Size();
+			const size_t size = (*a).Size();
 
-			std::unique_ptr<double[]> ptr_a(new double[size]);
-			a.get()->CopyDataTo(ptr_a.get());
+			std::shared_ptr<Array<double, DimCount>> a_obj = std::dynamic_pointer_cast<Array<double, DimCount>>(a);
+			std::shared_ptr<Array<double, DimCount>> b_obj = std::dynamic_pointer_cast<Array<double, DimCount>>(b);
 
-			std::unique_ptr<double[]> ptr_b(new double[b.get()->Size()]);
-			b.get()->CopyDataTo(ptr_b.get());
-
-			std::unique_ptr<double[]> ptr_c(new double[size]);
+			std::shared_ptr<Array<double, DimCount>> out = std::make_shared<Array<double, DimCount>>(Array<double, DimCount>((*a).Shape, size));
 
 			for (int i = 0; i < size; i++)
 			{
-				ptr_c[i] = ptr_a[i] * ptr_b[i];
+				(*out)[i] = (*a_obj)[i] * (*b_obj)[i];
 			}
 
-			x = return_data(a.get()->Shape, size, ptr_c.get());
-
+			x = std::static_pointer_cast<core::IArray<double, DimCount>>(out);
 			return;
 		}
 
@@ -466,47 +394,38 @@ namespace cpu_backend
 		virtual PtrVector Div(const PtrVector a, const PtrVector b) override
 		{
 			//a/b
-			const size_t size = a.get()->Size();
+			const size_t size = (*a).Size();
 
-			std::unique_ptr<double[]> ptr_a(new double[size]);
-			a.get()->CopyDataTo(ptr_a.get());
+			std::shared_ptr<Array<double, DimCount>> a_obj = std::dynamic_pointer_cast<Array<double, DimCount>>(a);
+			std::shared_ptr<Array<double, DimCount>> b_obj = std::dynamic_pointer_cast<Array<double, DimCount>>(b);
 
-			std::unique_ptr<double[]> ptr_b(new double[b.get()->Size()]);
-			b.get()->CopyDataTo(ptr_b.get());
-
-			std::unique_ptr<double[]> ptr_c(new double[size]);
+			std::shared_ptr<Array<double, DimCount>> out = std::make_shared<Array<double, DimCount>>(Array<double, DimCount>((*a).Shape, size));
 
 			for (int i = 0; i < size; i++)
 			{
-				ptr_c[i] = ptr_a[i] / ptr_b[i];
+				(*out)[i] = (*a_obj)[i] / (*b_obj)[i];
 			}
 
-			PtrVector out = return_data(a.get()->Shape, size, ptr_c.get());
-
-			return out;
+			return std::static_pointer_cast<core::IArray<double, DimCount>>(out);
 		}
 
 		//x = a/b
 		virtual void DivTo(PtrVector x, const PtrVector a, const PtrVector b) override
 		{
 			//x = a/b
-			const size_t size = a.get()->Size();
+			const size_t size = (*a).Size();
 
-			std::unique_ptr<double[]> ptr_a(new double[size]);
-			a.get()->CopyDataTo(ptr_a.get());
+			std::shared_ptr<Array<double, DimCount>> a_obj = std::dynamic_pointer_cast<Array<double, DimCount>>(a);
+			std::shared_ptr<Array<double, DimCount>> b_obj = std::dynamic_pointer_cast<Array<double, DimCount>>(b);
 
-			std::unique_ptr<double[]> ptr_b(new double[b.get()->Size()]);
-			b.get()->CopyDataTo(ptr_b.get());
-
-			std::unique_ptr<double[]> ptr_c(new double[size]);
+			std::shared_ptr<Array<double, DimCount>> out = std::make_shared<Array<double, DimCount>>(Array<double, DimCount>((*a).Shape, size));
 
 			for (int i = 0; i < size; i++)
 			{
-				ptr_c[i] = ptr_a[i] / ptr_b[i];
+				(*out)[i] = (*a_obj)[i] / (*b_obj)[i];
 			}
 
-			x = return_data(a.get()->Shape, size, ptr_c.get());
-
+			x = std::static_pointer_cast<core::IArray<double, DimCount>>(out);
 			return;
 		}
 
@@ -514,47 +433,38 @@ namespace cpu_backend
 		virtual PtrVector Pow(const PtrVector a, const PtrVector b) override
 		{
 			//a^b
-			const size_t size = a.get()->Size();
+			const size_t size = (*a).Size();
 
-			std::unique_ptr<double[]> ptr_a(new double[size]);
-			a.get()->CopyDataTo(ptr_a.get());
+			std::shared_ptr<Array<double, DimCount>> a_obj = std::dynamic_pointer_cast<Array<double, DimCount>>(a);
+			std::shared_ptr<Array<double, DimCount>> b_obj = std::dynamic_pointer_cast<Array<double, DimCount>>(b);
 
-			std::unique_ptr<double[]> ptr_b(new double[b.get()->Size()]);
-			b.get()->CopyDataTo(ptr_b.get());
-
-			std::unique_ptr<double[]> ptr_c(new double[size]);
+			std::shared_ptr<Array<double, DimCount>> out = std::make_shared<Array<double, DimCount>>(Array<double, DimCount>((*a).Shape, size));
 
 			for (int i = 0; i < size; i++)
 			{
-				ptr_c[i] = pow(ptr_a[i], ptr_b[i]);
+				(*out)[i] = pow((*a_obj)[i], (*b_obj)[i]);
 			}
 
-			PtrVector out = return_data(a.get()->Shape, size, ptr_c.get());
-
-			return out;
+			return std::static_pointer_cast<core::IArray<double, DimCount>>(out);
 		}
 
 		//x = a**b
 		virtual void PowTo(PtrVector x, const PtrVector a, const PtrVector b) override
 		{
-			//a^b
-			const size_t size = a.get()->Size();
+			//x = a^b
+			const size_t size = (*a).Size();
 
-			std::unique_ptr<double[]> ptr_a(new double[size]);
-			a.get()->CopyDataTo(ptr_a.get());
+			std::shared_ptr<Array<double, DimCount>> a_obj = std::dynamic_pointer_cast<Array<double, DimCount>>(a);
+			std::shared_ptr<Array<double, DimCount>> b_obj = std::dynamic_pointer_cast<Array<double, DimCount>>(b);
 
-			std::unique_ptr<double[]> ptr_b(new double[b.get()->Size()]);
-			b.get()->CopyDataTo(ptr_b.get());
-
-			std::unique_ptr<double[]> ptr_c(new double[size]);
+			std::shared_ptr<Array<double, DimCount>> out = std::make_shared<Array<double, DimCount>>(Array<double, DimCount>((*a).Shape, size));
 
 			for (int i = 0; i < size; i++)
 			{
-				ptr_c[i] = pow(ptr_a[i], ptr_b[i]);
+				(*out)[i] = pow((*a_obj)[i], (*b_obj)[i]);
 			}
 
-			x = return_data(a.get()->Shape, size, ptr_c.get());
-
+			x = std::static_pointer_cast<core::IArray<double, DimCount>>(out);
 			return;
 		}
 
@@ -562,49 +472,37 @@ namespace cpu_backend
 		virtual PtrVector Pow(const PtrVector a, const double& b) override
 		{
 			//a^b
-			const size_t size = a.get()->Size();
+			const size_t size = (*a).Size();
 
-			std::unique_ptr<double[]> ptr_a(new double[size]);
-			a.get()->CopyDataTo(ptr_a.get());
+			std::shared_ptr<Array<double, DimCount>> a_obj = std::dynamic_pointer_cast<Array<double, DimCount>>(a);
 
-			std::unique_ptr<double[]> ptr_c(new double[size]);
+			std::shared_ptr<Array<double, DimCount>> out = std::make_shared<Array<double, DimCount>>(Array<double, DimCount>((*a).Shape, size));
 
 			for (int i = 0; i < size; i++)
 			{
-				ptr_c[i] = pow(ptr_a[i], b);
+				(*out)[i] = pow((*a_obj)[i], b);
 			}
 
-			PtrVector out = return_data(a.get()->Shape, size, ptr_c.get());
-
-			return out;
+			return std::static_pointer_cast<core::IArray<double, DimCount>>(out);
 		}
 
 		//x = a**b
 		virtual void PowTo(PtrVector x, const PtrVector a, const double& b) override
 		{
 			//a^b
-			const size_t size = a.get()->Size();
+			const size_t size = (*a).Size();
 
-			std::unique_ptr<double[]> ptr_a(new double[size]);
-			a.get()->CopyDataTo(ptr_a.get());
+			std::shared_ptr<Array<double, DimCount>> a_obj = std::dynamic_pointer_cast<Array<double, DimCount>>(a);
 
-			std::unique_ptr<double[]> ptr_c(new double[size]);
+			std::shared_ptr<Array<double, DimCount>> out = std::make_shared<Array<double, DimCount>>(Array<double, DimCount>((*a).Shape, size));
 
 			for (int i = 0; i < size; i++)
 			{
-				ptr_c[i] = pow(ptr_a[i], b);
+				(*out)[i] = pow((*a_obj)[i], b);
 			}
 
-			x = return_data(a.get()->Shape, size, ptr_c.get());
-
+			x = std::static_pointer_cast<core::IArray<double, DimCount>>(out);
 			return;
-		}
-
-	private:
-		PtrVector return_data(std::array<const size_t, DimCount> shape, const size_t& size, const double* const data)
-		{
-			cpu_backend::Array<double, DimCount> out_temp(shape, size, data);
-			return std::make_shared<Array<double, DimCount>>(out_temp);
 		}
 	};
 
@@ -622,36 +520,30 @@ namespace cpu_backend
 		virtual PtrVector Add(const PtrVector a, const PtrVector b) override
 		{
 			//a+b
-			const size_t size = a.get()->Size();
+			const size_t size = (*a).Size();
 
-			std::unique_ptr<float[]> ptr_a(new float[size]);
-			a.get()->CopyDataTo(ptr_a.get());
+			std::shared_ptr<Array<float, DimCount>> a_obj = std::dynamic_pointer_cast<Array<float, DimCount>>(a);
 
-			std::unique_ptr<float[]> ptr_b(new float[b.get()->Size()]);
-			b.get()->CopyDataTo(ptr_b.get());
+			std::shared_ptr<Array<float, DimCount>> out = std::make_shared<Array<float, DimCount>>(Array<float, DimCount>((*a).Shape, (*b)));
 
-			cblas_saxpby(size, 1, ptr_a.get(), 1, 1, ptr_b.get(), 1);
+			cblas_saxpby(size, 1, &(*a_obj)[0], 1, 1, &(*out)[0], 1);
 
-			PtrVector out = return_data(a.get()->Shape, size, ptr_b.get());
-
-			return out;
+			return std::static_pointer_cast<core::IArray<float, DimCount>>(out);
 		}
 
 		//x = a+b
 		virtual void AddTo(PtrVector x, const PtrVector a, const PtrVector b) override
 		{
 			//x = a+b
-			const size_t size = a.get()->Size();
+			const size_t size = (*a).Size();
 
-			std::unique_ptr<float[]> ptr_a(new float[size]);
-			a.get()->CopyDataTo(ptr_a.get());
+			std::shared_ptr<Array<float, DimCount>> a_obj = std::dynamic_pointer_cast<Array<float, DimCount>>(a);
 
-			std::unique_ptr<float[]> ptr_b(new float[b.get()->Size()]);
-			b.get()->CopyDataTo(ptr_b.get());
+			std::shared_ptr<Array<float, DimCount>> out = std::make_shared<Array<float, DimCount>>(Array<float, DimCount>((*a).Shape, (*b)));
 
-			cblas_saxpby(size, 1, ptr_a.get(), 1, 1, ptr_b.get(), 1);
+			cblas_saxpby(size, 1, &(*a_obj)[0], 1, 1, &(*out)[0], 1);
 
-			x = return_data(a.get()->Shape, size, ptr_b.get());
+			x = std::static_pointer_cast<core::IArray<float, DimCount>>(out);
 
 			return;
 		}
@@ -660,37 +552,30 @@ namespace cpu_backend
 		virtual PtrVector Sub(const PtrVector a, const PtrVector b) override
 		{
 			//a-b
-			const size_t size = a.get()->Size();
+			const size_t size = (*a).Size();
 
-			std::unique_ptr<float[]> ptr_a(new float[size]);
-			a.get()->CopyDataTo(ptr_a.get());
+			std::shared_ptr<Array<float, DimCount>> a_obj = std::dynamic_pointer_cast<Array<float, DimCount>>(a);
 
-			std::unique_ptr<float[]> ptr_b(new float[b.get()->Size()]);
-			b.get()->CopyDataTo(ptr_b.get());
+			std::shared_ptr<Array<float, DimCount>> out = std::make_shared<Array<float, DimCount>>(Array<float, DimCount>((*a).Shape, (*b)));
 
-			cblas_saxpby(size, 1, ptr_a.get(), 1, -1, ptr_b.get(), 1);
+			cblas_saxpby(size, 1, &(*a_obj)[0], 1, -1, &(*out)[0], 1);
 
-			PtrVector out = return_data(a.get()->Shape, size, ptr_b.get());
-
-			return out;
+			return std::static_pointer_cast<core::IArray<float, DimCount>>(out);
 		}
 
 		//x = a-b
-		virtual void SubTo(PtrVector x, const PtrVector a, const PtrVector& b) override
+		virtual void SubTo(PtrVector x, const PtrVector a, const PtrVector b) override
 		{
 			//x = a-b
+			const size_t size = (*a).Size();
 
-			const size_t size = a.get()->Size();
+			std::shared_ptr<Array<float, DimCount>> a_obj = std::dynamic_pointer_cast<Array<float, DimCount>>(a);
 
-			std::unique_ptr<float[]> ptr_a(new float[size]);
-			a.get()->CopyDataTo(ptr_a.get());
+			std::shared_ptr<Array<float, DimCount>> out = std::make_shared<Array<float, DimCount>>(Array<float, DimCount>((*a).Shape, (*b)));
 
-			std::unique_ptr<float[]> ptr_b(new float[b.get()->Size()]);
-			b.get()->CopyDataTo(ptr_b.get());
+			cblas_saxpby(size, 1, &(*a_obj)[0], 1, -1, &(*out)[0], 1);
 
-			cblas_saxpby(size, 1, ptr_a.get(), 1, -1, ptr_b.get(), 1);
-
-			x = return_data(a.get()->Shape, size, ptr_b.get());
+			x = std::static_pointer_cast<core::IArray<float, DimCount>>(out);
 
 			return;
 		}
@@ -699,47 +584,38 @@ namespace cpu_backend
 		virtual PtrVector Mul(const PtrVector a, const PtrVector b) override
 		{
 			//a*b
-			const size_t size = a.get()->Size();
+			const size_t size = (*a).Size();
 
-			std::unique_ptr<float[]> ptr_a(new float[size]);
-			a.get()->CopyDataTo(ptr_a.get());
+			std::shared_ptr<Array<float, DimCount>> a_obj = std::dynamic_pointer_cast<Array<float, DimCount>>(a);
+			std::shared_ptr<Array<float, DimCount>> b_obj = std::dynamic_pointer_cast<Array<float, DimCount>>(b);
 
-			std::unique_ptr<float[]> ptr_b(new float[b.get()->Size()]);
-			b.get()->CopyDataTo(ptr_b.get());
-
-			std::unique_ptr<float[]> ptr_c(new float[size]);
+			std::shared_ptr<Array<float, DimCount>> out = std::make_shared<Array<float, DimCount>>(Array<float, DimCount>((*a).Shape, size));
 
 			for (int i = 0; i < size; i++)
 			{
-				ptr_c[i] = ptr_a[i] * ptr_b[i];
+				(*out)[i] = (*a_obj)[i] * (*b_obj)[i];
 			}
 
-			PtrVector out = return_data(a.get()->Shape, size, ptr_c.get());
-
-			return out;
+			return std::static_pointer_cast<core::IArray<float, DimCount>>(out);
 		}
 
 		//x = a*b
 		virtual void MulTo(PtrVector& x, const PtrVector a, const PtrVector b) override
 		{
 			//x = a*b
-			const size_t size = a.get()->Size();
+			const size_t size = (*a).Size();
 
-			std::unique_ptr<float[]> ptr_a(new float[size]);
-			a.get()->CopyDataTo(ptr_a.get());
+			std::shared_ptr<Array<float, DimCount>> a_obj = std::dynamic_pointer_cast<Array<float, DimCount>>(a);
+			std::shared_ptr<Array<float, DimCount>> b_obj = std::dynamic_pointer_cast<Array<float, DimCount>>(b);
 
-			std::unique_ptr<float[]> ptr_b(new float[b.get()->Size()]);
-			b.get()->CopyDataTo(ptr_b.get());
-
-			std::unique_ptr<float[]> ptr_c(new float[size]);
+			std::shared_ptr<Array<float, DimCount>> out = std::make_shared<Array<float, DimCount>>(Array<float, DimCount>((*a).Shape, size));
 
 			for (int i = 0; i < size; i++)
 			{
-				ptr_c[i] = ptr_a[i] * ptr_b[i];
+				(*out)[i] = (*a_obj)[i] * (*b_obj)[i];
 			}
 
-			x = return_data(a.get()->Shape, size, ptr_c.get());
-
+			x = std::static_pointer_cast<core::IArray<float, DimCount>>(out);
 			return;
 		}
 
@@ -747,47 +623,38 @@ namespace cpu_backend
 		virtual PtrVector Div(const PtrVector a, const PtrVector b) override
 		{
 			//a/b
-			const size_t size = a.get()->Size();
+			const size_t size = (*a).Size();
 
-			std::unique_ptr<float[]> ptr_a(new float[size]);
-			a.get()->CopyDataTo(ptr_a.get());
+			std::shared_ptr<Array<float, DimCount>> a_obj = std::dynamic_pointer_cast<Array<float, DimCount>>(a);
+			std::shared_ptr<Array<float, DimCount>> b_obj = std::dynamic_pointer_cast<Array<float, DimCount>>(b);
 
-			std::unique_ptr<float[]> ptr_b(new float[b.get()->Size()]);
-			b.get()->CopyDataTo(ptr_b.get());
-
-			std::unique_ptr<float[]> ptr_c(new float[size]);
+			std::shared_ptr<Array<float, DimCount>> out = std::make_shared<Array<float, DimCount>>(Array<float, DimCount>((*a).Shape, size));
 
 			for (int i = 0; i < size; i++)
 			{
-				ptr_c[i] = ptr_a[i] / ptr_b[i];
+				(*out)[i] = (*a_obj)[i] / (*b_obj)[i];
 			}
 
-			PtrVector out = return_data(a.get()->Shape, size, ptr_c.get());
-
-			return out;
+			return std::static_pointer_cast<core::IArray<float, DimCount>>(out);
 		}
 
 		//x = a/b
 		virtual void DivTo(PtrVector x, const PtrVector a, const PtrVector b) override
 		{
 			//x = a/b
-			const size_t size = a.get()->Size();
+			const size_t size = (*a).Size();
 
-			std::unique_ptr<float[]> ptr_a(new float[size]);
-			a.get()->CopyDataTo(ptr_a.get());
+			std::shared_ptr<Array<float, DimCount>> a_obj = std::dynamic_pointer_cast<Array<float, DimCount>>(a);
+			std::shared_ptr<Array<float, DimCount>> b_obj = std::dynamic_pointer_cast<Array<float, DimCount>>(b);
 
-			std::unique_ptr<float[]> ptr_b(new float[b.get()->Size()]);
-			b.get()->CopyDataTo(ptr_b.get());
-
-			std::unique_ptr<float[]> ptr_c(new float[size]);
+			std::shared_ptr<Array<float, DimCount>> out = std::make_shared<Array<float, DimCount>>(Array<float, DimCount>((*a).Shape, size));
 
 			for (int i = 0; i < size; i++)
 			{
-				ptr_c[i] = ptr_a[i] / ptr_b[i];
+				(*out)[i] = (*a_obj)[i] / (*b_obj)[i];
 			}
 
-			x = return_data(a.get()->Shape, size, ptr_c.get());
-
+			x = std::static_pointer_cast<core::IArray<float, DimCount>>(out);
 			return;
 		}
 
@@ -795,47 +662,38 @@ namespace cpu_backend
 		virtual PtrVector Pow(const PtrVector a, const PtrVector b) override
 		{
 			//a^b
-			const size_t size = a.get()->Size();
+			const size_t size = (*a).Size();
 
-			std::unique_ptr<float[]> ptr_a(new float[size]);
-			a.get()->CopyDataTo(ptr_a.get());
+			std::shared_ptr<Array<float, DimCount>> a_obj = std::dynamic_pointer_cast<Array<float, DimCount>>(a);
+			std::shared_ptr<Array<float, DimCount>> b_obj = std::dynamic_pointer_cast<Array<float, DimCount>>(b);
 
-			std::unique_ptr<float[]> ptr_b(new float[b.get()->Size()]);
-			b.get()->CopyDataTo(ptr_b.get());
-
-			std::unique_ptr<float[]> ptr_c(new float[size]);
+			std::shared_ptr<Array<float, DimCount>> out = std::make_shared<Array<float, DimCount>>(Array<float, DimCount>((*a).Shape, size));
 
 			for (int i = 0; i < size; i++)
 			{
-				ptr_c[i] = pow(ptr_a[i], ptr_b[i]);
+				(*out)[i] = pow((*a_obj)[i], (*b_obj)[i]);
 			}
 
-			PtrVector out = return_data(a.get()->Shape, size, ptr_c.get());
-
-			return out;
+			return std::static_pointer_cast<core::IArray<float, DimCount>>(out);
 		}
 
 		//x = a**b
 		virtual void PowTo(PtrVector x, const PtrVector a, const PtrVector b) override
 		{
-			//a^b
-			const size_t size = a.get()->Size();
+			//x = a^b
+			const size_t size = (*a).Size();
 
-			std::unique_ptr<float[]> ptr_a(new float[size]);
-			a.get()->CopyDataTo(ptr_a.get());
+			std::shared_ptr<Array<float, DimCount>> a_obj = std::dynamic_pointer_cast<Array<float, DimCount>>(a);
+			std::shared_ptr<Array<float, DimCount>> b_obj = std::dynamic_pointer_cast<Array<float, DimCount>>(b);
 
-			std::unique_ptr<float[]> ptr_b(new float[b.get()->Size()]);
-			b.get()->CopyDataTo(ptr_b.get());
-
-			std::unique_ptr<float[]> ptr_c(new float[size]);
+			std::shared_ptr<Array<float, DimCount>> out = std::make_shared<Array<float, DimCount>>(Array<float, DimCount>((*a).Shape, size));
 
 			for (int i = 0; i < size; i++)
 			{
-				ptr_c[i] = pow(ptr_a[i], ptr_b[i]);
+				(*out)[i] = pow((*a_obj)[i], (*b_obj)[i]);
 			}
 
-			x = return_data(a.get()->Shape, size, ptr_c.get());
-
+			x = std::static_pointer_cast<core::IArray<float, DimCount>>(out);
 			return;
 		}
 
@@ -843,49 +701,37 @@ namespace cpu_backend
 		virtual PtrVector Pow(const PtrVector a, const double& b) override
 		{
 			//a^b
-			const size_t size = a.get()->Size();
+			const size_t size = (*a).Size();
 
-			std::unique_ptr<float[]> ptr_a(new float[size]);
-			a.get()->CopyDataTo(ptr_a.get());
+			std::shared_ptr<Array<float, DimCount>> a_obj = std::dynamic_pointer_cast<Array<float, DimCount>>(a);
 
-			std::unique_ptr<float[]> ptr_c(new float[size]);
+			std::shared_ptr<Array<float, DimCount>> out = std::make_shared<Array<float, DimCount>>(Array<float, DimCount>((*a).Shape, size));
 
 			for (int i = 0; i < size; i++)
 			{
-				ptr_c[i] = pow(ptr_a[i], b);
+				(*out)[i] = pow((*a_obj)[i], b);
 			}
 
-			PtrVector out = return_data(a.get()->Shape, size, ptr_c.get());
-
-			return out;
+			return std::static_pointer_cast<core::IArray<float, DimCount>>(out);
 		}
 
 		//x = a**b
 		virtual void PowTo(PtrVector x, const PtrVector a, const double& b) override
 		{
 			//a^b
-			const size_t size = a.get()->Size();
+			const size_t size = (*a).Size();
 
-			std::unique_ptr<float[]> ptr_a(new float[size]);
-			a.get()->CopyDataTo(ptr_a.get());
+			std::shared_ptr<Array<float, DimCount>> a_obj = std::dynamic_pointer_cast<Array<float, DimCount>>(a);
 
-			std::unique_ptr<float[]> ptr_c(new float[size]);
+			std::shared_ptr<Array<float, DimCount>> out = std::make_shared<Array<float, DimCount>>(Array<float, DimCount>((*a).Shape, size));
 
 			for (int i = 0; i < size; i++)
 			{
-				ptr_c[i] = pow(ptr_a[i], b);
+				(*out)[i] = pow((*a_obj)[i], b);
 			}
 
-			x = return_data(a.get()->Shape, size, ptr_c.get());
-
+			x = std::static_pointer_cast<core::IArray<float, DimCount>>(out);
 			return;
-		}
-
-	private:
-		PtrVector return_data(std::array<const size_t, DimCount> shape, const size_t& size, const float* const data)
-		{
-			cpu_backend::Array<float, DimCount> out_temp(shape, size, data);
-			return std::make_shared<Array<float, DimCount>>(out_temp);
 		}
 	};
 
