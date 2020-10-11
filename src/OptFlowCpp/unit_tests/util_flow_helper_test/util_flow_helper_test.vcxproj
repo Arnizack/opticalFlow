@@ -18,11 +18,29 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="FlowHelperTest.cpp" />
+    <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\cpu_backend\cpu_backend.vcxproj">
+      <Project>{858a1f7f-71cd-49eb-9228-a3ae91925c53}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\flow_helper\flow_helper.vcxproj">
+      <Project>{0e88c56f-28f0-4b91-8232-29c507145c89}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\utilities\flow_helper\flow_helper.vcxproj">
+      <Project>{0e88c56f-28f0-4b91-8232-29c507145c89}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{0e88c56f-28f0-4b91-8232-29c507145c89}</ProjectGuid>
-    <RootNamespace>flow_helper</RootNamespace>
+    <ProjectGuid>{d10afbd2-1e11-4db2-b732-d69ebf56fb3f}</ProjectGuid>
+    <RootNamespace>util_flow_helper_test</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -152,5 +170,12 @@
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
+    <Import Project="..\..\packages\gmock.1.10.0\build\native\gmock.targets" Condition="Exists('..\..\packages\gmock.1.10.0\build\native\gmock.targets')" />
   </ImportGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\packages\gmock.1.10.0\build\native\gmock.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\gmock.1.10.0\build\native\gmock.targets'))" />
+  </Target>
 </Project>

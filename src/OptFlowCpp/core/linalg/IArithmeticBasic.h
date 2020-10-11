@@ -25,7 +25,7 @@ namespace core
 		virtual PtrVector Mul(const PtrVector a, const PtrVector b) = 0;
 
 		//x = a*b
-		virtual void MulTo(PtrVector& x, const PtrVector a, const PtrVector b) = 0;
+		virtual void MulTo(PtrVector x, const PtrVector a, const PtrVector b) = 0;
 
 		//a/b
 		virtual PtrVector Div(const PtrVector a, const PtrVector b) = 0;

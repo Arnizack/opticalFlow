@@ -33,7 +33,7 @@ namespace cpu_backend
 			arr[i] = i;
 		}
 
-		Array<T, dim> in_obj(shape, size, arr);
+		Array<T, dim> in_obj(shape, arr);
 
 		for (int i = 0; i < size; i++)
 		{

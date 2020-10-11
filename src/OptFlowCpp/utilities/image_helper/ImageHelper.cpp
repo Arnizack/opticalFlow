@@ -87,4 +87,9 @@ namespace imagehelper
 
     }
 
+    float& Image::Pixel(size_t x, size_t y, size_t channel)
+    {
+        return data->operator[](channel* width* height + y * width + x);
+    }
+
 }

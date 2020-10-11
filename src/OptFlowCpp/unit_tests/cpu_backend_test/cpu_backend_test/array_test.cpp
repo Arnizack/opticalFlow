@@ -20,7 +20,7 @@ namespace cpu_backend
 				arr[i] = i + 1;
 			}
 
-			Array<int, dim> obj(shape, size, arr);
+			Array<int, dim> obj(shape, arr);
 
 			std::vector<int> dst(obj.Size());
 

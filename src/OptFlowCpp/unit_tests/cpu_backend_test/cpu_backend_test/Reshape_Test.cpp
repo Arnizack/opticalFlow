@@ -16,7 +16,7 @@ namespace cpu_backend
 			std::array<const size_t, dim> shape_in = { 5,2 };
 
 			T arr[size] = { 0,1,2,3,4,5,6,7,8,9 };
-			Array<T, dim> in_obj(shape_in, size, arr);
+			Array<T, dim> in_obj(shape_in, arr);
 			return std::make_shared<Array<T, dim>>(in_obj);
 		}
 

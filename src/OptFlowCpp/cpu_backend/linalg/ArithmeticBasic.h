@@ -571,7 +571,9 @@ namespace cpu_backend
 
 			std::shared_ptr<Array<float, DimCount>> a_obj = std::dynamic_pointer_cast<Array<float, DimCount>>(a);
 
-			std::shared_ptr<Array<float, DimCount>> out = std::make_shared<Array<float, DimCount>>(Array<float, DimCount>((*a).Shape, (*b)));
+			std::shared_ptr<Array<float, DimCount>> out 
+				= std::make_shared<Array<float, DimCount>>
+				(Array<float, DimCount>((*a).Shape, (*b)));
 
 			cblas_saxpby(size, 1, &(*a_obj)[0], 1, -1, &(*out)[0], 1);
 

@@ -13,7 +13,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "core_mock_adaptor", "unit_t
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "optflow_solvers", "optflow_solvers\optflow_solvers.vcxproj", "{7FB25F03-7D47-4FE3-8EAA-1776578AE8FF}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "optflow_solvers_tests", "unit_tests\optflow_solvers_tests\optflow_solver_tests.vcxproj", "{DCD08E75-06AB-4C03-85D0-5CC919B131D4}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "optflow_solvers_test", "unit_tests\optflow_solvers_tests\optflow_solver_tests.vcxproj", "{DCD08E75-06AB-4C03-85D0-5CC919B131D4}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cpu_backend_test", "unit_tests\cpu_backend_test\cpu_backend_test\cpu_backend_test.vcxproj", "{FE6AAD17-8933-4886-A47A-EF9FC188E496}"
 EndProject
@@ -35,9 +35,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "color_code_test", "libs\tes
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "imageLib", "libs\imageLib\imageLib.vcxproj", "{A14F6A61-8E9D-4929-A3FD-F497E82F88BA}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "util_image_helper", "unit_tests\util_image_helper\util_image_helper.vcxproj", "{A6C94378-F0CE-492E-B142-95FEF92D8823}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "util_image_helper_test", "unit_tests\util_image_helper\util_image_helper.vcxproj", "{A6C94378-F0CE-492E-B142-95FEF92D8823}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "flow_helper", "flow_helper\flow_helper.vcxproj", "{0E88C56F-28F0-4B91-8232-29C507145C89}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "util_flow_helper_test", "unit_tests\util_flow_helper_test\util_flow_helper_test.vcxproj", "{D10AFBD2-1E11-4DB2-B732-D69EBF56FB3F}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "flow_helper", "utilities\flow_helper\flow_helper.vcxproj", "{0E88C56F-28F0-4B91-8232-29C507145C89}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -179,6 +181,16 @@ Global
 		{A6C94378-F0CE-492E-B142-95FEF92D8823}.Release|x64.Build.0 = Release|x64
 		{A6C94378-F0CE-492E-B142-95FEF92D8823}.Release|x86.ActiveCfg = Release|Win32
 		{A6C94378-F0CE-492E-B142-95FEF92D8823}.Release|x86.Build.0 = Release|Win32
+		{D10AFBD2-1E11-4DB2-B732-D69EBF56FB3F}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{D10AFBD2-1E11-4DB2-B732-D69EBF56FB3F}.Debug|x64.ActiveCfg = Debug|x64
+		{D10AFBD2-1E11-4DB2-B732-D69EBF56FB3F}.Debug|x64.Build.0 = Debug|x64
+		{D10AFBD2-1E11-4DB2-B732-D69EBF56FB3F}.Debug|x86.ActiveCfg = Debug|Win32
+		{D10AFBD2-1E11-4DB2-B732-D69EBF56FB3F}.Debug|x86.Build.0 = Debug|Win32
+		{D10AFBD2-1E11-4DB2-B732-D69EBF56FB3F}.Release|Any CPU.ActiveCfg = Release|Win32
+		{D10AFBD2-1E11-4DB2-B732-D69EBF56FB3F}.Release|x64.ActiveCfg = Release|x64
+		{D10AFBD2-1E11-4DB2-B732-D69EBF56FB3F}.Release|x64.Build.0 = Release|x64
+		{D10AFBD2-1E11-4DB2-B732-D69EBF56FB3F}.Release|x86.ActiveCfg = Release|Win32
+		{D10AFBD2-1E11-4DB2-B732-D69EBF56FB3F}.Release|x86.Build.0 = Release|Win32
 		{0E88C56F-28F0-4B91-8232-29C507145C89}.Debug|Any CPU.ActiveCfg = Debug|Win32
 		{0E88C56F-28F0-4B91-8232-29C507145C89}.Debug|x64.ActiveCfg = Debug|x64
 		{0E88C56F-28F0-4B91-8232-29C507145C89}.Debug|x64.Build.0 = Debug|x64
@@ -205,6 +217,7 @@ Global
 		{56517A5D-6436-4082-AF13-2EAF9C2E07A9} = {129C2AFB-D7D1-4469-8E0E-29788541ACD7}
 		{A14F6A61-8E9D-4929-A3FD-F497E82F88BA} = {09C4D919-3AA4-46F0-9692-138FE74D947D}
 		{A6C94378-F0CE-492E-B142-95FEF92D8823} = {0D4C8FCB-B7B6-4FD4-ABB8-76589C981313}
+		{D10AFBD2-1E11-4DB2-B732-D69EBF56FB3F} = {0D4C8FCB-B7B6-4FD4-ABB8-76589C981313}
 		{0E88C56F-28F0-4B91-8232-29C507145C89} = {0EF38D26-7AF5-4AC3-89BA-F609056E31FE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution

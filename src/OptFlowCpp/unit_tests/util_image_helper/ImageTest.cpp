@@ -18,7 +18,7 @@ namespace imagehelper
 		std::string path = "test.png";
 		std::array<const size_t, 2> shape = { 4,4 };
 		auto img = std::make_shared< cpu_backend::Array<float, 2>>
-			(shape, 16, expected_img.data());
+			(shape, expected_img.data());
 
 		imagehelper::SaveImage(path, img);
 		Image opened_img = imagehelper::OpenImage(path);

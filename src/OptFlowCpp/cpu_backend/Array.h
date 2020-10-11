@@ -11,7 +11,7 @@ namespace cpu_backend
 	public:
 		Array() = default;
 
-		Array(std::array<const size_t, DimCount> shape, const InnerTyp *const src) : 
+		Array(const std::array<const size_t, DimCount>& shape, const InnerTyp *const src) : 
 			core::IArray<InnerTyp, DimCount>(shape), _size(1), _data(std::vector<InnerTyp>())
 		{
 
@@ -25,7 +25,7 @@ namespace cpu_backend
 		}
 
 
-		Array(std::array<const size_t, DimCount> shape, const InnerTyp& single_value) : 
+		Array(const std::array<const size_t, DimCount>& shape, const InnerTyp& single_value) :
 			core::IArray<InnerTyp, DimCount>(shape), _size(1), _data(std::vector<InnerTyp>())
 		{
 

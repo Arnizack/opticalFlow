@@ -14,6 +14,9 @@ namespace imagehelper
 		size_t height;
 		size_t color_count;
 		std::shared_ptr<std::vector<float>> data;
+
+		float& Pixel(size_t x, size_t y, size_t channel);
+
 	};
 
 	void SaveImage(std::string filepath, float* img, size_t width, size_t height, size_t color_count);

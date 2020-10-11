@@ -73,8 +73,8 @@ namespace cpu_backend
 				arr_b[i] = i * 2;
 			}
 
-			Array<T, dim> obj_a(shape, size, arr_a);
-			Array<T, dim> obj_b(shape, size, arr_b);
+			Array<T, dim> obj_a(shape, arr_a);
+			Array<T, dim> obj_b(shape, arr_b);
 
 			std::shared_ptr<Array<T, dim>> in_a =
 				std::make_shared<Array<T, dim>>(obj_a);
