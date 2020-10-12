@@ -6,16 +6,16 @@
 namespace cpu_backend
 {
 	template<typename T>
-	T compareNorm(const T* const arr, const size_t size)
+	double compareNorm(const T* const arr, const size_t size)
 	{
-		T norm_value = 0;
+		double norm_value = 0;
 
 		for (size_t i = 0; i < size; i++)
 		{
 			norm_value += arr[i] * arr[i];
 		}
 
-		return (T)sqrt((double)norm_value);
+		return sqrt(norm_value);
 	}
 
 	template<typename T>
@@ -44,11 +44,11 @@ namespace cpu_backend
 
 		Norm<T, dim> norm;
 
-		std::shared_ptr<T> out = norm.Apply(in);
+		std::shared_ptr<double> out = norm.Apply(in);
 
-		T norm_value = compareNorm(arr, size);
+		double norm_value = (T)compareNorm(arr, size);
 
-		T out_value = *out;
+		double out_value = (T)*out;
 
 		EXPECT_EQ(norm_value, out_value);
 	}
@@ -58,6 +58,11 @@ namespace cpu_backend
 	TEST(NormTest, Double)
 	{
 		TestNormForTyp<double>();
+	}
+
+	TEST(NormTest, Float)
+	{
+		TestNormForTyp<float>();
 	}
 
 	TEST(NormTest, Int)
