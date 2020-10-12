@@ -2,6 +2,8 @@
 #include "core\IArrayFactory.h"
 #include "Array.h"
 
+#include <memory>
+
 namespace cpu_backend
 {
 	template<class InnerTyp, size_t DimCount>
@@ -18,7 +20,7 @@ namespace cpu_backend
 				size *= shape[i];
 			}
 
-			return std::make_shared<cpu_backend::Array<InnerTyp, DimCount>>(cpu_backend::Array<InnerTyp, DimCount>(shape, size, fill_value));
+			return std::make_shared<cpu_backend::Array<InnerTyp, DimCount>>(cpu_backend::Array<InnerTyp, DimCount>(shape, fill_value));
 		}
 
 		virtual PtrArray Zeros(std::array<const size_t, DimCount> shape) override
