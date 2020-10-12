@@ -18,7 +18,7 @@ namespace cpu_backend
 				size *= shape[i];
 			}
 
-			return std::make_shared<cpu_backend::Array<InnerTyp, DimCount>>(cpu_backend::Array<InnerTyp, DimCount>(shape, size, fill_value));
+			return std::make_shared<cpu_backend::Array<InnerTyp, DimCount>>(cpu_backend::Array<InnerTyp, DimCount>(shape, fill_value));
 		}
 
 		virtual PtrArray Zeros(std::array<const size_t, DimCount> shape) override

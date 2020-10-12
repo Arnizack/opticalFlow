@@ -173,10 +173,7 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="image\warper\GrayWarper.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
+    <ClInclude Include="image\warper\GrayWarper.h" />
     <ClInclude Include="image\warper\InterpolateBicubic.h">
       <SubType>
       </SubType>

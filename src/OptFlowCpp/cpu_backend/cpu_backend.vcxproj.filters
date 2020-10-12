@@ -30,9 +30,6 @@
     <ClInclude Include="linalg\ArithmeticChained.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="image\warper\GrayWarper.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="image\warper\InterpolateBicubic.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -43,6 +40,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="image\inner\DerivativeCalculator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="linalg\Norm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Statistics.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="image\warper\GrayWarper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

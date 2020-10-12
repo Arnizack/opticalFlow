@@ -8,6 +8,13 @@ namespace cpu_backend
     using PtrGrayImg = std::shared_ptr<core::IArray<float, 2>>;
     using PtrFlowField = std::shared_ptr<core::IArray<double, 3>>;
 
+    GrayWarper::GrayWarper(std::shared_ptr<DerivativeCalculator> derivative_calculator)
+        : _derivative_calculator(derivative_calculator)
+    {
+    }
+
+
+
     void GrayWarper::SetImage(PtrGrayImg image)
     {
         
@@ -18,8 +25,8 @@ namespace cpu_backend
     PtrGrayImg GrayWarper::Warp(PtrFlowField flow)
     {
         auto ptr_flow = std::static_pointer_cast<Array<double, 3>, core::IArray<double, 3>>(flow);
-        size_t width = flow->Shape[1];
-        size_t height = flow->Shape[0];
+        size_t width = flow->Shape[2];
+        size_t height = flow->Shape[1];
 
         auto ptr_image = std::make_shared<Array<float, 2>>(std::array<const size_t,2>({height,width}));
         
@@ -44,13 +51,18 @@ namespace cpu_backend
                 coord_y = fmin(coord_y, height);
                 coord_y = fmax(coord_y, 0);
 
-                size_t corner_x = fmin(coord_x, width - 1);
-                size_t corner_y = fmin(coord_y, height - 1);
+                size_t corner_x = fmin(coord_x, width - 2);
+                size_t corner_y = fmin(coord_y, height - 2);
 
-                float* scalars = _lookup->operator[](corner_x* width + corner_y).data();
+                float* scalars = _lookup->operator[](corner_x* (width-1) + corner_y).data();
 
                 double remap_coord_x = coord_x - corner_x;
                 double remap_coord_y = coord_y - corner_y;
+
+                remap_coord_x = fmin(remap_coord_x, 1);
+                remap_coord_x = fmax(remap_coord_x, 0);
+                remap_coord_y = fmin(remap_coord_y, 1);
+                remap_coord_y = fmax(remap_coord_y, 0);
 
                 float interpol_val = BicubicApplyScalars(scalars, remap_coord_x, remap_coord_y);
 
@@ -87,7 +99,7 @@ namespace cpu_backend
             for (int x = 0; x < width - 1; x++)
             {
                 int lower_left_coord = width * y + x;
-                int lower_right_coord = width * y + x + 1;
+                int lower_right_coord = width  * y + x + 1;
                 int upper_left_coord = width * (y + 1) + x;
                 int upper_right_coord = width * (y + 1) + x + 1;
 
@@ -111,7 +123,7 @@ namespace cpu_backend
                 float upper_left_corner_deriv_xy =  deriv_xy[upper_left_coord];
                 float upper_right_corner_deriv_xy = deriv_xy[upper_right_coord];
 
-                float* dst = lookup_table->operator[](lower_left_coord).data();
+                float* dst = lookup_table->operator[]((width -1 )* y + x).data();
 
                 InterpolateBicubicScalars(lower_left_corner, lower_right_corner,
                     upper_left_corner, upper_right_corner,
