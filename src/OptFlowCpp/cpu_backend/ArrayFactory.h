@@ -2,6 +2,8 @@
 #include "core\IArrayFactory.h"
 #include "Array.h"
 
+#include <memory>
+
 namespace cpu_backend
 {
 	template<class InnerTyp, size_t DimCount>

@@ -119,7 +119,7 @@ namespace cpu_backend
 		}
 
 		//x = a*b
-		virtual void MulTo(PtrVector& x, const PtrVector a, const PtrVector b) override
+		virtual void MulTo(PtrVector x, const PtrVector a, const PtrVector b) override
 		{
 			//x = a*b
 			const size_t size = (*a).Size();
@@ -127,7 +127,7 @@ namespace cpu_backend
 			std::shared_ptr<Array<InnerTyp, DimCount>> a_obj = std::dynamic_pointer_cast<Array<InnerTyp, DimCount>>(a);
 			std::shared_ptr<Array<InnerTyp, DimCount>> b_obj = std::dynamic_pointer_cast<Array<InnerTyp, DimCount>>(b);
 
-			std::shared_ptr<Array<InnerTyp, DimCount>> out = std::make_shared<Array<InnerTyp, DimCount>>(Array<InnerTyp, DimCount>((*a).Shape, size));
+			std::shared_ptr<Array<InnerTyp, DimCount>> out = std::make_shared<Array<InnerTyp, DimCount>>(Array<InnerTyp, DimCount>((*a).Shape));
 
 			for (int i = 0; i < size; i++)
 			{
@@ -174,7 +174,7 @@ namespace cpu_backend
 			std::shared_ptr<Array<InnerTyp, DimCount>> a_obj = std::dynamic_pointer_cast<Array<InnerTyp, DimCount>>(a);
 			std::shared_ptr<Array<InnerTyp, DimCount>> b_obj = std::dynamic_pointer_cast<Array<InnerTyp, DimCount>>(b);
 
-			std::shared_ptr<Array<InnerTyp, DimCount>> out = std::make_shared<Array<InnerTyp, DimCount>>(Array<InnerTyp, DimCount>((*a).Shape, size));
+			std::shared_ptr<Array<InnerTyp, DimCount>> out = std::make_shared<Array<InnerTyp, DimCount>>(Array<InnerTyp, DimCount>((*a).Shape));
 
 			for (int i = 0; i < size; i++)
 			{
@@ -221,7 +221,7 @@ namespace cpu_backend
 			std::shared_ptr<Array<InnerTyp, DimCount>> a_obj = std::dynamic_pointer_cast<Array<InnerTyp, DimCount>>(a);
 			std::shared_ptr<Array<InnerTyp, DimCount>> b_obj = std::dynamic_pointer_cast<Array<InnerTyp, DimCount>>(b);
 
-			std::shared_ptr<Array<InnerTyp, DimCount>> out = std::make_shared<Array<InnerTyp, DimCount>>(Array<InnerTyp, DimCount>((*a).Shape, size));
+			std::shared_ptr<Array<InnerTyp, DimCount>> out = std::make_shared<Array<InnerTyp, DimCount>>(Array<InnerTyp, DimCount>((*a).Shape) );
 
 			for (int i = 0; i < size; i++)
 			{
@@ -263,7 +263,7 @@ namespace cpu_backend
 
 			double b_conv = (double)b;
 
-			std::shared_ptr<Array<InnerTyp, DimCount>> out = std::make_shared<Array<InnerTyp, DimCount>>(Array<InnerTyp, DimCount>((*a).Shape, size));
+			std::shared_ptr<Array<InnerTyp, DimCount>> out = std::make_shared<Array<InnerTyp, DimCount>>(Array<InnerTyp, DimCount>((*a).Shape) );
 
 			for (int i = 0; i < size; i++)
 			{
@@ -371,7 +371,7 @@ namespace cpu_backend
 		}
 
 		//x = a*b
-		virtual void MulTo(PtrVector& x, const PtrVector a, const PtrVector b) override
+		virtual void MulTo(PtrVector x, const PtrVector a, const PtrVector b) override
 		{
 			//x = a*b
 			const size_t size = (*a).Size();
@@ -573,7 +573,7 @@ namespace cpu_backend
 
 			std::shared_ptr<Array<float, DimCount>> out 
 				= std::make_shared<Array<float, DimCount>>
-				(Array<float, DimCount>((*a).Shape, (*b)));
+				(Array<float, DimCount> ((*a).Shape, *b) );
 
 			cblas_saxpby(size, 1, &(*a_obj)[0], 1, -1, &(*out)[0], 1);
 
@@ -602,7 +602,7 @@ namespace cpu_backend
 		}
 
 		//x = a*b
-		virtual void MulTo(PtrVector& x, const PtrVector a, const PtrVector b) override
+		virtual void MulTo(PtrVector x, const PtrVector a, const PtrVector b) override
 		{
 			//x = a*b
 			const size_t size = (*a).Size();

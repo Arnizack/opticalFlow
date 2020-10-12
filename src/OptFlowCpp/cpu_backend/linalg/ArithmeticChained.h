@@ -57,7 +57,7 @@ namespace cpu_backend
 		}
 
 		//x = a*b
-		virtual void MulTo(PtrVector& x, const PtrVector a, const PtrVector b)
+		virtual void MulTo(PtrVector x, const PtrVector a, const PtrVector b)
 		{
 			_arithmetic_base.MulTo(x, a, b);
 			return;

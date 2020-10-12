@@ -24,6 +24,11 @@ namespace cpu_backend
 			std::copy_n(src, _size, _data.data());
 		}
 
+		Array(const std::array<const size_t, DimCount>& shape, core::IContainer<InnerTyp>& copy) :
+			core::IArray<InnerTyp, DimCount>(shape), _size(copy.Size()), _data(std::vector<InnerTyp>(copy.Size()))
+		{
+			copy.CopyDataTo(_data.data());
+		}
 
 		Array(const std::array<const size_t, DimCount>& shape, const InnerTyp& single_value) :
 			core::IArray<InnerTyp, DimCount>(shape), _size(1), _data(std::vector<InnerTyp>())
@@ -44,9 +49,9 @@ namespace cpu_backend
 		Array(const std::array<const size_t, DimCount>& shape) : 
 			core::IArray<InnerTyp, DimCount>(shape), _size(1), _data(std::vector<InnerTyp>())
 		{
-			for(const size_t& dim : shape)
+			for (const size_t& dim : shape)
 			{
-				_size*=dim;
+				_size *= dim;
 			}
 
 			_data = std::vector<InnerTyp>(_size);
