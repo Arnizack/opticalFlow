@@ -1,27 +1,20 @@
 #pragma once
+#include<algorithm>
+#include"ArrayHelper.h"
 
 namespace cpu_backend
 {
-	enum class Padding
-	{
-		ZEROS
-	};
 
 	enum class Direction
 	{
 		X,Y
 	};
 
+
+
 	namespace _inner
 	{
-		template<class T, Padding padding>
-		inline T GetValueAt(const int& x, const  int& y, const  int& width, const  int& height, T* img)
-		{
-			//default padding Zeros
-			if (x >= width || y >= height || x < 0 || y < 0)
-				return 0;
-			return img[width * y + x];
-		}
+		
 
 		template<Direction direction>
 		inline int CorrespondingX(const int& kernel_idx, const int& kernel_length_half, const int& x)

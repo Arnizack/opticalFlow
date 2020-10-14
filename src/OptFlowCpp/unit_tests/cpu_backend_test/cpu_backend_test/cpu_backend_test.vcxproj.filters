@@ -5,9 +5,11 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\lib\native\src\gtest\gtest-all.cc" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\lib\native\src\gmock\gmock-all.cc" />
-    <ClCompile Include="image\BicubicScalarTest.cpp" />
     <ClCompile Include="image\inner\convolution1DTest.cpp" />
     <ClCompile Include="image\GrayWarperTest.cpp" />
+    <ClCompile Include="linalg\ArithmeticBasic_test.cpp" />
+    <ClCompile Include="linalg\ArithmeticChained_Test.cpp" />
+    <ClCompile Include="linalg\Norm_Test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

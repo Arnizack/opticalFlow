@@ -67,6 +67,19 @@ namespace cpu_backend
 			return _data[i];
 		}
 
+		inline InnerTyp& operator[](const std::array<const size_t, DimCount>& coord)
+		{
+			//{y,x}
+			size_t flattened_coord = 0;
+			size_t multiplyer = 1;
+			for (int i = DimCount - 1; i >= 0 ; i--)
+			{
+				flattened_coord += multiplyer * coord[i];
+				multiplyer *= this->Shape[i];
+			}
+			return _data[flattened_coord];
+		}
+
 		virtual size_t Size() const override
 		{
 			return _size;
@@ -82,6 +95,8 @@ namespace cpu_backend
 		{
 			return _data.data();
 		}
+
+		
 
 	protected:
 	private:

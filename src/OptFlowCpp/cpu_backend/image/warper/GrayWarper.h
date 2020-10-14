@@ -14,17 +14,13 @@ namespace cpu_backend
 		using PtrFlowField = std::shared_ptr<core::IArray<double, 3>>;
 	public:
 
-		GrayWarper(std::shared_ptr<DerivativeCalculator> derivative_calculator);
-
 		// Inherited via IGrayWarper
 		virtual void SetImage(PtrGrayImg image) override;
 		virtual PtrGrayImg Warp(PtrFlowField flow) override;
 
-		std::unique_ptr<std::vector<std::array<float, 16>>> CreateBicubicLookup(
-			std::shared_ptr<Array<float, 2>> image);
+		
 	private:
-		std::shared_ptr<DerivativeCalculator> _derivative_calculator;
-		std::unique_ptr<std::vector<std::array<float, 16>>> _lookup;
+		std::shared_ptr<Array<float,2>> _image;
 
 		
 		
