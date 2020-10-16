@@ -54,6 +54,15 @@
     <ClInclude Include="image\inner\BicubicInterpolate.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="sb_linearsystem\SunBakerLinSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sb_linearsystem\SunBakerLSUpdater.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="image\inner\convolution2D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -63,6 +72,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="image\inner\DerivativeCalculator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sb_linearsystem\SunBakerLinSystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sb_linearsystem\SunBakerLSUpdater.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

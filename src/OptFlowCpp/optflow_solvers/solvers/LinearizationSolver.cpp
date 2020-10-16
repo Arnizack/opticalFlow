@@ -11,7 +11,7 @@ namespace optflow_solvers
     LinearizationSolver::LinearizationSolver(
         double start_relaxation, double end_relaxation, double relaxation_steps, 
         std::shared_ptr<core::ICrossFlowFilter> cross_filter, 
-        std::shared_ptr<ISunBakerLSBuilder> linear_system_builder, 
+        std::shared_ptr<ISunBakerLSUpdater> linear_system_updater, 
         PtrLinearSolver linear_solver, 
         std::shared_ptr<core::IReshaper<double>> flow_reshaper, 
         std::shared_ptr<core::IGrayWarper> warper, 
@@ -23,7 +23,7 @@ namespace optflow_solvers
         _end_relaxation(end_relaxation),
         _relaxation_steps(relaxation_steps),
         _cross_filter(cross_filter),
-        _linear_system_builder(linear_system_builder),
+        _linear_system_updater(linear_system_updater),
         _linear_solver(linear_solver),
         _flow_reshaper(flow_reshaper),
         _warper(warper),
@@ -47,7 +47,7 @@ namespace optflow_solvers
 
         _warper->SetImage(problem->SecondFrame);
         auto warped_img = _warper->Warp(initial_guess);
-        _linear_system_builder->SetFramePair(problem->FirstFrame, warped_img);
+        _linear_system_updater->SetFramePair(problem->FirstFrame, warped_img);
 
         auto delta_initial_flow = _flow_factory->Zeros({ 2,height,width });
         auto flow_before_filter = _flow_factory->Zeros({ 2,height,width });
@@ -58,9 +58,9 @@ namespace optflow_solvers
         for (size_t relaxation_iter = 0; relaxation_iter < _relaxation_steps; relaxation_iter++)
         {
             double relaxation = ComputeRelaxation(relaxation_iter);
-            _linear_system_builder->UpdateParameter(delta_initial_flow, relaxation);
+            _linear_system_updater->UpdateParameter(delta_initial_flow, relaxation);
             std::shared_ptr<core::ILinearProblem<double>> linear_problem 
-                = _linear_system_builder->Create();
+                = _linear_system_updater->Update();
 
             using PtrVector = std::shared_ptr<core::IArray<double, 1>>;
 

@@ -23,7 +23,7 @@ namespace optflow_solvers
 			double end_relaxation,
 			double relaxation_steps,
 			std::shared_ptr<core::ICrossFlowFilter> cross_filter,
-			std::shared_ptr<ISunBakerLSBuilder> linear_system_builder,
+			std::shared_ptr<ISunBakerLSUpdater> linear_system_builder,
 			PtrLinearSolver linear_solver,
 			std::shared_ptr<core::IReshaper<double>> flow_reshaper,
 			std::shared_ptr<core::IGrayWarper> warper,
@@ -44,7 +44,7 @@ namespace optflow_solvers
 		double _relaxation_steps;
 
 		std::shared_ptr<core::ICrossFlowFilter> _cross_filter;
-		std::shared_ptr<ISunBakerLSBuilder> _linear_system_builder;
+		std::shared_ptr<ISunBakerLSUpdater> _linear_system_updater;
 		PtrLinearSolver _linear_solver;
 		std::shared_ptr<core::IReshaper<double>> _flow_reshaper;
 		std::shared_ptr<core::IGrayWarper> _warper;
