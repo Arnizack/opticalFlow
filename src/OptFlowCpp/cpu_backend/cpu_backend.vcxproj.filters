@@ -39,9 +39,6 @@
     <ClInclude Include="image\inner\DerivativeCalculator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="linalg\Norm.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Statistics.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -52,6 +49,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="image\inner\BicubicInterpolate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="linalg\ArithmeticVector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
