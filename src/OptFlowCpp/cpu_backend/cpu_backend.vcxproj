@@ -175,6 +175,7 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="image\inner\convolution2D.h" />
     <ClInclude Include="image\inner\DerivativeCalculator.h">
       <SubType>
       </SubType>
@@ -188,6 +189,11 @@
     </ClInclude>
     <ClInclude Include="pch.h" />
     <ClInclude Include="Reshaper.h" />
+    <ClInclude Include="sb_linearsystem\SunBakerLinSystem.h" />
+    <ClInclude Include="sb_linearsystem\SunBakerLSUpdater.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Statistics.h" />
   </ItemGroup>
   <ItemGroup>
@@ -204,6 +210,11 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="sb_linearsystem\SunBakerLinSystem.cpp" />
+    <ClCompile Include="sb_linearsystem\SunBakerLSUpdater.cpp">
+      <SubType>
+      </SubType>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

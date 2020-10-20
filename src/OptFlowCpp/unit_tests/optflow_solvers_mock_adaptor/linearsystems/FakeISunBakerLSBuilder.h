@@ -7,7 +7,7 @@ namespace optflow_solvers
 {
 	namespace testing
 	{
-		class FakeISunBakerLSBuilder : public ISunBakerLSBuilder
+		class FakeISunBakerLSBuilder : public ISunBakerLSUpdater
 		{
 		public:
 			// Inherited via ISunBakerLSBuilder
@@ -16,7 +16,7 @@ namespace optflow_solvers
 			MOCK_METHOD2(UpdateParameter, 
 				void(PtrFlowField linearizazion_points, double relaxation) );
 
-			virtual std::shared_ptr<core::ILinearProblem<double>> Create() override {
+			virtual std::shared_ptr<core::ILinearProblem<double>> Update() override {
 				return std::make_shared<core::MockILinearProblem<double>>();
 			}
 		};

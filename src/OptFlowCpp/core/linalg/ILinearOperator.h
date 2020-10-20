@@ -1,5 +1,6 @@
 #pragma once
 #include"IOperator.h"
+#include<memory>
 
 namespace core
 {
@@ -9,7 +10,7 @@ namespace core
 	class ILinearOperator : public IOperator<InputTyp, OutputTyp>
 	{
 	public:
-		virtual ILinearOperator<OutputTyp,InputTyp> Transpose() = 0;
+		virtual std::shared_ptr<ILinearOperator<OutputTyp, InputTyp>> Transpose() = 0;
 		virtual bool IsSymetric() = 0;
 	};
 

@@ -25,7 +25,7 @@ namespace optflow_solvers
 			std::shared_ptr<core::ICrossFlowFilter> cross_filter = mock_cross_filter;
 
 			auto mock_linear_system_builder = std::make_shared<FakeISunBakerLSBuilder>();
-			std::shared_ptr<ISunBakerLSBuilder> linear_system_builder = mock_linear_system_builder;
+			std::shared_ptr<ISunBakerLSUpdater> linear_system_builder = mock_linear_system_builder;
 
 			auto mock_linear_solver = std::make_shared < MockILinearSolverD>();
 			std::shared_ptr<core::ILinearSolver<double>> linear_solver = mock_linear_solver;
