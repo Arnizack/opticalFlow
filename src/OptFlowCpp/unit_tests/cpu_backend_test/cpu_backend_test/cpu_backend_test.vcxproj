@@ -159,7 +159,7 @@
     </ClCompile>
     <ClCompile Include="linalg\ArithmeticBasic_test.cpp" />
     <ClCompile Include="linalg\ArithmeticChained_Test.cpp" />
-    <ClCompile Include="linalg\Norm_Test.cpp" />
+    <ClCompile Include="linalg\ArithmeticVector_Test.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
