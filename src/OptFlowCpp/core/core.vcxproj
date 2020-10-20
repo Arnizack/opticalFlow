@@ -45,6 +45,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="IScaler.h" />
+    <ClInclude Include="linalg\IArithmeticVector.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="pyramid\IPyramid.h" />
     <ClInclude Include="penalty\IBlendablePenalty.h" />
     <ClInclude Include="penalty\IPenalty.h" />
