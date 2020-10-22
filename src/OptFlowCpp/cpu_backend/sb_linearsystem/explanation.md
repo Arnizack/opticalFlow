@@ -38,9 +38,9 @@ b = |-I_y p'_D + I_y p''_D I_y dv + I_x p''_D I_y du + lambda_R 2 v_relax|
     |-I_x p'_D + I_x p''_D I_x du + I_x p''_D I_y dv + lambda_R 2 u_relax|
 
 K = - 2 lambda_K * mat(ker(x))
-D_y = diag(I_y p'_D I_y + 2 lambda_R)
+D_y = diag(I_y p''_D I_y + 2 lambda_R)
 R = diag(I_x p''_D I_y)
-D_x = diag(I_x p'_D I_x + 2 lambda_R )
+D_x = diag(I_x p''_D I_x + 2 lambda_R )
 
 ## Implementation
 

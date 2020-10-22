@@ -1,7 +1,7 @@
 #include"gtest/gtest.h"
 #include"optflow_solvers/solvers/LinearizationSolver.h"
 #include"unit_tests/core_mock_adaptor/flow/MockICrossFlowFilter.h"
-#include"unit_tests/optflow_solvers_mock_adaptor/linearsystems/FakeISunBakerLSBuilder.h"
+#include"unit_tests/optflow_solvers_mock_adaptor/linearsystems/FakeISunBakerLSUpdater.h"
 #include"unit_tests/core_mock_adaptor/solver/MockILinearSolverD.h"
 #include"unit_tests/core_mock_adaptor/MockIReshaperD.h"
 #include"unit_tests/core_mock_adaptor/image/MockIGrayWarper.h"
@@ -24,7 +24,7 @@ namespace optflow_solvers
 			auto mock_cross_filter = std::make_shared<MockICrossFlowFilter>();
 			std::shared_ptr<core::ICrossFlowFilter> cross_filter = mock_cross_filter;
 
-			auto mock_linear_system_builder = std::make_shared<FakeISunBakerLSBuilder>();
+			auto mock_linear_system_builder = std::make_shared<FakeISunBakerLSUpdater>();
 			std::shared_ptr<ISunBakerLSUpdater> linear_system_builder = mock_linear_system_builder;
 
 			auto mock_linear_solver = std::make_shared < MockILinearSolverD>();

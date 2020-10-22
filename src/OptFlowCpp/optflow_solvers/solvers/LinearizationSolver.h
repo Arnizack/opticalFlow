@@ -3,7 +3,7 @@
 #include"core/solver/problem/IGrayCrossFilterProblem.h"
 #include"core/flow/ICrossFlowFilter.h"
 #include"core/solver/ILinearSolver.h"
-#include"../linearsystems/ISunBakerLSBuilder.h"
+#include"../linearsystems/ISunBakerLSUpdater.h"
 #include"core/IReshaper.h"
 #include"core/image/IGrayWarper.h"
 #include"core/IArrayFactory.h"

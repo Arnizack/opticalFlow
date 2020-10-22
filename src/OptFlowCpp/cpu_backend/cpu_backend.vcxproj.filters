@@ -54,13 +54,16 @@
     <ClInclude Include="image\inner\BicubicInterpolate.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="sb_linearsystem\SunBakerLinSystem.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="sb_linearsystem\SunBakerLSUpdater.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="image\inner\convolution2D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sb_linearsystem\SunBakerLinearOp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="penalty\QuadraticPenalty.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -74,10 +77,13 @@
     <ClCompile Include="image\inner\DerivativeCalculator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="sb_linearsystem\SunBakerLinSystem.cpp">
+    <ClCompile Include="sb_linearsystem\SunBakerLSUpdater.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="sb_linearsystem\SunBakerLSUpdater.cpp">
+    <ClCompile Include="sb_linearsystem\SunBakerLinearOp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="penalty\QuadraticPenalty.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

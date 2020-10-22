@@ -19,13 +19,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="linearsystems\FakeISunBakerLSBuilder.h">
+    <ClInclude Include="linearsystems\FakeISunBakerLSUpdater.h">
       <SubType>
       </SubType>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="linearsystems\FakeISunBakerLSBuilder.cpp">
+    <ClCompile Include="linearsystems\FakeISunBakerLSUpdater.cpp">
       <SubType>
       </SubType>
     </ClCompile>

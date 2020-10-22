@@ -6,9 +6,12 @@
 
 namespace cpu_backend
 {
-	using PtrGrayImg = std::shared_ptr<core::IArray<double, 1>>;
-	class SunBakerLinearOp : public core::ILinearOperator<PtrGrayImg,PtrGrayImg>
+
+	class SunBakerLinearOp : public core::ILinearOperator<
+		std::shared_ptr<core::IArray<double, 1>>,
+		std::shared_ptr<core::IArray<double, 1>>>
 	{
+		using PtrGrayImg = std::shared_ptr<core::IArray<double, 1 >> ;
 		/*
 		Matrix representation:
 			    |K+A C  |

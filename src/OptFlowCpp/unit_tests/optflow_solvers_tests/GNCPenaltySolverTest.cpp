@@ -39,10 +39,10 @@ namespace optflow_solvers
 		using PtrGrayScale = std::shared_ptr <core::IArray<float, 2>>;
 		using ::testing::Return;
 
-		core::testing::MockIBlendablePenalty<PtrGrayScale>* penalty_mock =
-			new core::testing::MockIBlendablePenalty<PtrGrayScale>;
+		core::testing::MockIBlendablePenalty<double>* penalty_mock =
+			new core::testing::MockIBlendablePenalty<double>;
 
-		std::shared_ptr<core::IBlendablePenalty<PtrGrayScale>> ptr_penalty(penalty_mock);
+		std::shared_ptr<core::IBlendablePenalty<double>> ptr_penalty(penalty_mock);
 
 		core::testing::MockIArrayFactoryD3* flow_factory = new core::testing::MockIArrayFactoryD3;
 

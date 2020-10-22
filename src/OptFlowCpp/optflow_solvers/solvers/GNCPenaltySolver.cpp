@@ -11,7 +11,7 @@ namespace optflow_solvers
         std::shared_ptr<core::IGrayPenaltyCrossProblem>>>;
     
     using PtrBlendPenalty = std::shared_ptr<
-        core::IBlendablePenalty<core::IArray<float, 2>>>;
+        core::IBlendablePenalty<double>>;
     
     using PtrFlowFactory = std::shared_ptr<core::IArrayFactory<double, 3>>;
 

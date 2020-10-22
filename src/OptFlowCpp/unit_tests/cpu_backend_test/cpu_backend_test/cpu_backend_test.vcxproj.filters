@@ -12,6 +12,7 @@
     <ClCompile Include="linalg\Norm_Test.cpp" />
     <ClCompile Include="sb_linearsystem\SunBakerLinSystemTest.cpp" />
     <ClCompile Include="image\inner\convolution2DTest.cpp" />
+    <ClCompile Include="image\inner\DerivativeTest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

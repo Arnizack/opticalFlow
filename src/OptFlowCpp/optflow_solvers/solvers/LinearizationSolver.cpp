@@ -46,8 +46,10 @@ namespace optflow_solvers
         size_t height = problem->FirstFrame->Shape[0];
 
         _warper->SetImage(problem->SecondFrame);
+
         auto warped_img = _warper->Warp(initial_guess);
         _linear_system_updater->SetFramePair(problem->FirstFrame, warped_img);
+        _linear_system_updater->SetPenalty(problem->PenaltyFunc);
 
         auto delta_initial_flow = _flow_factory->Zeros({ 2,height,width });
         auto flow_before_filter = _flow_factory->Zeros({ 2,height,width });

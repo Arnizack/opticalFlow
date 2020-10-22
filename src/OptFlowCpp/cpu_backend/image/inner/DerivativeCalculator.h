@@ -12,6 +12,10 @@ namespace cpu_backend
 		void ComputeDerivativeY(float* img, int width, int height,float* dst);
 	private:
 		//kernel = [-1, 8, 0, -8, 1]/12
-		std::array<float, 5> kernel = { -1.0 / 12.0, 8.0 / 12.0,0,-8.0 / 12.0,1.0 / 12.0 };
+		//std::array<float, 5> kernel_x = 
+		//{ -1.0 / 12.0, 8.0 / 12.0,0,-8.0 / 12.0,1.0 / 12.0 };
+
+		std::array<float,5> kernel = 
+		{ 1.0 / 12.0, -8.0 / 12.0,0,8.0 / 12.0, -1.0 / 12.0 };
 	};
 }

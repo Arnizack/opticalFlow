@@ -24,7 +24,7 @@ namespace optflow_solvers
 		using PtrGrayScale = std::shared_ptr <core::IArray<float, 2>>;
 
 		using PtrBlendPenalty = std::shared_ptr<
-			core::IBlendablePenalty<PtrGrayScale>>;
+			core::IBlendablePenalty<double>>;
 
 		using PtrFlowFactory = std::shared_ptr<core::IArrayFactory<double, 3>>;
 
