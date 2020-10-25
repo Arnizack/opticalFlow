@@ -64,5 +64,24 @@ namespace cpu_backend
                 std::cout<<array[width-1];
         }
 
+        template<class T>
+        T ComputeColorDifferenceSquaredNorm(T* first_image, T* second_image, 
+            size_t first_pixel_index, 
+            size_t second_pixel_index, 
+            size_t width, size_t height, size_t color_channels_count)
+        {
+            T color_difference_norm = 0;
+            for (int color_channel_idx = 0;
+                color_channel_idx < color_channels_count; color_channel_idx++)
+            {
+                T* first_img_channel = first_image + pixel_count * color_channel_idx;
+                T* second_img_channel = second_image + pixel_count * color_channel_idx;
+
+                T difference = first_img_channel[first_pixel_index] - second_img_channel[second_pixel_index];
+                color_difference_norm += difference * difference;
+            }
+            return color_difference_norm;
+        }
+
     }
 }

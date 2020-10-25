@@ -16,7 +16,7 @@ namespace cpu_backend
 				0,   0.1, 0.2, 0.1, 0,
 
 			};
-			DerivativeCalculator deriv_calc;
+			DerivativeCalculator<float> deriv_calc;
 			imagehelper::Image deriv_x;
 			deriv_x.width = 5;
 			deriv_x.height = 4;

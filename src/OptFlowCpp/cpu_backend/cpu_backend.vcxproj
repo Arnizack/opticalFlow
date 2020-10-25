@@ -169,14 +169,27 @@
   <ItemGroup>
     <ClInclude Include="Array.h" />
     <ClInclude Include="ArrayFactory.h" />
+    <ClInclude Include="flow\CrossBilateralMedianFilter.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="image\inner\ArrayHelper.h" />
     <ClInclude Include="image\inner\BicubicInterpolate.h" />
+    <ClInclude Include="image\inner\BilateralMedian.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="image\inner\convolution1D.h">
       <SubType>
       </SubType>
     </ClInclude>
     <ClInclude Include="image\inner\convolution2D.h" />
     <ClInclude Include="image\inner\DerivativeCalculator.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="image\inner\IteratorHelper.h" />
+    <ClInclude Include="image\inner\LogOcclusion.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -201,7 +214,15 @@
     <ClInclude Include="Statistics.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="image\inner\DerivativeCalculator.cpp">
+    <ClCompile Include="flow\CrossBilateralMedianFilter.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="image\inner\BilateralMedian.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="image\inner\LogOcclusion.cpp">
       <SubType>
       </SubType>
     </ClCompile>

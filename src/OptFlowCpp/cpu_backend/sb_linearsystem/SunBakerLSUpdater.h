@@ -17,7 +17,7 @@ namespace cpu_backend
 		virtual std::shared_ptr<core::ILinearProblem<double>> Update() override;
 		virtual void SetPenalty(std::shared_ptr<core::IPenalty<double>> penalty) override;
 
-		SunBakerLSUpdater(std::shared_ptr<DerivativeCalculator> deriv_calculator,
+		SunBakerLSUpdater(std::shared_ptr<DerivativeCalculator<float>> deriv_calculator,
 
 			double lambda_kernel);
 
@@ -38,7 +38,7 @@ namespace cpu_backend
 		void initialize_deriv(size_t size);
 		void initialize_data(size_t data_size);
 
-		std::shared_ptr<DerivativeCalculator> _deriv_calculator;
+		std::shared_ptr<DerivativeCalculator<float>> _deriv_calculator;
 
 		//I_x
 		std::shared_ptr<Array<float, 1>> _image_deriv_x;

@@ -39,9 +39,6 @@
     <ClInclude Include="image\inner\DerivativeCalculator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="linalg\Norm.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Statistics.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -66,15 +63,27 @@
     <ClInclude Include="penalty\QuadraticPenalty.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="linalg\ArithmeticVector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="image\inner\LogOcclusion.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="flow\CrossBilateralMedianFilter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="image\inner\BilateralMedian.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="image\inner\IteratorHelper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="image\warper\GrayWarper.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="image\inner\DerivativeCalculator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="sb_linearsystem\SunBakerLSUpdater.cpp">
@@ -84,6 +93,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="penalty\QuadraticPenalty.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="image\inner\LogOcclusion.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="flow\CrossBilateralMedianFilter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="image\inner\BilateralMedian.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

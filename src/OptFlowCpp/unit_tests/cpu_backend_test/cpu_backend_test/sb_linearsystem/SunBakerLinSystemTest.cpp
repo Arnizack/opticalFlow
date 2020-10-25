@@ -60,7 +60,7 @@ namespace cpu_backend
 
 		TEST(SunBakerTest, LinearOpBuilderTest1)
 		{
-			auto ptr_deriv_calc = std::make_shared< DerivativeCalculator>();
+			auto ptr_deriv_calc = std::make_shared< DerivativeCalculator<float>>();
 
 			double lambda_kernel = 0.2;
 			lambda_kernel *= lambda_kernel;
