@@ -42,7 +42,7 @@ namespace optflow_solvers
 			PtrVector d = _arith_chained->Sub(b, A->Apply(x)); // d = r
 
 			PtrVector z = _arr_factory->Zeros({ b->Shape });
-			PtrVector r_next = _arr_factory->Zeros({ b->Shape });
+			PtrVector r_next;
 			double alpha;
 			double beta;
 
@@ -54,6 +54,7 @@ namespace optflow_solvers
 
 				_arith_chained->ScaleAddTo(x, alpha, d, x); // x = alpha * d + x
 
+				r_next = _arr_factory->Zeros({ b->Shape });
 				_arith_chained->ScaleAddTo(r_next, -alpha, z, r_current); // r_next  = r_current - alpha * z
 
 				if (_arith_vector->NormEuclidean(r_next) < _tol)
@@ -65,7 +66,7 @@ namespace optflow_solvers
 
 				_arith_chained->ScaleAddTo(d, beta, d, r_next); // d = beta*d + r_next
 
-				r_current = r_next;
+				r_current = std::move(r_next);
 			}
 
 			return x;

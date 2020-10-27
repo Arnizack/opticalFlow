@@ -61,7 +61,7 @@ namespace optflow_solvers
 	TEST(ConjugateGradientSolver, Test)
 	{
 		double tol = 0.00001;
-		size_t iter = 26;
+		size_t iter = 100;
 
 		//ArrayFactory
 		cpu_backend::ArrayFactory<double, 1> arr_factory;
@@ -79,9 +79,9 @@ namespace optflow_solvers
 		ConjugateGradientSolver<double> cg_solver(ptr_arr_factory, ptr_arith_vector, ptr_arith_chained, tol, iter);
 
 		//Problem
-		double mat_arr[16] = { 4,8,2,5,8,8,6,1,2,6,8,4,5,1,4,7 };
+		double mat_arr[16] = { 4,8,2,5, 8,8,6,1, 2,6,8,4, 5,1,4,7 };
 		cpu_backend::Array<double, 2> mat({ 4,4 }, mat_arr);
-		cpu_backend::LinearSystemMatrix<double> linear_sys_mat(std::make_shared<cpu_backend::Array<double, 2>>(mat));
+		cpu_backend::LinearSystemMatrix<double> linear_sys_mat(ptr_arr_factory, std::make_shared<cpu_backend::Array<double, 2>>(mat));
 
 		double vector_arr[4] = { 8,4,6,8 };
 		cpu_backend::Array<double, 1> vector({ 4 }, vector_arr);
@@ -94,12 +94,22 @@ namespace optflow_solvers
 		std::shared_ptr<core::IArray<double, 1>> out = cg_solver.Solve(std::make_shared<core::ILinearProblem<double>>(problem));
 		std::shared_ptr<cpu_backend::Array<double, 1>> out_cpu = std::dynamic_pointer_cast<cpu_backend::Array<double, 1>>(out);
 
-		int compare[4] = { 55, -142  , -14, 19 };
+		double compare[4] = { 0.08333333,  0.30555556, -0.02777778,  1.05555556 };
 		double temp;
 		for (size_t i = 0; i < 4; i++)
 		{
 			temp = (*out_cpu)[i] - compare[i];
-			EXPECT_EQ(compare[i], (int)(*out_cpu)[i]);
+			//EXPECT_DOUBLE_EQ(compare[i], (*out_cpu)[i]);
+
+			if (temp < 0)
+			{
+				temp *= -1;
+			}
+
+			if (temp > tol)
+			{
+				EXPECT_EQ(0, 1);
+			}
 		}
 	}
 }

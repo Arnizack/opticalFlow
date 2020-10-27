@@ -3,16 +3,19 @@
 #include "core/IArray.h"
 
 #include "../Array.h"
+#include "../ArrayFactory.h"
 
 namespace cpu_backend
 {
-	template<class Innertyp>
-	class LinearSystemMatrix : public core::ILinearOperator<std::shared_ptr<core::IArray<Innertyp, 1>>, std::shared_ptr<core::IArray<Innertyp, 1>>>
+	template<class InnerTyp>
+	class LinearSystemMatrix : public core::ILinearOperator<std::shared_ptr<core::IArray<InnerTyp, 1>>, std::shared_ptr<core::IArray<InnerTyp, 1>>>
 	{
-		using InputTyp = std::shared_ptr<core::IArray<Innertyp, 1>>; //Vector
-		using OutputTyp = std::shared_ptr<core::IArray<Innertyp, 1>>; //Vector
+		using InputTyp = std::shared_ptr<core::IArray<InnerTyp, 1>>; //Vector
+		using OutputTyp = std::shared_ptr<core::IArray<InnerTyp, 1>>; //Vector
 
-		using Ptr2DMatrix = std::shared_ptr<core::IArray<Innertyp, 2>>; //2DMatrix
+		using Ptr2DMatrix = std::shared_ptr<core::IArray<InnerTyp, 2>>; //2DMatrix
+
+		using PtrArrayFactory = std::shared_ptr<core::IArrayFactory<InnerTyp, 1>>;
 
 	public:
 
@@ -20,14 +23,13 @@ namespace cpu_backend
 		* Adds Matrix-Vector Multiplication to a 2D Array
 		*/
 
-		LinearSystemMatrix(const std::shared_ptr<core::IArray<Innertyp, 2>> data)
-			: _data(std::dynamic_pointer_cast<Array<Innertyp, 2>>(data))
+		LinearSystemMatrix(const PtrArrayFactory factory, std::shared_ptr<core::IArray<InnerTyp, 2>> data)
+			: _factory(std::dynamic_pointer_cast<ArrayFactory<InnerTyp, 1>>(factory)), _data(std::dynamic_pointer_cast<Array<InnerTyp, 2>>(data))
 		{}
 
 		virtual OutputTyp Apply(const InputTyp vec) override
 		{
-			std::shared_ptr<Array<Innertyp, 1>> dst_cpu = std::make_shared<Array<Innertyp, 1>>(Array<Innertyp, 1>({ _data->Shape[1] }));
-			OutputTyp dst = std::dynamic_pointer_cast<core::IArray<Innertyp, 1>>(dst_cpu);
+			std::shared_ptr<Array<InnerTyp, 1>> dst = std::dynamic_pointer_cast<Array<InnerTyp, 1>>( _factory->Zeros(vec->Shape));
 
 			ApplyTo(dst, vec);
 
@@ -36,8 +38,8 @@ namespace cpu_backend
 
 		virtual void ApplyTo(OutputTyp dst, const InputTyp vec) override
 		{
-			std::shared_ptr<Array<Innertyp, 1>> dst_cpu = std::dynamic_pointer_cast<Array<Innertyp, 1>>(dst);
-			std::shared_ptr<Array<Innertyp, 1>> vec_cpu = std::dynamic_pointer_cast<Array<Innertyp, 1>>(vec);
+			std::shared_ptr<Array<InnerTyp, 1>> dst_cpu = std::dynamic_pointer_cast<Array<InnerTyp, 1>>(dst);
+			std::shared_ptr<Array<InnerTyp, 1>> vec_cpu = std::dynamic_pointer_cast<Array<InnerTyp, 1>>(vec);
 
 			const size_t height = _data->Shape[0];
 			const size_t width = _data->Shape[1];
@@ -46,7 +48,7 @@ namespace cpu_backend
 			{
 				(*dst_cpu)[i] = (*_data)[i * width] * (*vec_cpu)[0];
 
-				for (size_t j = 0; j < width; j++)
+				for (size_t j = 1; j < width; j++)
 				{
 					(*dst_cpu)[i] += (*_data)[i * width + j] * (*vec_cpu)[j];
 				}
@@ -60,7 +62,7 @@ namespace cpu_backend
 			const size_t height = _data->Shape[0];
 			const size_t width = _data->Shape[1];
 
-			std::shared_ptr<Array<Innertyp, 2>> transposed = std::make_shared<Array<Innertyp, 2>>(Array<Innertyp, 2>( { width, height }) );
+			std::shared_ptr<Array<InnerTyp, 2>> transposed = std::make_shared<Array<InnerTyp, 2>>(Array<InnerTyp, 2>( { width, height }) );
 
 			for (size_t i = 0; i < height; i++)
 			{
@@ -70,7 +72,7 @@ namespace cpu_backend
 				}
 			}
 
-			std::shared_ptr<LinearSystemMatrix<Innertyp>> out = std::make_shared<LinearSystemMatrix<Innertyp>>(LinearSystemMatrix<Innertyp>(transposed) );
+			std::shared_ptr<LinearSystemMatrix<InnerTyp>> out = std::make_shared<LinearSystemMatrix<InnerTyp>>(LinearSystemMatrix<InnerTyp>(_factory, transposed) );
 
 			return std::static_pointer_cast<core::ILinearOperator<OutputTyp, InputTyp>>(out);
 		}
@@ -100,6 +102,7 @@ namespace cpu_backend
 		}
 
 	private:
-		std::shared_ptr<Array<Innertyp, 2>> _data;
+		std::shared_ptr<Array<InnerTyp, 2>> _data;
+		std::shared_ptr<ArrayFactory<InnerTyp, 1>> _factory;
 	};
 }
