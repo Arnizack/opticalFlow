@@ -48,6 +48,21 @@ namespace cpu_backend
 		}
 
 		template<typename T>
+		double ScalarDivScalarCompare(std::shared_ptr<Array<T, 1>> a, std::shared_ptr<Array<T, 1>> b)
+		{
+			double scalar_a = 0;
+			double scalar_b = 0;
+
+			for (size_t i = 0; i < (*a).Size(); i++)
+			{
+				scalar_a += (*a)[i] * (*a)[i];
+				scalar_b += (*b)[i] * (*b)[i];
+			}
+
+			return scalar_a / scalar_b;
+		}
+
+		template<typename T>
 		void TestForType()
 		{
 			const int size = 4;
@@ -74,25 +89,36 @@ namespace cpu_backend
 
 			ArrayFactory<T, dim> factory;
 
+			auto out = factory.Zeros(shape);
+
 			cpu_backend::ArithmeticVector<T, dim> arith_vec(std::make_shared<ArrayFactory<T, dim>>(factory));
 
+			//Norm
 			double out_norm = arith_vec.NormEuclidean(in_a);
 			double norm_control = NormEuclidCompare<T>(arr_a, size);
 			EXPECT_EQ(out_norm, norm_control);
 
+			//ScalarProduct
 			double out_scalar = arith_vec.ScalarProduct(in_a, in_b);
 			double scalar_compare = ScalarCompare<T>(arr_a, arr_b, size);
 			EXPECT_EQ(out_scalar, scalar_compare);
 
+			//Scale
 			double fac = 2;
 			std::shared_ptr<core::IArray<T, dim>> out_scale_temp = arith_vec.Scale(fac, in_a);
 			std::shared_ptr<Array<T, dim>> out_scale = std::dynamic_pointer_cast<Array<T, dim>>(out_scale_temp);
 			ScaleCompare<T, dim>(fac, arr_a, size, out_scale);
 
+			//ScaleTo
 			fac = 0.5;
 			arith_vec.ScaleTo(fac, in_a);
 			out_scale = std::dynamic_pointer_cast<Array<T, dim>>(in_a);
 			ScaleCompare<T, dim>(fac, arr_a, size, out_scale);
+
+			//ScalarDivScalar
+			double scalar_div_scalar_out = arith_vec.ScalarDivScalar(in_a, in_a, in_b, in_b);
+			double scalar_div_scalar_comp = ScalarDivScalarCompare(in_a, in_b);
+			EXPECT_EQ(scalar_div_scalar_out, scalar_div_scalar_comp);
 			return;
 		}
 
