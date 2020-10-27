@@ -72,7 +72,9 @@ namespace cpu_backend
 			std::shared_ptr<Array<T, dim>> in_b =
 				std::make_shared<Array<T, dim>>(obj_b);
 
-			cpu_backend::ArithmeticVector<T, dim> arith_vec;
+			ArrayFactory<T, dim> factory;
+
+			cpu_backend::ArithmeticVector<T, dim> arith_vec(std::make_shared<ArrayFactory<T, dim>>(factory));
 
 			double out_norm = arith_vec.NormEuclidean(in_a);
 			double norm_control = NormEuclidCompare<T>(arr_a, size);
@@ -82,11 +84,15 @@ namespace cpu_backend
 			double scalar_compare = ScalarCompare<T>(arr_a, arr_b, size);
 			EXPECT_EQ(out_scalar, scalar_compare);
 
-			const double fac = 2;
+			double fac = 2;
 			std::shared_ptr<core::IArray<T, dim>> out_scale_temp = arith_vec.Scale(fac, in_a);
 			std::shared_ptr<Array<T, dim>> out_scale = std::dynamic_pointer_cast<Array<T, dim>>(out_scale_temp);
 			ScaleCompare<T, dim>(fac, arr_a, size, out_scale);
 
+			fac = 0.5;
+			arith_vec.ScaleTo(fac, in_a);
+			out_scale = std::dynamic_pointer_cast<Array<T, dim>>(in_a);
+			ScaleCompare<T, dim>(fac, arr_a, size, out_scale);
 			return;
 		}
 

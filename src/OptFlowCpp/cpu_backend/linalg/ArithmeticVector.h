@@ -17,7 +17,13 @@ namespace cpu_backend
 		using PtrVector = std::shared_ptr<core::IArray<InnerTyp, 1>>;
 		using PtrMatrix = std::shared_ptr<core::IArray<InnerTyp, DimCount>>;
 
+		using PtrArrayFactory = std::shared_ptr<core::IArrayFactory<InnerTyp, DimCount>>;
+
 	public:
+		ArithmeticVector(const PtrArrayFactory factory)
+			: _factory(std::dynamic_pointer_cast<ArrayFactory<InnerTyp, DimCount>>(factory))
+		{}
+
 		// ||vec|| / norm(vec)
 		virtual double NormEuclidean(const PtrVector vec) override
 		{
@@ -53,7 +59,7 @@ namespace cpu_backend
 		// x = fac * A
 		virtual PtrMatrix Scale(const double& fac, const PtrMatrix a) override
 		{
-			std::shared_ptr<Array<InnerTyp, DimCount>> out = std::make_shared<Array<InnerTyp, DimCount>>(*a);
+			auto out = std::dynamic_pointer_cast<Array<InnerTyp, DimCount>>(_factory->Zeros(a->Shape));
 
 			for (size_t i = 0; i < (*out).Size(); i++)
 			{
@@ -75,6 +81,29 @@ namespace cpu_backend
 
 			return;
 		}
+
+		//<a,b> / <c,d>
+		virtual double ScalarDivScalar(const PtrVector a, const PtrVector b, const PtrVector c, const PtrVector d) override
+		{
+			double scalar_a_b = 0;
+			double scalar_c_d = 0;
+
+			auto in_a = std::dynamic_pointer_cast<Array<InnerTyp, 1>>(a);
+			auto in_b = std::dynamic_pointer_cast<Array<InnerTyp, 1>>(b);
+			auto in_c = std::dynamic_pointer_cast<Array<InnerTyp, 1>>(c);
+			auto in_d = std::dynamic_pointer_cast<Array<InnerTyp, 1>>(d);
+
+			for (size_t i = 0; i < (*in_a).Size(); i++)
+			{
+				scalar_a_b += (*in_a)[i] * (*in_b)[i];
+				scalar_c_d += (*in_c)[i] * (*in_d)[i];
+			}
+
+			return scalar_a_b / scalar_c_d;
+		}
+
+	private:
+		std::shared_ptr<ArrayFactory<InnerTyp, DimCount>> _factory;
 	};
 
 	/*
@@ -86,7 +115,13 @@ namespace cpu_backend
 		using PtrVector = std::shared_ptr<core::IArray<double, 1>>;
 		using PtrMatrix = std::shared_ptr<core::IArray<double, DimCount>>;
 
+		using PtrArrayFactory = std::shared_ptr<core::IArrayFactory<double, DimCount>>;
+
 	public:
+		ArithmeticVector(const PtrArrayFactory factory)
+			: _factory(std::dynamic_pointer_cast<ArrayFactory<double, DimCount>>(factory))
+		{}
+
 		// ||vec|| / norm(vec)
 		virtual double NormEuclidean(const PtrVector vec) override
 		{
@@ -107,7 +142,7 @@ namespace cpu_backend
 		// x = fac * A
 		virtual PtrMatrix Scale(const double& fac, const PtrMatrix a) override
 		{
-			std::shared_ptr<Array<double, DimCount>> out = std::make_shared<Array<double, DimCount>>(*a);
+			auto out = std::dynamic_pointer_cast<Array<double, DimCount>>(_factory->Zeros(a->Shape));
 
 			cblas_dscal((*out).Size(), fac, &(*out)[0], 1);
 
@@ -119,10 +154,33 @@ namespace cpu_backend
 		{
 			std::shared_ptr<Array<double, DimCount>> in_a = std::dynamic_pointer_cast<Array<double, DimCount>>(a);
 
-			cblas_dscal((*in_a).Size(), fac, &(*in_a)[0], 1);
+			cblas_dscal(in_a->Size(), fac, &(*in_a)[0], 1);
 
 			return;
 		}
+
+		//<a,b> / <c,d>
+		virtual double ScalarDivScalar(const PtrVector a, const PtrVector b, const PtrVector c, const PtrVector d) override
+		{
+			double scalar_a_b = 0;
+			double scalar_c_d = 0;
+
+			auto in_a = std::dynamic_pointer_cast<Array<double, 1>>(a);
+			auto in_b = std::dynamic_pointer_cast<Array<double, 1>>(b);
+			auto in_c = std::dynamic_pointer_cast<Array<double, 1>>(c);
+			auto in_d = std::dynamic_pointer_cast<Array<double, 1>>(d);
+
+			for (size_t i = 0; i < (*in_a).Size(); i++)
+			{
+				scalar_a_b += (*in_a)[i] * (*in_b)[i];
+				scalar_c_d += (*in_c)[i] * (*in_d)[i];
+			}
+
+			return scalar_a_b / scalar_c_d;
+		}
+
+	private:
+		std::shared_ptr<ArrayFactory<double, DimCount>> _factory;
 	};
 
 	/*
@@ -134,7 +192,13 @@ namespace cpu_backend
 		using PtrVector = std::shared_ptr<core::IArray<float, 1>>;
 		using PtrMatrix = std::shared_ptr<core::IArray<float, DimCount>>;
 
+		using PtrArrayFactory = std::shared_ptr<core::IArrayFactory<float, DimCount>>;
+
 	public:
+		ArithmeticVector(const PtrArrayFactory factory)
+			: _factory(std::dynamic_pointer_cast<ArrayFactory<float, DimCount>>(factory))
+		{}
+
 		// ||vec|| / norm(vec)
 		virtual double NormEuclidean(const PtrVector vec) override
 		{
@@ -155,7 +219,7 @@ namespace cpu_backend
 		// x = fac * A
 		virtual PtrMatrix Scale(const double& fac, const PtrMatrix a) override
 		{
-			std::shared_ptr<Array<float, DimCount>> out = std::make_shared<Array<float, DimCount>>(*a);
+			auto out = std::dynamic_pointer_cast<Array<float, DimCount>>(_factory->Zeros(a->Shape));
 
 			cblas_sscal((*out).Size(), fac, &(*out)[0], 1);
 
@@ -171,6 +235,29 @@ namespace cpu_backend
 
 			return;
 		}
+
+		//<a,b> / <c,d>
+		virtual double ScalarDivScalar(const PtrVector a, const PtrVector b, const PtrVector c, const PtrVector d) override
+		{
+			double scalar_a_b = 0;
+			double scalar_c_d = 0;
+
+			auto in_a = std::dynamic_pointer_cast<Array<float, 1>>(a);
+			auto in_b = std::dynamic_pointer_cast<Array<float, 1>>(b);
+			auto in_c = std::dynamic_pointer_cast<Array<float, 1>>(c);
+			auto in_d = std::dynamic_pointer_cast<Array<float, 1>>(d);
+
+			for (size_t i = 0; i < (*in_a).Size(); i++)
+			{
+				scalar_a_b += (*in_a)[i] * (*in_b)[i];
+				scalar_c_d += (*in_c)[i] * (*in_d)[i];
+			}
+
+			return scalar_a_b / scalar_c_d;
+		}
+
+	private:
+		std::shared_ptr<ArrayFactory<float, DimCount>> _factory;
 	};
 
 

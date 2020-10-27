@@ -12,33 +12,39 @@ namespace cpu_backend
 		Array() = default;
 
 		Array(const std::array<const size_t, DimCount>& shape, const InnerTyp *const src) : 
-			core::IArray<InnerTyp, DimCount>(shape), _size(1), _data(std::vector<InnerTyp>())
+			core::IArray<InnerTyp, DimCount>(shape), _data(std::vector<InnerTyp>())
 		{
+			size_t size = 1;
 
 			for (const size_t& dim : shape)
 			{
-				_size *= dim;
+				size *= dim;
 			}
-			_data = std::vector<InnerTyp>(_size);
 
-			std::copy_n(src, _size, _data.data());
+			_data = std::vector<InnerTyp>(size);
+
+			std::copy_n(src, size, _data.data());
 		}
 
 		Array(const std::array<const size_t, DimCount>& shape, core::IContainer<InnerTyp>& copy) :
-			core::IArray<InnerTyp, DimCount>(shape), _size(copy.Size()), _data(std::vector<InnerTyp>(copy.Size()))
+			core::IArray<InnerTyp, DimCount>(shape), _data(std::vector<InnerTyp>(copy.Size()))
 		{
 			copy.CopyDataTo(_data.data());
 		}
 
 		Array(const std::array<const size_t, DimCount>& shape, const InnerTyp& single_value) :
-			core::IArray<InnerTyp, DimCount>(shape), _size(1), _data(std::vector<InnerTyp>())
+			core::IArray<InnerTyp, DimCount>(shape), _data(std::vector<InnerTyp>())
 		{
+			size_t size = 1;
+
 			for (const size_t& dim : shape)
 			{
-				_size *= dim;
+				size *= dim;
 			}
-			_data = std::vector<InnerTyp>(_size);
-			for (size_t i = 0; i < _size; i++)
+
+			_data = std::vector<InnerTyp>(size);
+
+			for (size_t i = 0; i < size; i++)
 			{
 				_data[i] = single_value;
 			}
@@ -46,20 +52,22 @@ namespace cpu_backend
 		}
 
 		Array(core::IArray<InnerTyp, DimCount>& copy) :
-			core::IArray<InnerTyp, DimCount>(copy.Shape), _size(copy.Size()), _data(std::vector<InnerTyp>(copy.Size()))
+			core::IArray<InnerTyp, DimCount>(copy.Shape), _data(std::vector<InnerTyp>(copy.Size()))
 		{
 			copy.CopyDataTo(_data.data());
 		}
 
 		Array(const std::array<const size_t, DimCount>& shape) : 
-			core::IArray<InnerTyp, DimCount>(shape), _size(1), _data(std::vector<InnerTyp>())
+			core::IArray<InnerTyp, DimCount>(shape), _data(std::vector<InnerTyp>())
 		{
+			size_t size = 1;
+
 			for (const size_t& dim : shape)
 			{
-				_size *= dim;
+				size *= dim;
 			}
 
-			_data = std::vector<InnerTyp>(_size);
+			_data = std::vector<InnerTyp>(size);
 		}
 
 		inline InnerTyp& operator[](const size_t i)
@@ -87,12 +95,12 @@ namespace cpu_backend
 
 		virtual size_t Size() const override
 		{
-			return _size;
+			return _data.size();
 		}
 
 		virtual bool CopyDataTo(InnerTyp* destination) override
 		{
-			std::copy_n(_data.data(), _size, destination);
+			std::copy_n(_data.data(), _data.size(), destination);
 			return true;
 		}
 
@@ -105,7 +113,6 @@ namespace cpu_backend
 
 	protected:
 	private:
-		size_t _size;
 		std::vector<InnerTyp> _data;
 	};
 }

@@ -9,6 +9,7 @@ namespace core
 	{
 	public:
 		using PtrArray = std::shared_ptr < IArray<InnerTyp, DimCount>>;
+
 		virtual PtrArray Zeros(std::array<const size_t, DimCount> shape) = 0;
 		virtual PtrArray Full(const InnerTyp& fill_value, std::array<const size_t, DimCount> shape) = 0;
 	};

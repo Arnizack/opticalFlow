@@ -9,100 +9,148 @@ namespace cpu_backend
 	class ArithmeticChained : public core::IArithmeticChained<InnerTyp, DimCount>, public ArithmeticBasic<InnerTyp, DimCount>
 	{
 		using PtrVector = std::shared_ptr<core::IArray<InnerTyp, DimCount>>;
+		using PtrArrayFactory = std::shared_ptr<core::IArrayFactory<InnerTyp, DimCount>>;
+		using PtrArithmeticBase = std::shared_ptr<core::IArithmeticBasic<InnerTyp, DimCount>>;
+
 	public:
+		ArithmeticChained(const PtrArrayFactory factory)
+			: ArithmeticBasic<InnerTyp, DimCount>(factory), _factory(std::dynamic_pointer_cast<ArrayFactory<InnerTyp, DimCount>>(factory))
+		{}
+
 		//a*b+c
 		virtual PtrVector MulAdd(const PtrVector a, const PtrVector b, const PtrVector c) override
 		{
-			return _arithmetic_base.Add(_arithmetic_base.Mul(a, b), c);
+			const size_t size = a->Size();
+			auto out = std::dynamic_pointer_cast<Array<InnerTyp, DimCount>>( _factory->Zeros(a->Shape) );
+
+			auto in_a = std::dynamic_pointer_cast<Array<InnerTyp, DimCount>>(a);
+			auto in_b = std::dynamic_pointer_cast<Array<InnerTyp, DimCount>>(b);
+			auto in_c = std::dynamic_pointer_cast<Array<InnerTyp, DimCount>>(c);
+
+			for (size_t i = 0; i < size; i++)
+			{
+				(*out)[i] = (*in_a)[i] * (*in_b)[i] + (*in_c)[i];
+			}
+
+			return out;
 		}
 
 		//a*b+c*d
 		virtual PtrVector MulAddMul(const PtrVector a, const PtrVector b, const PtrVector c, const PtrVector d) override
 		{
-			return _arithmetic_base.Add(_arithmetic_base.Mul(a, b), _arithmetic_base.Mul(a, b));
+			const size_t size = a->Size();
+			auto out = std::dynamic_pointer_cast<Array<InnerTyp, DimCount>>( _factory->Zeros(a->Shape) );
+
+			auto in_a = std::dynamic_pointer_cast<Array<InnerTyp, DimCount>>(a);
+			auto in_b = std::dynamic_pointer_cast<Array<InnerTyp, DimCount>>(b);
+			auto in_c = std::dynamic_pointer_cast<Array<InnerTyp, DimCount>>(c);
+			auto in_d = std::dynamic_pointer_cast<Array<InnerTyp, DimCount>>(d);
+
+			for (size_t i = 0; i < size; i++)
+			{
+				(*out)[i] = (*in_a)[i] * (*in_b)[i] + (*in_c)[i] * (*in_d)[i];
+			}
+
+			return out;
 		}
 
-
-
-		//a+b
-		virtual PtrVector Add(const PtrVector a, const PtrVector b) 
+		//x = alpha*a + b
+		virtual void ScaleAddTo(const PtrVector x, const double& alpha, const PtrVector a, const PtrVector b) override
 		{
-			return _arithmetic_base.Add(a, b);
+			const size_t size = a->Size();
+			auto out = std::dynamic_pointer_cast<Array<InnerTyp, DimCount>>(x);
+
+			auto in_a = std::dynamic_pointer_cast<Array<InnerTyp, DimCount>>(a);
+			auto in_b = std::dynamic_pointer_cast<Array<InnerTyp, DimCount>>(b);
+
+			for (size_t i = 0; i < size; i++)
+			{
+				(*out)[i] = alpha * (*in_a)[i] + (*in_b)[i];
+			}
+
+			return;
+		}
+
+		//Methods of IArithmeticBasic
+		//a+b
+		virtual PtrVector Add(const PtrVector a, const PtrVector b) override
+		{
+			return ArithmeticBasic<InnerTyp, DimCount>::Add(a,b);
 		}
 
 		//x = a+b
-		virtual void AddTo(PtrVector x, const PtrVector a, const PtrVector b) 
+		virtual void AddTo(PtrVector x, const PtrVector a, const PtrVector b) override
 		{
-			_arithmetic_base.AddTo(x, a, b);
+			ArithmeticBasic<InnerTyp, DimCount>::AddTo(x, a, b);
 			return;
 		}
 
 		//a-b
-		virtual PtrVector Sub(const PtrVector a, const PtrVector b) 
+		virtual PtrVector Sub(const PtrVector a, const PtrVector b) override
 		{
-			return _arithmetic_base.Sub(a, b);
+			return ArithmeticBasic<InnerTyp, DimCount>::Sub(a, b);
 		}
 
 		//x = a-b
-		virtual void SubTo(PtrVector x, const PtrVector a, const PtrVector b) 
+		virtual void SubTo(PtrVector x, const PtrVector a, const PtrVector b) override
 		{
-			_arithmetic_base.SubTo(x, a, b);
+			ArithmeticBasic<InnerTyp, DimCount>::SubTo(x, a, b);
 			return;
 		}
 
 		//a*b
-		virtual PtrVector Mul(const PtrVector a, const PtrVector b)
+		virtual PtrVector Mul(const PtrVector a, const PtrVector b) override
 		{
-			return _arithmetic_base.Mul(a, b);
+			return ArithmeticBasic<InnerTyp, DimCount>::Mul(a, b);
 		}
 
 		//x = a*b
-		virtual void MulTo(PtrVector x, const PtrVector a, const PtrVector b)
+		virtual void MulTo(PtrVector x, const PtrVector a, const PtrVector b) override
 		{
-			_arithmetic_base.MulTo(x, a, b);
+			ArithmeticBasic<InnerTyp, DimCount>::MulTo(x, a, b);
 			return;
 		}
 
 		//a/b
-		virtual PtrVector Div(const PtrVector a, const PtrVector b)
+		virtual PtrVector Div(const PtrVector a, const PtrVector b) override
 		{
-			return _arithmetic_base.Div(a, b);
+			return ArithmeticBasic<InnerTyp, DimCount>::Div(a, b);
 		}
 
 		//x = a/b
-		virtual void DivTo(PtrVector x, const PtrVector a, const PtrVector b)
+		virtual void DivTo(PtrVector x, const PtrVector a, const PtrVector b) override
 		{
-			_arithmetic_base.DivTo(x, a, b);
+			ArithmeticBasic<InnerTyp, DimCount>::DivTo(x, a, b);
 			return;
 		}
 
 		//a**b
-		virtual PtrVector Pow(const PtrVector a, const PtrVector b)
+		virtual PtrVector Pow(const PtrVector a, const PtrVector b) override
 		{
-			return _arithmetic_base.Pow(a, b);
+			return ArithmeticBasic<InnerTyp, DimCount>::Pow(a, b);
 		}
 
 		//x = a**b
-		virtual void PowTo(PtrVector x, const PtrVector a, const PtrVector b)
+		virtual void PowTo(PtrVector x, const PtrVector a, const PtrVector b) override
 		{
-			_arithmetic_base.PowTo(x, a, b);
+			ArithmeticBasic<InnerTyp, DimCount>::PowTo(x, a, b);
 			return;
 		}
 
 		//a**b
-		virtual PtrVector Pow(const PtrVector a, const double& b)
+		virtual PtrVector Pow(const PtrVector a, const double& b) override
 		{
-			return _arithmetic_base.Pow(a, b);
+			return ArithmeticBasic<InnerTyp, DimCount>::Pow(a, b);
 		}
 
 		//x = a**b
-		virtual void PowTo(PtrVector x, const PtrVector a, const double& b)
+		virtual void PowTo(PtrVector x, const PtrVector a, const double& b) override
 		{
-			_arithmetic_base.PowTo(x, a, b);
+			ArithmeticBasic<InnerTyp, DimCount>::PowTo(x, a, b);
 			return;
 		}
 
 		private:
-			cpu_backend::ArithmeticBasic<InnerTyp, DimCount> _arithmetic_base;
+			std::shared_ptr< ArrayFactory<InnerTyp, DimCount>> _factory;
 	};
 }

@@ -16,8 +16,10 @@ namespace core
 		//a*b+c*d
 		virtual PtrVector MulAddMul(const PtrVector a,const PtrVector b,const PtrVector c,
 			const PtrVector d) = 0;
-			
-
+		
+		//x = alpha*a + b
+		virtual void ScaleAddTo(const PtrVector x, const double& alpha, const PtrVector a,
+			const PtrVector b) = 0;
 
 	};
 	
