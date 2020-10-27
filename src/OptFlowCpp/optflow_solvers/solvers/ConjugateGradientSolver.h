@@ -12,7 +12,7 @@ namespace optflow_solvers
 	class ConjugateGradientSolver : public core::ILinearSolver<InnerTyp>
 	{
 		using PtrVector = std::shared_ptr< core::IArray<InnerTyp, 1>>;
-		using PtrLinearOperator = std::shared_ptr<ILinearOperator<PtrVector, PtrVector>>;
+		using PtrLinearOperator = std::shared_ptr<core::ILinearOperator<PtrVector, PtrVector>>;
 
 	public:
 		ConjugateGradientSolver( 
@@ -26,44 +26,44 @@ namespace optflow_solvers
 
 		virtual PtrVector Solve(std::shared_ptr < core::ILinearProblem<InnerTyp>> problem) override
 		{
-			PtrVector x = (*_arr_factory).Zeros( (*b).Shape);
+			PtrVector initial_guess = _arr_factory->Zeros({ problem->Vector->Shape[0] });
 
-			return Solve(problem, x);
+			return Solve(problem, initial_guess);
 		}
 
 		virtual PtrVector Solve(std::shared_ptr < core::ILinearProblem<InnerTyp>> problem, const PtrVector initial_guess) override
 		{
-			PtrLinearOperator A = (*problem).LinearOperator;
-			PtrVector b = (*problem).Vector;
+			PtrLinearOperator A = problem->LinearOperator;
+			PtrVector b = problem->Vector;
 
-			PtrVector x = std::make_shared<core::IArray<InnerTyp, 1>> (*initial_guess);
+			PtrVector x = initial_guess;
 
-			PtrVector r_current = (*_arith_vector).Sub(b, (*A_dot_product).Apply(x));
-			PtrVector d = (*_arith_vector).Sub(b, (*A_dot_product).Apply(x));
+			PtrVector r_current = _arith_chained->Sub(b, A->Apply(x)); // r_current = b - A.dot(x)
+			PtrVector d = _arith_chained->Sub(b, A->Apply(x)); // d = r
 
-			PtrVector z;
-			PtrVector r_next;
+			PtrVector z = _arr_factory->Zeros({ b->Shape });
+			PtrVector r_next = _arr_factory->Zeros({ b->Shape });
 			double alpha;
 			double beta;
 
 			for (size_t i = 0; i < _iter; i++)
 			{
-				(*A).ApplyTo(z, d);
+				A->ApplyTo(z, d); //z = A.dot(d)
 
-				alpha = (*_arith_vector).ScalarProduct(r_current, r_current) / (*_arith_vector).ScalarProduct(d, z);
+				alpha = _arith_vector->ScalarDivScalar(r_current, r_current, d, z); // alpha = <r_current, r_current> / <d, z>
 
-				(*_arith_chained).AddTo(x, x, (*_arith_vector).Scale(alpha, d));
+				_arith_chained->ScaleAddTo(x, alpha, d, x); // x = alpha * d + x
 
-				(*_arith_chained).SubTo(r_next, r_current, (*_arith_vector).Scale(alpha, z));
+				_arith_chained->ScaleAddTo(r_next, -alpha, z, r_current); // r_next  = r_current - alpha * z
 
-				if ((*_arith_vector).NormEuclidean(r_next) < _tol)
+				if (_arith_vector->NormEuclidean(r_next) < _tol)
 				{
 					return x;
 				}
 
-				beta = (*_arith_vector).ScalarProduct(r_next, r_next) / (*_arith_vector).ScalarProduct(r_current, r_current);
+				beta = _arith_vector->ScalarDivScalar(r_next, r_next, r_current, r_current); // beta = <r_next, r_next> / <r_current, r_current>
 
-				(*_arith_chained).AddTo(d, r_next, (*_arith_vector).Scale(beta, d));
+				_arith_chained->ScaleAddTo(d, beta, d, r_next); // d = beta*d + r_next
 
 				r_current = r_next;
 			}
