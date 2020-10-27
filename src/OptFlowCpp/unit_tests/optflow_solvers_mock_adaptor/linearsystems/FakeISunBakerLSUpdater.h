@@ -1,5 +1,5 @@
 #pragma once
-#include"optflow_solvers/linearsystems/ISunBakerLSBuilder.h"
+#include"optflow_solvers/linearsystems/ISunBakerLSUpdater.h"
 #include"gmock/gmock.h"
 #include"unit_tests/core_mock_adaptor/solver/problem/MockILinearProblem.h"
 
@@ -7,7 +7,7 @@ namespace optflow_solvers
 {
 	namespace testing
 	{
-		class FakeISunBakerLSBuilder : public ISunBakerLSUpdater
+		class FakeISunBakerLSUpdater : public ISunBakerLSUpdater
 		{
 		public:
 			// Inherited via ISunBakerLSBuilder
@@ -15,6 +15,8 @@ namespace optflow_solvers
 				void(PtrGrayImg first_image, PtrGrayImg second_image));
 			MOCK_METHOD2(UpdateParameter, 
 				void(PtrFlowField linearizazion_points, double relaxation) );
+
+			MOCK_METHOD1(SetPenalty, void(std::shared_ptr<core::IPenalty<double>> penalty));
 
 			virtual std::shared_ptr<core::ILinearProblem<double>> Update() override {
 				return std::make_shared<core::testing::MockILinearProblem<double>>();

@@ -158,10 +158,12 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="image\inner\convolution2DTest.cpp" />
+    <ClCompile Include="image\inner\DerivativeTest.cpp" />
     <ClCompile Include="linalg\ArithmeticBasic_test.cpp" />
     <ClCompile Include="linalg\ArithmeticChained_Test.cpp" />
     <ClCompile Include="linalg\ArithmeticVector_Test.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Reshape_Test.cpp" />
     <ClCompile Include="sb_linearsystem\SunBakerLinSystemTest.cpp" />
   </ItemGroup>
   <ItemGroup>

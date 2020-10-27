@@ -12,8 +12,7 @@ namespace core
 		public:
 			using MockGrayImg = MockIArray<float, 2>;
 			using MockColorImg = MockIArray<float, 3>;
-			using MockPenaltyFunc = MockIPenalty<
-				std::shared_ptr<IArray<float, 2>>>;
+			using MockPenaltyFunc = MockIPenalty<double>;
 
 			FakeGrayCrossPenaltyProblem();
 

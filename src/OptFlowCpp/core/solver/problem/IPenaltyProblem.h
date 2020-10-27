@@ -9,7 +9,7 @@ namespace core
 	class IPenaltyProblem
 	{
 	public:
-		std::shared_ptr < IPenalty<std::shared_ptr <IArray<float, 2>>>>
+		std::shared_ptr < IPenalty<double>>
 			PenaltyFunc{ nullptr };
 	};
 

@@ -1,6 +1,6 @@
 #pragma once
 #include"pch.h"
-#include"SunBakerLinSystem.h"
+#include"SunBakerLinearOp.h"
 #include"../image/inner/convolution2D.h"
 
 

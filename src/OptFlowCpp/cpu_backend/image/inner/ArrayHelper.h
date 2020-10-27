@@ -7,7 +7,7 @@ namespace cpu_backend
 {
     enum class Padding
 	{
-		ZEROS, REPLICATE
+		ZEROS, REPLICATE, SYMMETRIC
 	};
 
     namespace _inner
@@ -18,6 +18,8 @@ namespace cpu_backend
             assert( !(hi < lo) );
             return (v < lo) ? lo : (hi < v) ? hi : v;
         }
+
+       
 
         template<class T, Padding padding>
 		inline T GetValueAt(const int& x, const  int& y, const  int width, const  int height,const T* img)
@@ -31,7 +33,21 @@ namespace cpu_backend
                 x_remap = clamp(x,0,width-1);
                 y_remap = clamp(y,0,height-1);
                 return img[width*y_remap+x_remap];
-            
+
+            case Padding::SYMMETRIC:
+                x_remap = x;
+                y_remap = y;
+                if (x >= width)
+                    x_remap = 2 * width - x - 1;
+                if (x < 0)
+                    x_remap = abs(x) - 1;
+
+                if (y >= height)
+                    y_remap = 2 * height - y - 1;
+                if (y < 0)
+                    y_remap = abs(y) - 1;
+                return img[width * y_remap + x_remap];
+
             default:
                 //default padding Zeros
                 if (x >= width || y >= height || x < 0 || y < 0)
