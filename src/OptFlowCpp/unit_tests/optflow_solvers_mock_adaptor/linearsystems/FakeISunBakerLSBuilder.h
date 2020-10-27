@@ -17,7 +17,7 @@ namespace optflow_solvers
 				void(PtrFlowField linearizazion_points, double relaxation) );
 
 			virtual std::shared_ptr<core::ILinearProblem<double>> Update() override {
-				return std::make_shared<core::MockILinearProblem<double>>();
+				return std::make_shared<core::testing::MockILinearProblem<double>>();
 			}
 		};
 	}

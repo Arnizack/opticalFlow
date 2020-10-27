@@ -66,6 +66,22 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="linalg\MockIArithmeticChained.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="linalg\MockIArithmeticVector.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="linalg\MockILinearOperator.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="MockIArrayFactory1D.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="MockIReshaperD.h">
       <SubType>
       </SubType>
@@ -89,6 +105,10 @@
     <ClInclude Include="MockIArrayFactoryD3.h" />
     <ClInclude Include="solver\problem\FakeGrayCrossProblem.h" />
     <ClInclude Include="solver\MockIFlowFieldSolver.h" />
+    <ClInclude Include="solver\problem\FakeLinearProblem.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="solver\problem\MockILinearProblem.h">
       <SubType>
       </SubType>
@@ -104,6 +124,10 @@
     <ClCompile Include="solver\problem\FakeGrayCrossPenaltyProblem.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="solver\problem\FakeGrayCrossProblem.cpp" />
+    <ClCompile Include="solver\problem\FakeLinearProblem.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="test.cpp" />
   </ItemGroup>
   <ItemGroup>
