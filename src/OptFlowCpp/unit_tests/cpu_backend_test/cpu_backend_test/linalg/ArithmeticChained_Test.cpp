@@ -15,6 +15,16 @@ namespace cpu_backend
 				EXPECT_EQ((arr_a[i] * arr_b[i]) + arr_c[i], ptr[i]);
 			}
 		}
+
+		template<typename T, size_t dim>
+		void control_ScaleAdd(std::shared_ptr<Array<T, dim>> x, const double& fac, std::shared_ptr<Array<T, dim>> a, std::shared_ptr<Array<T, dim>> b)
+		{
+			EXPECT_EQ(x->Size(), a->Size());
+			for (auto i = 0; i < x->Size(); i++)
+			{
+				EXPECT_EQ(fac*(*a)[i] + (*b)[i], (*x)[i]);
+			}
+		}
 		
 		template<typename T>
 		void TestForType()
@@ -55,12 +65,18 @@ namespace cpu_backend
 
 			T ptr[size];
 
-			ArithmeticChained<T, dim> arith_chain;
-			std::shared_ptr<core::IArray<T, dim>> test_obj;
+			ArrayFactory<T, dim> fac;
+			ArithmeticBasic<T, dim> arith_base(std::make_shared<ArrayFactory<T, dim>>(fac));
 
-			test_obj = arith_chain.MulAdd(in_a, in_b, in_c);
+			ArithmeticChained<T, dim> arith_chain(std::make_shared<ArrayFactory<T, dim>>(fac));
+
+			auto test_obj = arith_chain.MulAdd(in_a, in_b, in_c);
 			test_obj.get()->CopyDataTo(ptr);
 			control_MulAdd(ptr, arr_a, arr_b, arr_c, size, test_obj.get()->Size());
+
+			const double temp = 2;
+			arith_chain.ScaleAddTo(in_c, -temp, in_a, in_b);
+			control_ScaleAdd(in_c, -temp, in_a, in_b);
 		}
 		
 

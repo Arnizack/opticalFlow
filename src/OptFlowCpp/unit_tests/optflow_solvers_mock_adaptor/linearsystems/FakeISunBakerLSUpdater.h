@@ -19,7 +19,7 @@ namespace optflow_solvers
 			MOCK_METHOD1(SetPenalty, void(std::shared_ptr<core::IPenalty<double>> penalty));
 
 			virtual std::shared_ptr<core::ILinearProblem<double>> Update() override {
-				return std::make_shared<core::MockILinearProblem<double>>();
+				return std::make_shared<core::testing::MockILinearProblem<double>>();
 			}
 		};
 	}

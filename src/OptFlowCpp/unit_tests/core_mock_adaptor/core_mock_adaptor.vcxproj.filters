@@ -9,6 +9,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\lib\native\src\gmock\gmock-all.cc" />
     <ClCompile Include="pyramid\FakeIPyramid.cpp" />
     <ClCompile Include="pyramid\FakeIPyramidBuilder.cpp" />
+    <ClCompile Include="solver\problem\FakeLinearProblem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MockIArray.h" />
@@ -28,6 +29,11 @@
     <ClInclude Include="linalg\MockIArithmeticBasic.h" />
     <ClInclude Include="MockIReshaperD.h" />
     <ClInclude Include="solver\MockILinearSolverD.h" />
+    <ClInclude Include="linalg\MockIArithmeticVector.h" />
+    <ClInclude Include="MockIArrayFactory1D.h" />
+    <ClInclude Include="linalg\MockILinearOperator.h" />
+    <ClInclude Include="solver\problem\FakeLinearProblem.h" />
+    <ClInclude Include="linalg\MockIArithmeticChained.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

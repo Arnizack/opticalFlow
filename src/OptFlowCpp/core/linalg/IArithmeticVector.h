@@ -1,5 +1,7 @@
 #pragma once
-#include "IArithmeticBasic.h"
+//#include "IArithmeticBasic.h"
+#include"../IArray.h"
+#include <memory>
 
 namespace core
 {
@@ -21,5 +23,9 @@ namespace core
 
 		// A = fac * A
 		virtual void ScaleTo(const double& fac, const PtrMatrix a) = 0;
+
+		//<a,b> / <c,d>
+		virtual double ScalarDivScalar(const PtrVector a, const PtrVector b, const PtrVector c,
+			const PtrVector d) = 0;
 	};
 }

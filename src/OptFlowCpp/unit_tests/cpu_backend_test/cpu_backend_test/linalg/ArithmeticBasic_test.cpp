@@ -1,6 +1,7 @@
 #include "cpu_backend\linalg\ArithmeticBasic.h"
 #include "cpu_backend\linalg\ArithmeticChained.h"
 #include "cpu_backend\Array.h"
+#include "cpu_backend\ArrayFactory.h"
 
 #include"gtest/gtest.h"
 #include"gmock/gmock.h"
@@ -84,16 +85,13 @@ namespace cpu_backend
 
 			T ptr[size];
 
-			ArithmeticBasic<T, dim> arith_base;
-			std::shared_ptr<core::IArray<T, dim>> test_obj;
+			ArrayFactory<T, dim> fac;
+
+			ArithmeticBasic<T, dim> arith_base(std::make_shared<ArrayFactory<T, dim>>(fac));
+			std::shared_ptr<core::IArray<T, dim>> test_obj = std::make_shared<Array<T, dim>>(Array<T, dim>(shape, arr_a));
 
 			//Add
 			test_obj = arith_base.Add(in_a, in_b);
-			test_obj.get()->CopyDataTo(ptr);
-			control_add_sub<T>(ptr, arr_a, arr_b, 1, size, test_obj.get()->Size());
-
-			//AddTo
-			arith_base.AddTo(test_obj, in_a, in_b);
 			test_obj.get()->CopyDataTo(ptr);
 			control_add_sub<T>(ptr, arr_a, arr_b, 1, size, test_obj.get()->Size());
 			
@@ -102,28 +100,13 @@ namespace cpu_backend
 			test_obj.get()->CopyDataTo(ptr);
 			control_add_sub<T>(ptr, arr_a, arr_b, -1, size, test_obj.get()->Size());
 			
-			//SubTo
-			arith_base.SubTo(test_obj, in_a, in_b);
-			test_obj.get()->CopyDataTo(ptr);
-			control_add_sub<T>(ptr, arr_a, arr_b, -1, size, test_obj.get()->Size());
-			
 			//Mul
 			test_obj = arith_base.Mul(in_a, in_b);
 			test_obj.get()->CopyDataTo(ptr);
 			control_mul<T>(ptr, arr_a, arr_b, size, test_obj.get()->Size());
 
-			//MulTo
-			arith_base.MulTo(test_obj, in_a, in_b);
-			test_obj.get()->CopyDataTo(ptr);
-			control_mul<T>(ptr, arr_a, arr_b, size, test_obj.get()->Size());
-			
 			//Div
 			test_obj = arith_base.Div(in_a, in_b);
-			test_obj.get()->CopyDataTo(ptr);
-			control_div<T>(ptr, arr_a, arr_b, size, test_obj.get()->Size());
-			
-			//DivTo
-			arith_base.DivTo(test_obj, in_a, in_b);
 			test_obj.get()->CopyDataTo(ptr);
 			control_div<T>(ptr, arr_a, arr_b, size, test_obj.get()->Size());
 			
@@ -132,7 +115,27 @@ namespace cpu_backend
 			test_obj.get()->CopyDataTo(ptr);
 			control_pow<T>(ptr, arr_a, arr_b, size, test_obj.get()->Size());
 
-			//Pow
+			//AddTo
+			arith_base.AddTo(test_obj, in_a, in_b);
+			test_obj.get()->CopyDataTo(ptr);
+			control_add_sub<T>(ptr, arr_a, arr_b, 1, size, test_obj.get()->Size());
+
+			//SubTo
+			arith_base.SubTo(test_obj, in_a, in_b);
+			test_obj.get()->CopyDataTo(ptr);
+			control_add_sub<T>(ptr, arr_a, arr_b, -1, size, test_obj.get()->Size());
+
+			//MulTo
+			arith_base.MulTo(test_obj, in_a, in_b);
+			test_obj.get()->CopyDataTo(ptr);
+			control_mul<T>(ptr, arr_a, arr_b, size, test_obj.get()->Size());
+
+			//DivTo
+			arith_base.DivTo(test_obj, in_a, in_b);
+			test_obj.get()->CopyDataTo(ptr);
+			control_div<T>(ptr, arr_a, arr_b, size, test_obj.get()->Size());
+
+			//PowTo
 			arith_base.PowTo(test_obj, in_a, in_b);
 			test_obj.get()->CopyDataTo(ptr);
 			control_pow<T>(ptr, arr_a, arr_b, size, test_obj.get()->Size());

@@ -51,6 +51,7 @@
     <OutDir>$(SolutionDir)\bin\$(Platform)\$(Configuration)\</OutDir>
   </PropertyGroup>
   <ItemGroup>
+    <ClCompile Include="ConjugateGradientSolverTest.cpp" />
     <ClCompile Include="GNCPenaltySolverTest.cpp" />
     <ClCompile Include="LinearizationSolverTest.cpp" />
     <ClCompile Include="main.cpp" />

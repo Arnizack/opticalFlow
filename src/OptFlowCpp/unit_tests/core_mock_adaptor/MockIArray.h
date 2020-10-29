@@ -15,10 +15,11 @@ namespace core
 			{}
 			MockIArray() : IArray({ 0 })
 			{}
+			MockIArray(const core::testing::MockIArray<T, DimCount>& copy) : IArray(copy.Shape)
+			{}
 
-			MOCK_METHOD(size_t,Size,(),(const, override));
+			MOCK_METHOD(size_t, Size, (), (const, override));
 			MOCK_METHOD(bool, CopyDataTo, (T* destination), (override));
-
 		};
 	}
 }
