@@ -2,7 +2,7 @@
 #include"pch.h"
 #include"LogOcclusion.h"
 #include<algorithm>
-#include"ArrayHelper.h"
+#include"../../image/inner/ArrayHelper.h"
 
 namespace cpu_backend
 {
@@ -24,12 +24,12 @@ namespace cpu_backend
 
 		for (size_t i = 0; i < pixel_count; i++)
 		{
-			double d = std::max(flow_div[i], 0.0);
+			double d = std::min(flow_div[i], 0.0);
 			double exponent = d * d / (2.0 * sigma_div * sigma_div);
 			double color_difference_norm = _inner::ComputeColorDifferenceSquaredNorm(image, image_warped,i,i, width, height, color_channels_count);
 			
 			exponent += color_difference_norm * color_difference_norm / (2 * sigma_error * sigma_error);
-			destination[i] = exponent;
+			destination[i] = -exponent;
 		}
 	}
 }

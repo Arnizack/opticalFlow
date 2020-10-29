@@ -175,7 +175,7 @@
     </ClInclude>
     <ClInclude Include="image\inner\ArrayHelper.h" />
     <ClInclude Include="image\inner\BicubicInterpolate.h" />
-    <ClInclude Include="image\inner\BilateralMedian.h">
+    <ClInclude Include="flow\inner\BilateralMedian.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -189,7 +189,15 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="image\inner\IteratorHelper.h" />
-    <ClInclude Include="image\inner\LogOcclusion.h">
+    <ClInclude Include="flow\inner\LogOcclusion.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="image\inner\BilinearInterpolate.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="image\inner\WarpLinearColorImage.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -218,11 +226,15 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="image\inner\BilateralMedian.cpp">
+    <ClCompile Include="flow\inner\BilateralMedian.cpp">
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="image\inner\LogOcclusion.cpp">
+    <ClCompile Include="flow\inner\LogOcclusion.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="image\inner\WarpLinearColorImage.cpp">
       <SubType>
       </SubType>
     </ClCompile>

@@ -1,5 +1,4 @@
 #pragma once
-#include"../warper/GrayWarper.h"
 namespace cpu_backend
 {
 	void ComputeLogOcclusion(

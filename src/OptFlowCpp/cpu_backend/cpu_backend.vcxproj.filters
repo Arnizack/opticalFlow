@@ -66,16 +66,22 @@
     <ClInclude Include="linalg\ArithmeticVector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="image\inner\LogOcclusion.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="flow\CrossBilateralMedianFilter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="image\inner\BilateralMedian.h">
+    <ClInclude Include="image\inner\IteratorHelper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="image\inner\IteratorHelper.h">
+    <ClInclude Include="flow\inner\LogOcclusion.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="flow\inner\BilateralMedian.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="image\inner\BilinearInterpolate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="image\inner\WarpLinearColorImage.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -95,13 +101,16 @@
     <ClCompile Include="penalty\QuadraticPenalty.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="image\inner\LogOcclusion.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="flow\CrossBilateralMedianFilter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="image\inner\BilateralMedian.cpp">
+    <ClCompile Include="flow\inner\LogOcclusion.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="flow\inner\BilateralMedian.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="image\inner\WarpLinearColorImage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

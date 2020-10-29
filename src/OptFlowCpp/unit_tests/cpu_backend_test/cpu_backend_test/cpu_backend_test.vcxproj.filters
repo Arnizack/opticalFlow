@@ -14,6 +14,10 @@
     <ClCompile Include="image\inner\convolution2DTest.cpp" />
     <ClCompile Include="image\inner\DerivativeTest.cpp" />
     <ClCompile Include="Reshape_Test.cpp" />
+    <ClCompile Include="image\inner\WarpLinearColorTest.cpp" />
+    <ClCompile Include="flow\CrossBilateralMedianFilterTest.cpp" />
+    <ClCompile Include="flow\BilateralMedianFilterTest.cpp" />
+    <ClCompile Include="flow\OcclusionTest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

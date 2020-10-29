@@ -20,14 +20,17 @@ namespace cpu_backend
 		}
 
 		// div img = d/dx img + d/dy img
-		void Divergence(T* img, int width, int height, T* dst)
+		void FlowDivergence(T* flow, int width, int height, T* dst)
 		{
 			int size = width * height;
-			T* temp = malloc(size * sizeof(T));
-			ComputeDerivativeX(img, width, height, temp);
-			ComputeDerivativeY(img, width, height, dst);
+			T* temp = (T*) malloc(size * sizeof(T));
+			T* flow_y = flow;
+			T* flow_x = flow + width * height;
+			ComputeDerivativeX(flow_x, width, height, temp);
+			ComputeDerivativeY(flow_y, width, height, dst);
 			for (int i = 0; i < size; i++)
 				dst[i] += temp[i];
+			free(temp);
 
 		}
 	private:
@@ -35,7 +38,7 @@ namespace cpu_backend
 		//std::array<float, 5> kernel_x = 
 		//{ -1.0 / 12.0, 8.0 / 12.0,0,-8.0 / 12.0,1.0 / 12.0 };
 
-		std::array<float,5> kernel = 
+		std::array<T,5> kernel = 
 		{ 1.0 / 12.0, -8.0 / 12.0,0,8.0 / 12.0, -1.0 / 12.0 };
 	};
 }

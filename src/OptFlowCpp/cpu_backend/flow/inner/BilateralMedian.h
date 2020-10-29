@@ -11,7 +11,7 @@ namespace cpu_backend
 		double auxiliary_influence,
 		double sigma_distance,
 		double sigma_color,
-		int filter_length_half,
+		int filter_length,
 		size_t width,
 		size_t height,
 		size_t color_channel_count,
@@ -24,17 +24,17 @@ namespace cpu_backend
 		size_t width,
 		size_t height,
 		size_t color_channel_count,
-		int filter_length_half,
+		int filter_length,
 		double sigma_distance,
 		double sigma_color,
 		double* destination);
 
 	void _BilateralMedianList(int x, int y, double* flow, double* auxiliary_flow,
 		double filter_influence, double auxiliary_influence, double* weights,
-		int filter_length_half,
+		int filter_length,
 		size_t weigths_count, size_t width, size_t height, double* destination);
 
-	double BilateralMedianAt(int x, int y,
+	void BilateralMedianAt(int x, int y,
 		double* flow,
 		double* auxiliary_flow,
 		double* log_occlusion,
@@ -45,10 +45,11 @@ namespace cpu_backend
 		double auxiliary_influence,
 		double sigma_distance,
 		double sigma_color,
-		int filter_length_half,
+		int filter_length,
 		size_t width,
 		size_t height,
-		size_t color_channel_count);
+		size_t color_channel_count,
+		double* destination);
 
 	namespace _inner
 	{
