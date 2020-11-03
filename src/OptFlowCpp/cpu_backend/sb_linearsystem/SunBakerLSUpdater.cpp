@@ -111,7 +111,7 @@ namespace cpu_backend
         _penalty = penalty;
     }
     SunBakerLSUpdater::SunBakerLSUpdater(
-        std::shared_ptr<DerivativeCalculator> deriv_calculator, 
+        std::shared_ptr<DerivativeCalculator<float>> deriv_calculator,
         double lambda_kernel)
         :_deriv_calculator(deriv_calculator), _lambda_kernel(lambda_kernel)
     {

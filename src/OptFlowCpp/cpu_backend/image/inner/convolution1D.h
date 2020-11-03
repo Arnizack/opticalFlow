@@ -59,7 +59,7 @@ namespace cpu_backend
 				{
 					int x1 = _inner::CorrespondingX<direction>(kernel_idx, kernel_length_half, x);
 					int y1 = _inner::CorrespondingY<direction>(kernel_idx, kernel_length_half, y);
-					T img_val = _inner::GetValueAt<float,padding>(x1, y1, width, height, img);
+					T img_val = _inner::GetValueAt<T,padding>(x1, y1, width, height, img);
 					sum += img_val * kernel[kernel_idx];
 				}
 				destination[width * y + x] = sum;

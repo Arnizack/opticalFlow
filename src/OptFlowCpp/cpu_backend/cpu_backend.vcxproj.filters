@@ -63,7 +63,25 @@
     <ClInclude Include="penalty\QuadraticPenalty.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="linalg\LinearSystemMatrix.h">
+    <ClInclude Include="linalg\ArithmeticVector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="flow\CrossBilateralMedianFilter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="image\inner\IteratorHelper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="flow\inner\LogOcclusion.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="flow\inner\BilateralMedian.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="image\inner\BilinearInterpolate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="image\inner\WarpLinearColorImage.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="linalg\ArithmeticVector.h">
@@ -89,9 +107,6 @@
     <ClCompile Include="image\warper\GrayWarper.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="image\inner\DerivativeCalculator.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="sb_linearsystem\SunBakerLSUpdater.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -99,6 +114,18 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="penalty\QuadraticPenalty.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="flow\CrossBilateralMedianFilter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="flow\inner\LogOcclusion.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="flow\inner\BilateralMedian.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="image\inner\WarpLinearColorImage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
