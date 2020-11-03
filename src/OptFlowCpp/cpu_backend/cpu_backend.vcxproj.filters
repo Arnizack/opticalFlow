@@ -39,9 +39,6 @@
     <ClInclude Include="image\inner\DerivativeCalculator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="linalg\Norm.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Statistics.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -67,6 +64,21 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="linalg\LinearSystemMatrix.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="linalg\ArithmeticVector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="pyramid\Pyramid.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="pyramid\PyramidBuilder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Scaler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="problem\ProblemFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
