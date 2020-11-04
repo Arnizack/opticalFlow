@@ -22,7 +22,7 @@ namespace cpu_backend
        
 
         template<class T, Padding padding>
-		inline T GetValueAt(const int& x, const  int& y, const  int width, const  int height,const T* img)
+		inline T GetValueAt(const int& x, const  int& y, const  int width, const  int height, const T* img, const int offset = 0)
 		{
             int x_remap = 0;
             int y_remap = 0;
@@ -52,7 +52,7 @@ namespace cpu_backend
                 //default padding Zeros
                 if (x >= width || y >= height || x < 0 || y < 0)
                     return 0;
-                return img[width * y + x];
+                return img[offset + width * y + x];
             }
 		}
         template<class T>

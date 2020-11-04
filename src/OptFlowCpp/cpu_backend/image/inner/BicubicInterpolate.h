@@ -22,7 +22,7 @@ namespace cpu_backend
 
         template<class T>
         inline T BicubicInerpolateAt(const float& x,const float& y,const T* grid, 
-        const size_t& width, const size_t& height)
+        const size_t& width, const size_t& height, const size_t& offset = 0)
         {
             //Reference
             //https://theailearner.com/tag/bicubic-interpolation/
@@ -41,18 +41,18 @@ namespace cpu_backend
             for(int coeffs_y_idx = 0; coeffs_y_idx<4; coeffs_y_idx++)
             {
                 int y_grid = floor(y) - 1 + coeffs_y_idx;
-                T weight_x = 0;
+                float weight_x = 0; // T
                 for(int coeffs_x_idx = 0; coeffs_x_idx < 4; coeffs_x_idx ++)
                 {
                     int x_grid = floor(x) - 1 + coeffs_x_idx;
                     //opencv default: Padding::Zeros
-                    T grid_val = GetValueAt<T,Padding::ZEROS>(x_grid,y_grid,width,height,grid);
-                    T& coeff_x = coeffs_x[coeffs_x_idx];
+                    T grid_val = GetValueAt<T,Padding::ZEROS>(x_grid,y_grid,width,height,grid, offset);
+                    float& coeff_x = coeffs_x[coeffs_x_idx]; // T&
                     weight_x+=coeff_x*grid_val;
                    
                 }
 
-                T& coeff_y = coeffs_y[coeffs_y_idx];
+                float& coeff_y = coeffs_y[coeffs_y_idx]; // T&
                 result+=coeff_y*weight_x;
             }
 

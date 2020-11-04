@@ -18,6 +18,9 @@
     <ClCompile Include="flow\CrossBilateralMedianFilterTest.cpp" />
     <ClCompile Include="flow\BilateralMedianFilterTest.cpp" />
     <ClCompile Include="flow\OcclusionTest.cpp" />
+    <ClCompile Include="Scaler_Test.cpp" />
+    <ClCompile Include="Pyramid\Pyramid_Test.cpp" />
+    <ClCompile Include="Pyramid\PyramidBuilder_Test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

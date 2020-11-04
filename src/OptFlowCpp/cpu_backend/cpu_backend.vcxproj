@@ -217,9 +217,25 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="problem\ProblemFactory.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="pyramid\Pyramid.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="pyramid\PyramidBuilder.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Reshaper.h" />
     <ClInclude Include="sb_linearsystem\SunBakerLinearOp.h" />
     <ClInclude Include="sb_linearsystem\SunBakerLSUpdater.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Scaler.h">
       <SubType>
       </SubType>
     </ClInclude>
