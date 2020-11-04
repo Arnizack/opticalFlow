@@ -2,7 +2,6 @@
 #include"core/IArray.h"
 #include"core/IArrayFactory.h"
 #include"core/solver/IFlowFieldSolver.h"
-#include"core/IArrayFactory.h"
 #include"core/pyramid/IPyramidBuilder.h"
 #include"core/solver/problem/IGrayPenaltyCrossProblem.h"
 #include"core/flow/IFlowScaler.h"
