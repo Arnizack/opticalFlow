@@ -2,6 +2,7 @@
 #include"IArray.h"
 #include<memory>
 #include<array>
+
 namespace core
 {
 	template<class InnerTyp, size_t DimCount>

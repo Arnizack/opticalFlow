@@ -170,6 +170,11 @@
     <Import Project="..\..\..\packages\zlib.v120.windesktop.msvcstl.dyn.rt-dyn.1.2.8.8\build\native\zlib.v120.windesktop.msvcstl.dyn.rt-dyn.targets" Condition="Exists('..\..\..\packages\zlib.v120.windesktop.msvcstl.dyn.rt-dyn.1.2.8.8\build\native\zlib.v120.windesktop.msvcstl.dyn.rt-dyn.targets')" />
     <Import Project="..\..\..\packages\zlib.v140.windesktop.msvcstl.dyn.rt-dyn.1.2.8.8\build\native\zlib.v140.windesktop.msvcstl.dyn.rt-dyn.targets" Condition="Exists('..\..\..\packages\zlib.v140.windesktop.msvcstl.dyn.rt-dyn.1.2.8.8\build\native\zlib.v140.windesktop.msvcstl.dyn.rt-dyn.targets')" />
     <Import Project="..\..\..\packages\libpng.1.6.28.1\build\native\libpng.targets" Condition="Exists('..\..\..\packages\libpng.1.6.28.1\build\native\libpng.targets')" />
+    <Import Project="..\..\..\packages\boost.1.72.0.0\build\boost.targets" Condition="Exists('..\..\..\packages\boost.1.72.0.0\build\boost.targets')" />
+    <Import Project="..\..\..\packages\boost_chrono-vc120.1.72.0.0\build\boost_chrono-vc120.targets" Condition="Exists('..\..\..\packages\boost_chrono-vc120.1.72.0.0\build\boost_chrono-vc120.targets')" />
+    <Import Project="..\..\..\packages\boost_date_time-vc120.1.72.0.0\build\boost_date_time-vc120.targets" Condition="Exists('..\..\..\packages\boost_date_time-vc120.1.72.0.0\build\boost_date_time-vc120.targets')" />
+    <Import Project="..\..\..\packages\boost_system-vc120.1.72.0.0\build\boost_system-vc120.targets" Condition="Exists('..\..\..\packages\boost_system-vc120.1.72.0.0\build\boost_system-vc120.targets')" />
+    <Import Project="..\..\..\packages\boost_thread-vc120.1.72.0.0\build\boost_thread-vc120.targets" Condition="Exists('..\..\..\packages\boost_thread-vc120.1.72.0.0\build\boost_thread-vc120.targets')" />
   </ImportGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
@@ -179,5 +184,10 @@
     <Error Condition="!Exists('..\..\..\packages\zlib.v120.windesktop.msvcstl.dyn.rt-dyn.1.2.8.8\build\native\zlib.v120.windesktop.msvcstl.dyn.rt-dyn.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\zlib.v120.windesktop.msvcstl.dyn.rt-dyn.1.2.8.8\build\native\zlib.v120.windesktop.msvcstl.dyn.rt-dyn.targets'))" />
     <Error Condition="!Exists('..\..\..\packages\zlib.v140.windesktop.msvcstl.dyn.rt-dyn.1.2.8.8\build\native\zlib.v140.windesktop.msvcstl.dyn.rt-dyn.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\zlib.v140.windesktop.msvcstl.dyn.rt-dyn.1.2.8.8\build\native\zlib.v140.windesktop.msvcstl.dyn.rt-dyn.targets'))" />
     <Error Condition="!Exists('..\..\..\packages\libpng.1.6.28.1\build\native\libpng.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\libpng.1.6.28.1\build\native\libpng.targets'))" />
+    <Error Condition="!Exists('..\..\..\packages\boost.1.72.0.0\build\boost.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\boost.1.72.0.0\build\boost.targets'))" />
+    <Error Condition="!Exists('..\..\..\packages\boost_chrono-vc120.1.72.0.0\build\boost_chrono-vc120.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\boost_chrono-vc120.1.72.0.0\build\boost_chrono-vc120.targets'))" />
+    <Error Condition="!Exists('..\..\..\packages\boost_date_time-vc120.1.72.0.0\build\boost_date_time-vc120.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\boost_date_time-vc120.1.72.0.0\build\boost_date_time-vc120.targets'))" />
+    <Error Condition="!Exists('..\..\..\packages\boost_system-vc120.1.72.0.0\build\boost_system-vc120.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\boost_system-vc120.1.72.0.0\build\boost_system-vc120.targets'))" />
+    <Error Condition="!Exists('..\..\..\packages\boost_thread-vc120.1.72.0.0\build\boost_thread-vc120.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\boost_thread-vc120.1.72.0.0\build\boost_thread-vc120.targets'))" />
   </Target>
 </Project>

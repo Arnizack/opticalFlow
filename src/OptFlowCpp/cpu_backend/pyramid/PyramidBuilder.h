@@ -208,19 +208,21 @@ namespace cpu_backend
 				const size_t in_width = last_level->FirstFrame->Shape[0];
 				const size_t in_height = last_level->FirstFrame->Shape[1];
 
-				size_t* back_width = &_resolutions.back()[0]; // = min_resolution[0]
-				size_t * back_height = &_resolutions.back()[1]; // = min_resolution[1]
+				size_t back_width = _resolutions.back()[0]; // = min_resolution[0]
+				size_t back_height = _resolutions.back()[1]; // = min_resolution[1]
 
-				*back_width *= _factors[0];
-				*back_height *= _factors[0];
+				back_width *= _factors[0];
+				back_height *= _factors[0];
 
-				while (*back_width <= in_width && *back_height <= in_height)
+				while (back_width < in_width && back_height < in_height)
 				{
-					_resolutions.push_back( { *back_width, *back_height } );
+					_resolutions.push_back( { back_width, back_height } );
 
-					*back_width *= _factors[0];
-					*back_height *= _factors[0];
+					back_width *= _factors[0];
+					back_height *= _factors[0];
 				}
+				_resolutions.push_back({ in_width, in_height });
+
 				return;
 			}
 		}

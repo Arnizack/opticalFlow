@@ -16,5 +16,9 @@
     <ClInclude Include="solvers\IncrementalSolver.h" />
     <ClInclude Include="solvers\LinearizationSolver.h" />
     <ClInclude Include="linearsystems\ISunBakerLSUpdater.h" />
+    <ClInclude Include="solvers\ConjugateGradientSolver.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>
