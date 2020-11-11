@@ -17,7 +17,7 @@ namespace cpu_backend
 			if (_end_level == true)
 				return _current_level;
 
-			const T current = _current_level;
+			//const T current = _current_level;
 			
 			_end_level = _next_Pyramid->IsEndLevel();
 			_current_level = _next_Pyramid->GetCurrentLevel();
@@ -25,7 +25,7 @@ namespace cpu_backend
 			if (_next_Pyramid->IsEndLevel() != true)
 				_next_Pyramid = _next_Pyramid->GetNextPyramid();
 
-			return current;
+			return _current_level;
 		}
 
 		virtual bool IsEndLevel() override
