@@ -10,7 +10,7 @@ namespace core
 	class ICrossFlowFilter : public IOperator<PtrFlowField,PtrFlowField>
 	{
 	public:
-		virtual void SetFilterInfluence(double influence) = 0;
+		virtual void SetAuxiliaryInfluence(double influence) = 0;
 		virtual void SetCrossFilterImage(PtrColorImage image) = 0;
 
 	};

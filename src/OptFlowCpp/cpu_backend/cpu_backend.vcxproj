@@ -213,6 +213,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="pch.h" />
+    <ClInclude Include="penalty\CharbonnierPenalty.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="penalty\QuadraticPenalty.h">
       <SubType>
       </SubType>
@@ -267,6 +271,10 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="penalty\CharbonnierPenalty.cpp">
+      <SubType>
+      </SubType>
     </ClCompile>
     <ClCompile Include="penalty\QuadraticPenalty.cpp">
       <SubType>

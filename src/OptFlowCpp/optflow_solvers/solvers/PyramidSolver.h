@@ -14,7 +14,7 @@ namespace optflow_solvers
 	using PtrFlowField = std::shared_ptr<core::IArray<double, 3> >;
 	using PtrProblemPyramid = std::shared_ptr<core::IPyramid<PtrProblemTyp>>;
 
-	class PyramidSolver : core::IFlowFieldSolver<PtrProblemTyp>
+	class PyramidSolver : public core::IFlowFieldSolver<PtrProblemTyp>
 	{
 	public:
 
@@ -25,6 +25,8 @@ namespace optflow_solvers
 			std::shared_ptr<core::IFlowFieldSolver<PtrProblemTyp>> inner_solver
 		);
 
+		
+
 		virtual PtrFlowField Solve(const PtrProblemTyp problem) final override;
 
 		virtual PtrFlowField Solve(
@@ -32,6 +34,8 @@ namespace optflow_solvers
 	
 		PtrFlowField Solve(PtrProblemPyramid pyramid,
 			PtrFlowField initial_guess );
+
+		void SetPyramidBuilder(std::shared_ptr<core::IPyramidBuilder< PtrProblemTyp>> pyramid_builder);
 
 
 	private:

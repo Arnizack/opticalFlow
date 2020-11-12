@@ -10,6 +10,7 @@
     <ClCompile Include="pyramid\FakeIPyramid.cpp" />
     <ClCompile Include="pyramid\FakeIPyramidBuilder.cpp" />
     <ClCompile Include="solver\problem\FakeLinearProblem.cpp" />
+    <ClCompile Include="solver\MockIFlowSolverIterator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MockIArray.h" />
@@ -34,6 +35,7 @@
     <ClInclude Include="linalg\MockILinearOperator.h" />
     <ClInclude Include="solver\problem\FakeLinearProblem.h" />
     <ClInclude Include="linalg\MockIArithmeticChained.h" />
+    <ClInclude Include="solver\MockIFlowSolverIterator.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

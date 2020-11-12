@@ -12,16 +12,15 @@ namespace cpu_backend
 	using PtrFlowField = std::shared_ptr<core::IArray<double, 3>>;
 	using PtrColorImage = std::shared_ptr<core::IArray<float, 3>>;
 	CrossBilateralMedianFilter::CrossBilateralMedianFilter(
-		std::shared_ptr<DerivativeCalculator<double>> flow_deriv_calc, 
-		double sigma_div, 
-		double sigma_error, 
-		double filter_influence, 
-		double sigma_distance, 
-		double sigma_color, 
-		int filter_length)
-		: _flow_deriv_calc(flow_deriv_calc),_sigma_div(sigma_div), _sigma_error(sigma_error),
-		_filter_influence(filter_influence), _sigma_distance(sigma_distance), 
-		_sigma_color(sigma_color), _filter_length(filter_length)
+		std::shared_ptr<DerivativeCalculator<double>> flow_deriv_calc,
+		std::shared_ptr<CrossMedianFilterSettings> settings)
+		: _flow_deriv_calc(flow_deriv_calc),
+		_sigma_div(settings->SigmaDiv),
+		_sigma_error(settings->SigmaError),
+		_filter_influence(settings->FilterInfluence),
+		_sigma_distance(settings->SigmaDistance),
+		_sigma_color(settings->SigmaColor),
+		_filter_length(settings->FilterLength)
 
 	{
 
@@ -50,7 +49,7 @@ namespace cpu_backend
 			_sigma_distance, _sigma_color, _filter_length, _width, _height, _color_channel_count, destination->Data());
 		
 	}
-	void CrossBilateralMedianFilter::SetFilterInfluence(double influence)
+	void CrossBilateralMedianFilter::SetAuxiliaryInfluence(double influence)
 	{
 		_auxiliary_influence = influence;
 	}

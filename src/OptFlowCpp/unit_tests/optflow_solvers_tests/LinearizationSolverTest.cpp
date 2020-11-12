@@ -43,10 +43,13 @@ namespace optflow_solvers
 			std::shared_ptr<core::IArithmeticBasic<double, 3>> flow_arithmetic 
 				= mock_flow_arithmetic;
 
+			auto settings = std::make_shared<LinearizationSolverSettings>();
+			settings->StartRelaxation = start_relaxation;
+			settings->EndRelaxation = end_relaxation;
+			settings->RelaxationSteps = relaxation_steps;
+
 			LinearizationSolver solver(
-				start_relaxation,
-				end_relaxation,
-				relaxation_steps,
+				settings,
 				cross_filter,
 				linear_system_builder,
 				linear_solver,
@@ -71,9 +74,9 @@ namespace optflow_solvers
 			double second_relax = 9.306902992863403;
 			double third_relax = 10;
 
-			EXPECT_CALL(*mock_cross_filter, SetFilterInfluence(first_relax));
-			EXPECT_CALL(*mock_cross_filter, SetFilterInfluence(second_relax));
-			EXPECT_CALL(*mock_cross_filter, SetFilterInfluence(third_relax));
+			EXPECT_CALL(*mock_cross_filter, SetAuxiliaryInfluence(first_relax));
+			EXPECT_CALL(*mock_cross_filter, SetAuxiliaryInfluence(second_relax));
+			EXPECT_CALL(*mock_cross_filter, SetAuxiliaryInfluence(third_relax));
 			EXPECT_CALL(*mock_linear_system_builder, SetFramePair(_,_));
 			EXPECT_CALL(*mock_linear_system_builder, UpdateParameter(_, first_relax));
 			EXPECT_CALL(*mock_linear_system_builder, UpdateParameter(_, second_relax));

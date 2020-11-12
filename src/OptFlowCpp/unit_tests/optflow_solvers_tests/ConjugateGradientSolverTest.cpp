@@ -30,8 +30,13 @@ namespace optflow_solvers
 		core::testing::MockIArithmeticVector1D* arith_vector = new core::testing::MockIArithmeticVector1D;
 		std::shared_ptr<core::IArithmeticVector<double, 1>> ptr_arith_vector(arith_vector);
 
+		//Settings
+		auto settings = std::make_shared<CGSolverSettings>();
+		settings->Iterations = iter;
+		settings->Tolerance = tol;
+
 		//Solver Obj
-		ConjugateGradientSolver<double> cg_solver(ptr_arr_factory, ptr_arith_vector, ptr_arith_chained, tol, iter);
+		ConjugateGradientSolver<double> cg_solver(ptr_arr_factory, ptr_arith_vector, ptr_arith_chained, settings);
 
 		//Linear Problem
 		core::testing::FakeLinearProblem* problem = new core::testing::FakeLinearProblem;
@@ -75,8 +80,13 @@ namespace optflow_solvers
 		cpu_backend::ArithmeticVector<double, 1> arith_vector(ptr_arr_factory);
 		std::shared_ptr<cpu_backend::ArithmeticVector<double, 1>> ptr_arith_vector = std::make_shared<cpu_backend::ArithmeticVector<double, 1>>(arith_vector);
 
+		//Settings
+		auto settings = std::make_shared<CGSolverSettings>();
+		settings->Iterations = iter;
+		settings->Tolerance = tol;
+
 		//Solver Obj
-		ConjugateGradientSolver<double> cg_solver(ptr_arr_factory, ptr_arith_vector, ptr_arith_chained, tol, iter);
+		ConjugateGradientSolver<double> cg_solver(ptr_arr_factory, ptr_arith_vector, ptr_arith_chained, settings);
 
 		//Problem
 		double mat_arr[16] = { 4,8,2,5, 8,8,6,1, 2,6,8,4, 5,1,4,7 };

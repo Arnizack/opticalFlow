@@ -4,13 +4,19 @@
 #include"core/penalty/IBlendablePenalty.h"
 #include"core/IArrayFactory.h"
 #include"core/solver/problem/IProblemFactory.h"
+#include"core/solver/IFlowSolverIterator.h"
 
 namespace optflow_solvers
 {
 
 	
-
+	//Namespace clashing ? 
 	using ProblemTyp = std::shared_ptr<core::IGrayCrossFilterProblem>;
+
+	struct GNCPenaltySolverSettings
+	{
+		int GNCSteps = 3;
+	};
 
 	class GNCPenaltySolver : public core::IFlowFieldSolver<ProblemTyp>
 	{
@@ -32,7 +38,8 @@ namespace optflow_solvers
 
 	public:
 	
-		GNCPenaltySolver(int gnc_steps, std::vector<PtrStandardFlowSolver> inner_solvers, 
+		GNCPenaltySolver(std::shared_ptr<GNCPenaltySolverSettings> settings,
+			std::shared_ptr<core::IFlowSolverIterator<core::IGrayPenaltyCrossProblem>> solver_iterator,
 			PtrBlendPenalty penalty_func,
 			PtrFlowFactory flow_factory, PtrProblemFactory problem_factory);
 
@@ -50,6 +57,7 @@ namespace optflow_solvers
 
 		int _gnc_steps;
 		std::vector<PtrStandardFlowSolver> _inner_solvers;
+		std::shared_ptr<core::IFlowSolverIterator<core::IGrayPenaltyCrossProblem>> _solver_iterator;
 		PtrBlendPenalty _penalty_func;
 		PtrFlowFactory _flow_factory;
 		PtrProblemFactory _problem_factory;

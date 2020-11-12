@@ -6,15 +6,17 @@
     <ClCompile Include="solvers\PyramidSolver.cpp" />
     <ClCompile Include="solvers\IncrementalSolver.cpp" />
     <ClCompile Include="solvers\LinearizationSolver.cpp" />
+    <ClCompile Include="solvers\PyramidSolverIterator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
     <ClInclude Include="solvers\GNCPenaltySolver.h" />
-    <ClInclude Include="solvers\IFlowSolverFactory.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="solvers\PyramidSolver.h" />
     <ClInclude Include="solvers\IncrementalSolver.h" />
     <ClInclude Include="solvers\LinearizationSolver.h" />
     <ClInclude Include="linearsystems\ISunBakerLSUpdater.h" />
+    <ClInclude Include="solvers\ConjugateGradientSolver.h" />
+    <ClInclude Include="solvers\PyramidSolverIterator.h" />
   </ItemGroup>
 </Project>

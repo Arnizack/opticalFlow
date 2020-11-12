@@ -99,6 +99,12 @@
     <ClInclude Include="problem\ProblemFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="linalg\LinearSystemMatrix.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="penalty\CharbonnierPenalty.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -126,6 +132,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="image\inner\WarpLinearColorImage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="penalty\CharbonnierPenalty.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

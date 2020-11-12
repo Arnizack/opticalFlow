@@ -5,6 +5,10 @@
 
 namespace optflow_solvers
 {
+	struct IncrementalSolverSettings
+	{
+		int Steps = 3;
+	};
 	using PtrProblemTyp = std::shared_ptr<core::IGrayPenaltyCrossProblem>;
 	class IncrementalSolver : public core::IFlowFieldSolver<PtrProblemTyp>
 	{
@@ -12,7 +16,7 @@ namespace optflow_solvers
 		using PtrFlowField = std::shared_ptr<core::IArray<double, 3> >;
 		using PtrProblemTyp = std::shared_ptr<core::IGrayPenaltyCrossProblem>;
 
-		IncrementalSolver(int steps,
+		IncrementalSolver(std::shared_ptr<IncrementalSolverSettings> settings,
 			std::shared_ptr<core::IFlowFieldSolver<PtrProblemTyp>> inner_solver,
 			std::shared_ptr<core::IArrayFactory<double, 3>> flow_factory);
 

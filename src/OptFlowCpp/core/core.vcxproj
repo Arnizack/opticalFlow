@@ -63,6 +63,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="solver\IFlowFieldSolver.h" />
+    <ClInclude Include="solver\IFlowSolverIterator.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="solver\ILinearSolver.h" />
     <ClInclude Include="solver\problem\IColor2FrameProblem.h" />
     <ClInclude Include="solver\problem\IColorCrossFilterProblem.h" />
