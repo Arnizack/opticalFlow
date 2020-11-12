@@ -21,6 +21,7 @@
     <ClCompile Include="Scaler_Test.cpp" />
     <ClCompile Include="Pyramid\Pyramid_Test.cpp" />
     <ClCompile Include="Pyramid\PyramidBuilder_Test.cpp" />
+    <ClCompile Include="penalty\CharbonnierPenaltyTest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
