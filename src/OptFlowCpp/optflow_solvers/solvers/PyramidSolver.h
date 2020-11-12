@@ -4,7 +4,7 @@
 #include"core/solver/IFlowFieldSolver.h"
 #include"core/pyramid/IPyramidBuilder.h"
 #include"core/solver/problem/IGrayPenaltyCrossProblem.h"
-#include"core/flow/IFlowScaler.h"
+#include"core/IScaler.h"
 #include"core/solver/IFlowFieldSolver.h"
 
 namespace optflow_solvers
@@ -21,7 +21,7 @@ namespace optflow_solvers
 		PyramidSolver(
 			std::shared_ptr<core::IArrayFactory<double, 3>> flow_factory,
 			std::shared_ptr<core::IPyramidBuilder< PtrProblemTyp>> pyramid_builder,
-			std::shared_ptr<core::IFlowScaler> flow_scaler,
+			std::shared_ptr<core::IScaler<double, 3>> flow_scaler,
 			std::shared_ptr<core::IFlowFieldSolver<PtrProblemTyp>> inner_solver
 		);
 
@@ -41,7 +41,7 @@ namespace optflow_solvers
 	private:
 		std::shared_ptr<core::IArrayFactory<double, 3>> _flow_factory;
 		std::shared_ptr<core::IPyramidBuilder< PtrProblemTyp>> _pyramid_builder;
-		std::shared_ptr<core::IFlowScaler> _flow_scaler;
+		std::shared_ptr<core::IScaler<double, 3>> _flow_scaler;
 		std::shared_ptr<core::IFlowFieldSolver<PtrProblemTyp>> _inner_solver;
 	};
 

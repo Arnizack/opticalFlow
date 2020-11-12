@@ -11,11 +11,15 @@
 #include"cpu_backend/pyramid/Pyramid.h"
 #include"cpu_backend/pyramid/PyramidBuilder.h"
 #include"cpu_backend/problem/ProblemFactory.h"
+#include"cpu_backend/penalty/CharbonnierPenalty.h"
+#include"cpu_backend/Scaler.h"
 
 namespace console_ui
 {
     void RegisterCPUBackend(Hypodermic::ContainerBuilder& builder)
     {
+        _RegisterCPULinalg(builder);
+
         //Penalty
         builder.registerType<cpu_backend::CharbonnierPenalty>()
             .as<core::IBlendablePenalty<double>>();
@@ -37,12 +41,25 @@ namespace console_ui
             .as<core::IArrayFactory<double, 3>>()
             .singleInstance();
 
+        //Scaler core::IScaler<float, 2>
+        builder.registerType<cpu_backend::Scaler<float, 2>>()
+            .as<core::IScaler<float, 2>>()
+            .singleInstance();
+
+        //Scaler core::IScaler<float, 3>
+        builder.registerType<cpu_backend::Scaler<float, 3>>()
+            .as<core::IScaler<float, 3>>()
+            .singleInstance();
+        //Scaler core::IScaler<double,3>
+        builder.registerType<cpu_backend::Scaler<double, 3>>()
+            .as<core::IScaler<double, 3>>()
+            .singleInstance();
         //Pyramid Builder
         builder.registerType<cpu_backend::PyramidBuilder<std::shared_ptr<core::IGrayPenaltyCrossProblem>>>()
             .as< core::IPyramidBuilder< std::shared_ptr<core::IGrayPenaltyCrossProblem>>>();
 
         //Problem Factory
-        builder.registerType<core::IPenaltyProblem>()
+        builder.registerType<cpu_backend::ProblemFactory>()
             .as<core::IProblemFactory>();
 
     }
@@ -61,5 +78,8 @@ namespace console_ui
     {
         auto penalty_settings = std::make_shared<cpu_backend::CharbonnierPenaltySettings>();
         builder.registerInstance<cpu_backend::CharbonnierPenaltySettings>(penalty_settings);
+
+        auto median_filter_settings = std::make_shared< cpu_backend::CrossMedianFilterSettings>();
+        builder.registerInstance<cpu_backend::CrossMedianFilterSettings>(median_filter_settings);
     }
 }

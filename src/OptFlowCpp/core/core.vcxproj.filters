@@ -105,9 +105,6 @@
     <ClInclude Include="IScaler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="flow\IFlowScaler.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="flow\ICrossFlowFilter.h">
       <Filter>Header Files</Filter>
     </ClInclude>

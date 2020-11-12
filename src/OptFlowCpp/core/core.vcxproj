@@ -23,10 +23,6 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="flow\IFlowScaler.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
     <ClInclude Include="IArray.h" />
     <ClInclude Include="IArrayFactory.h" />
     <ClInclude Include="IContainer.h" />
