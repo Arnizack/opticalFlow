@@ -30,17 +30,20 @@ namespace console_ui
 
     void _RegisterGNCSolver(Hypodermic::ContainerBuilder& builder)
     {
-        using ISolverIterator = core::IFlowSolverIterator<core::IGrayPenaltyCrossProblem>;
-        builder.registerType < optflow_solvers::GNCPenaltySolver>()
-            .with< ISolverIterator, optflow_solvers::PyramidSolverIterator>();
+        
+        builder.registerType<optflow_solvers::GNCPenaltySolver>()
+            .as < core::IFlowFieldSolver<std::shared_ptr<core::IGrayCrossFilterProblem>>>();
     }
 
     void _RegisterPyramidSolver(Hypodermic::ContainerBuilder& builder)
     {  
         builder.registerType<optflow_solvers::PyramidSolver>()
             .with<IFlowSolver, optflow_solvers::IncrementalSolver>();
+        
+        using ISolverIterator = core::IFlowSolverIterator<core::IGrayPenaltyCrossProblem>;
 
-        builder.registerType<optflow_solvers::PyramidSolverIterator>();
+        builder.registerType<optflow_solvers::PyramidSolverIterator>()
+            .as< core::IFlowSolverIterator<core::IGrayPenaltyCrossProblem>>();
 
 
     }

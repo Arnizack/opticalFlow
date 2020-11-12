@@ -112,8 +112,8 @@ namespace cpu_backend
     }
     SunBakerLSUpdater::SunBakerLSUpdater(
         std::shared_ptr<DerivativeCalculator<float>> deriv_calculator,
-        double lambda_kernel)
-        :_deriv_calculator(deriv_calculator), _lambda_kernel(lambda_kernel)
+        std::shared_ptr< LinearSystemSettings> settings)
+        :_deriv_calculator(deriv_calculator), _lambda_kernel(settings->LambdaKernel)
     {
     }
     void SunBakerLSUpdater::initialize_deriv(size_t size)

@@ -35,11 +35,19 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="ComputeOpticalFlow.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="setup\RegisterCGSolver.h">
       <SubType>
       </SubType>
     </ClInclude>
     <ClInclude Include="setup\RegisterCPUBackend.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="setup\RegisterCPULinalg.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -49,12 +57,20 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ComputeOpticalFlow.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="setup\RegisterCGSolver.cpp">
       <SubType>
       </SubType>
     </ClCompile>
     <ClCompile Include="setup\RegisterCPUBackend.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="setup\RegisterCPULinalg.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -72,6 +88,12 @@
     </ProjectReference>
     <ProjectReference Include="..\optflow_solvers\optflow_solvers.vcxproj">
       <Project>{7fb25f03-7d47-4fe3-8eaa-1776578ae8ff}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\utilities\flow_helper\flow_helper.vcxproj">
+      <Project>{0e88c56f-28f0-4b91-8232-29c507145c89}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\utilities\image_helper\image_helper.vcxproj">
+      <Project>{32b2eff3-852d-4ea6-81c7-1775f7da9e3f}</Project>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

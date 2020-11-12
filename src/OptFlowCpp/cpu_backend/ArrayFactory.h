@@ -27,5 +27,10 @@ namespace cpu_backend
 		{
 			return Full(0, shape);
 		}
+
+		virtual PtrArray CreateFromSource(const InnerTyp* source, std::array<const size_t, DimCount> shape) override
+		{
+			return std::make_shared<cpu_backend::Array<InnerTyp, DimCount>>(shape, source);
+		}
 	};
 }

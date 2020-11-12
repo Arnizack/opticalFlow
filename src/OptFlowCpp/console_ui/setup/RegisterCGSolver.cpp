@@ -10,7 +10,7 @@ namespace console_ui
 			.as<core::ILinearSolver<double>>();
 
 	}
-	void RegisterDefaultCGSettings(Hypodermic::ContainerBuilder& builder)
+	void SetDefaultCGSettings(Hypodermic::ContainerBuilder& builder)
 	{
 		auto cg_settings = std::make_shared<optflow_solvers::CGSolverSettings>();
 		builder.registerInstance<optflow_solvers::CGSolverSettings>(cg_settings);

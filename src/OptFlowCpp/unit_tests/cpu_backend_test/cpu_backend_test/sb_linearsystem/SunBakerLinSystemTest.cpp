@@ -66,7 +66,10 @@ namespace cpu_backend
 			lambda_kernel *= lambda_kernel;
 			double relaxation = 0.01;
 
-			SunBakerLSUpdater updater(ptr_deriv_calc, lambda_kernel);
+			auto settings = std::make_shared<LinearSystemSettings>();
+			settings->LambdaKernel = lambda_kernel;
+
+			SunBakerLSUpdater updater(ptr_deriv_calc, settings);
 
 			float first_frame_data[20] =
 			{

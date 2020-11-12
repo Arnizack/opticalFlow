@@ -4,21 +4,22 @@
 #include"cpu_backend/flow/CrossBilateralMedianFilter.h"
 #include"cpu_backend/image/warper/GrayWarper.h"
 #include"cpu_backend/image/inner/DerivativeCalculator.h"
-#include"cpu_backend/linalg/ArithmeticBasic.h"
-#include"cpu_backend/linalg/ArithmeticChained.h"
-#include"cpu_backend/linalg/ArithmeticVector.h"
-#include"cpu_backend/ArrayFactory.h"
+
 #include"cpu_backend/pyramid/Pyramid.h"
 #include"cpu_backend/pyramid/PyramidBuilder.h"
 #include"cpu_backend/problem/ProblemFactory.h"
 #include"cpu_backend/penalty/CharbonnierPenalty.h"
+#include"cpu_backend/sb_linearsystem/SunBakerLSUpdater.h"
+//#include"cpu_backend/sb_linearsystem/SunBakerLinearOp.h" ?
 #include"cpu_backend/Scaler.h"
+
+#include"RegisterCPULinalg.h"
 
 namespace console_ui
 {
     void RegisterCPUBackend(Hypodermic::ContainerBuilder& builder)
     {
-        _RegisterCPULinalg(builder);
+        RegisterCPULinalg(builder);
 
         //Penalty
         builder.registerType<cpu_backend::CharbonnierPenalty>()
@@ -33,13 +34,7 @@ namespace console_ui
         builder.registerType<cpu_backend::DerivativeCalculator<double>>()
             .singleInstance();
 
-        //Array Factory
-        builder.registerType<cpu_backend::ArrayFactory<double, 1>>()
-            .as<core::IArrayFactory<double, 1>>()
-            .singleInstance();
-        builder.registerType<cpu_backend::ArrayFactory<double, 3>>()
-            .as<core::IArrayFactory<double, 3>>()
-            .singleInstance();
+        
 
         //Scaler core::IScaler<float, 2>
         builder.registerType<cpu_backend::Scaler<float, 2>>()
@@ -62,18 +57,12 @@ namespace console_ui
         builder.registerType<cpu_backend::ProblemFactory>()
             .as<core::IProblemFactory>();
 
-    }
-    void _RegisterCPULinalg(Hypodermic::ContainerBuilder& builder)
-    {
-        builder.registerType<cpu_backend::ArithmeticChained<double,1>>()
-            .as<core::IArithmeticChained<double,1>>()
-            .as<core::IArithmeticBasic<double,1>>()
-            .singleInstance();
-        builder.registerType<cpu_backend::ArithmeticVector<double, 1>>()
-            .as<core::IArithmeticVector<double, 1>>()
-            .singleInstance();
+        //SunBakerLSUpdater
+        builder.registerType<cpu_backend::SunBakerLSUpdater>()
+            .as<optflow_solvers::ISunBakerLSUpdater>();
 
     }
+    
     void SetCPUBackendDefaultSettings(Hypodermic::ContainerBuilder& builder)
     {
         auto penalty_settings = std::make_shared<cpu_backend::CharbonnierPenaltySettings>();
@@ -81,5 +70,8 @@ namespace console_ui
 
         auto median_filter_settings = std::make_shared< cpu_backend::CrossMedianFilterSettings>();
         builder.registerInstance<cpu_backend::CrossMedianFilterSettings>(median_filter_settings);
+
+        auto ls_settings = std::make_shared< cpu_backend::LinearSystemSettings>();
+        builder.registerInstance<cpu_backend::LinearSystemSettings>(ls_settings);
     }
 }

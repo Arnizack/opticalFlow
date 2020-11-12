@@ -134,7 +134,9 @@ namespace cpu_backend
 		virtual void SetScaleFactor(double factor, std::array<size_t, 2> min_resolution) override
 		{
 			//factor scales min_resolution
-			_resolutions = { min_resolution };
+			//_resolutions = { min_resolution };
+
+			_min_resolution = min_resolution;
 
 			_factors = { factor };
 		}
@@ -205,23 +207,29 @@ namespace cpu_backend
 			{
 				//SetScaleFactor
 
-				const size_t in_width = last_level->FirstFrame->Shape[0];
-				const size_t in_height = last_level->FirstFrame->Shape[1];
+				size_t in_width = last_level->FirstFrame->Shape[0];
+				size_t in_height = last_level->FirstFrame->Shape[1];
 
-				size_t back_width = _resolutions.back()[0]; // = min_resolution[0]
-				size_t back_height = _resolutions.back()[1]; // = min_resolution[1]
+				size_t min_width = _min_resolution[0];
+				size_t min_height = _min_resolution[1];
 
-				back_width *= _factors[0];
-				back_height *= _factors[0];
+				size_t scaled_width = in_width;
+				size_t scaled_height = in_height;
 
-				while (back_width < in_width && back_height < in_height)
+				double factor = _factors[0];
+
+				scaled_width *= factor;
+				scaled_height *= factor;
+
+				//endlos Schleife?
+				while (min_width < scaled_width && min_height < scaled_height)
 				{
-					_resolutions.push_back( { back_width, back_height } );
+					_resolutions.push_back( { scaled_height, scaled_height } );
 
-					back_width *= _factors[0];
-					back_height *= _factors[0];
+					scaled_height *= _factors[0];
+					scaled_height *= _factors[0];
 				}
-				_resolutions.push_back({ in_width, in_height });
+				_resolutions.push_back({ scaled_width, scaled_height });
 
 				return;
 			}
@@ -235,5 +243,6 @@ namespace cpu_backend
 		std::shared_ptr<core::IProblemFactory> _problem_factory;
 		std::shared_ptr<core::IScaler<float, 2>> _scaler_2D;
 		std::shared_ptr<core::IScaler<float, 3>> _scaler_3D;
+		std::array<size_t, 2> _min_resolution;
 	};
 }

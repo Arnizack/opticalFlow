@@ -23,7 +23,8 @@ namespace optflow_solvers
 	public:
 
 		PyramidSolverIterator(std::shared_ptr < PyramidsResolutions> resolutions, 
-			std::shared_ptr <PyramidSolver > pyramid_solver);
+			std::shared_ptr <PyramidSolver > pyramid_solver,
+			std::shared_ptr<core::IPyramidBuilder<std::shared_ptr<core::IGrayPenaltyCrossProblem>>> pyramid_builder);
 
 		virtual std::shared_ptr<core::IFlowFieldSolver<std::shared_ptr<core::IGrayPenaltyCrossProblem>>> Current() override;
 

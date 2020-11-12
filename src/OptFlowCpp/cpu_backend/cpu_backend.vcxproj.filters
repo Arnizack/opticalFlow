@@ -105,6 +105,9 @@
     <ClInclude Include="penalty\CharbonnierPenalty.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="image\inner\ConvertToGrayscale.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -135,6 +138,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="penalty\CharbonnierPenalty.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="problem\ProblemFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="image\inner\ConvertToGrayscale.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
