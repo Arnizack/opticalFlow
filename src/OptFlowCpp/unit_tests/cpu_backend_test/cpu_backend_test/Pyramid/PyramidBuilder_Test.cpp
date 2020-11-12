@@ -23,7 +23,10 @@ namespace cpu_backend
 
 			PyramidBuilder<PtrIGrayPenaltyCrossProblem> pyramid_builder(ptr_problem_factory, ptr_scaler_2D, ptr_scaler_3D);
 
-			//SET RESOLUTIONS
+			/*
+			* SET RESOLUTIONS
+			*/
+
 			std::vector<std::array<size_t, 2>> resolutions = { {2,2}, {4,4}, {6,6} };
 			pyramid_builder.SetResolutions(resolutions);
 
@@ -46,6 +49,62 @@ namespace cpu_backend
 
 				EXPECT_EQ(out_temp->FirstFrame->Shape[0], resolutions[i][0]);
 				EXPECT_EQ(out_temp->FirstFrame->Shape[1], resolutions[i][1]);
+			}
+
+			/*
+			* SET Scale Factors
+			*/
+
+			std::vector<double> factors = { 1.0/3.0, 2.0/3.0, 1 };
+			pyramid_builder.SetScaleFactors(factors);
+
+			pyramid = pyramid_builder.Create(last_level);
+
+			for (int i = 0; i < resolutions.size(); i++)
+			{
+				if (i == 2)
+					EXPECT_EQ(pyramid->IsEndLevel(), true);
+				else
+					EXPECT_EQ(pyramid->IsEndLevel(), false);
+
+				auto out_temp = pyramid->NextLevel();
+
+				EXPECT_EQ(out_temp->FirstFrame->Shape[0], resolutions[i][0]);
+				EXPECT_EQ(out_temp->FirstFrame->Shape[1], resolutions[i][1]);
+			}
+
+			/*
+			* SET Scale Factor
+			*/
+
+			std::array<size_t, 2> min_res = { {2,2} };
+			const double factor = 2;
+			pyramid_builder.SetScaleFactor(factor, min_res);
+
+			pyramid = pyramid_builder.Create(last_level);
+
+			for (int i = 0; i < 3; i++)
+			{
+				if (i == 2)
+				{
+					EXPECT_EQ(pyramid->IsEndLevel(), true);
+					auto out_temp = pyramid->NextLevel();
+
+					EXPECT_EQ(out_temp->FirstFrame->Shape[0], 6);
+					EXPECT_EQ(out_temp->FirstFrame->Shape[1], 6);
+				}
+				else
+				{
+					EXPECT_EQ(pyramid->IsEndLevel(), false);
+
+					auto out_temp = pyramid->NextLevel();
+
+					EXPECT_EQ(out_temp->FirstFrame->Shape[0], min_res[0]);
+					EXPECT_EQ(out_temp->FirstFrame->Shape[1], min_res[1]);
+
+					min_res[0] *= factor;
+					min_res[1] *= factor;
+				}
 			}
 		}
 	}
