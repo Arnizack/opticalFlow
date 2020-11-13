@@ -6,16 +6,24 @@
 #include "image/inner/BicubicInterpolate.h"
 #include "Array.h"
 
+/*
+* BICUBICUPSCALE (up)
+* BICUBIC FLOW SCALE (up)
+* 
+* SCALER: down mit gaussian
+* FLOW: mult factor
+*/
+
 namespace cpu_backend
 {
 	template<class InnerTyp, size_t DimCount>
-	class Scaler : public core::IScaler<InnerTyp, DimCount>
+	class ArrayScaler : public core::IScaler<core::IArray<InnerTyp, DimCount>>
 	{
 		using PtrArray = std::shared_ptr<core::IArray<InnerTyp, DimCount>>;
 		using PtrArrayFactroy = std::shared_ptr<core::IArrayFactory<InnerTyp, DimCount>>;
 
 	public:
-		Scaler (PtrArrayFactroy factory)
+		ArrayScaler(PtrArrayFactroy factory)
 			: _factroy(factory)
 		{}
 
@@ -60,13 +68,13 @@ namespace cpu_backend
 	* 2D
 	*/
 	template<class InnerTyp>
-	class Scaler<InnerTyp, 2> : public core::IScaler<InnerTyp, 2>
+	class ArrayScaler<InnerTyp, 2> : public core::IScaler<core::IArray<InnerTyp, 2>>
 	{
 		using PtrArray = std::shared_ptr<core::IArray<InnerTyp, 2>>;
 		using PtrArrayFactroy = std::shared_ptr<core::IArrayFactory<InnerTyp, 2>>;
 
 	public:
-		Scaler(PtrArrayFactroy factory)
+		ArrayScaler(PtrArrayFactroy factory)
 			: _factroy(factory)
 		{}
 
@@ -111,13 +119,13 @@ namespace cpu_backend
 	* 3D
 	*/
 	template<class InnerTyp>
-	class Scaler<InnerTyp, 3> : public core::IScaler<InnerTyp, 3>
+	class ArrayScaler<InnerTyp, 3> : public core::IScaler<core::IArray<InnerTyp, 3>>
 	{
 		using PtrArray = std::shared_ptr<core::IArray<InnerTyp, 3>>;
 		using PtrArrayFactroy = std::shared_ptr<core::IArrayFactory<InnerTyp, 3>>;
 
 	public:
-		Scaler(PtrArrayFactroy factory)
+		ArrayScaler(PtrArrayFactroy factory)
 			: _factroy(factory)
 		{}
 

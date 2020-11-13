@@ -173,9 +173,17 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="GrayPenaltyCrossProblemScaler.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="image\inner\ArrayHelper.h" />
     <ClInclude Include="image\inner\BicubicInterpolate.h" />
     <ClInclude Include="flow\inner\BilateralMedian.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="image\inner\BicubicScale.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -192,11 +200,10 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="image\inner\DownScaleGaussianGrayScale.h">
+    <ClInclude Include="image\inner\GaussianScale.h">
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="image\inner\filters\Gaussian1DFilter.h" />
     <ClInclude Include="image\inner\IteratorHelper.h" />
     <ClInclude Include="flow\inner\LogOcclusion.h">
       <SubType>

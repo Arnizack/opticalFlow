@@ -1,10 +1,11 @@
 #pragma once
 #include "../IScaler.h"
+#include "../IArray.h"
 
 namespace core
 {
 
-	class IGrayscaleScaler : public IScaler<float, 2>
+	class IGrayscaleScaler : public IScaler<IArray<float, 2>>
 	{};
 	
 }

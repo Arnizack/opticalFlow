@@ -108,10 +108,13 @@
     <ClInclude Include="image\inner\ConvertToGrayscale.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="image\inner\filters\Gaussian1DFilter.h">
+    <ClInclude Include="image\inner\BicubicScale.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="image\inner\DownScaleGaussianGrayScale.h">
+    <ClInclude Include="image\inner\GaussianScale.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GrayPenaltyCrossProblemScaler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
