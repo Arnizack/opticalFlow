@@ -1,16 +1,25 @@
 #include <boost/program_options.hpp>
 
+#include"ComputeOpticalFlow.h"
+
 #include <iostream>
 #include <string>
 #include <vector>
+
+int set_mandatory_variables()
+{
+	std::cout << "See --help for must set variables\n";
+	return 2;
+}
 
 int main(int argc, char* argv[])
 {
 	namespace bpo = boost::program_options;
 
-	std::string input_file_1;
-	std::string input_file_2;
-	std::string output_path;
+	std::string first_img_path = "E:\\dev\\opticalFlow\\V2\\opticalFlow\\resources\\eval-twoframes\\Dimetrodon\\frame10.png"; /*"H:\\dev\\opticalFlow\\Prototyp\\Version 2\\opticalFlow\\resources\\eval-twoframes\\Dimetrodon\\frame10.png";*/
+	std::string second_img_path = "E:\\dev\\opticalFlow\\V2\\opticalFlow\\resources\\eval-twoframes\\Dimetrodon\\frame11.png"; /*"H:\\dev\\opticalFlow\\Prototyp\\Version 2\\opticalFlow\\resources\\eval-twoframes\\Dimetrodon\\frame11.png";*/
+	std::string flow_output_path = "computed_flow.flo";
+	std::string flow_img_path = "computed_img.png";
 
 	//Setting up all posible Arguments
 	bpo::options_description generic("Generic options");
@@ -19,9 +28,10 @@ int main(int argc, char* argv[])
 
 	bpo::options_description mandatory("Mandatory");
 	mandatory.add_options()
-		("input-file1,1", bpo::value< std::string>(&input_file_1), "first input file")
-		("input-file2,2", bpo::value< std::string>(&input_file_2), "second input file")
-		("output-path,O", bpo::value< std::string>(&output_path), "Output path");
+		("input-img1,1", bpo::value< std::string>(&first_img_path), "path to first input image")
+		("input-img2,2", bpo::value< std::string>(&second_img_path), "path to second input image")
+		("flow-img,F", bpo::value< std::string>(&flow_img_path), "path to flow image")
+		("output-path,O", bpo::value< std::string>(&flow_output_path), "Output path");
 
 	bpo::options_description cmdline("All Options");
 	cmdline.add(generic).add(mandatory);
@@ -38,38 +48,45 @@ int main(int argc, char* argv[])
 		return 1;
 	}
 
-	if (!vm.count("input-file1"))
+	if (!vm.count("input-img1"))
 	{
-		std::cout << "See --help for must set variables\n";
-		return 2;
+		/*return*/ set_mandatory_variables();
 	}
 
-	if (!vm.count("input-file2"))
+	if (!vm.count("input-img2"))
 	{
-		std::cout << "See --help for must set variables\n";
-		return 2;
+		/*return*/ set_mandatory_variables();
+	}
+
+	if (!vm.count("flow-img"))
+	{
+		/*return*/ set_mandatory_variables();
 	}
 
 	if (!vm.count("output-path"))
 	{
-		std::cout << "See --help for must set variables\n";
-		return 2;
+		/*return*/ set_mandatory_variables();
 	}
 
 	//Test output
-	std::cout << "Include File 1 is: " << input_file_1 << '\n';
-	std::cout << "Include File 2 is: " << input_file_2 << '\n';
-	std::cout << "Output Path is: " << output_path << '\n';
+	std::cout << "Input image 1 is: " << first_img_path << '\n';
+	std::cout << "Input image 2 is: " << second_img_path << '\n';
+	std::cout << "Output Path is: " << flow_output_path << '\n';
+	std::cout << "Flow image is: " << flow_img_path << '\n';
 
-	return 0;
-#include"ComputeOpticalFlow.h"
-
-int main()
-{
-	std::string first_img_path = "H:\\dev\\opticalFlow\\Prototyp\\Version 2\\opticalFlow\\resources\\eval-twoframes\\Dimetrodon\\frame10.png";
-	std::string second_img_path = "H:\\dev\\opticalFlow\\Prototyp\\Version 2\\opticalFlow\\resources\\eval-twoframes\\Dimetrodon\\frame11.png";
-	std::string flow_output_path = "computed_flow.flo";
-	std::string flow_img_path = "computed_img.png";
 
 	console_ui::ComputeOpticalFlow(first_img_path, second_img_path, flow_output_path, flow_img_path);
+
+	return 0;
 }
+
+
+//int main()
+//{
+//	std::string first_img_path = "H:\\dev\\opticalFlow\\Prototyp\\Version 2\\opticalFlow\\resources\\eval-twoframes\\Dimetrodon\\frame10.png";
+//	std::string second_img_path = "H:\\dev\\opticalFlow\\Prototyp\\Version 2\\opticalFlow\\resources\\eval-twoframes\\Dimetrodon\\frame11.png";
+//	std::string flow_output_path = "computed_flow.flo";
+//	std::string flow_img_path = "computed_img.png";
+//
+//	console_ui::ComputeOpticalFlow(first_img_path, second_img_path, flow_output_path, flow_img_path);
+//}
