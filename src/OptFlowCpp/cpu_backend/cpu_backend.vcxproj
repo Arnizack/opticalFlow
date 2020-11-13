@@ -192,6 +192,11 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="image\inner\DownScaleGaussianGrayScale.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="image\inner\filters\Gaussian1DFilter.h" />
     <ClInclude Include="image\inner\IteratorHelper.h" />
     <ClInclude Include="flow\inner\LogOcclusion.h">
       <SubType>

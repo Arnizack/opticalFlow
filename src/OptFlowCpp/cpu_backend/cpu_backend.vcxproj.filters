@@ -108,6 +108,12 @@
     <ClInclude Include="image\inner\ConvertToGrayscale.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="image\inner\filters\Gaussian1DFilter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="image\inner\DownScaleGaussianGrayScale.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
