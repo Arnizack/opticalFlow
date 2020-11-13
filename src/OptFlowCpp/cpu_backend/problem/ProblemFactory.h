@@ -15,9 +15,12 @@ namespace cpu_backend
 		}
 
 		virtual std::shared_ptr<core::IGrayCrossFilterProblem> CreateGrayCrossFilterProblem(std::shared_ptr<core::IArray<float, 3>> first_image, std::shared_ptr<core::IArray<float, 3>> seconde_image) override;
-	
+		
+		
 	private:
 		std::shared_ptr<ArrayFactory<float, 2>> _grayscale_factory;
 
+
+		
 	};
 }

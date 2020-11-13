@@ -10,7 +10,8 @@
 #include"cpu_backend/penalty/CharbonnierPenalty.h"
 #include"cpu_backend/sb_linearsystem/SunBakerLSUpdater.h"
 #include"cpu_backend/ArrayScaler.h"
-
+#include"cpu_backend/flow/FlowFieldScaler.h"
+#include"cpu_backend/problem/GrayPenaltyCrossProblemScaler.h"
 #include"RegisterCPULinalg.h"
 
 namespace console_ui
@@ -47,9 +48,16 @@ namespace console_ui
         builder.registerType<cpu_backend::ArrayScaler<double, 3>>()
             .as<core::IScaler<core::IArray<double, 3>>>()
             .singleInstance();
-       ////Pyramid Builder
-       //builder.registerType<cpu_backend::PyramidBuilder<std::shared_ptr<core::IGrayPenaltyCrossProblem>>>()
-       //    .as< core::IPyramidBuilder< std::shared_ptr<core::IGrayPenaltyCrossProblem>>>();
+
+        //FlowField Scaler
+        builder.registerType<cpu_backend::FlowFieldScaler>()
+            .as< core::IScaler<core::IArray<double, 3>>>()
+            .singleInstance();
+
+        //GrayPenaltyCrossProblem Scaler
+        builder.registerType<cpu_backend::GrayPenaltyCrossProblemScaler>()
+            .as<core::IScaler<core::IGrayPenaltyCrossProblem>>()
+            .singleInstance();
 
         //Problem Factory
         builder.registerType<cpu_backend::ProblemFactory>()

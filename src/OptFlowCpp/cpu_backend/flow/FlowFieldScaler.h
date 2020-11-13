@@ -8,7 +8,7 @@
 
 namespace cpu_backend
 {
-	class FlowFieldScaler : core::IScaler<core::IArray<double,3>>
+	class FlowFieldScaler : public core::IScaler<core::IArray<double,3>>
 	{
 	public:
 		FlowFieldScaler(std::shared_ptr<core::IArrayFactory<double, 3>> array_factory)

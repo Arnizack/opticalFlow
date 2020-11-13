@@ -65,12 +65,12 @@ namespace console_ui
 
         auto pyramids_resolutions = std::make_shared< optflow_solvers::PyramidsResolutions>();
         pyramids_resolutions->Resolutions = std::vector<optflow_solvers::PyramidResolutions>(2);
-        pyramids_resolutions->Resolutions[0].MinResolutionX = 32;
-        pyramids_resolutions->Resolutions[0].MinResolutionY= 32;
+        pyramids_resolutions->Resolutions[0].MinResolutionX = 16;
+        pyramids_resolutions->Resolutions[0].MinResolutionY= 16;
         pyramids_resolutions->Resolutions[0].ScaleFactor = 0.5;
 
-        pyramids_resolutions->Resolutions[1].MinResolutionX = 200;
-        pyramids_resolutions->Resolutions[1].MinResolutionY = 200;
+        pyramids_resolutions->Resolutions[1].MinResolutionX = 16;
+        pyramids_resolutions->Resolutions[1].MinResolutionY = 16;
         pyramids_resolutions->Resolutions[1].ScaleFactor = 0.5;
 
         builder.registerInstance<optflow_solvers::PyramidsResolutions>(pyramids_resolutions);

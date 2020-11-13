@@ -6,7 +6,7 @@ namespace optflow_solvers
 	class GrayPenaltyCrossPyramidBuilder : public PyramidBuilder<core::IGrayPenaltyCrossProblem>
 	{
 	public:
-
+		GrayPenaltyCrossPyramidBuilder(std::shared_ptr<core::IScaler<core::IGrayPenaltyCrossProblem>> scaler);
 
 		// Inherited via PyramidBuilder
 		virtual std::shared_ptr<core::IPyramid<core::IGrayPenaltyCrossProblem>> 

@@ -54,12 +54,12 @@ namespace cpu_backend
 		}
 
 		template<class T>
-		void DownScaleGaussianColorScale(T* image, int width, int height, int dest_width, int dest_height, T* destination)
+		void DownScaleGaussianColorScale(T* image, int width, int height, int dest_width, int dest_height, int color_channel, T* destination)
 		{
 			const size_t in_wh = width * height;
 			const size_t dest_wh = dest_width * dest_height;
 
-			for (size_t z = 0; z < 3; z++)
+			for (size_t z = 0; z < color_channel; z++)
 			{
 				DownScaleGaussianGrayScale<T>(image + (z * in_wh), width, height, dest_width, dest_height, destination + (z * dest_wh));
 			}

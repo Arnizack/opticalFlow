@@ -17,6 +17,7 @@ namespace optflow_solvers
 	class PyramidBuilder : public core::IPyramidBuilder<InnerTyp>
 	{
 	public:
+		PyramidBuilder(std::shared_ptr<core::IScaler<InnerTyp>> scaler);
 		virtual void SetScaleFactors(std::vector<double> factors) override;
 		virtual void SetScaleFactor(double factor, std::array<size_t, 2> min_resolution) override;
 		//The original resolution should not be in resolutions
@@ -44,6 +45,12 @@ namespace optflow_solvers
 
 	};
 
+
+	template<class InnerTyp>
+	inline PyramidBuilder<InnerTyp>::PyramidBuilder(std::shared_ptr<core::IScaler<InnerTyp>> scaler)
+		: _scaler(scaler)
+	{
+	}
 
 	template<class InnerTyp>
 	inline void PyramidBuilder<InnerTyp>::SetScaleFactors(std::vector<double> factors)
@@ -109,7 +116,7 @@ namespace optflow_solvers
 		layers.push_back(last_layer);
 		for (auto resolution : _resolutions)
 		{
-			_scaler->Scale(last_layer, resolution[0], resolution[1]);
+			layers.push_back(_scaler->Scale(last_layer, resolution[0], resolution[1]));
 		}
 		return layers;
 	}

@@ -13,7 +13,7 @@ namespace optflow_solvers
 	{
 	public:
 		Pyramid(std::vector<std::shared_ptr<T>> levels)
-			: _levels(levels), iter(levels.size() - 1)
+			: _levels(levels), iter(levels.size())
 		{}
 
 		virtual std::shared_ptr<T> NextLevel() override
