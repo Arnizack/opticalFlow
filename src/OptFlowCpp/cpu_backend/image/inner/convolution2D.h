@@ -38,7 +38,7 @@ namespace cpu_backend
 
 	template<class T, size_t kernel_width,
 		size_t kernel_height>
-		inline void Convolute2D(T* image, T* destination, size_t width, size_t height, 
+		inline void Convolute2D(const T* image, T* destination, size_t width, size_t height, 
 			T* kernel)
 	{
 
@@ -48,8 +48,7 @@ namespace cpu_backend
 			{
 				double sum = Convolute2DAt<T, kernel_width, kernel_height, kernel>
 					(x, y, image, width, height);
-				T& result_val = _inner::GetValueAt(x, y, width, height, image);
-				result_val = sum;
+				destination[width * y + x] = sum;
 			}
 		}
 	}
