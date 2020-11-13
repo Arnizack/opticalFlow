@@ -1,12 +1,12 @@
 #pragma once
-#include"core/flow/IFlowScaler.h"
+#include"core/IScaler.h"
 #include"gmock/gmock.h"
 
 namespace core
 {
 	namespace testing
 	{
-		class MockIFlowScaler : public IFlowScaler
+		class MockIFlowScaler : public IScaler<double,3>
 		{
 		public:
 

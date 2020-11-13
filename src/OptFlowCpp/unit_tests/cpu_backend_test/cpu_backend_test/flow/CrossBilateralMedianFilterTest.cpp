@@ -72,10 +72,16 @@ namespace cpu_backend
 		auto ptr_log_occlusion = std::make_shared<Array<double, 2>>(occ_shape, log_occlusion);
 
 		
-		
-		CrossBilateralMedianFilter filter(flow_deriv_calc, sigma_div, sigma_error, filter_influence,
-			sigma_distance, sigma_color, filter_length);
-		filter.SetFilterInfluence(auxilary_influence);
+		auto settings = std::make_shared<CrossMedianFilterSettings>();
+		settings->SigmaDiv = sigma_div;
+		settings->SigmaError = sigma_error;
+		settings->FilterInfluence = filter_influence;
+		settings->SigmaDistance = sigma_distance;
+		settings->SigmaColor = sigma_color;
+		settings->FilterLength = filter_length;
+
+		CrossBilateralMedianFilter filter(flow_deriv_calc, settings);
+		filter.SetAuxiliaryInfluence(auxilary_influence);
 		filter.SetCrossFilterImage(ptr_image);
 		filter.ApplyTo(ptr_flow_result, ptr_flow);
 		

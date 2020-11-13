@@ -14,14 +14,19 @@ namespace optflow_solvers
 {
 	using PtrProblemTyp = std::shared_ptr<core::IGrayPenaltyCrossProblem>;
 
+	struct LinearizationSolverSettings
+	{
+		double StartRelaxation = 1e-04 / 255.0;
+		double EndRelaxation = 1e-01 / 255.0;
+		double RelaxationSteps = 3;
+	};
+
 	class LinearizationSolver : public core::IFlowFieldSolver<PtrProblemTyp>
 	{
 		using PtrLinearSolver = std::shared_ptr<core::ILinearSolver<double>>;
 	public:
 		LinearizationSolver(
-			double start_relaxation,
-			double end_relaxation,
-			double relaxation_steps,
+			std::shared_ptr<LinearizationSolverSettings> settings,
 			std::shared_ptr<core::ICrossFlowFilter> cross_filter,
 			std::shared_ptr<ISunBakerLSUpdater> linear_system_builder,
 			PtrLinearSolver linear_solver,

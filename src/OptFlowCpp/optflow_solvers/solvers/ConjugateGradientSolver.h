@@ -8,6 +8,11 @@
 
 namespace optflow_solvers
 {
+	struct CGSolverSettings
+	{
+		double Tolerance = 1e-3;
+		size_t Iterations = 100;
+	};
 	template<class InnerTyp>
 	class ConjugateGradientSolver : public core::ILinearSolver<InnerTyp>
 	{
@@ -19,9 +24,10 @@ namespace optflow_solvers
 		std::shared_ptr< core::IArrayFactory<InnerTyp, 1>> arr_factory,
 		std::shared_ptr< core::IArithmeticVector<InnerTyp, 1>> arith_vector,
 		std::shared_ptr< core::IArithmeticChained<InnerTyp, 1>> arith_chained,
-		const double tol,
-		const size_t iter) 
-			: _arr_factory(arr_factory), _arith_vector(arith_vector), _arith_chained(arith_chained), _tol(tol), _iter(iter)
+		std::shared_ptr < CGSolverSettings> settings
+		) 
+			: _arr_factory(arr_factory), _arith_vector(arith_vector), _arith_chained(arith_chained), 
+			_tol(settings->Tolerance), _iter(settings->Iterations)
 		{}
 
 		virtual PtrVector Solve(std::shared_ptr < core::ILinearProblem<InnerTyp>> problem) override

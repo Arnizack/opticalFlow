@@ -15,7 +15,7 @@ namespace cpu_backend
 			core::IArray<InnerTyp, DimCount>(shape), _data(std::vector<InnerTyp>())
 		{
 			size_t size = 1;
-
+			
 			for (const size_t& dim : shape)
 			{
 				size *= dim;

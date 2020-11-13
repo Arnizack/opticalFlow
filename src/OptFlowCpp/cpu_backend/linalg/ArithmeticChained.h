@@ -6,7 +6,10 @@
 namespace cpu_backend
 {
 	template<class InnerTyp, size_t DimCount>
-	class ArithmeticChained : public core::IArithmeticChained<InnerTyp, DimCount>, public ArithmeticBasic<InnerTyp, DimCount>
+	class ArithmeticChained 
+		: public core::IArithmeticChained<InnerTyp, DimCount>, 
+		public ArithmeticBasic<InnerTyp, DimCount>,
+		public core::IArithmeticBasic<InnerTyp, DimCount>
 	{
 		using PtrVector = std::shared_ptr<core::IArray<InnerTyp, DimCount>>;
 		using PtrArrayFactory = std::shared_ptr<core::IArrayFactory<InnerTyp, DimCount>>;

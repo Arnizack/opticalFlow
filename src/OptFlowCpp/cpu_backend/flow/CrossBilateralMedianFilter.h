@@ -5,6 +5,15 @@
 #include"../Array.h"
 namespace cpu_backend
 {
+	struct CrossMedianFilterSettings
+	{
+		double SigmaDiv = 0.3;
+		double SigmaError = 20;
+		double FilterInfluence = 5;
+		double SigmaDistance = 7;
+		double SigmaColor = 7.0 /255;
+		int FilterLength = 15;
+	};
 	//ToDo
 	class CrossBilateralMedianFilter : public core::ICrossFlowFilter
 	{
@@ -12,16 +21,12 @@ namespace cpu_backend
 		using PtrColorImage = std::shared_ptr<core::IArray<float, 3>>;
 	public:
 		CrossBilateralMedianFilter(std::shared_ptr<DerivativeCalculator<double>> flow_deriv_calc,
-			double sigma_div,
-			double sigma_error,
-			double filter_influence ,
-			double sigma_distance,
-			double sigma_color,
-			int filter_length);
+			std::shared_ptr<CrossMedianFilterSettings> settings
+			);
 
 		virtual PtrFlowField Apply(const PtrFlowField vec) override;
 		virtual void ApplyTo(PtrFlowField dst, const PtrFlowField vec) override;
-		virtual void SetFilterInfluence(double influence) override;
+		virtual void SetAuxiliaryInfluence(double influence) override;
 		virtual void SetCrossFilterImage(PtrColorImage image) override;
 		
 

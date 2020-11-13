@@ -38,8 +38,8 @@ namespace optflow_solvers
 			FakeIPyramidBuilder >(mock_pyramid_builder);
 
 		auto mock_flow_scaler = std::make_shared<MockIFlowScaler>();
-		std::shared_ptr<core::IFlowScaler> flow_scaler
-			= std::static_pointer_cast<core::IFlowScaler,MockIFlowScaler>(mock_flow_scaler);
+		std::shared_ptr<core::IScaler<double,3>> flow_scaler
+			= std::static_pointer_cast<core::IScaler<double, 3>,MockIFlowScaler>(mock_flow_scaler);
 
 		auto mock_inner_solver = std::make_shared<MockIFlowFieldSolver>();
 		std::shared_ptr<core::IFlowFieldSolver<PtrProblemTyp>> inner_solver

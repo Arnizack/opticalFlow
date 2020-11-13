@@ -7,6 +7,7 @@
 #include"unit_tests/core_mock_adaptor/MockIArray.h"
 #include"unit_tests/core_mock_adaptor/solver/problem/FakeGrayCrossProblem.h"
 #include"unit_tests/core_mock_adaptor/solver/problem/FakeGrayCrossPenaltyProblem.h"
+#include"unit_tests/core_mock_adaptor/solver/MockIFlowSolverIterator.h"
 
 namespace optflow_solvers
 {
@@ -20,10 +21,9 @@ namespace optflow_solvers
 
 		core::testing::MockIFlowFieldSolver* first_solver =
 			new core::testing::MockIFlowFieldSolver;
-		core::testing::MockIFlowFieldSolver* second_solver =
-			new core::testing::MockIFlowFieldSolver;
-		core::testing::MockIFlowFieldSolver* third_solver =
-			new core::testing::MockIFlowFieldSolver;
+		
+
+		std::shared_ptr< core::testing::MockIFlowFieldSolver>ptr_first_solver (first_solver);
 
 		using IStandardSolver = core::IFlowFieldSolver<
 			std::shared_ptr<core::IGrayPenaltyCrossProblem>>;
@@ -31,9 +31,8 @@ namespace optflow_solvers
 		using PtrStandardFlowSolver = std::shared_ptr<IStandardSolver>;
 
 
-		std::vector< PtrStandardFlowSolver> solvers;
-		solvers.push_back(std::shared_ptr<IStandardSolver>(first_solver));
-		solvers.push_back(std::shared_ptr<IStandardSolver>(second_solver));
+		std::shared_ptr<core::IFlowSolverIterator<core::IGrayPenaltyCrossProblem>> solver_iterator =
+		std::make_shared<core::testing::MockIFlowSolverIterator>(2, ptr_first_solver);
 		//solvers.push_back(std::shared_ptr<IStandardSolver>(&third_solver));
 
 		using PtrGrayScale = std::shared_ptr <core::IArray<float, 2>>;
@@ -69,8 +68,9 @@ namespace optflow_solvers
 
 		std::shared_ptr<core::IProblemFactory> ptr_problem_factory(problem_factory);
 
-
-		GNCPenaltySolver gnc_solver(gnc_steps, solvers, ptr_penalty, 
+		auto settings = std::make_shared<GNCPenaltySolverSettings>();
+		settings->GNCSteps = gnc_steps;
+		GNCPenaltySolver gnc_solver(settings, solver_iterator, ptr_penalty,
 			ptr_flow_factory, ptr_problem_factory);
 
 		using ::testing::_;
@@ -83,8 +83,7 @@ namespace optflow_solvers
 		EXPECT_CALL(*penalty_mock, SetBlendFactor((double)1)).Times(1);
 
 
-		EXPECT_CALL(*first_solver, Solve(_, _)).Times(1);
-		EXPECT_CALL(*second_solver, Solve(_, _)).Times(2);
+		EXPECT_CALL(*first_solver, Solve(_, _)).Times(3);
 
 		EXPECT_CALL(*flow_factory, Zeros(std::array<const size_t, 3>({ 2,0,0 }))).Times(1);
 

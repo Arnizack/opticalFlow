@@ -19,11 +19,12 @@ namespace optflow_solvers
 
     using PtrPenaltyProblem = std::shared_ptr<core::IGrayPenaltyCrossProblem>;
 
-    GNCPenaltySolver::GNCPenaltySolver(int gnc_steps, 
-        std::vector<PtrStandardFlowSolver> inner_solvers, 
+    GNCPenaltySolver::GNCPenaltySolver(
+        std::shared_ptr<GNCPenaltySolverSettings> settings,
+        std::shared_ptr<core::IFlowSolverIterator<core::IGrayPenaltyCrossProblem>> solver_iterator,
         PtrBlendPenalty penalty_func, PtrFlowFactory flow_factory, 
         PtrProblemFactory problem_factory)
-        : _gnc_steps(gnc_steps), _inner_solvers(inner_solvers), 
+        : _gnc_steps(settings->GNCSteps), _solver_iterator(solver_iterator),
         _flow_factory(flow_factory), _penalty_func(penalty_func),
         _problem_factory(problem_factory)
     {
@@ -52,9 +53,14 @@ namespace optflow_solvers
             double blend_factor = ComputeBlendFactor(gnc_iter,_gnc_steps);
             _penalty_func->SetBlendFactor(blend_factor);
             penalty_problem->PenaltyFunc = _penalty_func;
-            PtrStandardFlowSolver current_solver = GetFlowSolverAt(gnc_iter);
+            
+            
+            PtrStandardFlowSolver current_solver = _solver_iterator->Current();
             
             initial_guess = current_solver->Solve(penalty_problem, initial_guess);
+
+            if (!_solver_iterator->IsEnd())
+                _solver_iterator->Increament();
         }
         return initial_guess;
         

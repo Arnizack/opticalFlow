@@ -21,6 +21,8 @@ namespace core
 				std::shared_ptr < IArray<double, 3>>(const double& fill_value, std::array<const size_t, 3> shape)
 			);
 
+			MOCK_METHOD2(CreateFromSource, std::shared_ptr < IArray<double, 3>>(const double* source, std::array<const size_t, 3> shape));
+
 
 			
 

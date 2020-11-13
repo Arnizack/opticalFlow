@@ -7,10 +7,10 @@ namespace optflow_solvers
     using PtrFlowField = std::shared_ptr<core::IArray<double, 3> >;
     using PtrProblemTyp = std::shared_ptr<core::IGrayPenaltyCrossProblem>;
 
-    IncrementalSolver::IncrementalSolver(int steps, 
+    IncrementalSolver::IncrementalSolver(std::shared_ptr<IncrementalSolverSettings> settings,
         std::shared_ptr<core::IFlowFieldSolver<PtrProblemTyp>> inner_solver, 
         std::shared_ptr<core::IArrayFactory<double, 3>> flow_factory)
-        :_inner_solver(inner_solver),_flow_factory(flow_factory),_steps(steps)
+        :_inner_solver(inner_solver),_flow_factory(flow_factory),_steps(settings->Steps)
     {
     }
 

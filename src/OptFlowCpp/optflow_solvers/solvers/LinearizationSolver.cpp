@@ -9,7 +9,7 @@ namespace optflow_solvers
     using PtrProblemTyp = std::shared_ptr<core::IGrayPenaltyCrossProblem>;
 
     LinearizationSolver::LinearizationSolver(
-        double start_relaxation, double end_relaxation, double relaxation_steps, 
+        std::shared_ptr<LinearizationSolverSettings> settings,
         std::shared_ptr<core::ICrossFlowFilter> cross_filter, 
         std::shared_ptr<ISunBakerLSUpdater> linear_system_updater, 
         PtrLinearSolver linear_solver, 
@@ -19,9 +19,9 @@ namespace optflow_solvers
         std::shared_ptr<core::IArithmeticBasic<double, 3>> flow_arithmetic)
 
         :
-        _start_relaxation(start_relaxation),
-        _end_relaxation(end_relaxation),
-        _relaxation_steps(relaxation_steps),
+        _start_relaxation(settings->StartRelaxation),
+        _end_relaxation(settings->EndRelaxation),
+        _relaxation_steps(settings->RelaxationSteps),
         _cross_filter(cross_filter),
         _linear_system_updater(linear_system_updater),
         _linear_solver(linear_solver),
@@ -72,7 +72,7 @@ namespace optflow_solvers
             delta_initial_flow = _flow_reshaper->Reshape3D(result_vector, {2,height,width});
 
              _flow_arithmetic->AddTo(flow_before_filter, initial_guess, delta_initial_flow);
-             _cross_filter->SetFilterInfluence(relaxation);
+             _cross_filter->SetAuxiliaryInfluence(relaxation);
              _cross_filter->ApplyTo(flow_after_filter, flow_before_filter);
 
              _flow_arithmetic->SubTo(delta_initial_flow, flow_after_filter, initial_guess);

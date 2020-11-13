@@ -13,7 +13,7 @@ namespace cpu_backend
 		{
 			using PtrIGrayPenaltyCrossProblem = std::shared_ptr<core::IGrayPenaltyCrossProblem>;
 
-			std::shared_ptr<ProblemFactory> ptr_problem_factory = std::make_shared<ProblemFactory>(ProblemFactory());
+			std::shared_ptr<ProblemFactory> ptr_problem_factory = std::make_shared<ProblemFactory>(ProblemFactory(nullptr));
 
 			std::shared_ptr<ArrayFactory<float, 2>> ptr_arr_factory_2D = std::make_shared<ArrayFactory<float, 2>>(ArrayFactory<float, 2>());
 			std::shared_ptr<ArrayFactory<float, 3>> ptr_arr_factory_3D = std::make_shared<ArrayFactory<float, 3>>(ArrayFactory<float, 3>());

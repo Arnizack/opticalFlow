@@ -6,7 +6,11 @@
 #include"core/penalty/IPenalty.h"
 namespace cpu_backend
 {
-	class SunBakerLSUpdater : optflow_solvers::ISunBakerLSUpdater
+	struct LinearSystemSettings
+	{
+		double LambdaKernel = 10.0 / 255.0;
+	};
+	class SunBakerLSUpdater : public optflow_solvers::ISunBakerLSUpdater
 	{
 	public:
 		using PtrGrayImg = std::shared_ptr<core::IArray<float, 2>>;
@@ -19,7 +23,7 @@ namespace cpu_backend
 
 		SunBakerLSUpdater(std::shared_ptr<DerivativeCalculator<float>> deriv_calculator,
 
-			double lambda_kernel);
+			std::shared_ptr< LinearSystemSettings> settings);
 
 		//D_y
 		std::shared_ptr<Array<double, 1>> _data_y;

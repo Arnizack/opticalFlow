@@ -170,7 +170,6 @@
     </ClInclude>
     <ClInclude Include="solvers\ConjugateGradientSolver.h" />
     <ClInclude Include="solvers\GNCPenaltySolver.h" />
-    <ClInclude Include="solvers\IFlowSolverFactory.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="solvers\IncrementalSolver.h">
       <SubType>
@@ -181,6 +180,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="solvers\PyramidSolver.h" />
+    <ClInclude Include="solvers\PyramidSolverIterator.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="solvers\GNCPenaltySolver.cpp" />
@@ -199,6 +202,7 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="solvers\PyramidSolver.cpp" />
+    <ClCompile Include="solvers\PyramidSolverIterator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\core\core.vcxproj">

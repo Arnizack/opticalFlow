@@ -17,6 +17,7 @@ namespace core
 
 
 			MOCK_METHOD2(Full, PtrArray(const double& fill_value, std::array<const size_t, 1> shape));
+			MOCK_METHOD2(CreateFromSource, PtrArray(const double* source, std::array<const size_t, 1> shape));
 		};
 	}
 }
