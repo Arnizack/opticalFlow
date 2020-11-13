@@ -22,6 +22,7 @@
     <ClCompile Include="Pyramid\Pyramid_Test.cpp" />
     <ClCompile Include="Pyramid\PyramidBuilder_Test.cpp" />
     <ClCompile Include="penalty\CharbonnierPenaltyTest.cpp" />
+    <ClCompile Include="image\inner\BicubicUpscale_Test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

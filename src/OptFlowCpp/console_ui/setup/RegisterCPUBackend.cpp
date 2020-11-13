@@ -37,17 +37,17 @@ namespace console_ui
         
 
         //Scaler core::IScaler<float, 2>
-        builder.registerType<cpu_backend::Scaler<float, 2>>()
-            .as<core::IScaler<float, 2>>()
+        builder.registerType<cpu_backend::ArrayScaler<float, 2>>()
+            .as<core::IScaler<core::IArray<float, 2>>>()
             .singleInstance();
 
         //Scaler core::IScaler<float, 3>
-        builder.registerType<cpu_backend::Scaler<float, 3>>()
-            .as<core::IScaler<float, 3>>()
+        builder.registerType<cpu_backend::ArrayScaler<float, 3>>()
+            .as<core::IScaler<core::IArray<float, 3>>>()
             .singleInstance();
         //Scaler core::IScaler<double,3>
-        builder.registerType<cpu_backend::Scaler<double, 3>>()
-            .as<core::IScaler<double, 3>>()
+        builder.registerType<cpu_backend::ArrayScaler<double, 3>>()
+            .as<core::IScaler<core::IArray<double, 3>>>()
             .singleInstance();
         //Pyramid Builder
         builder.registerType<cpu_backend::PyramidBuilder<std::shared_ptr<core::IGrayPenaltyCrossProblem>>>()

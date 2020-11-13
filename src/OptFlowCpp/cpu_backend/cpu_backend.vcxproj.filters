@@ -108,6 +108,15 @@
     <ClInclude Include="image\inner\ConvertToGrayscale.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="image\inner\BicubicScale.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="image\inner\GaussianScale.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GrayPenaltyCrossProblemScaler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">

@@ -6,7 +6,7 @@ namespace core
 {
 	namespace testing
 	{
-		class MockIFlowScaler : public IScaler<double,3>
+		class MockIFlowScaler : public IScaler<IArray<double,3>>
 		{
 		public:
 

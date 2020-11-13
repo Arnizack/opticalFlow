@@ -10,7 +10,7 @@ namespace optflow_solvers
 	PyramidSolver::PyramidSolver(
 		std::shared_ptr<core::IArrayFactory<double, 3>> flow_factory, 
 		std::shared_ptr<core::IPyramidBuilder<PtrProblemTyp>> pyramid_builder, 
-		std::shared_ptr<core::IScaler<double, 3>> flow_scaler,
+		std::shared_ptr<core::IScaler<core::IArray<double, 3>>> flow_scaler,
 		std::shared_ptr<core::IFlowFieldSolver<PtrProblemTyp>> inner_solver)
 		: _flow_factory(flow_factory), _pyramid_builder(pyramid_builder), 
 		_flow_scaler(flow_scaler), _inner_solver(inner_solver)

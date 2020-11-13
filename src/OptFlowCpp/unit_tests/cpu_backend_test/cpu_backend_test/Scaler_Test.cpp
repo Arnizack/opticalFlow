@@ -12,7 +12,7 @@ namespace cpu_backend
 		{
 			std::shared_ptr<ArrayFactory<T, 2>> arr_factory = std::make_shared<ArrayFactory<T, 2>>(ArrayFactory<T, 2>());
 
-			Scaler<T, 2> scaler(arr_factory);
+			ArrayScaler<T, 2> scaler(arr_factory);
 
 			const size_t width = 2;
 			const size_t height = 2;
@@ -54,7 +54,7 @@ namespace cpu_backend
 		{
 			std::shared_ptr<ArrayFactory<T, 3>> arr_factory = std::make_shared<ArrayFactory<T, 3>>(ArrayFactory<T, 3>());
 
-			Scaler<T, 3> scaler(arr_factory);
+			ArrayScaler<T, 3> scaler(arr_factory);
 
 			const size_t width = 2;
 			const size_t height = 2;
