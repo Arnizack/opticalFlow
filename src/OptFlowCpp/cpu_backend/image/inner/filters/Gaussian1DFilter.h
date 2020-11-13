@@ -36,14 +36,14 @@ namespace cpu_backend
 
 			return kernel;
 		}
-	}
-	template<class T, Direction _Direction, Padding _Padding>
-	void Gaussian1DFilter(T* image, int width, int height, double standard_deviation, T* destination)
-	{
-		std::vector<T> kernel = _inner::CreateKernel<T>(standard_deviation);
-		Convolute1D<T, _Padding, _Direction>(image, width, height, kernel.data(), kernel.size(), destination);
+	
+		template<class T, Direction _Direction, Padding _Padding>
+		void Gaussian1DFilter(T* image, int width, int height, double standard_deviation, T* destination)
+		{
+			std::vector<T> kernel = _inner::CreateKernel<T>(standard_deviation);
+			Convolute1D<T, _Padding, _Direction>(image, width, height, kernel.data(), kernel.size(), destination);
 
+		}
 	}
-
 
 }

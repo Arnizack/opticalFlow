@@ -54,8 +54,8 @@ namespace cpu_backend
 			std::vector<double> temp(width * height);
 
 
-			Gaussian1DFilter<double, Direction::X, Padding::SYMMETRIC>(input_image.data(), width, height, std_deriv, temp.data());
-			Gaussian1DFilter<double, Direction::Y, Padding::SYMMETRIC>(temp.data(), width, height, std_deriv, actual_result.data());
+			_inner::Gaussian1DFilter<double, Direction::X, Padding::SYMMETRIC>(input_image.data(), width, height, std_deriv, temp.data());
+			_inner::Gaussian1DFilter<double, Direction::Y, Padding::SYMMETRIC>(temp.data(), width, height, std_deriv, actual_result.data());
 
 			double near =0.6;
 
@@ -169,8 +169,8 @@ namespace cpu_backend
 			std::vector<double> temp(width * height);
 
 
-			Gaussian1DFilter<double, Direction::X, Padding::SYMMETRIC>(input_image.data(), width, height, std_deriv, temp.data());
-			Gaussian1DFilter<double, Direction::Y, Padding::SYMMETRIC>(temp.data(), width, height, std_deriv, actual_result.data());
+			_inner::Gaussian1DFilter<double, Direction::X, Padding::SYMMETRIC>(input_image.data(), width, height, std_deriv, temp.data());
+			_inner::Gaussian1DFilter<double, Direction::Y, Padding::SYMMETRIC>(temp.data(), width, height, std_deriv, actual_result.data());
 
 			double near = 11; //WTF
 

@@ -28,7 +28,7 @@ namespace cpu_backend
 			const size_t dst_size = dst_width * dst_height;
 
 			T out[dst_size];
-			cpu_backend::_inner::Bicubic2DScale<T>(in, out, width, height, dst_width, dst_height);
+			cpu_backend::_inner::BicubicGrayScale<T>(in, out, width, height, dst_width, dst_height);
 			
 
 			T comp[dst_size] = { 3.53485, 8.44025, 13.2138, 11.1484,
@@ -73,7 +73,7 @@ namespace cpu_backend
 
 			T out[dst_size];
 
-			cpu_backend::_inner::BicubicFlowScale<T>(in, out, width, height, dst_width, dst_height);
+			cpu_backend::_inner::BicubicColorScale<T>(in, out, width, height, dst_width, dst_height);
 
 			T comp[dst_width * dst_height] = { 3.53485, 8.44025, 13.2138, 11.1484,
 												11.6675, 21.9659, 29.0057, 22.8955,

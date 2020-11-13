@@ -79,7 +79,7 @@ namespace cpu_backend
 
             
 
-			DownScaleGaussianGrayScale<float>(input_img.data(),
+			_inner::DownScaleGaussianGrayScale<float>(input_img.data(),
 				width, height, dest_width, dest_heigth, actual_result.data());
 
 			for (int i = 0; i < dest_heigth * dest_width; i++)

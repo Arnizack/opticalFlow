@@ -1,6 +1,5 @@
 #include "cpu_backend/pyramid/PyramidBuilder.h"
 #include "cpu_backend/ArrayFactory.h"
-#include "cpu_backend/Scaler.h"
 #include "cpu_backend/problem/ProblemFactory.h"
 
 #include "gtest/gtest.h"

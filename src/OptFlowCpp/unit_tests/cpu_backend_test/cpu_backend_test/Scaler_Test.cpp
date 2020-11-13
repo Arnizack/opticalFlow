@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-#include "cpu_backend/Scaler.h"
+#include "cpu_backend/ArrayScaler.h"
 #include "cpu_backend/ArrayFactory.h"
 
 namespace cpu_backend

@@ -2,7 +2,7 @@
 #include "core/IScaler.h"
 #include "core/solver/problem/IGrayPenaltyCrossProblem.h"
 #include "core/solver/problem/IProblemFactory.h"
-#include "image/inner/GaussianScale.h"
+#include "image/inner/DownScaleGaussianGrayScale.h"
 #include "image/inner/BicubicScale.h"
 #include "Array.h"
 
@@ -29,15 +29,15 @@ namespace cpu_backend
 			{
 				auto in_img = std::dynamic_pointer_cast<Array<float, 2>>(input->FirstFrame);
 				auto out_img = std::dynamic_pointer_cast<Array<float, 2>>(output->FirstFrame);
-				cpu_backend::_inner::Gaussian2DScale(in_img->Data(), out_img->Data(), in_width, in_height, dst_width, dst_height);
+				cpu_backend::_inner::DownScaleGaussianGrayScale<float>(in_img->Data(), in_width, in_height, dst_width, dst_height, out_img->Data());
 
 				in_img = std::dynamic_pointer_cast<Array<float, 2>>(input->SecondFrame);
 				out_img = std::dynamic_pointer_cast<Array<float, 2>>(output->SecondFrame);
-				cpu_backend::_inner::Gaussian2DScale(in_img->Data(), out_img->Data(), in_width, in_height, dst_width, dst_height);
+				cpu_backend::_inner::DownScaleGaussianGrayScale<float>(in_img->Data(), in_width, in_height, dst_width, dst_height, out_img->Data());
 
 				auto in_flow = std::dynamic_pointer_cast<Array<float, 3>>(input->CrossFilterImage);
 				auto out_flow = std::dynamic_pointer_cast<Array<float, 3>>(output->CrossFilterImage);
-				cpu_backend::_inner::GaussianFlowScale(in_flow->Data(), out_flow->Data(), in_width, in_height, dst_width, dst_height);
+				cpu_backend::_inner::DownScaleGaussianColorScale<float>(in_flow->Data(), in_width, in_height, dst_width, dst_height, out_flow->Data());
 
 				output->PenaltyFunc = input->PenaltyFunc;
 			}
@@ -45,15 +45,15 @@ namespace cpu_backend
 			{
 				auto in_img = std::dynamic_pointer_cast<Array<float, 2>>(input->FirstFrame);
 				auto out_img = std::dynamic_pointer_cast<Array<float, 2>>(output->FirstFrame);
-				cpu_backend::_inner::Bicubic2DScale(in_img->Data(), out_img->Data(), in_width, in_height, dst_width, dst_height);
+				cpu_backend::_inner::BicubicGrayScale<float>(in_img->Data(), out_img->Data(), in_width, in_height, dst_width, dst_height);
 
 				in_img = std::dynamic_pointer_cast<Array<float, 2>>(input->SecondFrame);
 				out_img = std::dynamic_pointer_cast<Array<float, 2>>(output->SecondFrame);
-				cpu_backend::_inner::Bicubic2DScale(in_img->Data(), out_img->Data(), in_width, in_height, dst_width, dst_height);
+				cpu_backend::_inner::BicubicGrayScale<float>(in_img->Data(), out_img->Data(), in_width, in_height, dst_width, dst_height);
 
 				auto in_flow = std::dynamic_pointer_cast<Array<float, 3>>(input->CrossFilterImage);
 				auto out_flow = std::dynamic_pointer_cast<Array<float, 3>>(output->CrossFilterImage);
-				cpu_backend::_inner::BicubicFlowScale(in_flow->Data(), out_flow->Data(), in_width, in_height, dst_width, dst_height);
+				cpu_backend::_inner::BicubicColorScale<float>(in_flow->Data(), out_flow->Data(), in_width, in_height, dst_width, dst_height);
 
 				output->PenaltyFunc = input->PenaltyFunc;
 			}

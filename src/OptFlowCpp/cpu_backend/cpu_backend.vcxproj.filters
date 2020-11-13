@@ -93,9 +93,6 @@
     <ClInclude Include="pyramid\PyramidBuilder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Scaler.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="problem\ProblemFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -121,6 +118,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="image\inner\DownScaleGaussianGrayScale.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ArrayScaler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

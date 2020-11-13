@@ -257,7 +257,7 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="Scaler.h">
+    <ClInclude Include="ArrayScaler.h">
       <SubType>
       </SubType>
     </ClInclude>

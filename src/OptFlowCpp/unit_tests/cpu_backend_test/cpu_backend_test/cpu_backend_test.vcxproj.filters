@@ -25,6 +25,7 @@
     <ClCompile Include="image\inner\DownScaleTest.cpp" />
     <ClCompile Include="image\inner\GaussianFilterTest.cpp" />
     <ClCompile Include="image\inner\BicubicUpscale_Test.cpp" />
+    <ClCompile Include="GrayPenaltyCrossProblemScaler_Test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
