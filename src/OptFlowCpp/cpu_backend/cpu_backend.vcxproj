@@ -177,7 +177,7 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="GrayPenaltyCrossProblemScaler.h">
+    <ClInclude Include="problem\GrayPenaltyCrossProblemScaler.h">
       <SubType>
       </SubType>
     </ClInclude>

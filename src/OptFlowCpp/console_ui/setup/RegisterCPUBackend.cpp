@@ -9,7 +9,7 @@
 #include"cpu_backend/problem/ProblemFactory.h"
 #include"cpu_backend/penalty/CharbonnierPenalty.h"
 #include"cpu_backend/sb_linearsystem/SunBakerLSUpdater.h"
-#include"cpu_backend/Scaler.h"
+#include"cpu_backend/ArrayScaler.h"
 
 #include"RegisterCPULinalg.h"
 

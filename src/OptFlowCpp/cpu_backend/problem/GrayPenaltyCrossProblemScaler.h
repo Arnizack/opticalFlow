@@ -2,9 +2,9 @@
 #include "core/IScaler.h"
 #include "core/solver/problem/IGrayPenaltyCrossProblem.h"
 #include "core/solver/problem/IProblemFactory.h"
-#include "image/inner/DownScaleGaussianGrayScale.h"
-#include "image/inner/BicubicScale.h"
-#include "Array.h"
+#include "../image/inner/DownScaleGaussianGrayScale.h"
+#include "../image/inner/BicubicScale.h"
+#include "../Array.h"
 
 namespace cpu_backend
 {

@@ -87,15 +87,6 @@
     <ClInclude Include="linalg\ArithmeticVector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Scaler.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="pyramid\Pyramid.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="pyramid\PyramidBuilder.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="problem\ProblemFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -114,9 +105,6 @@
     <ClInclude Include="image\inner\GaussianScale.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GrayPenaltyCrossProblemScaler.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="image\inner\filters\Gaussian1DFilter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -127,6 +115,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="flow\FlowFieldScaler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="problem\GrayPenaltyCrossProblemScaler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

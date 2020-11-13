@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-#include "cpu_backend/GrayPenaltyCrossProblemScaler.h"
+#include "cpu_backend/problem/GrayPenaltyCrossProblemScaler.h"
 #include "cpu_backend/problem/ProblemFactory.h"
 
 namespace cpu_backend
