@@ -6,7 +6,7 @@
 #include "core/solver/problem/IProblemFactory.h"
 #include "core/IScaler.h"
 
-namespace cpu_backend
+namespace optflow_solvers
 {
 	template<class T>
 	class Pyramid : public core::IPyramid<T>
