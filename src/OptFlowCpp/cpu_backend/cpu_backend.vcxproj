@@ -200,6 +200,8 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="image\inner\DownScaleGaussianGrayScale.h" />
+    <ClInclude Include="image\inner\filters\Gaussian1DFilter.h" />
     <ClInclude Include="image\inner\GaussianScale.h">
       <SubType>
       </SubType>
