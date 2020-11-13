@@ -4,6 +4,7 @@
 #include "../Array.h"
 
 #include <memory>
+#include <omp.h>
 #include <cblas.h>
 
 namespace cpu_backend
@@ -32,6 +33,7 @@ namespace cpu_backend
 			double norm = 0;
 			const size_t size = (*in).Size();
 
+			#pragma omp parallel for
 			for (size_t i = 0; i < size; i++)
 			{
 				norm += (*in)[i] * (*in)[i];
@@ -48,6 +50,7 @@ namespace cpu_backend
 			std::shared_ptr<Array<InnerTyp, 1>> in_a = std::dynamic_pointer_cast<Array<InnerTyp, 1>>(a);
 			std::shared_ptr<Array<InnerTyp, 1>> in_b = std::dynamic_pointer_cast<Array<InnerTyp, 1>>(b);
 
+			#pragma omp parallel for
 			for (size_t i = 0; i < (*in_a).Size(); i++)
 			{
 				out += (*in_a)[i] * (*in_b)[i];
@@ -61,6 +64,7 @@ namespace cpu_backend
 		{
 			auto out = std::dynamic_pointer_cast<Array<InnerTyp, DimCount>>(_factory->Zeros(a->Shape));
 
+			#pragma omp parallel for
 			for (size_t i = 0; i < (*out).Size(); i++)
 			{
 				(*out)[i] = fac * (*out)[i];
@@ -74,6 +78,7 @@ namespace cpu_backend
 		{
 			std::shared_ptr<Array<InnerTyp, DimCount>> in_a = std::dynamic_pointer_cast<Array<InnerTyp, DimCount>>(a);
 
+			#pragma omp parallel for
 			for (size_t i = 0; i < (*in_a).Size(); i++)
 			{
 				(*in_a)[i] = fac * (*in_a)[i];
@@ -93,6 +98,7 @@ namespace cpu_backend
 			auto in_c = std::dynamic_pointer_cast<Array<InnerTyp, 1>>(c);
 			auto in_d = std::dynamic_pointer_cast<Array<InnerTyp, 1>>(d);
 
+			#pragma omp parallel for
 			for (size_t i = 0; i < (*in_a).Size(); i++)
 			{
 				scalar_a_b += (*in_a)[i] * (*in_b)[i];
@@ -170,6 +176,7 @@ namespace cpu_backend
 			auto in_c = std::dynamic_pointer_cast<Array<double, 1>>(c);
 			auto in_d = std::dynamic_pointer_cast<Array<double, 1>>(d);
 
+			#pragma omp parallel for
 			for (size_t i = 0; i < (*in_a).Size(); i++)
 			{
 				scalar_a_b += (*in_a)[i] * (*in_b)[i];
@@ -247,6 +254,7 @@ namespace cpu_backend
 			auto in_c = std::dynamic_pointer_cast<Array<float, 1>>(c);
 			auto in_d = std::dynamic_pointer_cast<Array<float, 1>>(d);
 
+			#pragma omp parallel for
 			for (size_t i = 0; i < (*in_a).Size(); i++)
 			{
 				scalar_a_b += (*in_a)[i] * (*in_b)[i];

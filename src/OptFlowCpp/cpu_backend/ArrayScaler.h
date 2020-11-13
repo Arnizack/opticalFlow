@@ -7,6 +7,9 @@
 #include "Array.h"
 
 /*
+* NOT USED ANYMORE
+* 
+* 
 * BICUBICUPSCALE (up)
 * BICUBIC FLOW SCALE (up)
 * 

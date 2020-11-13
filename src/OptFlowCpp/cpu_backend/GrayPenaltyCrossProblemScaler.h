@@ -25,7 +25,9 @@ namespace cpu_backend
 
 			auto output = _problem_factory->CreateGrayPenaltyCrossProblem();
 
-			if (dst_width < in_width)
+			
+
+			if (dst_width < in_width && dst_height < in_height)
 			{
 				auto in_img = std::dynamic_pointer_cast<Array<float, 2>>(input->FirstFrame);
 				auto out_img = std::dynamic_pointer_cast<Array<float, 2>>(output->FirstFrame);

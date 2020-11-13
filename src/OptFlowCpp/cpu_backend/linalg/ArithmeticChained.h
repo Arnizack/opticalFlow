@@ -2,6 +2,7 @@
 #include "core/linalg/IArithmeticChained.h"
 #include "ArithmeticBasic.h"
 #include "../Array.h"
+#include <omp.h>
 
 namespace cpu_backend
 {
@@ -30,6 +31,7 @@ namespace cpu_backend
 			auto in_b = std::dynamic_pointer_cast<Array<InnerTyp, DimCount>>(b);
 			auto in_c = std::dynamic_pointer_cast<Array<InnerTyp, DimCount>>(c);
 
+			#pragma omp parallel for
 			for (size_t i = 0; i < size; i++)
 			{
 				(*out)[i] = (*in_a)[i] * (*in_b)[i] + (*in_c)[i];
@@ -49,6 +51,7 @@ namespace cpu_backend
 			auto in_c = std::dynamic_pointer_cast<Array<InnerTyp, DimCount>>(c);
 			auto in_d = std::dynamic_pointer_cast<Array<InnerTyp, DimCount>>(d);
 
+			#pragma omp parallel for
 			for (size_t i = 0; i < size; i++)
 			{
 				(*out)[i] = (*in_a)[i] * (*in_b)[i] + (*in_c)[i] * (*in_d)[i];
@@ -66,6 +69,7 @@ namespace cpu_backend
 			auto in_a = std::dynamic_pointer_cast<Array<InnerTyp, DimCount>>(a);
 			auto in_b = std::dynamic_pointer_cast<Array<InnerTyp, DimCount>>(b);
 
+			#pragma omp parallel for
 			for (size_t i = 0; i < size; i++)
 			{
 				(*out)[i] = alpha * (*in_a)[i] + (*in_b)[i];
