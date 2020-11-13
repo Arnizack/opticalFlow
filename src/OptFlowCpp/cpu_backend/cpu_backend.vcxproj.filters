@@ -87,6 +87,9 @@
     <ClInclude Include="linalg\ArithmeticVector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Scaler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="pyramid\Pyramid.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -121,6 +124,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ArrayScaler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="flow\FlowFieldScaler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -159,6 +165,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="image\inner\ConvertToGrayscale.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="flow\FlowFieldScaler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

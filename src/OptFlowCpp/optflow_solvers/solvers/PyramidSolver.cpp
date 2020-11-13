@@ -5,11 +5,11 @@ namespace optflow_solvers
 
 	using PtrProblemTyp = std::shared_ptr<core::IGrayPenaltyCrossProblem>;
 	using PtrFlowField = std::shared_ptr<core::IArray<double, 3> >;
-	using PtrProblemPyramid = std::shared_ptr<core::IPyramid<PtrProblemTyp>>;
+	using PtrProblemPyramid = std::shared_ptr<core::IPyramid<core::IGrayPenaltyCrossProblem>>;
 
 	PyramidSolver::PyramidSolver(
 		std::shared_ptr<core::IArrayFactory<double, 3>> flow_factory, 
-		std::shared_ptr<core::IPyramidBuilder<PtrProblemTyp>> pyramid_builder, 
+		std::shared_ptr<core::IPyramidBuilder<core::IGrayPenaltyCrossProblem>> pyramid_builder,
 		std::shared_ptr<core::IScaler<core::IArray<double, 3>>> flow_scaler,
 		std::shared_ptr<core::IFlowFieldSolver<PtrProblemTyp>> inner_solver)
 		: _flow_factory(flow_factory), _pyramid_builder(pyramid_builder), 
@@ -46,7 +46,7 @@ namespace optflow_solvers
 		}
 		return initial_guess_scaled;
 	}
-	void PyramidSolver::SetPyramidBuilder(std::shared_ptr<core::IPyramidBuilder<PtrProblemTyp>> pyramid_builder)
+	void PyramidSolver::SetPyramidBuilder(std::shared_ptr<core::IPyramidBuilder<core::IGrayPenaltyCrossProblem>> pyramid_builder)
 	{
 		_pyramid_builder = pyramid_builder;
 	}

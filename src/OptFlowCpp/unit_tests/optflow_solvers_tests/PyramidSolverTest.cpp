@@ -27,14 +27,14 @@ namespace optflow_solvers
 
 		using PtrProblemTyp = std::shared_ptr<core::IGrayPenaltyCrossProblem>;
 		auto fake_pyramid = std::make_shared<FakeIPyramid>(pyramid_levels, problem);
-		auto pyramid = std::static_pointer_cast<core::IPyramid<PtrProblemTyp>, FakeIPyramid>(fake_pyramid);
+		auto pyramid = std::static_pointer_cast<core::IPyramid<core::IGrayPenaltyCrossProblem>, FakeIPyramid>(fake_pyramid);
 
 
 		auto mock_pyramid_builder =
 			std::make_shared<FakeIPyramidBuilder>(pyramid);
-		std::shared_ptr<core::IPyramidBuilder< PtrProblemTyp>> pyramid_builder
+		std::shared_ptr<core::IPyramidBuilder< core::IGrayPenaltyCrossProblem>> pyramid_builder
 			= std::static_pointer_cast<
-			core::IPyramidBuilder< PtrProblemTyp>,
+			core::IPyramidBuilder< core::IGrayPenaltyCrossProblem>,
 			FakeIPyramidBuilder >(mock_pyramid_builder);
 
 		auto mock_flow_scaler = std::make_shared<MockIFlowScaler>();

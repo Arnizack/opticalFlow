@@ -12,11 +12,11 @@ namespace cpu_backend
 	class Pyramid : public core::IPyramid<T>
 	{
 	public:
-		Pyramid(std::vector<T> levels)
+		Pyramid(std::vector<std::shared_ptr<T>> levels)
 			: _levels(levels), iter(levels.size() - 1)
 		{}
 
-		virtual T NextLevel() override
+		virtual std::shared_ptr<T> NextLevel() override
 		{
 			return _levels[--iter];
 		}
@@ -30,6 +30,6 @@ namespace cpu_backend
 
 	private:
 		size_t iter;
-		std::vector<T> _levels; // MAX to min
+		std::vector<std::shared_ptr<T>> _levels; // MAX to min
 	};
 }

@@ -168,6 +168,7 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="pyramid\Pyramid.h" />
     <ClInclude Include="solvers\ConjugateGradientSolver.h" />
     <ClInclude Include="solvers\GNCPenaltySolver.h" />
     <ClInclude Include="pch.h" />
