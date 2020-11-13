@@ -7,6 +7,7 @@
     <ClCompile Include="solvers\IncrementalSolver.cpp" />
     <ClCompile Include="solvers\LinearizationSolver.cpp" />
     <ClCompile Include="solvers\PyramidSolverIterator.cpp" />
+    <ClCompile Include="pyramid\GrayPenaltyCrossPyramidBuilder.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -19,6 +20,8 @@
     <ClInclude Include="solvers\ConjugateGradientSolver.h" />
     <ClInclude Include="solvers\PyramidSolverIterator.h" />
     <ClInclude Include="pyramid\Pyramid.h" />
+    <ClInclude Include="pyramid\PyramidBuilder.h" />
+    <ClInclude Include="pyramid\GrayPenaltyCrossPyramidBuilder.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

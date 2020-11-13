@@ -5,6 +5,7 @@
 #include"optflow_solvers/solvers/PyramidSolver.h"
 #include"optflow_solvers/solvers/GNCPenaltySolver.h"
 #include"optflow_solvers/solvers/PyramidSolverIterator.h"
+#include"optflow_solvers/pyramid/GrayPenaltyCrossPyramidBuilder.h"
 
 namespace console_ui
 {
@@ -37,6 +38,9 @@ namespace console_ui
 
     void _RegisterPyramidSolver(Hypodermic::ContainerBuilder& builder)
     {  
+        builder.registerType<optflow_solvers::GrayPenaltyCrossPyramidBuilder>()
+            .as<core::IPyramidBuilder<core::IGrayPenaltyCrossProblem>>();
+
         builder.registerType<optflow_solvers::PyramidSolver>()
             .with<IFlowSolver, optflow_solvers::IncrementalSolver>();
         

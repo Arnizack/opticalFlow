@@ -168,6 +168,14 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="pyramid\GrayPenaltyCrossPyramidBuilder.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="pyramid\PyramidBuilder.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="pyramid\Pyramid.h" />
     <ClInclude Include="solvers\ConjugateGradientSolver.h" />
     <ClInclude Include="solvers\GNCPenaltySolver.h" />
@@ -187,6 +195,10 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="pyramid\GrayPenaltyCrossPyramidBuilder.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="solvers\GNCPenaltySolver.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

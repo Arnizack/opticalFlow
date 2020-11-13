@@ -4,14 +4,11 @@
 namespace core
 {
 
-	template<class InnerTyp> /*, size_t DimCount>*/
+	template<class InnerTyp> 
 	class IScaler
 	{
 	public:
-		//using PtrArray = std::shared_ptr<IArray<InnerTyp, DimCount>>;
-		using PtrInnerTyp = std::shared_ptr<InnerTyp>;
-
-		virtual PtrInnerTyp Scale(const PtrInnerTyp input, const size_t& dst_width,
+		virtual std::shared_ptr<InnerTyp> Scale(const std::shared_ptr<InnerTyp> input, const size_t& dst_width,
 			const size_t& dst_height) = 0;
 	};
 	
