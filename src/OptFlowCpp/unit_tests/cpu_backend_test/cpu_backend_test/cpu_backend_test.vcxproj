@@ -172,7 +172,6 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="penalty\CharbonnierPenaltyTest.cpp" />
     <ClCompile Include="Pyramid\PyramidBuilder_Test.cpp" />
-    <ClCompile Include="Pyramid\Pyramid_Test.cpp" />
     <ClCompile Include="Reshape_Test.cpp" />
     <ClCompile Include="sb_linearsystem\SunBakerLinSystemTest.cpp" />
     <ClCompile Include="Scaler_Test.cpp" />

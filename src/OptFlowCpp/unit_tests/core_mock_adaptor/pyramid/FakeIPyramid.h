@@ -6,22 +6,22 @@ namespace core
 {
 	namespace testing
 	{
-		using PtrProblemTyp = std::shared_ptr<IGrayPenaltyCrossProblem>;
-		class FakeIPyramid : public IPyramid<PtrProblemTyp>
+		
+		class FakeIPyramid : public IPyramid<IGrayPenaltyCrossProblem>
 		{
 		public:
-			FakeIPyramid(int level_counter, PtrProblemTyp problem);
+			FakeIPyramid(int level_counter, std::shared_ptr<IGrayPenaltyCrossProblem> problem);
 			
 
 
 			// Inherited via IPyramid
-			virtual PtrProblemTyp NextLevel() override;
+			virtual std::shared_ptr<IGrayPenaltyCrossProblem> NextLevel() override;
 
 			virtual bool IsEndLevel() override;
 		private:
 			int _counter;
 			int _level_count;
-			PtrProblemTyp _problem;
+			std::shared_ptr<IGrayPenaltyCrossProblem> _problem;
 		};
 	}
 }

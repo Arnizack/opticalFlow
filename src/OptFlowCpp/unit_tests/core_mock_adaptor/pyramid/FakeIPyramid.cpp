@@ -4,12 +4,13 @@ namespace core
 {
 	namespace testing
 	{
-		using PtrProblemTyp = std::shared_ptr<IGrayPenaltyCrossProblem>;
-		FakeIPyramid::FakeIPyramid(int level_count, PtrProblemTyp problem)
+
+		FakeIPyramid::FakeIPyramid(int level_count, std::shared_ptr<IGrayPenaltyCrossProblem> problem)
 			: _counter(0), _problem(problem), _level_count(level_count)
 		{
 		}
-		PtrProblemTyp FakeIPyramid::NextLevel()
+	
+		std::shared_ptr<IGrayPenaltyCrossProblem> FakeIPyramid::NextLevel()
 		{
 			_counter++;
 			return _problem;

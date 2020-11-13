@@ -90,16 +90,10 @@
     <ClInclude Include="solver\problem\IProblemFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="pyramid\IPyramid.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="image\IGrayscaleScaler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="image\IColorScaler.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="pyramid\IPyramidBuilder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="IScaler.h">
@@ -121,6 +115,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="solver\IFlowSolverIterator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="pyramid\IPyramid.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="pyramid\IPyramidBuilder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

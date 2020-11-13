@@ -5,12 +5,10 @@
 #include"cpu_backend/image/warper/GrayWarper.h"
 #include"cpu_backend/image/inner/DerivativeCalculator.h"
 
-#include"cpu_backend/pyramid/Pyramid.h"
-#include"cpu_backend/pyramid/PyramidBuilder.h"
+//#include"cpu_backend/pyramid/Pyramid.h"
 #include"cpu_backend/problem/ProblemFactory.h"
 #include"cpu_backend/penalty/CharbonnierPenalty.h"
 #include"cpu_backend/sb_linearsystem/SunBakerLSUpdater.h"
-//#include"cpu_backend/sb_linearsystem/SunBakerLinearOp.h" ?
 #include"cpu_backend/Scaler.h"
 
 #include"RegisterCPULinalg.h"
@@ -49,9 +47,9 @@ namespace console_ui
         builder.registerType<cpu_backend::ArrayScaler<double, 3>>()
             .as<core::IScaler<core::IArray<double, 3>>>()
             .singleInstance();
-        //Pyramid Builder
-        builder.registerType<cpu_backend::PyramidBuilder<std::shared_ptr<core::IGrayPenaltyCrossProblem>>>()
-            .as< core::IPyramidBuilder< std::shared_ptr<core::IGrayPenaltyCrossProblem>>>();
+       ////Pyramid Builder
+       //builder.registerType<cpu_backend::PyramidBuilder<std::shared_ptr<core::IGrayPenaltyCrossProblem>>>()
+       //    .as< core::IPyramidBuilder< std::shared_ptr<core::IGrayPenaltyCrossProblem>>>();
 
         //Problem Factory
         builder.registerType<cpu_backend::ProblemFactory>()

@@ -45,7 +45,6 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="pyramid\IPyramid.h" />
     <ClInclude Include="penalty\IBlendablePenalty.h" />
     <ClInclude Include="penalty\IPenalty.h" />
     <ClInclude Include="IStatistics.h" />
@@ -54,6 +53,7 @@
     <ClInclude Include="linalg\ILinearOperator.h" />
     <ClInclude Include="linalg\IOperator.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="pyramid\IPyramid.h" />
     <ClInclude Include="pyramid\IPyramidBuilder.h">
       <SubType>
       </SubType>

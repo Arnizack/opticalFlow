@@ -7,11 +7,11 @@ namespace core
 {
 	namespace testing
 	{
-		using PtrProblemTyp = std::shared_ptr<IGrayPenaltyCrossProblem>;
-		class FakeIPyramidBuilder : public IPyramidBuilder<PtrProblemTyp>
+
+		class FakeIPyramidBuilder : public IPyramidBuilder<IGrayPenaltyCrossProblem>
 		{
 		public:
-			FakeIPyramidBuilder(std::shared_ptr<IPyramid<PtrProblemTyp>> pyramid);
+			FakeIPyramidBuilder(std::shared_ptr<IPyramid<IGrayPenaltyCrossProblem>> pyramid);
 
 			// Inherited via IPyramidBuilder
 			MOCK_METHOD( void, SetScaleFactors ,(std::vector<double> factors),( override));
@@ -26,10 +26,10 @@ namespace core
 
 
 			// Inherited via IPyramidBuilder
-			virtual std::shared_ptr<IPyramid<PtrProblemTyp>> Create(PtrProblemTyp last_level) override;
+			virtual std::shared_ptr<IPyramid<IGrayPenaltyCrossProblem>> Create(std::shared_ptr<IGrayPenaltyCrossProblem> last_level) override;
 		private:
 			
-			std::shared_ptr<IPyramid<PtrProblemTyp>> _pyramid;
+			std::shared_ptr<IPyramid<IGrayPenaltyCrossProblem>> _pyramid;
 		};
 	}
 }

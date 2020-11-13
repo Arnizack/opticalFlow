@@ -6,7 +6,7 @@ namespace optflow_solvers
 {
     PyramidSolverIterator::PyramidSolverIterator(std::shared_ptr < PyramidsResolutions> resolutions, 
                 std::shared_ptr <PyramidSolver > pyramid_solver,
-        std::shared_ptr<core::IPyramidBuilder<std::shared_ptr<core::IGrayPenaltyCrossProblem>>> pyramid_builder)
+        std::shared_ptr<core::IPyramidBuilder<core::IGrayPenaltyCrossProblem>> pyramid_builder)
         : _resolutions(resolutions) , _pyramid_solver(pyramid_solver), _pyramid_builder(pyramid_builder)
     {
         

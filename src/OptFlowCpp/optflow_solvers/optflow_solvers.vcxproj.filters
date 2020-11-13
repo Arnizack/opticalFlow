@@ -18,5 +18,9 @@
     <ClInclude Include="linearsystems\ISunBakerLSUpdater.h" />
     <ClInclude Include="solvers\ConjugateGradientSolver.h" />
     <ClInclude Include="solvers\PyramidSolverIterator.h" />
+    <ClInclude Include="pyramid\Pyramid.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>
