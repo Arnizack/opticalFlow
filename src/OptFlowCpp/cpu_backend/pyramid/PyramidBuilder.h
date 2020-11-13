@@ -49,13 +49,6 @@ namespace cpu_backend
 		}
 
 	private:
-		void update_problem(T problem, T last_level, const size_t& iter)
-		{
-			problem->FirstFrame = _scaler_2D->Scale(last_level->FirstFrame, _resolutions[iter][0], _resolutions[iter][1]);
-			problem->SecondFrame = _scaler_2D->Scale(last_level->SecondFrame, _resolutions[iter][0], _resolutions[iter][1]);
-			problem->CrossFilterImage = _scaler_3D->Scale(last_level->CrossFilterImage, _resolutions[iter][0], _resolutions[iter][1]);
-			problem->PenaltyFunc = last_level->PenaltyFunc;
-		}
 
 		void setup_resolutions(T last_level)
 		{
@@ -134,9 +127,9 @@ namespace cpu_backend
 		virtual void SetScaleFactor(double factor, std::array<size_t, 2> min_resolution) override
 		{
 			//factor scales min_resolution
-			//_resolutions = { min_resolution };
+			_resolutions = { min_resolution };
 
-			_min_resolution = min_resolution;
+			//_min_resolution = min_resolution;
 
 			_factors = { factor };
 		}
@@ -156,29 +149,18 @@ namespace cpu_backend
 			
 			setup_resolutions(last_level);
 
-			auto temp_problem = _problem_factory->CreateGrayPenaltyCrossProblem();
-			update_problem(temp_problem, last_level, 0);
+			auto lowest_res = _problem_factory->CreateGrayPenaltyCrossProblem();
+			lowest_res->FirstFrame = _scaler_2D->Scale(last_level->FirstFrame, _resolutions[0][0], _resolutions[0][1]);
+			lowest_res->SecondFrame = _scaler_2D->Scale(last_level->SecondFrame, _resolutions[0][0], _resolutions[0][1]);
+			lowest_res->CrossFilterImage = _scaler_3D->Scale(last_level->CrossFilterImage, _resolutions[0][0], _resolutions[0][1]);
+			lowest_res->PenaltyFunc = last_level->PenaltyFunc;
 
-			PtrPyramidIGrayPenaltyCrossProblem start = std::make_shared<PyramidIGrayPenaltyCrossProblem>(PyramidIGrayPenaltyCrossProblem(temp_problem));
+			PtrPyramidIGrayPenaltyCrossProblem pyramid = std::make_shared<PyramidIGrayPenaltyCrossProblem>(PyramidIGrayPenaltyCrossProblem(_resolutions, lowest_res, _problem_factory, _scaler_2D, _scaler_3D));
 
-			for (size_t i = 1; i < _resolutions.size(); i++)
-			{
-				update_problem(temp_problem, last_level, i);
-
-				start->AddLevel(temp_problem);
-			}
-
-			return start;
+			return pyramid;
 		}
 
 	private:
-		void update_problem(PtrIGrayPenaltyCrossProblem problem, PtrIGrayPenaltyCrossProblem last_level, const size_t& iter)
-		{
-			problem->FirstFrame = _scaler_2D->Scale(last_level->FirstFrame, _resolutions[iter][0], _resolutions[iter][1]);
-			problem->SecondFrame = _scaler_2D->Scale(last_level->SecondFrame, _resolutions[iter][0], _resolutions[iter][1]);
-			problem->CrossFilterImage = _scaler_3D->Scale(last_level->CrossFilterImage, _resolutions[iter][0], _resolutions[iter][1]);
-			problem->PenaltyFunc = last_level->PenaltyFunc;
-		}
 
 		void setup_resolutions(PtrIGrayPenaltyCrossProblem last_level)
 		{
@@ -210,26 +192,19 @@ namespace cpu_backend
 				size_t in_width = last_level->FirstFrame->Shape[0];
 				size_t in_height = last_level->FirstFrame->Shape[1];
 
-				size_t min_width = _min_resolution[0];
-				size_t min_height = _min_resolution[1];
-
-				size_t scaled_width = in_width;
-				size_t scaled_height = in_height;
-
 				double factor = _factors[0];
 
-				scaled_width *= factor;
-				scaled_height *= factor;
-
-				//endlos Schleife?
-				while (min_width < scaled_width && min_height < scaled_height)
+				size_t iter_width = _resolutions[0][0] * factor;
+				size_t iter_height = _resolutions[0][1] * factor;
+				
+				while (iter_width < in_width && iter_height < in_height)
 				{
-					_resolutions.push_back( { scaled_height, scaled_height } );
+					_resolutions.push_back( { iter_width, iter_height } );
 
-					scaled_height *= _factors[0];
-					scaled_height *= _factors[0];
+					iter_width *= factor;
+					iter_height *= factor;
 				}
-				_resolutions.push_back({ scaled_width, scaled_height });
+				_resolutions.push_back({ in_width, in_height });
 
 				return;
 			}
@@ -243,6 +218,6 @@ namespace cpu_backend
 		std::shared_ptr<core::IProblemFactory> _problem_factory;
 		std::shared_ptr<core::IScaler<float, 2>> _scaler_2D;
 		std::shared_ptr<core::IScaler<float, 3>> _scaler_3D;
-		std::array<size_t, 2> _min_resolution;
+		//std::array<size_t, 2> _min_resolution;
 	};
 }

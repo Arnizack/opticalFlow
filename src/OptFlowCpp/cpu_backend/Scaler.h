@@ -124,28 +124,30 @@ namespace cpu_backend
 		virtual PtrArray Scale(const PtrArray input, const size_t& dst_width,
 			const size_t& dst_height) override
 		{
-			std::shared_ptr<Array<InnerTyp, 3>> out = std::dynamic_pointer_cast<Array<InnerTyp, 3>>(_factroy->Zeros({ dst_width, dst_height, 3 }));
-
 			auto image = std::dynamic_pointer_cast<Array<InnerTyp, 3>>(input);
 
 			size_t input_width = input->Shape[0];
 			size_t input_height = input->Shape[1];
 			const size_t input_depth = input->Shape[2];
 
-			const float width_realtion = dst_width / input_width;
-			const float height_relation = dst_height / input_height;
+			std::shared_ptr<Array<InnerTyp, 3>> out = std::dynamic_pointer_cast<Array<InnerTyp, 3>>(_factroy->Zeros({ dst_width, dst_height, input_depth }));
+
+			const float width_realtion = (double)dst_width / (double)input_width;
+			const float height_relation = (double)dst_height / (double)input_height;
 
 			float x_proj;
 			float y_proj;
+			size_t dst_wh = dst_height * dst_width;
 			size_t y_offset;
 			size_t dst_offset;
+			size_t input_wh = input_width * input_height;
 			size_t input_offset;
 
-			#pragma omp parallel for
+			//#pragma omp parallel for
 			for (int z = 0; z < input_depth; z++)
 			{
-				dst_offset = dst_height * dst_width * z;
-				input_offset = input_width * input_height * z;
+				dst_offset = dst_wh * z;
+				input_offset = input_wh * z;
 
 				for (size_t y = 0; y < dst_height; y++) // column y
 				{

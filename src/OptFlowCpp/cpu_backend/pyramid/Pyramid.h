@@ -1,6 +1,10 @@
 #pragma once
 #include <memory>
+#include <vector>
+#include <array>
 #include "core/pyramid/IPyramid.h"
+#include "core/solver/problem/IProblemFactory.h"
+#include "core/IScaler.h"
 
 namespace cpu_backend
 {
@@ -8,119 +12,42 @@ namespace cpu_backend
 	class Pyramid : public core::IPyramid<T>
 	{
 	public:
-		Pyramid(const T next_level)
-			: _current_level(next_level), _end_level(true), _next_Pyramid(nullptr)
+		Pyramid(std::vector< std::array<size_t, 2>> resolutions, const T lowest_res,
+			std::shared_ptr<core::IProblemFactory> problem_factory,	std::shared_ptr<core::IScaler<float, 2>> scaler_2D, 
+			std::shared_ptr<core::IScaler<float, 3>> scaler_3D)
+			: _resolutions(resolutions), _lowest_res(lowest_res), _end_level(resolutions.size() - 1), iter(0),
+			_problem_factory(problem_factory), _scaler_2D(scaler_2D), _scaler_3D(scaler_3D)
 		{}
 
 		virtual T NextLevel() override
 		{
-			if (_end_level == true)
-				return _current_level;
+			const size_t target_width = _resolutions[++iter][0];
+			const size_t target_height = _resolutions[iter][1];
 
-			//const T current = _current_level;
-			
-			_end_level = _next_Pyramid->IsEndLevel();
-			_current_level = _next_Pyramid->GetCurrentLevel();
+			auto temp_problem = _problem_factory->CreateGrayPenaltyCrossProblem();
+			temp_problem->FirstFrame = _scaler_2D->Scale(_lowest_res->FirstFrame, target_width, target_height);
+			temp_problem->SecondFrame = _scaler_2D->Scale(_lowest_res->SecondFrame, target_width, target_height);
+			temp_problem->CrossFilterImage = _scaler_3D->Scale(_lowest_res->CrossFilterImage, target_width, target_height);
+			temp_problem->PenaltyFunc = _lowest_res->PenaltyFunc;
 
-			if (_next_Pyramid->IsEndLevel() != true)
-				_next_Pyramid = _next_Pyramid->GetNextPyramid();
-
-			return _current_level;
+			return temp_problem;
 		}
 
 		virtual bool IsEndLevel() override
 		{
-			return _end_level;
-		}
-
-		void AddLevel(T next_level)
-		{
-			if (_end_level == true)
-			{
-				_end_level = false;
-
-				_next_Pyramid = std::make_shared<Pyramid<T>>(Pyramid<T>(next_level));
-
-			} else {
-				_next_Pyramid->AddLevel(next_level);
-			}
-		}
-
-		T GetCurrentLevel()
-		{
-			return _current_level;
-		}
-
-		std::shared_ptr<Pyramid<T>> GetNextPyramid()
-		{
-			return _next_Pyramid;
+			if (iter == _end_level)
+				return true;
+			return false;
 		}
 
 	private:
-		bool _end_level;
-		T _current_level;
-		std::shared_ptr<Pyramid<T>> _next_Pyramid;
-	};
+		size_t iter;
+		size_t _end_level;
+		std::vector< std::array<size_t, 2>> _resolutions;
+		const T _lowest_res;
 
-	/*
-	* SHARED_PTR
-	*/
-	template<class T>
-	class Pyramid<std::shared_ptr<T>> : public core::IPyramid<std::shared_ptr<T>>
-	{
-	public:
-		Pyramid(const std::shared_ptr<T> next_level)
-			: _current_level(std::make_shared<T>(*next_level)), _end_level(true), _next_Pyramid(nullptr)
-		{}
-
-		virtual std::shared_ptr<T> NextLevel() override
-		{
-			if (_end_level == true)
-				return _current_level;
-
-			const std::shared_ptr<T> current = std::make_shared<T>(*_current_level);
-
-			_end_level = _next_Pyramid->IsEndLevel();
-			_current_level = _next_Pyramid->GetCurrentLevel();
-
-			if (_next_Pyramid->IsEndLevel() != true)
-				_next_Pyramid = _next_Pyramid->GetNextPyramid();
-
-			return current;
-		}
-
-		virtual bool IsEndLevel() override
-		{
-			return _end_level;
-		}
-
-		void AddLevel(std::shared_ptr<T> next_level)
-		{
-			if (_end_level == true)
-			{
-				_end_level = false;
-
-				_next_Pyramid = std::make_shared<Pyramid<std::shared_ptr<T>>>(Pyramid<std::shared_ptr<T>>(next_level));
-
-			}
-			else {
-				_next_Pyramid->AddLevel(next_level);
-			}
-		}
-
-		std::shared_ptr<T> GetCurrentLevel()
-		{
-			return _current_level;
-		}
-
-		std::shared_ptr<Pyramid<std::shared_ptr<T>>> GetNextPyramid()
-		{
-			return _next_Pyramid;
-		}
-
-	private:
-		bool _end_level;
-		std::shared_ptr<T> _current_level;
-		std::shared_ptr<Pyramid<std::shared_ptr<T>>> _next_Pyramid;
+		std::shared_ptr<core::IProblemFactory> _problem_factory;
+		std::shared_ptr<core::IScaler<float, 2>> _scaler_2D;
+		std::shared_ptr<core::IScaler<float, 3>> _scaler_3D;
 	};
 }

@@ -33,23 +33,40 @@ namespace cpu_backend
 			auto last_level = ptr_problem_factory->CreateGrayPenaltyCrossProblem();
 			last_level->FirstFrame = ptr_arr_factory_2D->Full(1, { 6,6 });
 			last_level->SecondFrame = ptr_arr_factory_2D->Full(2, { 6,6 });
-			last_level->CrossFilterImage = ptr_arr_factory_3D->Full(3, {6,6});
+			last_level->CrossFilterImage = ptr_arr_factory_3D->Full(3, {6,6,3});
 			last_level->PenaltyFunc;
 
 			auto pyramid = pyramid_builder.Create(last_level);
 
-			for (int i = 0; i < resolutions.size(); i++)
+			/*for (int i = 0; i < resolutions.size() + 1; i++)
 			{
-				if (i == 2)
+				if (i == resolutions.size())
+				{
 					EXPECT_EQ(pyramid->IsEndLevel(), true);
+					return;
+				}
 				else
 					EXPECT_EQ(pyramid->IsEndLevel(), false);
 
 				auto out_temp = pyramid->NextLevel();
 
+				EXPECT_EQ(out_temp->FirstFrame->Shape[0], resolutions[i+1][0]);
+				EXPECT_EQ(out_temp->FirstFrame->Shape[1], resolutions[i+1][1]);
+			}*/
+
+			int i = 1;
+
+			while (!pyramid->IsEndLevel())
+			{
+				auto out_temp = pyramid->NextLevel();
+
 				EXPECT_EQ(out_temp->FirstFrame->Shape[0], resolutions[i][0]);
 				EXPECT_EQ(out_temp->FirstFrame->Shape[1], resolutions[i][1]);
+
+				i++;
 			}
+
+			EXPECT_EQ(pyramid->IsEndLevel(), true);
 
 			/*
 			* SET Scale Factors
@@ -60,18 +77,19 @@ namespace cpu_backend
 
 			pyramid = pyramid_builder.Create(last_level);
 
-			for (int i = 0; i < resolutions.size(); i++)
-			{
-				if (i == 2)
-					EXPECT_EQ(pyramid->IsEndLevel(), true);
-				else
-					EXPECT_EQ(pyramid->IsEndLevel(), false);
+			i = 1;
 
+			while (!pyramid->IsEndLevel())
+			{
 				auto out_temp = pyramid->NextLevel();
 
 				EXPECT_EQ(out_temp->FirstFrame->Shape[0], resolutions[i][0]);
 				EXPECT_EQ(out_temp->FirstFrame->Shape[1], resolutions[i][1]);
+
+				i++;
 			}
+
+			EXPECT_EQ(pyramid->IsEndLevel(), true);
 
 			/*
 			* SET Scale Factor
@@ -85,25 +103,27 @@ namespace cpu_backend
 
 			for (int i = 0; i < 3; i++)
 			{
-				if (i == 2)
+				if (i == 1)
 				{
-					EXPECT_EQ(pyramid->IsEndLevel(), true);
+					EXPECT_EQ(pyramid->IsEndLevel(), false);
 					auto out_temp = pyramid->NextLevel();
 
 					EXPECT_EQ(out_temp->FirstFrame->Shape[0], 6);
 					EXPECT_EQ(out_temp->FirstFrame->Shape[1], 6);
 				}
+				else if(i == 2)
+					EXPECT_EQ(pyramid->IsEndLevel(), true);
 				else
 				{
 					EXPECT_EQ(pyramid->IsEndLevel(), false);
 
 					auto out_temp = pyramid->NextLevel();
 
-					EXPECT_EQ(out_temp->FirstFrame->Shape[0], min_res[0]);
-					EXPECT_EQ(out_temp->FirstFrame->Shape[1], min_res[1]);
-
 					min_res[0] *= factor;
 					min_res[1] *= factor;
+
+					EXPECT_EQ(out_temp->FirstFrame->Shape[0], min_res[0]);
+					EXPECT_EQ(out_temp->FirstFrame->Shape[1], min_res[1]);
 				}
 			}
 		}
