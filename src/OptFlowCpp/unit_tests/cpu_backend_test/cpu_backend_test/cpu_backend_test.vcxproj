@@ -154,6 +154,7 @@
     <ClCompile Include="array_test.cpp" />
     <ClCompile Include="flow\BilateralMedianFilterTest.cpp" />
     <ClCompile Include="flow\CrossBilateralMedianFilterTest.cpp" />
+    <ClCompile Include="flow\FlowFieldScaler_Test.cpp" />
     <ClCompile Include="flow\OcclusionTest.cpp" />
     <ClCompile Include="GrayPenaltyCrossProblemScaler_Test.cpp" />
     <ClCompile Include="image\GrayWarperTest.cpp" />
