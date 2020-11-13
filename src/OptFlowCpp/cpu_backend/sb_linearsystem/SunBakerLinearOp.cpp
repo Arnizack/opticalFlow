@@ -2,7 +2,7 @@
 #include"pch.h"
 #include"SunBakerLinearOp.h"
 #include"../image/inner/convolution2D.h"
-
+#include"../Array.h"
 
 namespace cpu_backend
 {
@@ -18,7 +18,10 @@ namespace cpu_backend
 	}
 	PtrGrayImg SunBakerLinearOp::Apply(const PtrGrayImg vec)
 	{
-		return nullptr;
+
+		auto result = std::make_shared< Array<double,1>>(vec->Shape);
+		ApplyTo(result, vec);
+		return result;
 	}
 	void SunBakerLinearOp::ApplyTo(PtrGrayImg dst, const PtrGrayImg vec)
 	{

@@ -23,6 +23,7 @@ int main(int argc, char* argv[])
 	std::string flow_output_path = "computed_flow.flo";
 	std::string flow_img_path = "computed_img.png";
 
+	/*
 	//Setting up all posible Arguments
 	bpo::options_description generic("Generic options");
 	generic.add_options()
@@ -43,6 +44,7 @@ int main(int argc, char* argv[])
 	bpo::store(bpo::parse_command_line(argc, argv, cmdline), vm);
 	bpo::notify(vm);
 
+	
 	//Checking what is set
 	if (vm.count("help"))
 	{
@@ -52,22 +54,22 @@ int main(int argc, char* argv[])
 
 	if (!vm.count("input-img1"))
 	{
-		/*return*/ set_mandatory_variables();
+		set_mandatory_variables();
 	}
 
 	if (!vm.count("input-img2"))
 	{
-		/*return*/ set_mandatory_variables();
+		set_mandatory_variables();
 	}
 
 	if (!vm.count("flow-img"))
 	{
-		/*return*/ set_mandatory_variables();
+		set_mandatory_variables();
 	}
 
 	if (!vm.count("output-path"))
 	{
-		/*return*/ set_mandatory_variables();
+		set_mandatory_variables();
 	}
 
 	//Test output
@@ -75,8 +77,7 @@ int main(int argc, char* argv[])
 	std::cout << "Input image 2 is: " << second_img_path << '\n';
 	std::cout << "Output Path is: " << flow_output_path << '\n';
 	std::cout << "Flow image is: " << flow_img_path << '\n';
-
-
+	*/
 	console_ui::ComputeOpticalFlow(first_img_path, second_img_path, flow_output_path, flow_img_path);
 
 	return 0;
