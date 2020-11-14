@@ -20,7 +20,11 @@ int main(int argc, char* argv[])
 
 	if (di_container == nullptr)
 	{
-		console_ui::ComputeOpticalFlow(first_img_path, second_img_path, flow_output_path, flow_img_path);
+		//input = --help
+
+		//console_ui::ComputeOpticalFlow(first_img_path, second_img_path, flow_output_path, flow_img_path);
+
+		return 1;
 	}
 	else
 	{
