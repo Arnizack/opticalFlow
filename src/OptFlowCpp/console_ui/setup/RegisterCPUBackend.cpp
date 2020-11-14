@@ -80,4 +80,26 @@ namespace console_ui
         auto ls_settings = std::make_shared< cpu_backend::LinearSystemSettings>();
         builder.registerInstance<cpu_backend::LinearSystemSettings>(ls_settings);
     }
+
+    void SetCPUBackendCommandlineSettings(Hypodermic::ContainerBuilder& builder, boost::program_options::variables_map vm)
+    {
+        auto penalty_settings = std::make_shared<cpu_backend::CharbonnierPenaltySettings>();
+        penalty_settings->DefaultBlendFactor = vm["penalty_blend"].as<double>();
+        penalty_settings->Epsilon = vm["penalty_eps"].as<double>();
+        penalty_settings->Exponent = vm["penalty_exp"].as<double>();
+        builder.registerInstance<cpu_backend::CharbonnierPenaltySettings>(penalty_settings);
+
+        auto median_filter_settings = std::make_shared< cpu_backend::CrossMedianFilterSettings>();
+        median_filter_settings->FilterInfluence = vm["cross_filt"].as<double>();
+        median_filter_settings->FilterLength = vm["cross_filt_len"].as<int>();
+        median_filter_settings->SigmaColor = vm["cross_sig_col"].as<double>();
+        median_filter_settings->SigmaDistance = vm["cross_sig_dist"].as<double>();
+        median_filter_settings->SigmaDiv = vm["cross_sig_div"].as<double>();
+        median_filter_settings->SigmaError = vm["cross_sig_err"].as<double>();
+        builder.registerInstance<cpu_backend::CrossMedianFilterSettings>(median_filter_settings);
+
+        auto ls_settings = std::make_shared< cpu_backend::LinearSystemSettings>();
+        ls_settings->LambdaKernel = vm["lin_sys_lamb"].as<double>();
+        builder.registerInstance<cpu_backend::LinearSystemSettings>(ls_settings);
+    }
 }

@@ -15,4 +15,12 @@ namespace console_ui
 		auto cg_settings = std::make_shared<optflow_solvers::CGSolverSettings>();
 		builder.registerInstance<optflow_solvers::CGSolverSettings>(cg_settings);
 	}
+
+	void SetCommandlineCGSettings(Hypodermic::ContainerBuilder& builder, boost::program_options::variables_map vm)
+	{
+		auto cg_settings = std::make_shared<optflow_solvers::CGSolverSettings>();
+		cg_settings->Iterations = vm["cg_iter"].as<size_t>();
+		cg_settings->Tolerance = vm["cg_tol"].as<double>();
+		builder.registerInstance<optflow_solvers::CGSolverSettings>(cg_settings);
+	}
 }

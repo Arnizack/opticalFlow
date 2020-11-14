@@ -1,21 +1,10 @@
 #pragma once
 #include"ComputeOpticalFlow.h"
-#include<iostream>
-#include"utilities/image_helper/ImageHelper.h"
-#include"utilities/flow_helper/FlowHelper.h"
-#include"Hypodermic/ContainerBuilder.h"
-#include"setup/RegisterCGSolver.h"
-#include"setup/RegisterCPUBackend.h"
-#include"setup/RegisterSunBakerSolver.h"
-#include"core/IArrayFactory.h"
-#include"core/solver/problem/IProblemFactory.h"
-#include"core/solver/IFlowFieldSolver.h"
-#include"optflow_solvers/solvers/GNCPenaltySolver.h"
-#include"optflow_solvers/solvers/LinearizationSolver.h"
+
 
 namespace console_ui
 {
-    std::shared_ptr<Hypodermic::Container> SetupSolvers()
+    std::shared_ptr<Hypodermic::Container> SetupDefaultSolvers()
     {
         
         Hypodermic::ContainerBuilder builder;
@@ -44,9 +33,9 @@ namespace console_ui
         return array_factory->CreateFromSource(image.data->data(), shape);
     }
 
-    void ComputeOpticalFlow(std::string first_image_path, std::string second_image_path, std::string flow_output_path, std::string flow_img_output_path)
+    void ComputeOpticalFlow(std::string first_image_path, std::string second_image_path, std::string flow_output_path, std::string flow_img_output_path, std::shared_ptr<Hypodermic::Container> di_container)
     {
-        auto di_container = SetupSolvers();
+        //auto di_container = SetupDefaultSolvers();
         auto first_img = OpenImage(first_image_path, di_container);
         auto second_img = OpenImage(second_image_path, di_container);
 
