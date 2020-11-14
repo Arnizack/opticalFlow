@@ -3,6 +3,7 @@
 #include"SunBakerLinearOp.h"
 #include"../image/inner/convolution2D.h"
 #include"../Array.h"
+#include <omp.h>
 
 namespace cpu_backend
 {
@@ -57,6 +58,7 @@ namespace cpu_backend
 
 		//dst_upper = A*vec_upper - 2 lambda_kernel * ker(vec_upper)
 		//dst_upper += C*vec_lower
+		#pragma omp parallel for
 		for (int y = 0; y < _height; y++)
 		{
 			for (int x = 0; x < _width; x++)
@@ -75,6 +77,7 @@ namespace cpu_backend
 
 		//dst_upper = B*vec_lower - 2 lambda_kernel * ker(vec_lower)
 		//dst_upper += C*vec_upper
+		#pragma omp parallel for
 		for (int y = 0; y < _height; y++)
 		{
 			for (int x = 0; x < _width; x++)
