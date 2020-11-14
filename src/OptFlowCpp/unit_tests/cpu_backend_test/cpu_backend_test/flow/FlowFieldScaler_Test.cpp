@@ -26,49 +26,57 @@ namespace cpu_backend
 
 			ArrayFactory<double, 3> arr_factory;
 
-			auto input = arr_factory.CreateFromSource(arr_in, { 5,5,2 });
+			auto input = std::dynamic_pointer_cast<Array<double, 3>>(arr_factory.CreateFromSource(arr_in, { 5,5,2 }) );
 
 			FlowFieldScaler scaler(std::make_shared<ArrayFactory<double, 3>>(arr_factory));
 
-			auto out = std::dynamic_pointer_cast<Array<double, 3>>( scaler.Scale(input, 10, 10) );
+			int new_width = 10;
+			int new_height = 10;
+
+			auto out = std::dynamic_pointer_cast<Array<double, 3>>( scaler.Scale(input, new_width, new_height) );
 
 			size_t new_size = out->Shape[0] * out->Shape[1] * out->Shape[2];
 
-			EXPECT_EQ(out->Shape[0], 10);
-			EXPECT_EQ(out->Shape[1], 10);
+			EXPECT_EQ(out->Shape[0], new_width);
+			EXPECT_EQ(out->Shape[1], new_height);
 
 			double arr_out1[200];
 			double arr_temp[size];
 
 			for (int i = 0; i < size; i++)
 			{
-				arr_temp[i] = i * 0.5;
+				arr_temp[i] = i * 2;
+
+				EXPECT_EQ((*input)[i], i);
 			}
 
-			_inner::BicubicGrayScale<double>(arr_temp, arr_out1, 5, 5, 10, 10);
-			_inner::BicubicGrayScale<double>(arr_temp + 25, arr_out1 + 100, 5, 5, 10, 10);
+			_inner::BicubicGrayScale<double>(arr_temp, arr_out1, width, height, new_width, new_height);
+			_inner::BicubicGrayScale<double>(arr_temp + 25, arr_out1 + 100, width, height, new_width, new_height);
 
 			for (int i = 0; i < new_size; i++)
 			{
 				EXPECT_EQ((*out)[i], arr_out1[i]);
 			}
 
-			out = std::dynamic_pointer_cast<Array<double, 3>>( scaler.Scale(input, 2, 2) );
+			new_width = 2;
+			new_height = 2;
+
+			out = std::dynamic_pointer_cast<Array<double, 3>>( scaler.Scale(input, new_width, new_height) );
 
 			new_size = out->Shape[0] * out->Shape[1] * out->Shape[2];
 
-			EXPECT_EQ(out->Shape[0], 2);
-			EXPECT_EQ(out->Shape[1], 2);
+			EXPECT_EQ(out->Shape[0], new_width);
+			EXPECT_EQ(out->Shape[1], new_height);
 
 			double arr_out2[8];
 
 			for (int i = 0; i < size; i++)
 			{
-				arr_temp[i] = i * 2.0;
+				arr_temp[i] = i * 0.4;
 			}
 
-			_inner::DownScaleGaussianGrayScale<double>(arr_temp, 5, 5, 2, 2, arr_out2);
-			_inner::DownScaleGaussianGrayScale<double>(arr_temp + 25, 5, 5, 2, 2, arr_out2 + 4);
+			_inner::DownScaleGaussianGrayScale<double>(arr_temp, width, height, new_width, new_height, arr_out2);
+			_inner::DownScaleGaussianGrayScale<double>(arr_temp + 25, width, height, new_width, new_height, arr_out2 + 4);
 
 			for (int i = 0; i < new_size; i++)
 			{

@@ -16,10 +16,10 @@ namespace cpu_backend
 		const size_t in_wh = in_width * in_height;
 
 		// X
-		double factor = (double)in_width / (double)dst_width;
+		double factor = (double)dst_width / (double)in_width;
 		ScaleIn(in->Data(), factor, in_wh);
 		// Y
-		factor = (double)in_height / (double)dst_height;
+		factor = (double)dst_height / (double)in_height;
 		ScaleIn(in->Data() + in_wh, factor, in_wh);
 
 		if (dst_width < in_width && dst_height < in_height)
