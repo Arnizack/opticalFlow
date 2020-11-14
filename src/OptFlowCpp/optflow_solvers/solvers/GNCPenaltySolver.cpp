@@ -45,11 +45,14 @@ namespace optflow_solvers
         penalty_problem->CrossFilterImage = problem->CrossFilterImage;
         penalty_problem->FirstFrame = problem->FirstFrame;
         penalty_problem->SecondFrame = problem->SecondFrame;
-
+        
 
 
         for (int gnc_iter = 0; gnc_iter < _gnc_steps; gnc_iter++)
         {
+
+            std::cout << "GNC Solve"<<gnc_iter << std::endl;
+
             double blend_factor = ComputeBlendFactor(gnc_iter,_gnc_steps);
             _penalty_func->SetBlendFactor(blend_factor);
             penalty_problem->PenaltyFunc = _penalty_func;

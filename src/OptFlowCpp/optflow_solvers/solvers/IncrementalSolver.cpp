@@ -1,6 +1,7 @@
 #pragma once
 #include"pch.h"
 #include"IncrementalSolver.h"
+#include <iostream>
 
 namespace optflow_solvers
 {
@@ -26,6 +27,7 @@ namespace optflow_solvers
     {
         for (int step = 0; step < _steps; step++)
         {
+            std::cout << "Incremental Solver Step: " << step << std::endl;
             initial_guess = _inner_solver->Solve(problem, initial_guess);
         }
         return initial_guess;
