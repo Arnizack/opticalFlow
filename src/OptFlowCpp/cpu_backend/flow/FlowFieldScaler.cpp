@@ -6,12 +6,12 @@ namespace cpu_backend
 {
 	std::shared_ptr<core::IArray<double, 3>> FlowFieldScaler::Scale(const std::shared_ptr<core::IArray<double, 3>> input, const size_t& dst_width, const size_t& dst_height)
 	{
-		auto in_width = input->Shape[0];
+		auto in_width = input->Shape[2];
 		auto in_height = input->Shape[1];
 
 		auto temp = std::dynamic_pointer_cast<Array<double, 3>>(input);
 		auto in = std::make_shared<Array<double, 3>>(*input);
-		auto output = std::dynamic_pointer_cast<Array<double, 3>>(_array_factory->Zeros({ dst_width, dst_height, 2 }));
+		auto output = std::dynamic_pointer_cast<Array<double, 3>>(_array_factory->Zeros({ 2, dst_height, dst_width}));
 
 		const size_t in_wh = in_width * in_height;
 
