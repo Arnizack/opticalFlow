@@ -56,6 +56,7 @@ namespace console_ui
             return;
         }
         
+        
 
         auto problem_factory = di_container->resolve<core::IProblemFactory>();
         auto problem = problem_factory->CreateGrayCrossFilterProblem(first_img, second_img);

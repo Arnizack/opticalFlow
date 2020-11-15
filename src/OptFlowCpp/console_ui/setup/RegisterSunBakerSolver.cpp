@@ -61,7 +61,7 @@ namespace console_ui
         builder.registerInstance<optflow_solvers::IncrementalSolverSettings>(incremental_settings);
 
         auto gnc_settings = std::make_shared<optflow_solvers::GNCPenaltySolverSettings>();
-        gnc_settings->GNCSteps = 1;
+        gnc_settings->GNCSteps = 3;
         builder.registerInstance<optflow_solvers::GNCPenaltySolverSettings>(gnc_settings);
 
         auto pyramids_resolutions = std::make_shared< optflow_solvers::PyramidsResolutions>();

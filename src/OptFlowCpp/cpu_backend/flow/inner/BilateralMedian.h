@@ -34,13 +34,28 @@ namespace cpu_backend
 		int filter_length,
 		size_t weigths_count, size_t width, size_t height, double* destination);
 
+	void _BilateralMedianListFlowSpecific(int x, int y, double* flow,
+		double* auxiliary_flow,
+		double filter_influence,
+		double auxiliary_influence,
+		int filter_length, size_t width, size_t height, double* destination);
+
+	void _BilateralMedianListWeightsSpecific(int x, int y,
+		double* auxiliary_flow,
+		double filter_influence,
+		double auxiliary_influence,
+		double* weights,
+		int filter_length,
+		size_t weigths_count, size_t width, size_t height, double* destination);
+
 	void BilateralMedianAt(int x, int y,
 		double* flow,
 		double* auxiliary_flow,
 		double* log_occlusion,
 		float* image,
 		double* weights,
-		double* median_list,
+		double* median_list_x,
+		double* median_list_y,
 		double filter_influence,
 		double auxiliary_influence,
 		double sigma_distance,

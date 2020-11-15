@@ -5,6 +5,7 @@
 #include"../../image/inner/IteratorHelper.h"
 #include"../../image/inner/ArrayHelper.h"
 #include <omp.h>
+#include<vector>
 
 namespace cpu_backend
 {
@@ -20,17 +21,20 @@ namespace cpu_backend
         for (int y = 0; y < height; y++)
         {
             double* weights = (double*) malloc(weights_max_length * sizeof(double));
-            double* median_list = (double*)malloc(median_list_max_length * sizeof(double));
+            double* median_list_x = (double*)malloc(median_list_max_length * sizeof(double));
+
+            double* median_list_y = (double*)malloc(median_list_max_length * sizeof(double));
             for (int x = 0; x < width; x++)
             {
                 int coord = y * width + x;
                 BilateralMedianAt(x, y, flow, auxiliary_flow, log_occlusion, image, weights,
-                    median_list, filter_influence, auxiliary_influence, sigma_distance, sigma_color, filter_length,
+                    median_list_x,median_list_y, filter_influence, auxiliary_influence, sigma_distance, sigma_color, filter_length,
                     width, height, color_channel_count,destination);
 
             }
             free(weights);
-            free(median_list);
+            free(median_list_x);
+            free(median_list_y);
         }
     }
 
@@ -125,6 +129,79 @@ namespace cpu_backend
 
     }
     
+    
+    void _BilateralMedianListFlowSpecific(int x, int y, double* flow,
+        double* auxiliary_flow,
+        double filter_influence,
+        double auxiliary_influence,
+        int filter_length,
+        size_t width, size_t height, double* destination)
+    {
+        //See A NEW MEDIAN FORMULA WITH APPLICATIONS TO PDE BASED DENOISING
+        //EQ. 3.13
+        int filter_length_half = filter_length / 2;
+        size_t x_start = std::max(x - filter_length_half, 0);
+        size_t x_end = std::min<size_t>(x + filter_length_half + 1, width);
+        size_t y_start = std::max(y - filter_length_half, 0);
+        size_t y_end = std::min<size_t>(y + filter_length_half + 1, height);
+
+        size_t counter = 0;
+        _inner::Iterate2D(x_start, x_end, y_start, y_end, [&](size_t x_compared, size_t y_compared)
+        {
+            destination[counter] = _inner::GetValueAt<double, Padding::ZEROS>(x_compared, y_compared, width, height, flow);
+            counter++;
+        });
+
+    }
+
+    template <typename T> int sgn(T val) {
+        return (T(0) <= val) - (val < T(0));
+    }
+
+    void _BilateralMedianListWeightsSpecific(int x, int y,
+        double* auxiliary_flow,
+        double filter_influence,
+        double auxiliary_influence,
+        double* weights,
+        int filter_length,
+        size_t weigths_count, size_t width, size_t height, double* destination)
+    {
+        //See A NEW MEDIAN FORMULA WITH APPLICATIONS TO PDE BASED DENOISING
+        //EQ. 3.13
+
+        double lambda = auxiliary_influence / filter_influence;
+        double multiplikator = 1 / (2 * lambda);
+
+        for (int negative_weight_count = 0; negative_weight_count <= weigths_count; negative_weight_count++)
+        {
+            double sum = 0;
+            
+            
+            for (int negativ_weight_idx = 0; negativ_weight_idx< negative_weight_count ; negativ_weight_idx++)
+            {
+                sum -= weights[negativ_weight_idx];
+            }
+
+            for (int positiv_weight_idx = negative_weight_count; positiv_weight_idx < weigths_count; positiv_weight_idx++)
+            {
+                sum += weights[positiv_weight_idx];
+            }
+            
+            /*
+            for (int weight_idx = 0; weight_idx < weigths_count; weight_idx++)
+            {
+                //sgn(weight_idx-negative_weight_count) = -1 for weight_idx<negative_weight_count
+                //sgn(weight_idx-negative_weight_count) = 1 for weight_idx>=negative_weight_count
+                sum += sgn(weight_idx - negative_weight_count) * weights[weight_idx];
+            }*/
+
+            destination[negative_weight_count] = multiplikator * sum;
+        }
+
+    }
+
+
+
     void BilateralMedianAt(
         int x, int y,
         double* flow,
@@ -132,7 +209,8 @@ namespace cpu_backend
         double* log_occlusion,
         float* image,
         double* weights,
-        double* median_list,
+        double* median_list_x,
+        double* median_list_y,
         double filter_influence,
         double auxiliary_influence,
         double sigma_distance,
@@ -146,17 +224,29 @@ namespace cpu_backend
     {
         size_t weights_count = BilateralMedianWeight(x, y, log_occlusion, image, width, height, color_channel_count,
             filter_length, sigma_distance, sigma_color, weights);
+
+        _BilateralMedianListWeightsSpecific(x, y, auxiliary_flow, filter_influence, auxiliary_influence, weights, filter_length,
+            weights_count, width, height, median_list_y);
+        std::copy_n(median_list_y, weights_count + 1, median_list_x);
+
+        double* median_list_flow_specific_y = median_list_y + weights_count + 1;
+        double* median_list_flow_specific_x = median_list_x + weights_count + 1;
+
         //Y Flow
         double* flow_y = flow;
-        _BilateralMedianList(x, y, flow, auxiliary_flow, filter_influence, auxiliary_influence, weights, filter_length,
-            weights_count, width, height, median_list);
-        destination[y*width+x] = _inner::_median(median_list, weights_count * 2 + 1);
+        _BilateralMedianListFlowSpecific(x, y, flow_y, auxiliary_flow, filter_influence, auxiliary_influence, filter_length,
+            width, height, median_list_flow_specific_y);
+        //_BilateralMedianList(x, y, flow, auxiliary_flow, filter_influence, auxiliary_influence, weights, filter_length,
+        //    weights_count, width, height, median_list2.data());
+        destination[y * width + x] = _inner::_median(median_list_y, weights_count * 2 + 1);
 
         //X Flow
         double* flow_x = flow + width * height;
-        _BilateralMedianList(x, y, flow_x, auxiliary_flow, filter_influence, auxiliary_influence, weights, filter_length,
-            weights_count, width, height, median_list);
-        destination[width*height+y * width + x] = _inner::_median(median_list, weights_count * 2 + 1);
+        //_BilateralMedianList(x, y, flow_x, auxiliary_flow, filter_influence, auxiliary_influence, weights, filter_length,
+        //    weights_count, width, height, median_list);
+        _BilateralMedianListFlowSpecific(x, y, flow_x, auxiliary_flow, filter_influence, auxiliary_influence, filter_length,
+            width, height, median_list_flow_specific_x);
+        destination[width*height+y * width + x] = _inner::_median(median_list_x, weights_count * 2 + 1);
 
     }
 
