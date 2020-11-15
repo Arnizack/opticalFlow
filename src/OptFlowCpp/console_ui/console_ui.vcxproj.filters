@@ -29,6 +29,12 @@
     <ClCompile Include="setup\RegisterCPULinalg.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="commandline_boost\ProgramOptions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="commandline_boost\SetupOptions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="commandline\IClEngine.h">
@@ -56,6 +62,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="setup\RegisterCPULinalg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="commandline_boost\ProgramOptions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="commandline_boost\SetupOptions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

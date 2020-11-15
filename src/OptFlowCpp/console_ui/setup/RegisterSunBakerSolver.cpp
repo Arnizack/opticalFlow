@@ -79,4 +79,33 @@ namespace console_ui
 
 
     }
+
+    void SetCommandlineSunBakerSettings(Hypodermic::ContainerBuilder& builder, boost::program_options::variables_map vm)
+    {
+        auto linearization_settings = std::make_shared< optflow_solvers::LinearizationSolverSettings>();
+        linearization_settings->StartRelaxation = vm["lin_start"].as<double>();
+        linearization_settings->EndRelaxation = vm["lin_end"].as<double>();
+        linearization_settings->RelaxationSteps = vm["lin_steps"].as<double>();
+        builder.registerInstance<optflow_solvers::LinearizationSolverSettings>(linearization_settings);
+
+        auto incremental_settings = std::make_shared<optflow_solvers::IncrementalSolverSettings>();
+        incremental_settings->Steps = vm["inc_steps"].as<int>();
+        builder.registerInstance<optflow_solvers::IncrementalSolverSettings>(incremental_settings);
+
+        auto gnc_settings = std::make_shared<optflow_solvers::GNCPenaltySolverSettings>();
+        gnc_settings->GNCSteps = vm["gnc_steps"].as<int>();
+        builder.registerInstance<optflow_solvers::GNCPenaltySolverSettings>(gnc_settings);
+
+        auto pyramids_resolutions = std::make_shared< optflow_solvers::PyramidsResolutions>();
+        pyramids_resolutions->Resolutions = std::vector<optflow_solvers::PyramidResolutions>(2);
+        pyramids_resolutions->Resolutions[0].MinResolutionX = 16;
+        pyramids_resolutions->Resolutions[0].MinResolutionY = 16;
+        pyramids_resolutions->Resolutions[0].ScaleFactor = 0.5;
+
+        pyramids_resolutions->Resolutions[1].MinResolutionX = 16;
+        pyramids_resolutions->Resolutions[1].MinResolutionY = 16;
+        pyramids_resolutions->Resolutions[1].ScaleFactor = 0.5;
+
+        builder.registerInstance<optflow_solvers::PyramidsResolutions>(pyramids_resolutions);
+    }
 }

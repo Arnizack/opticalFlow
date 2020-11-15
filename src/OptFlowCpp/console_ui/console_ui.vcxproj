@@ -35,6 +35,14 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="commandline_boost\ProgramOptions.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="commandline_boost\SetupOptions.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="ComputeOpticalFlow.h">
       <SubType>
       </SubType>
@@ -57,6 +65,14 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="commandline_boost\ProgramOptions.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="commandline_boost\SetupOptions.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="ComputeOpticalFlow.cpp">
       <SubType>
       </SubType>
