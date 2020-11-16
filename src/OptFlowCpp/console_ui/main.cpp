@@ -16,6 +16,8 @@ int main(int argc, char* argv[])
 	std::string flow_output_path = "computed_flow.flo";
 	std::string flow_img_path = "computed_img.png";
 	
+	console_ui::ComputeOpticalFlow(first_img_path, second_img_path, flow_output_path, flow_img_path);
+	return 0;
 	auto di_container = console_ui::ComnandlineSetup(argc, argv, first_img_path, second_img_path, flow_output_path, flow_img_path);
 
 	if (di_container == nullptr)

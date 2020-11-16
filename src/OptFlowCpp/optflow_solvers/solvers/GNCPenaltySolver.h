@@ -5,6 +5,7 @@
 #include"core/IArrayFactory.h"
 #include"core/solver/problem/IProblemFactory.h"
 #include"core/solver/IFlowSolverIterator.h"
+#include"settings/GNCPenaltySolverSettings.h"
 
 namespace optflow_solvers
 {
@@ -13,10 +14,7 @@ namespace optflow_solvers
 	//Namespace clashing ? 
 	using ProblemTyp = std::shared_ptr<core::IGrayCrossFilterProblem>;
 
-	struct GNCPenaltySolverSettings
-	{
-		int GNCSteps = 3;
-	};
+	
 
 	class GNCPenaltySolver : public core::IFlowFieldSolver<ProblemTyp>
 	{

@@ -9,17 +9,13 @@
 #include"core/IArrayFactory.h"
 #include"core/linalg/IArithmeticBasic.h"
 #include"core/flow/ICrossFlowFilter.h"
+#include"settings/LinearizationSolverSettings.h"
 
 namespace optflow_solvers
 {
 	using PtrProblemTyp = std::shared_ptr<core::IGrayPenaltyCrossProblem>;
 
-	struct LinearizationSolverSettings
-	{
-		double StartRelaxation = 1e-04 / 255.0;
-		double EndRelaxation = 1e-01 / 255.0;
-		double RelaxationSteps = 3;
-	};
+	
 
 	class LinearizationSolver : public core::IFlowFieldSolver<PtrProblemTyp>
 	{

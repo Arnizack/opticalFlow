@@ -193,6 +193,26 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="solvers\settings\CGSolverSettings.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="solvers\settings\GNCPenaltySolverSettings.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="solvers\settings\IncrementalSolverSettings.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="solvers\settings\LinearizationSolverSettings.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="solvers\TwoSolverIterator.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pyramid\GrayPenaltyCrossPyramidBuilder.cpp">

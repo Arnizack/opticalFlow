@@ -2,13 +2,12 @@
 #include"core/solver/IFlowFieldSolver.h"
 #include"core/IArray.h"
 #include"core/IArrayFactory.h"
+#include"settings/IncrementalSolverSettings.h"
+
 
 namespace optflow_solvers
 {
-	struct IncrementalSolverSettings
-	{
-		int Steps = 3;
-	};
+	
 	using PtrProblemTyp = std::shared_ptr<core::IGrayPenaltyCrossProblem>;
 	class IncrementalSolver : public core::IFlowFieldSolver<PtrProblemTyp>
 	{
