@@ -154,9 +154,6 @@ namespace cpu_backend
 
     }
 
-    template <typename T> int sgn(T val) {
-        return (T(0) <= val) - (val < T(0));
-    }
 
     void _BilateralMedianListWeightsSpecific(int x, int y,
         double* auxiliary_flow,
@@ -171,7 +168,7 @@ namespace cpu_backend
 
         double lambda = auxiliary_influence / filter_influence;
         double multiplikator = 1 / (2 * lambda);
-
+        /*
         for (int negative_weight_count = 0; negative_weight_count <= weigths_count; negative_weight_count++)
         {
             double sum = 0;
@@ -187,15 +184,19 @@ namespace cpu_backend
                 sum += weights[positiv_weight_idx];
             }
             
-            /*
-            for (int weight_idx = 0; weight_idx < weigths_count; weight_idx++)
-            {
-                //sgn(weight_idx-negative_weight_count) = -1 for weight_idx<negative_weight_count
-                //sgn(weight_idx-negative_weight_count) = 1 for weight_idx>=negative_weight_count
-                sum += sgn(weight_idx - negative_weight_count) * weights[weight_idx];
-            }*/
-
             destination[negative_weight_count] = multiplikator * sum;
+        }*/
+        double sum = 0;
+        for (int positiv_weight_idx = 0; positiv_weight_idx < weigths_count; positiv_weight_idx++)
+        {
+            sum += weights[positiv_weight_idx];
+        }
+        destination[0] = multiplikator * sum;
+
+        for (int negative_weight_count = 0; negative_weight_count < weigths_count; negative_weight_count++)
+        {
+            sum -= 2 * weights[negative_weight_count];
+            destination[negative_weight_count+1] = multiplikator * sum;
         }
 
     }
@@ -231,6 +232,8 @@ namespace cpu_backend
 
         double* median_list_flow_specific_y = median_list_y + weights_count + 1;
         double* median_list_flow_specific_x = median_list_x + weights_count + 1;
+
+        //std::vector<double> median_list2(weights_count * 2 + 1);
 
         //Y Flow
         double* flow_y = flow;
