@@ -3,7 +3,7 @@
 
 #include <boost/program_options.hpp>
 
-namespace console_ui
+namespace optflow_composition
 {
 	void RegisterCPUBackend(Hypodermic::ContainerBuilder& builder);
 	void SetCPUBackendDefaultSettings(Hypodermic::ContainerBuilder& builder);

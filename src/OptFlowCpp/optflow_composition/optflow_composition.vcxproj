@@ -18,11 +18,85 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Backends.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="ContainerInstaller.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="ContainerOptions.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="CPUBackendInstaller.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="CPUBackendInstallers\RegisterCPUBackend.h" />
+    <ClInclude Include="CPUBackendInstallers\RegisterCPULinalg.h" />
+    <ClInclude Include="CPUBackendOptions.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="FlowSolverInstaller.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="FlowSolverInstallers\GNCSolverContainer.h" />
+    <ClInclude Include="FlowSolverInstallers\LevelSolverContainer.h" />
+    <ClInclude Include="FlowSolverInstallers\PyramidContainer.h" />
+    <ClInclude Include="FlowSolverInstallers\PyramidIteratorContainer.h" />
+    <ClInclude Include="FlowSolverOptions.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ContainerInstaller.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="CPUBackendInstaller.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="CPUBackendInstallers\RegisterCPUBackend.cpp" />
+    <ClCompile Include="CPUBackendInstallers\RegisterCPULinalg.cpp" />
+    <ClCompile Include="CPUBackendOptions.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="FlowSolverInstaller.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="FlowSolverInstallers\GNCSolverContainer.cpp" />
+    <ClCompile Include="FlowSolverInstallers\LevelSolverContainer.cpp" />
+    <ClCompile Include="FlowSolverInstallers\PyramidContainer.cpp" />
+    <ClCompile Include="FlowSolverInstallers\PyramidIteratorContainer.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\core\core.vcxproj">
+      <Project>{f7e80072-58dd-410b-827e-f95e620af895}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\cpu_backend\cpu_backend.vcxproj">
+      <Project>{858a1f7f-71cd-49eb-9228-a3ae91925c53}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\optflow_solvers\optflow_solvers.vcxproj">
+      <Project>{7fb25f03-7d47-4fe3-8eaa-1776578ae8ff}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{7FB25F03-7D47-4FE3-8EAA-1776578AE8FF}</ProjectGuid>
-    <RootNamespace>optflow_solvers</RootNamespace>
+    <ProjectGuid>{22ba4a3a-efa0-4920-ad45-0d9f39b0c7ed}</ProjectGuid>
+    <RootNamespace>optflow_composition</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -94,15 +168,12 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\libs;$(SolutionDir)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>
-      </SubSystem>
+      <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
@@ -112,15 +183,12 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\libs;$(SolutionDir)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>
-      </SubSystem>
+      <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -130,15 +198,12 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\libs;$(SolutionDir)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>
-      </SubSystem>
+      <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
@@ -148,134 +213,25 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\libs;$(SolutionDir)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>
-      </SubSystem>
+      <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClInclude Include="framework.h" />
-    <ClInclude Include="linearsystems\ISunBakerLSUpdater.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="OpticalFlowApplication.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="pyramid\GrayPenaltyCrossPyramidBuilder.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="pyramid\PyramidBuilder.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="pyramid\Pyramid.h" />
-    <ClInclude Include="solvers\ConjugateGradientSolver.h" />
-    <ClInclude Include="solvers\GNCPenaltySolver.h" />
-    <ClInclude Include="pch.h" />
-    <ClInclude Include="solvers\IncrementalSolver.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="solvers\LinearizationSolver.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="solvers\PyramidSolver.h" />
-    <ClInclude Include="solvers\PyramidSolverIterator.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="solvers\settings\CGSolverSettings.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="solvers\settings\GNCPenaltySolverSettings.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="solvers\settings\IncrementalSolverSettings.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="solvers\settings\LinearizationSolverSettings.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="solvers\TwoSolverIterator.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="OpticalFlowApplication.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="pyramid\GrayPenaltyCrossPyramidBuilder.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="solvers\GNCPenaltySolver.cpp" />
-    <ClCompile Include="pch.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="solvers\IncrementalSolver.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="solvers\LinearizationSolver.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="solvers\PyramidSolver.cpp" />
-    <ClCompile Include="solvers\PyramidSolverIterator.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\core\core.vcxproj">
-      <Project>{f7e80072-58dd-410b-827e-f95e620af895}</Project>
-      <LinkLibraryDependencies>true</LinkLibraryDependencies>
-    </ProjectReference>
-    <ProjectReference Include="..\libs\imageLib\imageLib.vcxproj">
-      <Project>{a14f6a61-8e9d-4929-a3fd-f497e82f88ba}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\utilities\flow_helper\flow_helper.vcxproj">
-      <Project>{0e88c56f-28f0-4b91-8232-29c507145c89}</Project>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
-    <Import Project="..\packages\boost.1.72.0.0\build\boost.targets" Condition="Exists('..\packages\boost.1.72.0.0\build\boost.targets')" />
-    <Import Project="..\packages\boost_chrono-vc120.1.72.0.0\build\boost_chrono-vc120.targets" Condition="Exists('..\packages\boost_chrono-vc120.1.72.0.0\build\boost_chrono-vc120.targets')" />
-    <Import Project="..\packages\boost_date_time-vc120.1.72.0.0\build\boost_date_time-vc120.targets" Condition="Exists('..\packages\boost_date_time-vc120.1.72.0.0\build\boost_date_time-vc120.targets')" />
-    <Import Project="..\packages\boost_system-vc120.1.72.0.0\build\boost_system-vc120.targets" Condition="Exists('..\packages\boost_system-vc120.1.72.0.0\build\boost_system-vc120.targets')" />
-    <Import Project="..\packages\boost_thread-vc120.1.72.0.0\build\boost_thread-vc120.targets" Condition="Exists('..\packages\boost_thread-vc120.1.72.0.0\build\boost_thread-vc120.targets')" />
+    <Import Project="..\packages\OpenBLAS.0.2.14.1\build\native\openblas.targets" Condition="Exists('..\packages\OpenBLAS.0.2.14.1\build\native\openblas.targets')" />
   </ImportGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\boost.1.72.0.0\build\boost.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost.1.72.0.0\build\boost.targets'))" />
-    <Error Condition="!Exists('..\packages\boost_chrono-vc120.1.72.0.0\build\boost_chrono-vc120.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost_chrono-vc120.1.72.0.0\build\boost_chrono-vc120.targets'))" />
-    <Error Condition="!Exists('..\packages\boost_date_time-vc120.1.72.0.0\build\boost_date_time-vc120.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost_date_time-vc120.1.72.0.0\build\boost_date_time-vc120.targets'))" />
-    <Error Condition="!Exists('..\packages\boost_system-vc120.1.72.0.0\build\boost_system-vc120.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost_system-vc120.1.72.0.0\build\boost_system-vc120.targets'))" />
-    <Error Condition="!Exists('..\packages\boost_thread-vc120.1.72.0.0\build\boost_thread-vc120.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost_thread-vc120.1.72.0.0\build\boost_thread-vc120.targets'))" />
+    <Error Condition="!Exists('..\packages\OpenBLAS.0.2.14.1\build\native\openblas.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\OpenBLAS.0.2.14.1\build\native\openblas.targets'))" />
   </Target>
 </Project>

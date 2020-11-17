@@ -7,7 +7,7 @@
 #include"cpu_backend/image/warper/GrayWarper.h"
 
 
-namespace console_ui
+namespace optflow_composition
 {
     void RegisterCPULinalg(Hypodermic::ContainerBuilder& builder)
     {

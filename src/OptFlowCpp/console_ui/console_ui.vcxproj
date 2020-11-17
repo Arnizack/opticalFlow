@@ -43,46 +43,6 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="ComputeOpticalFlow.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="setup\RegisterCGSolver.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="setup\RegisterCPUBackend.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="setup\RegisterCPULinalg.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="setup\RegisterSunBakerSolver.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="setup\solvers\GNCSolverContainer.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="setup\solvers\LevelSolverContainer.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="setup\solvers\PyramidContainer.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="setup\solvers\PyramidIteratorContainer.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="setup\solvers\SetupSolverSettings.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="commandline_boost\ProgramOptions.cpp">
@@ -93,59 +53,17 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="ComputeOpticalFlow.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="setup\RegisterCGSolver.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="setup\RegisterCPUBackend.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="setup\RegisterCPULinalg.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="setup\RegisterSunBakerSolver.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="setup\solvers\GNCSolverContainer.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="setup\solvers\LevelSolverContainer.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="setup\solvers\PyramidContainer.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="setup\solvers\PyramidIteratorContainer.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\core\core.vcxproj">
       <Project>{f7e80072-58dd-410b-827e-f95e620af895}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\cpu_backend\cpu_backend.vcxproj">
-      <Project>{858a1f7f-71cd-49eb-9228-a3ae91925c53}</Project>
+    <ProjectReference Include="..\optflow_composition\optflow_composition.vcxproj">
+      <Project>{22ba4a3a-efa0-4920-ad45-0d9f39b0c7ed}</Project>
     </ProjectReference>
     <ProjectReference Include="..\optflow_solvers\optflow_solvers.vcxproj">
       <Project>{7fb25f03-7d47-4fe3-8eaa-1776578ae8ff}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\utilities\flow_helper\flow_helper.vcxproj">
-      <Project>{0e88c56f-28f0-4b91-8232-29c507145c89}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\utilities\image_helper\image_helper.vcxproj">
-      <Project>{32b2eff3-852d-4ea6-81c7-1775f7da9e3f}</Project>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

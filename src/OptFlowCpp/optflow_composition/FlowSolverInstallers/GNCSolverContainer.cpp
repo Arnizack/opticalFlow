@@ -2,7 +2,7 @@
 #include"GNCSolverContainer.h"
 #include"PyramidIteratorContainer.h"
 #include"optflow_solvers/solvers/GNCPenaltySolver.h"
-namespace console_ui
+namespace optflow_composition
 {
     std::shared_ptr<Hypodermic::Container> GNCSolverContainer(const Backends& backends, const GNCSolverSettings& settings)
     {

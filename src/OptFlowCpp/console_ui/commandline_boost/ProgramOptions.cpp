@@ -9,12 +9,12 @@ namespace console_ui
 	{
 
 		Hypodermic::ContainerBuilder builder;
-		SetCommandlineCGSettings(builder, vm);
-		RegisterCGSolver(builder);
-		SetCPUBackendCommandlineSettings(builder, vm);
-		RegisterCPUBackend(builder);
-		SetCommandlineSunBakerSettings(builder, vm);
-		RegisterSunBakerSolver(builder);
+		//SetCommandlineCGSettings(builder, vm);
+		//RegisterCGSolver(builder);
+		//SetCPUBackendCommandlineSettings(builder, vm);
+		//RegisterCPUBackend(builder);
+		//SetCommandlineSunBakerSettings(builder, vm);
+		//RegisterSunBakerSolver(builder);
 
 		return builder.build();
 	}

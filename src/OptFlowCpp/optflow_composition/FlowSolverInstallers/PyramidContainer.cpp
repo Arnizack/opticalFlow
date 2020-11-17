@@ -5,9 +5,8 @@
 #include"optflow_solvers/pyramid/GrayPenaltyCrossPyramidBuilder.h"
 #include"optflow_solvers/solvers/LinearizationSolver.h"
 #include"optflow_solvers/solvers/IncrementalSolver.h"
-#include"../RegisterCPUBackend.h"
 
-namespace console_ui
+namespace optflow_composition
 {
     std::shared_ptr<Hypodermic::Container> PyramidContainer(const Backends& backends, const PyramidSettings& settings)
     {

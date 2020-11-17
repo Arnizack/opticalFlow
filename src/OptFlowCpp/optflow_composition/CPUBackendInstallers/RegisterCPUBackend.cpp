@@ -14,7 +14,7 @@
 #include"cpu_backend/problem/GrayPenaltyCrossProblemScaler.h"
 #include"RegisterCPULinalg.h"
 
-namespace console_ui
+namespace optflow_composition
 {
     void RegisterCPUBackend(Hypodermic::ContainerBuilder& builder)
     {
