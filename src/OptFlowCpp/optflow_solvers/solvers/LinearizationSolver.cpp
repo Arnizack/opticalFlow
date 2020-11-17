@@ -2,6 +2,7 @@
 #include"pch.h"
 #include"LinearizationSolver.h"
 #include<math.h>
+#include"core/Logger.h"
 
 namespace optflow_solvers
 {
@@ -59,6 +60,9 @@ namespace optflow_solvers
 
         for (size_t relaxation_iter = 0; relaxation_iter < _relaxation_steps; relaxation_iter++)
         {
+
+            OF_LOG_INFO("Linearization Solver Relaxation Step: {}", relaxation_iter);
+
             double relaxation = ComputeRelaxation(relaxation_iter);
             _linear_system_updater->UpdateParameter(delta_initial_flow, relaxation);
             std::shared_ptr<core::ILinearProblem<double>> linear_problem 

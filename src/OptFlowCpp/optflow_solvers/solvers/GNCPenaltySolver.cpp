@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "GNCPenaltySolver.h"
+#include"core/Logger.h"
 namespace optflow_solvers
 {
     using ProblemTyp = std::shared_ptr<core::IGrayCrossFilterProblem>;
@@ -51,8 +52,7 @@ namespace optflow_solvers
         for (int gnc_iter = 0; gnc_iter < _gnc_steps; gnc_iter++)
         {
 
-            std::cout << "GNC Solve"<<gnc_iter << std::endl;
-
+            OF_LOG_INFO("GNC Solver Step: {0:d}", gnc_iter);
             double blend_factor = ComputeBlendFactor(gnc_iter,_gnc_steps);
             _penalty_func->SetBlendFactor(blend_factor);
             penalty_problem->PenaltyFunc = _penalty_func;

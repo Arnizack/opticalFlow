@@ -5,6 +5,7 @@
 #include "core/IArrayFactory.h"
 #include "core/linalg/IArithmeticChained.h"
 #include "core/linalg/IArithmeticVector.h"
+#include "core/Logger.h"
 #include<iostream>
 
 namespace optflow_solvers
@@ -36,7 +37,7 @@ namespace optflow_solvers
 
 		virtual PtrVector Solve(std::shared_ptr < core::ILinearProblem<InnerTyp>> problem, const PtrVector initial_guess) override
 		{
-			std::cout << "Solve CG" << std::endl;
+			OF_LOG_TRACE("Solve CG");
 			PtrLinearOperator A = problem->LinearOperator;
 			PtrVector b = problem->Vector;
 
