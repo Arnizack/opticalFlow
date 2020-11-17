@@ -97,6 +97,9 @@
     <ClInclude Include="setup\solvers\SetupSolverSettings.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="user_input\makros.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
