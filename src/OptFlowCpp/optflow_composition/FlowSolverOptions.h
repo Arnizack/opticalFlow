@@ -1,21 +1,14 @@
 #pragma once
-#include"Hypodermic/Container.h"
+#include"Backends.h"
 #include"optflow_solvers/solvers/settings/CGSolverSettings.h"
 #include"optflow_solvers/solvers/settings/GNCPenaltySolverSettings.h"
 #include"optflow_solvers/solvers/settings/IncrementalSolverSettings.h"
 #include"optflow_solvers/solvers/settings/LinearizationSolverSettings.h"
 
-
-namespace console_ui
+namespace optflow_composition
 {
-	struct Backends
-	{
-		std::shared_ptr<Hypodermic::Container> CPUBackend;
-		Backends(std::shared_ptr<Hypodermic::Container> cpu_backend)
-			: CPUBackend(cpu_backend)
-		{}
-
-	};
+	//ToDo Rename Settings to Options
+	
 
 	struct LevelSettings
 	{
@@ -51,5 +44,11 @@ namespace console_ui
 	{
 		std::shared_ptr<optflow_solvers::GNCPenaltySolverSettings> GNCSettings = std::make_shared<optflow_solvers::GNCPenaltySolverSettings>();
 		PyramidIteratorSettings PyramidContainerSettings;
+	};
+
+	struct FlowSolverOptions
+	{
+		GNCSolverSettings GNCSettings;
+		
 	};
 }

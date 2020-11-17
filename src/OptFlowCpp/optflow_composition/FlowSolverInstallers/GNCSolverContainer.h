@@ -1,8 +1,8 @@
 #pragma once
 #include"Hypodermic/Container.h"
-#include"SetupSolverSettings.h"
+#include"../FlowSolverOptions.h"
 
-namespace console_ui
+namespace optflow_composition
 {
 	
 

@@ -1,9 +1,9 @@
 #pragma once
 
 #include"Hypodermic/ContainerBuilder.h"
-#include"SetupSolverSettings.h"
+#include"../FlowSolverOptions.h"
 
-namespace console_ui
+namespace optflow_composition
 {
 
 	std::shared_ptr<Hypodermic::Container> PyramidIteratorContainer(

@@ -8,6 +8,7 @@
     <ClCompile Include="solvers\LinearizationSolver.cpp" />
     <ClCompile Include="solvers\PyramidSolverIterator.cpp" />
     <ClCompile Include="pyramid\GrayPenaltyCrossPyramidBuilder.cpp" />
+    <ClCompile Include="OpticalFlowApplication.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -27,6 +28,7 @@
     <ClInclude Include="solvers\settings\GNCPenaltySolverSettings.h" />
     <ClInclude Include="solvers\settings\IncrementalSolverSettings.h" />
     <ClInclude Include="solvers\settings\LinearizationSolverSettings.h" />
+    <ClInclude Include="OpticalFlowApplication.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

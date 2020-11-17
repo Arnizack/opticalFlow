@@ -19,92 +19,71 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="commandline\commands\ICLArgument.h">
+    <ClInclude Include="Backends.h">
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="commandline\commands\ICLCommand.h">
+    <ClInclude Include="ContainerInstaller.h">
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="commandline\commands\IClOption.h">
+    <ClInclude Include="ContainerOptions.h">
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="commandline\IClEngine.h">
+    <ClInclude Include="CPUBackendInstaller.h">
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="commandline_boost\ProgramOptions.h">
+    <ClInclude Include="CPUBackendInstallers\RegisterCPUBackend.h" />
+    <ClInclude Include="CPUBackendInstallers\RegisterCPULinalg.h" />
+    <ClInclude Include="CPUBackendOptions.h">
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="commandline_boost\SetupOptions.h">
+    <ClInclude Include="FlowSolverInstaller.h">
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="ComputeOpticalFlow.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="setup\RegisterCGSolver.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="setup\RegisterCPUBackend.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="setup\RegisterCPULinalg.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="setup\RegisterSunBakerSolver.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="setup\solvers\GNCSolverContainer.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="setup\solvers\LevelSolverContainer.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="setup\solvers\PyramidContainer.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="setup\solvers\PyramidIteratorContainer.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="setup\solvers\SetupSolverSettings.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="user_input\makros.h">
+    <ClInclude Include="FlowSolverInstallers\GNCSolverContainer.h" />
+    <ClInclude Include="FlowSolverInstallers\LevelSolverContainer.h" />
+    <ClInclude Include="FlowSolverInstallers\PyramidContainer.h" />
+    <ClInclude Include="FlowSolverInstallers\PyramidIteratorContainer.h" />
+    <ClInclude Include="FlowSolverOptions.h">
       <SubType>
       </SubType>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="commandline_boost\ProgramOptions.cpp">
+    <ClCompile Include="ContainerInstaller.cpp">
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="commandline_boost\SetupOptions.cpp">
+    <ClCompile Include="CPUBackendInstaller.cpp">
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="main.cpp" />
+    <ClCompile Include="CPUBackendInstallers\RegisterCPUBackend.cpp" />
+    <ClCompile Include="CPUBackendInstallers\RegisterCPULinalg.cpp" />
+    <ClCompile Include="CPUBackendOptions.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="FlowSolverInstaller.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="FlowSolverInstallers\GNCSolverContainer.cpp" />
+    <ClCompile Include="FlowSolverInstallers\LevelSolverContainer.cpp" />
+    <ClCompile Include="FlowSolverInstallers\PyramidContainer.cpp" />
+    <ClCompile Include="FlowSolverInstallers\PyramidIteratorContainer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\core\core.vcxproj">
       <Project>{f7e80072-58dd-410b-827e-f95e620af895}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\optflow_composition\optflow_composition.vcxproj">
-      <Project>{22ba4a3a-efa0-4920-ad45-0d9f39b0c7ed}</Project>
+    <ProjectReference Include="..\cpu_backend\cpu_backend.vcxproj">
+      <Project>{858a1f7f-71cd-49eb-9228-a3ae91925c53}</Project>
     </ProjectReference>
     <ProjectReference Include="..\optflow_solvers\optflow_solvers.vcxproj">
       <Project>{7fb25f03-7d47-4fe3-8eaa-1776578ae8ff}</Project>
@@ -116,32 +95,32 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{0ea2b21a-5b5d-42f2-a3e4-ff974b36ffe4}</ProjectGuid>
-    <RootNamespace>console_ui</RootNamespace>
+    <ProjectGuid>{22ba4a3a-efa0-4920-ad45-0d9f39b0c7ed}</ProjectGuid>
+    <RootNamespace>optflow_composition</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -184,18 +163,6 @@
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)\bin\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)\bin\intermediates\$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
-  </PropertyGroup>
-  <PropertyGroup Label="Vcpkg" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <VcpkgEnabled>true</VcpkgEnabled>
-  </PropertyGroup>
-  <PropertyGroup Label="Vcpkg" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <VcpkgEnabled>true</VcpkgEnabled>
-  </PropertyGroup>
-  <PropertyGroup Label="Vcpkg" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <VcpkgEnabled>true</VcpkgEnabled>
-  </PropertyGroup>
-  <PropertyGroup Label="Vcpkg" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <VcpkgEnabled>true</VcpkgEnabled>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

@@ -168,6 +168,10 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="OpticalFlowApplication.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="pyramid\GrayPenaltyCrossPyramidBuilder.h">
       <SubType>
       </SubType>
@@ -215,6 +219,10 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="OpticalFlowApplication.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="pyramid\GrayPenaltyCrossPyramidBuilder.cpp">
       <SubType>
       </SubType>
@@ -241,6 +249,12 @@
     <ProjectReference Include="..\core\core.vcxproj">
       <Project>{f7e80072-58dd-410b-827e-f95e620af895}</Project>
       <LinkLibraryDependencies>true</LinkLibraryDependencies>
+    </ProjectReference>
+    <ProjectReference Include="..\libs\imageLib\imageLib.vcxproj">
+      <Project>{a14f6a61-8e9d-4929-a3fd-f497e82f88ba}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\utilities\flow_helper\flow_helper.vcxproj">
+      <Project>{0e88c56f-28f0-4b91-8232-29c507145c89}</Project>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

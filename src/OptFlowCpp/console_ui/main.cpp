@@ -1,13 +1,14 @@
-#include"ComputeOpticalFlow.h"
-#include "commandline_boost/ProgramOptions.h"
-
+#include"optflow_solvers/OpticalFlowApplication.h"
+//#include "commandline_boost/ProgramOptions.h"
+#include"optflow_composition/ContainerInstaller.h"
 #include <iostream>
 #include <string>
 #include <vector>
 
+
 int main(int argc, char* argv[])
 {
-	namespace bpo = boost::program_options;
+	
 
 	std::string first_img_path = "E:\\dev\\opticalFlow\\V2\\opticalFlow\\resources\\eval-twoframes\\Dimetrodon\\frame10.png"; 
 	//first_img_path = "H:\\dev\\opticalFlow\\Prototyp\\Version 2\\opticalFlow\\resources\\eval-twoframes\\Dimetrodon\\frame10.png";
@@ -16,22 +17,16 @@ int main(int argc, char* argv[])
 	std::string flow_output_path = "computed_flow.flo";
 	std::string flow_img_path = "computed_img.png";
 	
-	console_ui::ComputeOpticalFlow(first_img_path, second_img_path, flow_output_path, flow_img_path);
-	return 0;
-	auto di_container = console_ui::ComnandlineSetup(argc, argv, first_img_path, second_img_path, flow_output_path, flow_img_path);
+	optflow_composition::ContainerInstaller di_installer;
 
-	if (di_container == nullptr)
-	{
-		//input = --help
+	auto options = std::make_shared<optflow_composition::ContainerOptions>();
+	di_installer.SetOptions(options);
 
-		//console_ui::ComputeOpticalFlow(first_img_path, second_img_path, flow_output_path, flow_img_path);
+	auto di_container = di_installer.Install();
 
-		return 1;
-	}
-	else
-	{
-		console_ui::ComputeOpticalFlow(first_img_path, second_img_path, flow_output_path, flow_img_path, di_container);
-	}
+	auto application = di_container->resolve<optflow_solvers::OpticalFlowApplication>();
+
+	application->ComputeOpticalFlow(first_img_path, second_img_path, flow_output_path, flow_img_path);
 
 	return 0;
 }

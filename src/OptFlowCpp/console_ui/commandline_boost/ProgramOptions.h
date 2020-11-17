@@ -4,9 +4,6 @@
 #include <string>
 #include <iostream>
 #include"Hypodermic/ContainerBuilder.h"
-#include"../setup/RegisterCGSolver.h"
-#include"../setup/RegisterCPUBackend.h"
-#include"../setup/RegisterSunBakerSolver.h"
 
 namespace console_ui
 {

@@ -14,37 +14,10 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="setup\RegisterSunBakerSolver.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="setup\RegisterCGSolver.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="setup\RegisterCPUBackend.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ComputeOpticalFlow.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="setup\RegisterCPULinalg.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="commandline_boost\ProgramOptions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="commandline_boost\SetupOptions.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="setup\solvers\LevelSolverContainer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="setup\solvers\PyramidContainer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="setup\solvers\PyramidIteratorContainer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="setup\solvers\GNCSolverContainer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -59,21 +32,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="commandline\commands\IClOption.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="setup\RegisterSunBakerSolver.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="setup\RegisterCGSolver.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="setup\RegisterCPUBackend.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ComputeOpticalFlow.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="setup\RegisterCPULinalg.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="commandline_boost\ProgramOptions.h">

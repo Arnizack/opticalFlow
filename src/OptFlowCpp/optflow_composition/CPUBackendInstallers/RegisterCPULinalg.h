@@ -1,7 +1,7 @@
 #pragma once
 #include"Hypodermic/ContainerBuilder.h"
 
-namespace console_ui
+namespace optflow_composition
 {
 	void RegisterCPULinalg(Hypodermic::ContainerBuilder& builder);
 }
