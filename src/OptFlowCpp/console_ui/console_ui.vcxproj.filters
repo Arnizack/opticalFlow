@@ -20,6 +20,9 @@
     <ClCompile Include="commandline_boost\SetupOptions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="json_user_input\JsonSetOptions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="commandline\IClEngine.h">
@@ -55,7 +58,19 @@
     <ClInclude Include="setup\solvers\SetupSolverSettings.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="user_input\makros.h">
+    <ClInclude Include="setup\RegisterCGSolver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="setup\RegisterCPUBackend.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="setup\RegisterCPULinalg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="setup\RegisterSunBakerSolver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="json_user_input\JsonSetOptions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

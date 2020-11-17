@@ -43,7 +43,7 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="ComputeOpticalFlow.h">
+    <ClInclude Include="json_user_input\JsonSetOptions.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -83,10 +83,6 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="user_input\makros.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="commandline_boost\ProgramOptions.cpp">
@@ -94,6 +90,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="commandline_boost\SetupOptions.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="json_user_input\JsonSetOptions.cpp">
       <SubType>
       </SubType>
     </ClCompile>

@@ -43,12 +43,12 @@ namespace optflow_composition
 	struct GNCSolverSettings
 	{
 		std::shared_ptr<optflow_solvers::GNCPenaltySolverSettings> GNCSettings = std::make_shared<optflow_solvers::GNCPenaltySolverSettings>();
-		PyramidIteratorSettings PyramidContainerSettings;
+		std::shared_ptr<PyramidIteratorSettings> PyramidContainerSettings = std::make_shared<PyramidIteratorSettings>();
 	};
 
 	struct FlowSolverOptions
 	{
-		GNCSolverSettings GNCSettings;
+		std::shared_ptr<GNCSolverSettings> GNCSettings = std::make_shared<GNCSolverSettings>();
 		
 	};
 }
