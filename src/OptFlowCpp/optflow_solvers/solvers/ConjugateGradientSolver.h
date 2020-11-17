@@ -1,6 +1,6 @@
 #pragma once
 #include "../framework.h"
-
+#include"settings/CGSolverSettings.h"
 #include "core/solver/ILinearSolver.h"
 #include "core/IArrayFactory.h"
 #include "core/linalg/IArithmeticChained.h"
@@ -9,11 +9,7 @@
 
 namespace optflow_solvers
 {
-	struct CGSolverSettings
-	{
-		double Tolerance = 1e-3;
-		size_t Iterations = 100;
-	};
+	
 	template<class InnerTyp>
 	class ConjugateGradientSolver : public core::ILinearSolver<InnerTyp>
 	{

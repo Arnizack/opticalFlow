@@ -35,6 +35,18 @@
     <ClCompile Include="commandline_boost\SetupOptions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="setup\solvers\LevelSolverContainer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="setup\solvers\PyramidContainer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="setup\solvers\PyramidIteratorContainer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="setup\solvers\GNCSolverContainer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="commandline\IClEngine.h">
@@ -68,6 +80,21 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="commandline_boost\SetupOptions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="setup\solvers\LevelSolverContainer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="setup\solvers\PyramidContainer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="setup\solvers\PyramidIteratorContainer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="setup\solvers\GNCSolverContainer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="setup\solvers\SetupSolverSettings.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

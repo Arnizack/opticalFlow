@@ -22,6 +22,11 @@
     <ClInclude Include="pyramid\Pyramid.h" />
     <ClInclude Include="pyramid\PyramidBuilder.h" />
     <ClInclude Include="pyramid\GrayPenaltyCrossPyramidBuilder.h" />
+    <ClInclude Include="solvers\TwoSolverIterator.h" />
+    <ClInclude Include="solvers\settings\CGSolverSettings.h" />
+    <ClInclude Include="solvers\settings\GNCPenaltySolverSettings.h" />
+    <ClInclude Include="solvers\settings\IncrementalSolverSettings.h" />
+    <ClInclude Include="solvers\settings\LinearizationSolverSettings.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

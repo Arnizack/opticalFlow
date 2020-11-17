@@ -1,6 +1,6 @@
 #pragma once
 #include"ComputeOpticalFlow.h"
-
+#include"setup/solvers/GNCSolverContainer.h"
 
 namespace console_ui
 {
@@ -18,6 +18,18 @@ namespace console_ui
         return builder.build();
     }
 
+    std::shared_ptr<Hypodermic::Container> SetupDefaultSolvers2()
+    {
+        Hypodermic::ContainerBuilder builder;
+        SetCPUBackendDefaultSettings(builder);
+        RegisterCPUBackend(builder);
+        auto cpu_backend = builder.build();
+
+        Backends backends(cpu_backend);
+        GNCSolverSettings settings;
+        return GNCSolverContainer(backends, settings);
+   
+    }
     std::shared_ptr<core::IArray<float, 3>> OpenImage(std::string filepath, std::shared_ptr<Hypodermic::Container> container)
     {
         auto array_factory = container->resolve<core::IArrayFactory<float, 3>>();
@@ -33,7 +45,8 @@ namespace console_ui
         return array_factory->CreateFromSource(image.data->data(), shape);
     }
 
-    void ComputeOpticalFlow(std::string first_image_path, std::string second_image_path, std::string flow_output_path, std::string flow_img_output_path, std::shared_ptr<Hypodermic::Container> di_container)
+    void ComputeOpticalFlow(std::string first_image_path, std::string second_image_path, std::string flow_output_path, std::string flow_img_output_path, 
+        std::shared_ptr<Hypodermic::Container> di_container)
     {
         //auto di_container = SetupDefaultSolvers();
         auto first_img = OpenImage(first_image_path, di_container);
@@ -52,7 +65,7 @@ namespace console_ui
 
         //auto flow_solver = di_container->resolve<core::IFlowFieldSolver<std::shared_ptr<core::IGrayCrossFilterProblem>>>();
         
-        auto temp = di_container->resolve< optflow_solvers::LinearizationSolver>();
+        //auto temp = di_container->resolve< optflow_solvers::LinearizationSolver>();
         auto flow_solver = di_container->resolve < optflow_solvers::GNCPenaltySolver>();
         auto flow_field = flow_solver->Solve(problem);
         flowhelper::SaveFlow(flow_output_path, flow_field);

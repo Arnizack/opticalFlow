@@ -63,6 +63,26 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="setup\solvers\GNCSolverContainer.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="setup\solvers\LevelSolverContainer.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="setup\solvers\PyramidContainer.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="setup\solvers\PyramidIteratorContainer.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="setup\solvers\SetupSolverSettings.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="commandline_boost\ProgramOptions.cpp">
@@ -91,6 +111,22 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="setup\RegisterSunBakerSolver.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="setup\solvers\GNCSolverContainer.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="setup\solvers\LevelSolverContainer.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="setup\solvers\PyramidContainer.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="setup\solvers\PyramidIteratorContainer.cpp">
       <SubType>
       </SubType>
     </ClCompile>

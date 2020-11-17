@@ -7,3 +7,5 @@
 .vs/
 /src/OptFlowCpp/test
 /src/OptFlowCpp/.vscode
+/src/OptFlowCpp/console_ui/computed_flow.flo
+/src/OptFlowCpp/console_ui/computed_img.png
