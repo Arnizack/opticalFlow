@@ -1,6 +1,7 @@
 #include"pch.h"
 #include "PyramidSolver.h"
 #include <iostream>
+#include"core/Logger.h"
 namespace optflow_solvers
 {
 
@@ -41,8 +42,8 @@ namespace optflow_solvers
 			auto problem = pyramid->NextLevel();
 			size_t width = problem->FirstFrame->Shape[1];
 			size_t heigth = problem->FirstFrame->Shape[0];
-			
-			std::cout << "Pyramid Level: " << width << "," << heigth << std::endl;
+
+			OF_LOG_INFO("Pyramid Level: {}, {}", width, heigth);
 
 			/*PtrFlowField*/ initial_guess_scaled = _flow_scaler->Scale(initial_guess_scaled,width,heigth);
 

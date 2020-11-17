@@ -2,6 +2,7 @@
 #include"pch.h"
 #include"IncrementalSolver.h"
 #include <iostream>
+#include"core/Logger.h"
 
 namespace optflow_solvers
 {
@@ -27,7 +28,8 @@ namespace optflow_solvers
     {
         for (int step = 0; step < _steps; step++)
         {
-            std::cout << "Incremental Solver Step: " << step << std::endl;
+
+            OF_LOG_INFO("Incremental Solver Step: {0:d}", step);
             initial_guess = _inner_solver->Solve(problem, initial_guess);
         }
         return initial_guess;

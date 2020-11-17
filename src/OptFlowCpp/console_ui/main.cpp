@@ -4,11 +4,15 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include"core/Logger.h"
 
 
 int main(int argc, char* argv[])
 {
 	
+	core::Logger::Init();
+
+	OF_LOG_INFO("Start Logger");
 
 	std::string first_img_path = "E:\\dev\\opticalFlow\\V2\\opticalFlow\\resources\\eval-twoframes\\Dimetrodon\\frame10.png"; 
 	first_img_path = "H:\\dev\\opticalFlow\\Prototyp\\Version 2\\opticalFlow\\resources\\eval-twoframes\\Dimetrodon\\frame10.png";
