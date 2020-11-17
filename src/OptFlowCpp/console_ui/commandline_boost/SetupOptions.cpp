@@ -80,7 +80,7 @@ namespace console_ui
 		linearization.add_options()
 			("lin_start", bpo::value<double>()->default_value(1e-04 / 255.0), "Sets the default Start-Relaxation value of the Linearization Solver")
 			("lin_end", bpo::value<double>()->default_value(1e-01 / 255.0), "Sets the default End-Relaxation value of the Linearization Solver")
-			("lin_steps", bpo::value<double>()->default_value(1e-04 / 255.0), "Sets the default Relaxation-Steps value of the Linearization Solver");
+			("lin_steps", bpo::value<double>()->default_value(3), "Sets the default Relaxation-Steps value of the Linearization Solver");
 
 		bpo::options_description incremental("Incremental Solver options");
 		incremental.add_options()
