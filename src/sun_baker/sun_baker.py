@@ -24,10 +24,10 @@ def preprocessing(first_image : np.ndarray,second_image : np.ndarray) -> Tuple[n
     :param second_image: (Color,Height,Width)
     :return: (filter_image, first_gray_image, second_gray_image)
     """
-    first_struc, first_tex = denoising_chambolle_image(first_image)
-    second_struc, second_tex = denoising_chambolle_image(second_image)
+    first_struc, first_tex = denoising_chambolle_image(first_image,iter=1,std_dev=0.5)
+    second_struc, second_tex = denoising_chambolle_image(second_image,iter=1,std_dev=0.5)
 
-    filter_image = scale_image_channels_in_range(first_struc,start=0,end=1)
+    filter_image = scale_np_array_in_range(first_tex,start=0,end=0)#scale_image_channels_in_range(first_tex,start=0,end=1)
 
     mix = 4/5
 
@@ -52,6 +52,13 @@ def sun_baker_optical_flow(first_image : np.ndarray, second_image : np.ndarray,s
     gnc_factors = settings.gnc_scale_factors
 
     filter_image, first_gray_image, second_gray_image = preprocessing(first_image,second_image)
+
+    show_image(first_image)
+    plt.figure()
+    plt.imshow(first_gray_image)
+    plt.figure()
+    plt.imshow(second_gray_image)
+    plt.show()
 
     pyramid_levels_first_gray_image = create_matrix_pyramid(first_gray_image, factors)
     pyramid_levels_second_gray_image = create_matrix_pyramid(second_gray_image, factors)
@@ -120,12 +127,16 @@ def sun_baker_optical_flow(first_image : np.ndarray, second_image : np.ndarray,s
 
 
             for iter in range(settings.steps_per_level):
-                flow = solve_layer(filter_scaled,first_gray_scaled,second_gray_scaled,flow, penalty_func,settings)
+                flow_next = solve_layer(filter_scaled,first_gray_scaled,second_gray_scaled,flow, penalty_func,settings)
+                if(np.linalg.norm(flow-flow_next) < 1e-03):
+                    flow = flow_next
+                    print("Iter break")
+                    break
+                flow = flow_next
 
-
-            plt.title("At level: "+str(width) +","+str(height)+", GNC: "+str(gnc_iter))
-            show_flow_field(flow, width, height)
-            plt.show()
+            #plt.title("At level: "+str(width) +","+str(height)+", GNC: "+str(gnc_iter))
+            #show_flow_field(flow, width, height)
+            #plt.show()
 
     print("Sun Baker full time: ", time() - start_time)
     return flow

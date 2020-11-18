@@ -17,7 +17,9 @@ def compute_occlusion_log(first_frame,second_frame, flow, sigma_d = 0.3, sigma_e
     #and the Principles behind Them
 
     flow_y_derivative = differentiate_matrix(flow[0])
+
     flow_x_derivative = differentiate_matrix(flow[1])
+
 
     div = flow_y_derivative[0] + flow_x_derivative[1]
 
@@ -31,13 +33,13 @@ def compute_occlusion_log(first_frame,second_frame, flow, sigma_d = 0.3, sigma_e
 
     X,Y = np.meshgrid(np.arange(width),np.arange(height))
 
-    exponent = d**2/2*sigma_d**2
+    exponent = d**2/(2*sigma_d**2)
 
     first_frame_warped = warp_image(first_frame,flow)
 
     color_difference = first_frame - first_frame_warped
 
-    exponent += np.linalg.norm(color_difference,axis=0)**2 / 2*sigma_e**2
+    exponent += np.linalg.norm(color_difference,axis=0)**2 / (2*sigma_e**2)
 
     return -exponent
 

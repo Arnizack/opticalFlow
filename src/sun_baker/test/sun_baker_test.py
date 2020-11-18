@@ -9,6 +9,7 @@ from src.sun_baker.solver_settings import SolverSettings
 from src.utilities.penalty_functions.GeneralizedCharbonnierPenalty import GeneralizedCharbonnierPenalty
 import matplotlib.pyplot as plt
 
+
 def test_sun_baker(img1,img2):
     settings = SolverSettings()
     flow = sun_baker_optical_flow(img1,img2)
@@ -68,6 +69,10 @@ def Urban3():
 if __name__ == '__main__':
     img1, img2, ref_flow = RubberWhale()
     computed_flow = test_sun_baker(img1,img2)
+    try:
+        np.savetxt("RubberWhale.csv", computed_flow.flatten(), delimiter=",")
+    except Exception:
+        pass
     error = test_condition(img1,img2,computed_flow,GeneralizedCharbonnierPenalty(),SolverSettings())
 
     plt.title("Hypothese")

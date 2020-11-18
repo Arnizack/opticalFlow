@@ -44,9 +44,9 @@ def setup_linear_system(I_x: np.ndarray, I_y: np.ndarray, I_t: np.ndarray, guess
         |-I_x p'_D + I_x p''_D I_x du + I_x p''_D I_y dv + lambda_R 2 u_relax|
 
     K = - 2 lambda_K * mat(ker(x))
-    D_y = diag(I_y p'_D I_y + 2 lambda_R)
+    D_y = diag(I_y p''_D I_y + 2 lambda_R)
     R = diag(I_x p''_D I_y)
-    D_x = diag(I_x p'_D I_x + 2 lambda_R )
+    D_x = diag(I_x p''_D I_x + 2 lambda_R )
 
 
     :return: Diagonal Matrix , Vector
@@ -78,3 +78,4 @@ def setup_linear_system(I_x: np.ndarray, I_y: np.ndarray, I_t: np.ndarray, guess
                          I_x * second_derivative_penalty * I_y * guess_v + lambda_r * 2 * relax_u
 
     return (A, b)
+

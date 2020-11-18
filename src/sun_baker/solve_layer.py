@@ -4,7 +4,8 @@ from src.utilities.color2grayscale import color2grayscale
 from src.sun_baker.derivative_sun import derivative_sun
 from src.sun_baker.setup_linear_system.setup_linear_system import setup_linear_system
 from src.utilities.penalty_functions.IPenalty import IPenalty
-from src.filter.cython.bilateral_median import bilateral_median_filter
+#from src.filter.cython.bilateral_median import bilateral_median_filter
+from src.filter.bilater_median import bilateral_median_filter
 from src.utilities.compute_occlusion import compute_occlusion,compute_occlusion_log
 from src.utilities.warp_grid import warp_image, warp_matrix
 import scipy.sparse.linalg as splinalg
@@ -113,13 +114,20 @@ def solve_layer(filter_image : np.ndarray,first_gray_image : np.ndarray, second_
         #plt.show()
 
         if(settings.flow_filter_filter_size>3):
+            print("Flow")
+            print(flow)
+            print("FilterImage")
+            print(filter_image)
             init_flow = np.zeros(shape=(2, height, width), dtype=np.double)
 
             log_occlusion = compute_occlusion_log(filter_image, filter_image, flow)
 
+            print("Log Occlusion")
+            print(log_occlusion)
+
             flow = bilateral_median_filter(flow.astype(np.double), log_occlusion.astype(np.double),
                                            flow.astype(np.double), filter_image.astype(np.double),
-                                           weigth_auxiliary=lambda_relax, weigth_filter=10,
+                                           weigth_auxiliary=lambda_relax, weigth_filter=5,
                                            sigma_distance=settings.flow_filter_sigma_distance,
                                            sigma_color=settings.flow_filter_sigma_color,
                                            filter_size = settings.flow_filter_filter_size)
@@ -127,6 +135,9 @@ def solve_layer(filter_image : np.ndarray,first_gray_image : np.ndarray, second_
             #plt.title("After Filter")
             #show_flow_field(flow, width, height)
             #plt.show()
+
+            print("flow after")
+            print(flow)
 
             relax_flow_field = flow.reshape(width*height*2)-initial_flow_field.reshape(width*height*2)
             guess_vu = relax_flow_field

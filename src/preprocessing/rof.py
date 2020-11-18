@@ -3,7 +3,7 @@ from scipy import signal
 from time import time
 from typing import Tuple
 
-def denoising_chambolle_image(img: np.ndarray,lambda0=0.125, std_dev=None, iter=1) -> Tuple[np.ndarray,np.ndarray]:
+def denoising_chambolle_image(img: np.ndarray,lambda0=0.125, std_dev=None, iter=100) -> Tuple[np.ndarray,np.ndarray]:
     """
 
     :param img: 3D np.ndarray

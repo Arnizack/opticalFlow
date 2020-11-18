@@ -170,7 +170,8 @@ def test_bilateral_median_filter_bug2():
     init_flow = np.zeros(shape=(2, img1.shape[1], img1.shape[2]), dtype=np.double)
     flow = bilateral_median_filter(flow.astype(np.double), occlusion.astype(np.double), init_flow.astype(np.double),
                                    img1.astype(np.double),
-                                   weigth_auxiliary=1, weigth_filter=1, sigma_distance=1, sigma_color=1, filter_size=3)
+                                   weigth_auxiliary=2, weigth_filter=6, sigma_distance=5, sigma_color=4,
+                                   filter_size=3)
 
     return flow
 
@@ -258,11 +259,12 @@ def test_bilateral_median_filter(img1,img2):
     start = time()
 
     flow = bilateral_median_filter(flow.astype(np.double),occlusion.astype(np.double),init_flow.astype(np.double),img1.astype(np.double),
-                                   weigth_auxiliary=1,weigth_filter=1, sigma_distance = 1, sigma_color = 1,filter_size=3)
+                                   weigth_auxiliary=2, weigth_filter=6, sigma_distance=5, sigma_color=4,
+                                   filter_size=3)
     c_flow = c_filter.bilateral_median_filter(flow.astype(np.double), occlusion.astype(np.double),
                                               init_flow.astype(np.double),
                                               img1.astype(np.double),
-                                              weigth_auxiliary=1, weigth_filter=1, sigma_distance=1, sigma_color=1,
+                                              weigth_auxiliary=2, weigth_filter=6, sigma_distance=5, sigma_color=4,
                                               filter_size=3)
 
     print("Bilateral Median Filter Time: ",time()-start)
@@ -271,11 +273,12 @@ def test_bilateral_median_filter(img1,img2):
 
 if __name__ == '__main__':
     img1,img2 = grove3()
-    flow = test_bilateral_median_filter_color()
+    flow = test_bilateral_median_filter_bug2()
 
     #flow[0][flow[0]>7]=0
     #flow[1][flow[1] > 7] = 0
     plt.title("Final")
+    print(flow.flatten())
     show_flow_field(flow,flow.shape[2],flow.shape[1],mode="RGB")
     show_flow_field(flow, flow.shape[2], flow.shape[1], mode="Split")
 

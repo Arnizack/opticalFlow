@@ -43,7 +43,9 @@ cdef int max(int a, int b) nogil:
 
 @cython.boundscheck(False)  # Deactivate bounds checking
 @cython.wraparound(False)   # Deactivate negative indexing.
-cdef void inner_row_kernel(int y, double[:,:, ::1] flow, double[:, ::1] log_occlusen, double[:,:, ::1] auxiliary_field, double[:,:, ::1] image,double[:,:,::1] result_flow,
+cdef void inner_row_kernel(int y, double[:,:, ::1] flow, double[:, ::1] log_occlusen, 
+double[:,:, ::1] auxiliary_field, 
+double[:,:, ::1] image,double[:,:,::1] result_flow,
                         double weigth_auxiliary, double weigth_filter, int width, int height,
                         double sigma_distance, double sigma_color, int filter_size, int color_channel_count, int filter_half, int helper_list_size
                 ) nogil:
@@ -86,8 +88,8 @@ cdef void inner_row_kernel(int y, double[:,:, ::1] flow, double[:, ::1] log_occl
                 for channel_idx in range(color_channel_count):
                     color_squared_difference += (image[channel_idx,y_compare,x_compare] - image[channel_idx,y,x]) ** 2
 
-                exponent = distance_squared_difference / (2 * sigma_distance)
-                exponent += color_squared_difference / (2 * sigma_color * color_channel_count)
+                exponent = distance_squared_difference / (2 * sigma_distance * sigma_distance)
+                exponent += color_squared_difference / (2 * sigma_color * sigma_color * color_channel_count)
 
                 occlusen_current = log_occlusen[y,x]
                 occlusen_compared = log_occlusen[y_compare,x_compare]

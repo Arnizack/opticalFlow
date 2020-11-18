@@ -42,3 +42,10 @@ def create_matrix_pyramid(matrix,factors):
 
     pyramid_levels.reverse()
     return pyramid_levels
+
+
+
+if __name__ == '__main__':
+    img = np.arange(0, 20 * 26)
+    img.shape = (20, 26)
+    downscale(img,0.5)

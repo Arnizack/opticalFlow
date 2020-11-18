@@ -37,8 +37,8 @@ def setup_linear_system_test1():
     plt.show()
 
 def setup_linear_system_test2(img1,img2):
-    img1 = downscale_image(img1, 0.02)
-    img2 = downscale_image(img2, 0.02)
+    #img1 = downscale_image(img1, 0.02)
+    #img2 = downscale_image(img2, 0.02)
     width = img1.shape[2]
     height = img1.shape[1]
 
@@ -84,8 +84,17 @@ def setup_linear_system_test2(img1,img2):
 
     plt.show()
 
+def test_cpp_img():
+    img1 = np.arange(20)
+    img2 = np.arange(20,40)
+    img1.shape=(1,5,4)
+    img2.shape = (1,5,4)
+    return  img1,img2
 
 if __name__ == '__main__':
     img1 = open_image(r"..\..\..\..\resources\eval-twoframes\Dimetrodon\frame10.png")
     img2 = open_image(r"..\..\..\..\resources\eval-twoframes\Dimetrodon\frame11.png")
+    img1,img2 = test_cpp_img()
+
+
     setup_linear_system_test2(img1,img2)

@@ -63,7 +63,12 @@ def warp_matrix(matrix, offset):
     x_warped_coords = x_warped_coords.astype(np.float32)
     y_warped_coords = y_warped_coords.astype(np.float32)
 
-    return cv2.remap(matrix,x_warped_coords,y_warped_coords,cv2.INTER_CUBIC)
+    x_warped_coords[x_warped_coords>width-1] = width-1
+    y_warped_coords[y_warped_coords>height-1] = height-1
+    x_warped_coords[x_warped_coords<= 0] = 0
+    y_warped_coords[y_warped_coords<= 0] = 0
+
+    return cv2.remap(matrix,x_warped_coords,y_warped_coords,cv2.INTER_CUBIC,cv2.BORDER_REFLECT)
 
 def warp_image(image,warp_offset):
     """
@@ -91,3 +96,4 @@ def warp_derivative(derivative,warp_offset):
     for channel_idx in range(color_channels_count):
         warped_derivative[channel_idx] = warp_image(derivative[channel_idx], warp_offset)
     return warped_derivative
+

@@ -2,7 +2,6 @@ from src.horn_schunck.horn_schunck import compute_optical_flow_HS, SolverSetting
 from src.utilities.image_access import open_image
 from src.utilities.compare_flow import compare_flow
 from src.utilities.flow_field_helper import read_flow_field
-from src.preprocessing.rof import denoising_chambolle_color_img
 from src.utilities.scale_np_array_in_range import scale_np_array_in_range
 import numpy as np
 from src.utilities.image_access import show_image
@@ -55,8 +54,8 @@ def grove2():
 
 if __name__ == '__main__':
     img1, img2, ref_flow = RubberWhale()
-    img1 = denoising_chambolle_color_img(img1)
-    img2 = denoising_chambolle_color_img(img2)
+    #img1 = denoising_chambolle_color_img(img1)
+    #img2 = denoising_chambolle_color_img(img2)
     img1 = scale_np_array_in_range(img1,0,1)
     img2 = scale_np_array_in_range(img2,0,1)
 

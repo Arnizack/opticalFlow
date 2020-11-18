@@ -49,8 +49,8 @@ def bilateral_median_filter(flow, log_occlusen, auxiliary_field, image, weigth_a
                     for channel in image:
                         color_squared_difference += (channel[y_compare][x_compare] - channel[y][x]) ** 2
 
-                    exponent = distance_squared_difference / 2 * sigma_distance
-                    exponent += color_squared_difference / 2 * sigma_color * color_channel_count
+                    exponent = distance_squared_difference / (2 * sigma_distance * sigma_distance)
+                    exponent += color_squared_difference / (2 * sigma_color * sigma_color * color_channel_count)
 
                     occlusen_current = log_occlusen[y][x]
                     occlusen_compared = log_occlusen[y_compare][x_compare]
@@ -85,5 +85,6 @@ def bilateral_median_filter(flow, log_occlusen, auxiliary_field, image, weigth_a
 
             result_flow[0][y][x] = median(helper_flow_y_list[:n*2+1])
             result_flow[1][y][x] = median(helper_flow_x_list[:n*2+1])
-
+    print("result_flow")
+    print(result_flow.flatten())
     return result_flow

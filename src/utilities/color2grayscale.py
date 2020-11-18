@@ -8,7 +8,8 @@ def color2grayscale(image : np.ndarray, methode="heuristic_linear_combination") 
     :param methode: "heuristic_linear_combination" ,"ROF"
     :return: (height,width)
     """
-
+    if(image.shape[0]==1):
+        return image[0]
 
     R = image[0]
     G = image[1]
