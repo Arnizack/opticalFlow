@@ -16,6 +16,6 @@ def test_differentiate_image(img):
 
 
 if __name__ == '__main__':
-    img = open_image(r"..\..\..\resources\calibration\RradialGradient.jpg")
-    #img = open_image(r"..\..\..\resources\eval-twoframes\syntetisch\frame11.jpg")
+    img = open_image(r"..\..\..\..\resources\calibration\RradialGradient.jpg")
+    #img = open_image(r"..\..\..\..\resources\eval-twoframes\syntetisch\frame11.jpg")
     test_differentiate_image(img)

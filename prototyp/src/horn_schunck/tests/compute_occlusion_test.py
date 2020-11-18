@@ -19,9 +19,9 @@ def test_occlusion(img1, img2):
     return occlusion
 
 def dimetrodon():
-    img1 = open_image(r"..\..\..\resources\eval-twoframes\Dimetrodon\frame10-gray.png")
-    img2 = open_image(r"..\..\..\resources\eval-twoframes\Dimetrodon\frame11-gray.png")
-    ref_flow = read_flow_field(r"..\..\..\resources\eval-twoframes-groundtruth\Dimetrodon\flow10.flo")
+    img1 = open_image(r"..\..\..\..\resources\eval-twoframes\Dimetrodon\frame10-gray.png")
+    img2 = open_image(r"..\..\..\..\resources\eval-twoframes\Dimetrodon\frame11-gray.png")
+    ref_flow = read_flow_field(r"..\..\..\..\resources\eval-twoframes-groundtruth\Dimetrodon\flow10.flo")
     return img1,img2,ref_flow
 
 if __name__ == '__main__':

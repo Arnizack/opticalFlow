@@ -49,10 +49,10 @@ def _to_gray(img):
     return np.array([(img[0]+img[1]+img[2])],dtype=float)/3
 
 if __name__ == '__main__':
-    img1_color = open_image(r"..\..\..\resources\eval-twoframes\Dimetrodon\frame10.png")
-    img2_color = open_image(r"..\..\..\resources\eval-twoframes\Dimetrodon\frame11.png")
-    img1_gray = open_image(r"..\..\..\resources\eval-twoframes\Dimetrodon\frame10-gray.png")
-    img2_gray = open_image(r"..\..\..\resources\eval-twoframes\Dimetrodon\frame11-gray.png")
+    img1_color = open_image(r"..\..\..\..\resources\eval-twoframes\Dimetrodon\frame10.png")
+    img2_color = open_image(r"..\..\..\..\resources\eval-twoframes\Dimetrodon\frame11.png")
+    img1_gray = open_image(r"..\..\..\..\resources\eval-twoframes\Dimetrodon\frame10-gray.png")
+    img2_gray = open_image(r"..\..\..\..\resources\eval-twoframes\Dimetrodon\frame11-gray.png")
 
     img1_color = _to_gray(img1_color)
     img2_color = _to_gray(img2_color)

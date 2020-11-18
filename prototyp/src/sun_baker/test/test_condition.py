@@ -33,9 +33,9 @@ def test_condition(first_image : np.ndarray, second_image : np.ndarray, flow : n
     return error
 
 if __name__ == '__main__':
-    img1 = open_image(r"..\..\..\resources\eval-twoframes\Dimetrodon\frame10.png")
-    img2 = open_image(r"..\..\..\resources\eval-twoframes\Dimetrodon\frame11.png")
-    ref_flow = read_flow_field(r"..\..\..\resources\eval-twoframes-groundtruth\Dimetrodon\flow10.flo")
+    img1 = open_image(r"..\..\..\..\resources\eval-twoframes\Dimetrodon\frame10.png")
+    img2 = open_image(r"..\..\..\..\resources\eval-twoframes\Dimetrodon\frame11.png")
+    ref_flow = read_flow_field(r"..\..\..\..\resources\eval-twoframes-groundtruth\Dimetrodon\flow10.flo")
 
     settings = SolverSettings()
     settings.weight_kernel=180/255

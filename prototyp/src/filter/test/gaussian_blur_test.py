@@ -10,7 +10,7 @@ import numpy as np
 import math
 
 def dimetrodon():
-    img = open_image(r"..\..\..\resources\eval-twoframes\Dimetrodon\frame10-gray.png")
+    img = open_image(r"..\..\..\..\resources\eval-twoframes\Dimetrodon\frame10-gray.png")
 
     return img
 
@@ -22,7 +22,7 @@ def test_mat():
     plt.show()
 
 def test_flow():
-    flow = read_flow_field(r"..\..\..\resources\eval-twoframes-groundtruth\Dimetrodon\flow10.flo")
+    flow = read_flow_field(r"..\..\..\..\resources\eval-twoframes-groundtruth\Dimetrodon\flow10.flo")
 
 
 

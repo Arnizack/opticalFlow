@@ -12,14 +12,14 @@ import numpy as np
 from time import time
 
 def dimetrodon():
-    img1 = open_image(r"..\..\..\resources\eval-twoframes\Dimetrodon\frame10-gray.png")
-    img2 = open_image(r"..\..\..\resources\eval-twoframes\Dimetrodon\frame11-gray.png")
+    img1 = open_image(r"..\..\..\..\resources\eval-twoframes\Dimetrodon\frame10-gray.png")
+    img2 = open_image(r"..\..\..\..\resources\eval-twoframes\Dimetrodon\frame11-gray.png")
 
     return img1,img2
 
 def grove3():
-    img1 = open_image(r"..\..\..\resources\eval-twoframes\Grove3\frame10.png")
-    img2 = open_image(r"..\..\..\resources\eval-twoframes\Grove3\frame11.png")
+    img1 = open_image(r"..\..\..\..\resources\eval-twoframes\Grove3\frame10.png")
+    img2 = open_image(r"..\..\..\..\resources\eval-twoframes\Grove3\frame11.png")
     return img1,img2
 
 def test_bilateral_median_filter_bug():

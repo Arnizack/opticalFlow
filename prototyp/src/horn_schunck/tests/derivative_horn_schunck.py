@@ -29,7 +29,7 @@ def test_get_I_x():
     print(actual_result)
 
 def test_derivative_test():
-    img1 = open_image(r"..\..\..\resources\calibration\RradialGradient.jpg")
+    img1 = open_image(r"..\..\..\..\resources\calibration\RradialGradient.jpg")
 
     img1 = img1[0]
 

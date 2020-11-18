@@ -38,20 +38,20 @@ def test_layer1(img1,img2):
 
 if __name__ == '__main__':
     #test_setup_linear_system()
-    img1 = open_image(r"..\..\..\resources\eval-twoframes\Dimetrodon\frame10.png")
-    img2 = open_image(r"..\..\..\resources\eval-twoframes\Dimetrodon\frame11.png")
-    img1 = open_image(r"..\..\..\resources\eval-twoframes\Dimetrodon\frame10-gray.png")
-    img2 = open_image(r"..\..\..\resources\eval-twoframes\Dimetrodon\frame11-gray.png")
-    #img1 = open_image(r"..\..\..\resources\eval-twoframes\syntetisch\frame10.jpg")
-    #img2 = open_image(r"..\..\..\resources\eval-twoframes\syntetisch\frame11.jpg")
+    img1 = open_image(r"..\..\..\..\resources\eval-twoframes\Dimetrodon\frame10.png")
+    img2 = open_image(r"..\..\..\..\resources\eval-twoframes\Dimetrodon\frame11.png")
+    img1 = open_image(r"..\..\..\..\resources\eval-twoframes\Dimetrodon\frame10-gray.png")
+    img2 = open_image(r"..\..\..\..\resources\eval-twoframes\Dimetrodon\frame11-gray.png")
+    #img1 = open_image(r"..\..\..\..\resources\eval-twoframes\syntetisch\frame10.jpg")
+    #img2 = open_image(r"..\..\..\..\resources\eval-twoframes\syntetisch\frame11.jpg")
 
     #img1 = img1[[0]]
     #img2 = img2[[0]]
-    #img1 = open_image(r"..\..\..\resources\eval-twoframes\Dimetrodon\frame10.png")
-    #img2 = open_image(r"..\..\..\resources\eval-twoframes\Dimetrodon\frame11.png")
+    #img1 = open_image(r"..\..\..\..\resources\eval-twoframes\Dimetrodon\frame10.png")
+    #img2 = open_image(r"..\..\..\..\resources\eval-twoframes\Dimetrodon\frame11.png")
     computed_flow = test_layer1(img1,img2)
 
-    ref_flow = read_flow_field(r"..\..\..\resources\eval-twoframes-groundtruth\Dimetrodon\flow10.flo")
+    ref_flow = read_flow_field(r"..\..\..\..\resources\eval-twoframes-groundtruth\Dimetrodon\flow10.flo")
 
     compare_flow(computed_flow,ref_flow,img1,img2,plot=True)
 

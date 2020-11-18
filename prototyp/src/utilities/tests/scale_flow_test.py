@@ -47,5 +47,5 @@ def test_downscale_visual(flow):
     plt.show()
 
 if __name__ == '__main__':
-    flow = read_flow_field(r"..\..\..\resources\eval-twoframes-groundtruth\Dimetrodon\flow10.flo")
+    flow = read_flow_field(r"..\..\..\..\resources\eval-twoframes-groundtruth\Dimetrodon\flow10.flo")
     test_downscale_visual(flow)

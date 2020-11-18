@@ -92,8 +92,8 @@ def test_cpp_img():
     return  img1,img2
 
 if __name__ == '__main__':
-    img1 = open_image(r"..\..\..\..\resources\eval-twoframes\Dimetrodon\frame10.png")
-    img2 = open_image(r"..\..\..\..\resources\eval-twoframes\Dimetrodon\frame11.png")
+    img1 = open_image(r"..\..\..\..\..\resources\eval-twoframes\Dimetrodon\frame10.png")
+    img2 = open_image(r"..\..\..\..\..\resources\eval-twoframes\Dimetrodon\frame11.png")
     img1,img2 = test_cpp_img()
 
 
