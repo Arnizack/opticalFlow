@@ -19,92 +19,33 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Base.h">
+    <ClInclude Include="ImageLogger.h">
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="flow\ICrossFlowFilter.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="IArray.h" />
-    <ClInclude Include="IArrayFactory.h" />
-    <ClInclude Include="IContainer.h" />
-    <ClInclude Include="image\IColorConvolution.h" />
-    <ClInclude Include="image\IColorScaler.h" />
-    <ClInclude Include="image\IGrayscaleConvolution.h" />
-    <ClInclude Include="image\IGrayscaleFilter.h" />
-    <ClInclude Include="image\IColorFilter.h" />
-    <ClInclude Include="image\IGrayscaleScaler.h" />
-    <ClInclude Include="image\IGrayWarper.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="IReshaper.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="IScaler.h" />
-    <ClInclude Include="linalg\IArithmeticVector.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="Logger.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="penalty\IBlendablePenalty.h" />
-    <ClInclude Include="penalty\IPenalty.h" />
-    <ClInclude Include="IStatistics.h" />
-    <ClInclude Include="linalg\IArithmeticBasic.h" />
-    <ClInclude Include="linalg\IArithmeticChained.h" />
-    <ClInclude Include="linalg\ILinearOperator.h" />
-    <ClInclude Include="linalg\IOperator.h" />
-    <ClInclude Include="pch.h" />
-    <ClInclude Include="pyramid\IPyramid.h" />
-    <ClInclude Include="pyramid\IPyramidBuilder.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="solver\IFlowFieldSolver.h" />
-    <ClInclude Include="solver\IFlowSolverIterator.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="solver\ILinearSolver.h" />
-    <ClInclude Include="solver\problem\IColor2FrameProblem.h" />
-    <ClInclude Include="solver\problem\IColorCrossFilterProblem.h" />
-    <ClInclude Include="solver\problem\IGray2FrameProblem.h" />
-    <ClInclude Include="solver\problem\IGrayCrossFilterProblem.h" />
-    <ClInclude Include="solver\problem\IGrayPenaltyCrossProblem.h" />
-    <ClInclude Include="solver\problem\IGrayPenaltyProblem.h" />
-    <ClInclude Include="solver\problem\ILinearProblem.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="solver\problem\IPenaltyProblem.h" />
-    <ClInclude Include="solver\problem\IProblemFactory.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Logger.cpp">
+    <ClCompile Include="ImageLogger.cpp">
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="pch.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <ProjectReference Include="..\..\core\core.vcxproj">
+      <Project>{f7e80072-58dd-410b-827e-f95e620af895}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\flow_helper\flow_helper.vcxproj">
+      <Project>{0e88c56f-28f0-4b91-8232-29c507145c89}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\image_helper\image_helper.vcxproj">
+      <Project>{32b2eff3-852d-4ea6-81c7-1775f7da9e3f}</Project>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{f7e80072-58dd-410b-827e-f95e620af895}</ProjectGuid>
-    <RootNamespace>core</RootNamespace>
+    <ProjectGuid>{7358395e-d24e-4469-b3cc-dd9f718b3996}</ProjectGuid>
+    <RootNamespace>debug</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -178,8 +119,6 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -195,8 +134,6 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -212,8 +149,6 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -229,8 +164,6 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -242,20 +175,5 @@
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
-    <Import Project="..\packages\boost.1.72.0.0\build\boost.targets" Condition="Exists('..\packages\boost.1.72.0.0\build\boost.targets')" />
-    <Import Project="..\packages\boost_chrono-vc120.1.72.0.0\build\boost_chrono-vc120.targets" Condition="Exists('..\packages\boost_chrono-vc120.1.72.0.0\build\boost_chrono-vc120.targets')" />
-    <Import Project="..\packages\boost_date_time-vc120.1.72.0.0\build\boost_date_time-vc120.targets" Condition="Exists('..\packages\boost_date_time-vc120.1.72.0.0\build\boost_date_time-vc120.targets')" />
-    <Import Project="..\packages\boost_system-vc120.1.72.0.0\build\boost_system-vc120.targets" Condition="Exists('..\packages\boost_system-vc120.1.72.0.0\build\boost_system-vc120.targets')" />
-    <Import Project="..\packages\boost_thread-vc120.1.72.0.0\build\boost_thread-vc120.targets" Condition="Exists('..\packages\boost_thread-vc120.1.72.0.0\build\boost_thread-vc120.targets')" />
   </ImportGroup>
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\boost.1.72.0.0\build\boost.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost.1.72.0.0\build\boost.targets'))" />
-    <Error Condition="!Exists('..\packages\boost_chrono-vc120.1.72.0.0\build\boost_chrono-vc120.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost_chrono-vc120.1.72.0.0\build\boost_chrono-vc120.targets'))" />
-    <Error Condition="!Exists('..\packages\boost_date_time-vc120.1.72.0.0\build\boost_date_time-vc120.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost_date_time-vc120.1.72.0.0\build\boost_date_time-vc120.targets'))" />
-    <Error Condition="!Exists('..\packages\boost_system-vc120.1.72.0.0\build\boost_system-vc120.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost_system-vc120.1.72.0.0\build\boost_system-vc120.targets'))" />
-    <Error Condition="!Exists('..\packages\boost_thread-vc120.1.72.0.0\build\boost_thread-vc120.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost_thread-vc120.1.72.0.0\build\boost_thread-vc120.targets'))" />
-  </Target>
 </Project>

@@ -7,7 +7,8 @@ namespace optflow_solvers
 {
     OpticalFlowApplication::OpticalFlowApplication(std::shared_ptr<core::IArrayFactory<float, 3>> image_factory, std::shared_ptr<core::IProblemFactory> problem_factory, std::shared_ptr<core::IFlowFieldSolver<std::shared_ptr<core::IGrayCrossFilterProblem>>> flow_solver)
         : _image_factory(image_factory), _problem_factory(problem_factory), _flow_solver(flow_solver)
-    {}
+    {
+    }
     std::shared_ptr<core::IArray<float, 3>> OpticalFlowApplication::OpenImage(std::string filepath)
     {
         imagehelper::Image image = imagehelper::OpenImage(filepath);

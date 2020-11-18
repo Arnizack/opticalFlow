@@ -3,6 +3,7 @@
 #include"IncrementalSolver.h"
 #include <iostream>
 #include"core/Logger.h"
+#include"utilities/debug/ImageLogger.h"
 
 namespace optflow_solvers
 {
@@ -31,6 +32,8 @@ namespace optflow_solvers
 
             OF_LOG_INFO("Incremental Solver Step: {0:d}", step);
             initial_guess = _inner_solver->Solve(problem, initial_guess);
+            OF_LOG_FLOWARRAY("Incremental Solver initial guess: ", initial_guess);
+            OF_LOG_IMAGE_FLOW_END();
         }
         return initial_guess;
     }

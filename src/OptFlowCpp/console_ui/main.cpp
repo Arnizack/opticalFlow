@@ -5,12 +5,14 @@
 #include <string>
 #include <vector>
 #include"core/Logger.h"
-
+#include"utilities/debug/ImageLogger.h"
 
 int main(int argc, char* argv[])
 {
 	
 	core::Logger::Init();
+	debug::ImageLogger::Init("debug_images", 
+		"H:\\dev\\opticalFlow\\optFlowCpp\\opticalFlow\\src\\OptFlowCpp\\bin\\x64\\Debug\\debug_flow");
 
 	OF_LOG_INFO("Start Logger");
 

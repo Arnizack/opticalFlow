@@ -2,6 +2,7 @@
 #include"pch.h"
 #include"Logger.h"
 
+
 namespace core
 {
     std::shared_ptr<spdlog::logger> Logger::_Logger;
@@ -13,4 +14,6 @@ namespace core
 
         
     }
+
+    
 }

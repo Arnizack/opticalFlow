@@ -4,7 +4,7 @@
 #include <spdlog/spdlog.h>
 #include "spdlog/sinks/stdout_color_sinks.h"
 #pragma warning(pop)
-#include<memory>
+
 
 namespace core
 {
@@ -17,6 +17,9 @@ namespace core
 	private:
 		static std::shared_ptr<spdlog::logger> _Logger;
 	};
+
+
+	
 }
 
 //log macros
@@ -25,3 +28,6 @@ namespace core
 #define OF_LOG_WARN(...)     ::core::Logger::GetLogger()->warn(__VA_ARGS__)
 #define OF_LOG_ERROR(...)    ::core::Logger::GetLogger()->error(__VA_ARGS__)
 #define OF_LOG_CRITICAL(...) ::core::Logger::GetLogger()->critical(__VA_ARGS__)
+
+
+
