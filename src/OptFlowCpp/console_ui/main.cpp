@@ -11,8 +11,9 @@ int main(int argc, char* argv[])
 {
 	
 	core::Logger::Init();
-	debug::ImageLogger::Init("debug_images", 
-		"H:\\dev\\opticalFlow\\optFlowCpp\\opticalFlow\\src\\OptFlowCpp\\bin\\x64\\Debug\\debug_flow");
+	debug::ImageLogger::Init(
+		"H:\\dev\\opticalFlow\\optFlowCpp\\opticalFlow\\src\\OptFlowCpp\\bin\\debug_images",
+		"H:\\dev\\opticalFlow\\optFlowCpp\\opticalFlow\\src\\OptFlowCpp\\bin\\debug_flow");
 
 	OF_LOG_INFO("Start Logger");
 
@@ -24,6 +25,8 @@ int main(int argc, char* argv[])
 	optflow_composition::ContainerInstaller di_installer;
 
 	auto options = std::make_shared<optflow_composition::ContainerOptions>();
+	options->SolverOptions->GNCSettings.GNCSettings->GNCSteps = 1;
+
 	di_installer.SetOptions(options);
 
 	auto di_container = di_installer.Install();

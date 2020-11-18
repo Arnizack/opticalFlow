@@ -17,14 +17,7 @@ namespace debug
 		static std::atomic<int> _flow_counter;
 		static bool _should_log;
 
-		static std::string GetImageFilepath(std::string name)
-		{
-			std::stringstream filepath;
-			filepath << _image_directory << "\\" << name;
-			filepath << _image_counter << ".png";
-			_image_counter++;
-			return filepath.str();
-		}
+		static std::string GetImageFilepath(std::string name);
 
 		static std::string GetFlowFilepath(std::string name);
 

@@ -92,15 +92,15 @@ namespace flowhelper
         img.data = std::make_shared<std::vector<float>>(width * height * 3);
         for (int y = 0; y < height; y++)
         {
-            for (int x = 0; x < height; x++)
+            for (int x = 0; x < width; x++)
             {
-                float flow_x = flow.GetXFlow(x, y);
+                float flow_x = flow.GetXFlow(x, y);//temp
                 float flow_y = flow.GetYFlow(x, y);
                 uchar color[3] = {};
                 computeColor(flow_x, flow_y, color);
-                img.Pixel(x, y, 0) = color[0];
-                img.Pixel(x, y, 1) = color[1];
-                img.Pixel(x, y, 2) = color[2];
+                img.Pixel(x, y, 0) = ((float)color[0] )/ 255.0;
+                img.Pixel(x, y, 1) = ((float)color[1] )/ 255.0;
+                img.Pixel(x, y, 2) = ((float)color[2] )/ 255.0;
             }
         }
         imagehelper::SaveImage(filepath, img);

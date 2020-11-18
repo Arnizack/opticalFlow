@@ -2,6 +2,7 @@
 #include<array>
 #include"cpu_backend/Array.h"
 #include"utilities/flow_helper/FlowHelper.h"
+#include<filesystem>
 
 namespace flowhelper
 {
@@ -40,5 +41,34 @@ namespace flowhelper
 		
 		SaveFlow2Color(path, flow);
 		
+	}
+	#define WINDOWS
+	#ifdef WINDOWS
+	#include <direct.h>
+	#define GetCurrentDir _getcwd
+	#else
+	#include <unistd.h>
+	#define GetCurrentDir getcwd
+	#endif
+
+	std::string get_current_dir() {
+		char buff[FILENAME_MAX]; //create string buffer to hold path
+		GetCurrentDir(buff, FILENAME_MAX);
+		std::string current_working_dir(buff);
+		return current_working_dir;
+	}
+	TEST(flow_helper, color2)
+	{
+
+		std::string path = "DimetrodonConvertet.png";
+
+		auto cwd = get_current_dir();
+
+		FlowField flow = OpenFlow("..\\..\\..\\..\\..\\resources\\eval-twoframes-groundtruth\\Dimetrodon\\flow10.flo");
+
+		
+
+		SaveFlow2Color(path, flow);
+
 	}
 }

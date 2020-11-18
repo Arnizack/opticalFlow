@@ -12,11 +12,20 @@ namespace debug
     std::atomic<int> ImageLogger::_flow_counter;
     bool ImageLogger::_should_log;
 
+    inline std::string ImageLogger::GetImageFilepath(std::string name)
+    {
+        std::stringstream filepath;
+        filepath << _image_directory << "\\" << name << " ";
+        filepath << _image_counter << ".png";
+        _image_counter++;
+        return filepath.str();
+    }
+
     std::string ImageLogger::GetFlowFilepath(std::string name)
     {
         std::stringstream filepath;
-        filepath << _flow_directory << "\\" << name;
-        filepath << _flow_counter << ".flo";
+        filepath << _flow_directory << "\\" << name << " ";
+        filepath << _flow_counter << ".png";
         _flow_counter++;
         return filepath.str();
     }
@@ -65,12 +74,12 @@ namespace debug
         std::copy_n(data, width * height * 2, flow.data->data());
         flow.height = height;
         flow.width = width;
-        flowhelper::SaveFlow(filepath, flow);
+        flowhelper::SaveFlow2Color(filepath, flow);
     }
     void ImageLogger::LogFlowField(std::string name, std::shared_ptr<core::IArray<double, 3>> data)
     {
         if (!_should_log) return;
         std::string filepath = GetFlowFilepath(name);
-        flowhelper::SaveFlow(filepath, data);
+        flowhelper::SaveFlow2Color(filepath, data);
     }
 }
