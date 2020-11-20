@@ -2,6 +2,7 @@
 #include "GNCPenaltySolver.h"
 #include"core/Logger.h"
 #include"utilities/debug/ImageLogger.h"
+
 namespace optflow_solvers
 {
     using ProblemTyp = std::shared_ptr<core::IGrayCrossFilterProblem>;
@@ -63,7 +64,6 @@ namespace optflow_solvers
             
             initial_guess = current_solver->Solve(penalty_problem, initial_guess);
 
-            OF_LOG_IMAGE_FLOW_BEGIN();
             OF_LOG_FLOWARRAY("GNC Solver initial guess", initial_guess);
 
 

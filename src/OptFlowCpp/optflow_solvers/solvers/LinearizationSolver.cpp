@@ -3,6 +3,8 @@
 #include"LinearizationSolver.h"
 #include<math.h>
 #include"core/Logger.h"
+#include"utilities/debug/ImageLogger.h"
+
 
 namespace optflow_solvers
 {
@@ -58,6 +60,8 @@ namespace optflow_solvers
 
         _cross_filter->SetCrossFilterImage(problem->CrossFilterImage);
 
+        OF_LOG_FLOWARRAY("First Flow Before CG", initial_guess);
+
         for (size_t relaxation_iter = 0; relaxation_iter < _relaxation_steps; relaxation_iter++)
         {
 
@@ -76,8 +80,12 @@ namespace optflow_solvers
             delta_initial_flow = _flow_reshaper->Reshape3D(result_vector, {2,height,width});
 
              _flow_arithmetic->AddTo(flow_before_filter, initial_guess, delta_initial_flow);
+             OF_LOG_FLOWARRAY("Flow Before Filter", flow_before_filter);
+
              _cross_filter->SetAuxiliaryInfluence(relaxation);
              _cross_filter->ApplyTo(flow_after_filter, flow_before_filter);
+
+             OF_LOG_FLOWARRAY("Flow Before Filter", flow_after_filter);
 
              _flow_arithmetic->SubTo(delta_initial_flow, flow_after_filter, initial_guess);
         }

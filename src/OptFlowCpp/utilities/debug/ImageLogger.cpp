@@ -15,8 +15,8 @@ namespace debug
     inline std::string ImageLogger::GetImageFilepath(std::string name)
     {
         std::stringstream filepath;
-        filepath << _image_directory << "\\" << name << " ";
-        filepath << _image_counter << ".png";
+        filepath << _image_directory << "\\" ;
+        filepath << _image_counter << " " << name << ".png";
         _image_counter++;
         return filepath.str();
     }
@@ -24,8 +24,8 @@ namespace debug
     std::string ImageLogger::GetFlowFilepath(std::string name)
     {
         std::stringstream filepath;
-        filepath << _flow_directory << "\\" << name << " ";
-        filepath << _flow_counter << ".png";
+        filepath << _flow_directory << "\\";
+        filepath << _flow_counter << " " << name << ".png";
         _flow_counter++;
         return filepath.str();
     }

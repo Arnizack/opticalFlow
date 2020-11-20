@@ -75,6 +75,33 @@ namespace flowhelper
         }
         WriteFlowFile(flow_convert, filepath.data());
     }
+
+    
+
+    float GetMaxMotionOfFlow(FlowField flow)
+    {
+        double max_motion = 0;
+        
+        
+
+        for (int y = 0; y < flow.height; y++)
+        {
+            for (int x = 0; x < flow.width; x++)
+            {
+                double flow_x = flow.GetXFlow(x, y);
+                double flow_y = flow.GetYFlow(x, y);
+                if (abs((int)flow_x) < (int)flow.width && abs((int)flow_y) < (int)flow.height)
+                {
+                    double norm = sqrt(flow_x * flow_x + flow_y * flow_y);
+                    max_motion = std::max(max_motion, norm);
+                }
+                
+            }
+        }
+
+        return (float)max_motion;
+    }
+
     void SaveFlow(std::string filepath, 
         std::shared_ptr < core::IArray<double, 3>> flow)
     {
@@ -90,12 +117,18 @@ namespace flowhelper
         img.height = height;
         img.color_count = 3;
         img.data = std::make_shared<std::vector<float>>(width * height * 3);
+
+        double max_motion = GetMaxMotionOfFlow(flow);
+
+        float scaler = 1.0 / max_motion;
+
+
         for (int y = 0; y < height; y++)
         {
             for (int x = 0; x < width; x++)
             {
-                float flow_x = flow.GetXFlow(x, y);//temp
-                float flow_y = flow.GetYFlow(x, y);
+                float flow_x = flow.GetXFlow(x, y) * scaler;//temp
+                float flow_y = flow.GetYFlow(x, y) * scaler;
                 uchar color[3] = {};
                 computeColor(flow_x, flow_y, color);
                 img.Pixel(x, y, 0) = ((float)color[0] )/ 255.0;
