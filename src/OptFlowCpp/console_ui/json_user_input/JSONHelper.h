@@ -1,6 +1,8 @@
 #pragma once
 #include <string>
 #include <nlohmann/json.hpp>
+#include <iomanip>
+#include <fstream>
 
 #ifndef VarName(var) (#var)
 #define VarName(var) (#var)
@@ -17,4 +19,6 @@ namespace console_ui
 	* suffix = starting at last .
 	*/
 	std::string GetOptionName(std::string var_name, const std::string& suffix = "");
+
+	void OutputJSON(const modern_json::json& output, const std::string& file_path);
 }

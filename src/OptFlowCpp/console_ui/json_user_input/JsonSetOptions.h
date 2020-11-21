@@ -25,6 +25,4 @@ namespace console_ui
 	std::shared_ptr<optflow_composition::ContainerOptions> JsonSetupSettings (std::string json_input_file_path, std::shared_ptr<optflow_composition::ContainerOptions> options);
 
 	modern_json::json GenerateJSON();
-
-	void OutputJSON(const modern_json::json& output, const std::string& file_path);
 }

@@ -36,4 +36,11 @@ namespace console_ui
 
 		return all_lower(var_name + '_' + suffix);
 	}
+
+	void OutputJSON(const modern_json::json& output, const std::string& file_path)
+	{
+		std::ofstream out_stream(file_path);
+
+		out_stream << std::setw(output.size() * 2) << output << std::endl;
+	}
 }
