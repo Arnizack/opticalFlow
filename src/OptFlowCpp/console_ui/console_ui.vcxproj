@@ -181,6 +181,9 @@
     <ProjectReference Include="..\optflow_solvers\optflow_solvers.vcxproj">
       <Project>{7fb25f03-7d47-4fe3-8eaa-1776578ae8ff}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\utilities\debug\debug.vcxproj">
+      <Project>{7358395e-d24e-4469-b3cc-dd9f718b3996}</Project>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

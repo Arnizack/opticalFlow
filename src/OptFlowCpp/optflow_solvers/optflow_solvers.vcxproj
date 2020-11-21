@@ -253,6 +253,9 @@
     <ProjectReference Include="..\libs\imageLib\imageLib.vcxproj">
       <Project>{a14f6a61-8e9d-4929-a3fd-f497e82f88ba}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\utilities\debug\debug.vcxproj">
+      <Project>{7358395e-d24e-4469-b3cc-dd9f718b3996}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\utilities\flow_helper\flow_helper.vcxproj">
       <Project>{0e88c56f-28f0-4b91-8232-29c507145c89}</Project>
     </ProjectReference>

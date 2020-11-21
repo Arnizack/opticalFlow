@@ -7,19 +7,24 @@
 #include <string>
 #include <vector>
 #include"core/Logger.h"
-
+#include"utilities/debug/ImageLogger.h"
 
 int main(int argc, char* argv[])
 {
 	
 	core::Logger::Init();
+	debug::ImageLogger::Init(
+		"H:\\dev\\opticalFlow\\optFlowCpp\\opticalFlow\\src\\OptFlowCpp\\bin\\debug_images",
+		"H:\\dev\\opticalFlow\\optFlowCpp\\opticalFlow\\src\\OptFlowCpp\\bin\\debug_flow");
 
 	OF_LOG_INFO("Start Logger");
 
-	std::string first_img_path = "E:\\dev\\opticalFlow\\V2\\opticalFlow\\resources\\eval-twoframes\\Dimetrodon\\frame10.png"; 
-	//first_img_path = "H:\\dev\\opticalFlow\\Prototyp\\Version 2\\opticalFlow\\resources\\eval-twoframes\\Dimetrodon\\frame10.png";
-	std::string second_img_path = "E:\\dev\\opticalFlow\\V2\\opticalFlow\\resources\\eval-twoframes\\Dimetrodon\\frame11.png"; 
-	//second_img_path = "H:\\dev\\opticalFlow\\Prototyp\\Version 2\\opticalFlow\\resources\\eval-twoframes\\Dimetrodon\\frame11.png";
+	std::string first_img_path = "..\\..\\..\\resources\\eval-twoframes\\Dimetrodon\\frame10.png"; 
+	std::string second_img_path = "..\\..\\..\\resources\\eval-twoframes\\Dimetrodon\\frame11.png";
+	//std::string first_img_path = "E:\\dev\\opticalFlow\\V2\\opticalFlow\\resources\\eval-twoframes\\Dimetrodon\\frame10.png"; 
+	////first_img_path = "H:\\dev\\opticalFlow\\Prototyp\\Version 2\\opticalFlow\\resources\\eval-twoframes\\Dimetrodon\\frame10.png";
+	//std::string second_img_path = "E:\\dev\\opticalFlow\\V2\\opticalFlow\\resources\\eval-twoframes\\Dimetrodon\\frame11.png"; 
+	////second_img_path = "H:\\dev\\opticalFlow\\Prototyp\\Version 2\\opticalFlow\\resources\\eval-twoframes\\Dimetrodon\\frame11.png";
 	std::string flow_output_path = "computed_flow.flo";
 	std::string flow_img_path = "computed_img.png";
 
@@ -37,6 +42,8 @@ int main(int argc, char* argv[])
 
 	//Parse JSON
 	console_ui::JsonSetupSettings(json_input_path, options);
+
+	options->SolverOptions->GNCSettings.GNCSettings->GNCSteps = 1;
 
 	di_installer.SetOptions(options);
 
