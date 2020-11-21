@@ -98,7 +98,8 @@ namespace flowhelper
                 
             }
         }
-
+        if (max_motion == 0)
+            return 1.0;
         return (float)max_motion;
     }
 

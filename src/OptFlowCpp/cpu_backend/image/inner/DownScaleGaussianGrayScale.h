@@ -1,7 +1,8 @@
 #pragma once
 #include"filters/Gaussian1DFilter.h"
 #include<memory>
-
+#include"utilities/debug/ImageLogger.h"
+#include<type_traits>
 
 namespace cpu_backend
 {
@@ -14,12 +15,12 @@ namespace cpu_backend
 			T scale_factor = (T)dst_length / (T)src_length;
 			return 1 / sqrt(2 * scale_factor);
 		}
-	
+
 
 		template<class T>
 		void DownScaleGaussianGrayScale(T* image, int width, int height, int dest_width, int dest_height, T* destination)
 		{
-			T scale_factor_width = (T)dest_width / (T) width;
+			T scale_factor_width = (T)dest_width / (T)width;
 			T scale_factor_height = (T)dest_height / (T)height;
 			auto temp_x_blured = std::make_unique<std::vector<T>>(width * height);
 			auto temp_xy_blured = std::make_unique<std::vector<T>>(width * height);
@@ -32,7 +33,7 @@ namespace cpu_backend
 
 			Gaussian1DFilter<T, Direction::X, Padding::SYMMETRIC>(image, width, height, std_deviation_x, ptr_temp_x_blured);
 			Gaussian1DFilter<T, Direction::Y, Padding::SYMMETRIC>(ptr_temp_x_blured, width, height, std_deviation_y, ptr_temp_xy_blured);
-
+	
 			T dest_to_src_scaler_x = (T)width / (T)dest_width;
 
 			T dest_to_src_scaler_y = (T)height / (T)dest_height;

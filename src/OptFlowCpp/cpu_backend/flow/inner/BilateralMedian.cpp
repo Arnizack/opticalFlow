@@ -59,6 +59,9 @@ namespace cpu_backend
 
         size_t counter = 0;
 
+        double distance_scaler = 1.0 / (2 * sigma_distance * sigma_distance);
+        double color_norm_scaler = 1.0 / (2 * sigma_color * sigma_color * color_channel_count);
+
         _inner::Iterate2D(x_start, x_end, y_start, y_end, [&](size_t x_compared, size_t y_compared)
         {
             int x_diff = (int)x - (int)x_compared;
@@ -73,8 +76,8 @@ namespace cpu_backend
 
             double log_occlusion_compared = log_occlusion[second_pixel_idx];
             
-            double exponent = distance_norm_squared / (2 * sigma_distance * sigma_distance);
-            exponent += color_norm_squared / (2 * sigma_color * sigma_color * color_channel_count);
+            double exponent = distance_norm_squared * distance_scaler;
+            exponent += color_norm_squared * color_norm_scaler;
             exponent -= log_occlusion_compared;
             exponent += log_occlusion_current;
 

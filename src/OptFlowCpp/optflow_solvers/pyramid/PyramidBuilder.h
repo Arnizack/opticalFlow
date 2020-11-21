@@ -116,7 +116,8 @@ namespace optflow_solvers
 		layers.push_back(last_layer);
 		for (auto resolution : _resolutions)
 		{
-			layers.push_back(_scaler->Scale(last_layer, resolution[0], resolution[1]));
+			auto layer = _scaler->Scale(last_layer, resolution[0], resolution[1]);
+			layers.push_back(layer);
 		}
 		return layers;
 	}

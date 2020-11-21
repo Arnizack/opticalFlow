@@ -12,7 +12,7 @@ namespace cpu_backend
 		double FilterInfluence = 5;
 		double SigmaDistance = 7;
 		double SigmaColor = 7.0 /255;
-		int FilterLength = 7;
+		int FilterLength = 15;
 	};
 	//ToDo
 	class CrossBilateralMedianFilter : public core::ICrossFlowFilter

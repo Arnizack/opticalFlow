@@ -50,6 +50,7 @@ namespace cpu_backend
 		T* kernel, int kernel_length, T* destination)
 	{
 		int kernel_length_half = kernel_length / 2;
+		#pragma omp parallel for
 		for(int y = 0; y < height; y++)
 		{
 			for (int x = 0; x < width; x++)

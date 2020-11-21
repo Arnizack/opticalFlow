@@ -21,8 +21,8 @@ namespace cpu_backend
 		//and the Principles behind Them
  
 		int pixel_count = width * height;
-
-		for (size_t i = 0; i < pixel_count; i++)
+		#pragma omp parallel for
+		for (int i = 0; i < pixel_count; i++)
 		{
 			double d = std::min(flow_div[i], 0.0);
 			double exponent = d * d / (2.0 * sigma_div * sigma_div);

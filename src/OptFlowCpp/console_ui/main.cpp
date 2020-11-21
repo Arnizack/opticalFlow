@@ -25,15 +25,15 @@ int main(int argc, char* argv[])
 	optflow_composition::ContainerInstaller di_installer;
 
 	auto options = std::make_shared<optflow_composition::ContainerOptions>();
-	options->SolverOptions->GNCSettings.GNCSettings->GNCSteps = 1;
+	//options->SolverOptions->GNCSettings.GNCSettings->GNCSteps = 1;
 
 	di_installer.SetOptions(options);
 
 	auto di_container = di_installer.Install();
 
 	auto application = di_container->resolve<optflow_solvers::OpticalFlowApplication>();
-	OF_LOG_IMAGE_FLOW_BEGIN();
+	//OF_LOG_IMAGE_FLOW_BEGIN();
 	application->ComputeOpticalFlow(first_img_path, second_img_path, flow_output_path, flow_img_path);
-	OF_LOG_IMAGE_FLOW_END();
+	//OF_LOG_IMAGE_FLOW_END();
 	return 0;
 }

@@ -16,6 +16,7 @@ namespace debug
 		static std::atomic<int> _image_counter;
 		static std::atomic<int> _flow_counter;
 		static bool _should_log;
+		static bool _is_available;
 
 		static std::string GetImageFilepath(std::string name);
 

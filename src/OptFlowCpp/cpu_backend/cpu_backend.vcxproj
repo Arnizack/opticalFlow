@@ -317,6 +317,9 @@
     <ProjectReference Include="..\core\core.vcxproj">
       <Project>{f7e80072-58dd-410b-827e-f95e620af895}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\utilities\debug\debug.vcxproj">
+      <Project>{7358395e-d24e-4469-b3cc-dd9f718b3996}</Project>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

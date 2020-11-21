@@ -6,6 +6,7 @@
 #include "../image/inner/DownScaleGaussianGrayScale.h"
 #include "../image/inner/BicubicScale.h"
 #include "../Array.h"
+#include"utilities/debug/ImageLogger.h"
 
 namespace cpu_backend
 {
@@ -23,8 +24,8 @@ namespace cpu_backend
 		virtual PtrIGrayPenaltyCrossProblem Scale(const PtrIGrayPenaltyCrossProblem input, const size_t& dst_width,
 			const size_t& dst_height) override
 		{
-			auto in_width = input->FirstFrame->Shape[0];
-			auto in_height = input->FirstFrame->Shape[1];
+			auto in_width = input->FirstFrame->Shape[1];
+			auto in_height = input->FirstFrame->Shape[0];
 			auto color_count = input->CrossFilterImage->Shape[0];
 
 			auto output = _problem_factory->CreateGrayPenaltyCrossProblem();
@@ -68,6 +69,9 @@ namespace cpu_backend
 
 				output->PenaltyFunc = input->PenaltyFunc;
 			}
+			
+			OF_LOG_IMAGE2DARRAY("First Image Scaled", output->FirstFrame);
+			OF_LOG_IMAGE2DARRAY("Second Image Scaled", output->SecondFrame);
 
 			return output;
 		}

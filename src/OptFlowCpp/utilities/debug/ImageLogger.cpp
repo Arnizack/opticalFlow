@@ -10,7 +10,8 @@ namespace debug
 
     std::atomic<int> ImageLogger::_image_counter;
     std::atomic<int> ImageLogger::_flow_counter;
-    bool ImageLogger::_should_log;
+    bool ImageLogger::_should_log = false;
+    bool ImageLogger::_is_available = false;
 
     inline std::string ImageLogger::GetImageFilepath(std::string name)
     {
@@ -36,8 +37,9 @@ namespace debug
         _image_counter = 0;
         _flow_counter = 0;
         _should_log = false;
+        _is_available = true;
     }
-    void ImageLogger::BeginLogging() { _should_log = true; }
+    void ImageLogger::BeginLogging() { _should_log = _is_available; }
     void ImageLogger::EndLogging() { _should_log = false; }
     void ImageLogger::Log2DImage(std::string name, float* data, size_t width, size_t height)
     {
