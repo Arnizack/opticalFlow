@@ -14,14 +14,15 @@ namespace console_ui
 		return generic;
 	}
 
-	boost::program_options::options_description SetupIOOptions(std::string first_image_path, std::string second_image_path, std::string flow_output_path, std::string flow_img_output_path)
+	boost::program_options::options_description SetupIOOptions(std::string& first_image_path, std::string& second_image_path, std::string& flow_output_path, std::string& flow_img_output_path, std::string& json_input_path)
 	{
 		bpo::options_description io("Input-Output options");
 		io.add_options()
 			("input-img1,1", bpo::value< std::string>(&first_image_path), "path to first input image")
 			("input-img2,2", bpo::value< std::string>(&second_image_path), "path to second input image")
 			("output-path,O", bpo::value< std::string>(&flow_output_path), "Flow output path")
-			("flow-img,F", bpo::value< std::string>(&flow_img_output_path), "path to flow image");
+			("flow-img,F", bpo::value< std::string>(&flow_img_output_path), "path to flow image")
+			("json-input,J", bpo::value< std::string>(&json_input_path), "path to input json file for settings");
 
 		return io;
 	}

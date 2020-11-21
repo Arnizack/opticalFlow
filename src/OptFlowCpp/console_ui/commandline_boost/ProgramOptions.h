@@ -9,9 +9,10 @@ namespace console_ui
 {
 	namespace bpo = boost::program_options;
 
-	std::shared_ptr<Hypodermic::Container> ComnandlineSetup(int argc, char* argv[],
-		std::string first_image_path, std::string second_image_path, 
-		std::string flow_output_path, std::string flow_img_output_path);
+	bool CheckCommandLineInput(int argc, char* argv[],
+		std::string& first_image_path, std::string& second_image_path,
+		std::string& flow_output_path, std::string& flow_img_output_path, 
+		std::string& json_input_path);
 
 	bpo::variables_map ParseCommandline(int argc, char* argv[], bpo::options_description options);
 }
