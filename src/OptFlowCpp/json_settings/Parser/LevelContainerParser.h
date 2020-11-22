@@ -1,16 +1,14 @@
 #pragma once
 
 #include <nlohmann/json.hpp>
-#include <memory>
 
 #include "optflow_composition/ContainerOptions.h"
-#include "optflow_solvers/solvers/settings/GNCPenaltySolverSettings.h"
 
 #include "FlowSolverParser/CGSolverParser.h"
 #include "FlowSolverParser/IncrementalSolverParser.h"
 #include "FlowSolverParser/LinearizationSolverParser.h"
 
-namespace console_ui
+namespace json_settings
 {
 	namespace modern_json = nlohmann;
 

@@ -12,7 +12,7 @@
 #define VarName(var) (#var)
 #endif // !VarName(var) (#var)
 
-namespace console_ui
+namespace json_settings
 {
 	namespace modern_json = nlohmann;
 

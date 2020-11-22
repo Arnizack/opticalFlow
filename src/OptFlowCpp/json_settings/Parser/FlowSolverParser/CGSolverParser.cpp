@@ -1,12 +1,12 @@
 #pragma once
-#include"CGSolverParser.h"
+#include "CGSolverParser.h"
 
 #ifndef VarName(var) (#var)
 #define VarName(var) (#var)
 #endif // !VarName(var) (#var)
 
 
-namespace console_ui
+namespace json_settings
 {
     void ParseCGSolver(const modern_json::json& input, std::shared_ptr<optflow_solvers::CGSolverSettings> cg_solver, const std::string string_end)
     {

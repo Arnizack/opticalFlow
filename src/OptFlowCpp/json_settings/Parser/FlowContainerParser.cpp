@@ -1,7 +1,7 @@
 #pragma once
 #include"FlowContainerParser.h"
 
-namespace console_ui
+namespace json_settings
 {
 	void ParseFlowSolver(const modern_json::json& input, std::shared_ptr<optflow_composition::FlowSolverOptions> flow_solver, std::string string_end)
 	{

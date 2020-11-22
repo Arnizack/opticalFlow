@@ -5,7 +5,7 @@
 #define VarName(var) (#var)
 #endif // !VarName
 
-namespace console_ui
+namespace json_settings
 {
 	void ParsePyramidResolution(const modern_json::json& input, optflow_composition::PyramidResolution& pyramid_resolution, const std::string string_end)
 	{
@@ -30,8 +30,11 @@ namespace console_ui
 
 	void ParsePyramidContainerSettings(const modern_json::json& input, optflow_composition::PyramidIteratorSettings& pyramid_iterator_settings, const std::string string_end)
 	{
-		ParsePyramid(input, pyramid_iterator_settings.ConvexSettings, "Convex" + string_end);
-		ParsePyramid(input, pyramid_iterator_settings.NonConvexSettings, "Non_Convex" + string_end);
+		if(input.count("convex_settings"))
+			ParsePyramid(input["convex_settings"], pyramid_iterator_settings.ConvexSettings, "Convex" + string_end);
+
+		if (input.count("non_convex_settings"))
+		ParsePyramid(input["non_convex_settings"], pyramid_iterator_settings.NonConvexSettings, "Non_Convex" + string_end);
 	}
 
 	void GeneratePyramidResolution(modern_json::json& output, optflow_composition::PyramidResolution& pyramid_resolution, const std::string string_end)
@@ -54,7 +57,10 @@ namespace console_ui
 
 	void GeneratePyramidContainerSettings(modern_json::json& output, optflow_composition::PyramidIteratorSettings& pyramid_iterator_settings, std::string string_end)
 	{
-		GeneratePyramid(output, pyramid_iterator_settings.ConvexSettings, "Convex" + string_end);
-		GeneratePyramid(output, pyramid_iterator_settings.NonConvexSettings, "Non_Convex" + string_end);
+		output["convex_settings"];
+		GeneratePyramid(output["convex_settings"], pyramid_iterator_settings.ConvexSettings, "Convex" + string_end);
+
+		output["non_convex_settings"];
+		GeneratePyramid(output["non_convex_settings"], pyramid_iterator_settings.NonConvexSettings, "Non_Convex" + string_end);
 	}
 }

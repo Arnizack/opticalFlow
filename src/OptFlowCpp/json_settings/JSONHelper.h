@@ -9,7 +9,7 @@
 #endif // !VarName
 
 
-namespace console_ui
+namespace json_settings
 {
 	namespace modern_json = nlohmann;
 

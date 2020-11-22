@@ -5,7 +5,7 @@
 #define VarName(var) (#var)
 #endif
 
-namespace console_ui
+namespace json_settings
 {
 	void ParseLinearizationSolver(const modern_json::json& input, std::shared_ptr<optflow_solvers::LinearizationSolverSettings> linearization_solver, const std::string string_end)
 	{

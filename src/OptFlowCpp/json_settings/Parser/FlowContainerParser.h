@@ -7,7 +7,7 @@
 #include "PyramidContainerParser.h"
 #include "FlowSolverParser/GNCPenaltySolverParser.h"
 
-namespace console_ui
+namespace json_settings
 {
 	namespace modern_json = nlohmann;
 
