@@ -12,7 +12,7 @@
             "pyramid_resolution_minresolutiony_convex": 32,
             "pyramid_resolution_scalefactor_convex": 0.5
         },
-        "gnc_penalty_gncsteps": 3,
+        "gnc_penalty_gncsteps": 2,
         "non_convex_settings": {
             "cg_solver_iterations_non_convex": 100,
             "cg_solver_tolerance_non_convex": 0.001,
