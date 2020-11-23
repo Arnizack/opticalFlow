@@ -6,7 +6,7 @@
 #endif // !VarName
 
 
-namespace console_ui
+namespace json_settings
 {
     void ParseGNCPenaltySolver(const modern_json::json& input, std::shared_ptr<optflow_solvers::GNCPenaltySolverSettings> gnc_penalty, const std::string string_end)
     {

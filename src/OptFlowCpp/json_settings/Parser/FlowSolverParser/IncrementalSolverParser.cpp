@@ -6,7 +6,7 @@
 #endif // !VarName(var) (#var)
 
 
-namespace console_ui
+namespace json_settings
 {
     void ParseIncrementalSolver(const modern_json::json& input, std::shared_ptr<optflow_solvers::IncrementalSolverSettings> incremental_solver, const std::string string_end)
     {

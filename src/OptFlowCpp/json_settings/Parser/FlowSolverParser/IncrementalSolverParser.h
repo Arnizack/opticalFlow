@@ -5,10 +5,9 @@
 #include <string>
 
 #include "optflow_composition/ContainerOptions.h"
-#include "optflow_solvers/solvers/settings/GNCPenaltySolverSettings.h"
 #include "../../JSONHelper.h"
 
-namespace console_ui
+namespace json_settings
 {
 	namespace modern_json = nlohmann;
 

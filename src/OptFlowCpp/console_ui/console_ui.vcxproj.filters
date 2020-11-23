@@ -20,36 +20,6 @@
     <ClCompile Include="commandline_boost\SetupOptions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="json_user_input\JsonSetOptions.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="json_user_input\Parser\CPUBackendParser\CPUBackendParser.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="json_user_input\Parser\FlowContainerParser.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="json_user_input\Parser\PyramidContainerParser.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="json_user_input\Parser\LevelContainerParser.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="json_user_input\Parser\FlowSolverParser\GNCPenaltySolverParser.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="json_user_input\Parser\FlowSolverParser\LinearizationSolverParser.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="json_user_input\Parser\FlowSolverParser\IncrementalSolverParser.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="json_user_input\Parser\FlowSolverParser\CGSolverParser.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="json_user_input\JSONHelper.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="commandline\IClEngine.h">
@@ -95,36 +65,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="setup\RegisterSunBakerSolver.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="json_user_input\JsonSetOptions.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="json_user_input\Parser\CPUBackendParser\CPUBackendParser.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="json_user_input\Parser\FlowContainerParser.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="json_user_input\Parser\PyramidContainerParser.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="json_user_input\Parser\LevelContainerParser.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="json_user_input\Parser\FlowSolverParser\GNCPenaltySolverParser.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="json_user_input\Parser\FlowSolverParser\LinearizationSolverParser.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="json_user_input\Parser\FlowSolverParser\IncrementalSolverParser.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="json_user_input\Parser\FlowSolverParser\CGSolverParser.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="json_user_input\JSONHelper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

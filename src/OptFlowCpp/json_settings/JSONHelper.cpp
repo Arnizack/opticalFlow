@@ -1,7 +1,7 @@
 #pragma once
 #include"JSONHelper.h"
 
-namespace console_ui
+namespace json_settings
 {
 	inline void RepalaceAll(std::string& in, const std::string& target_1, const std::string& target_2, const std::string& replace_with = "_")
 	{

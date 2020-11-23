@@ -1,7 +1,7 @@
 #pragma once
 #include"LevelContainerParser.h"
 
-namespace console_ui
+namespace json_settings
 {
     void ParseLevelSettings(const modern_json::json& input, optflow_composition::LevelSettings& level, std::string string_end)
     {
