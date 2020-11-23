@@ -1,0 +1,24 @@
+{
+                            
+"cg_solver_iterations_convex": 100,
+"cg_solver_iterations_non_convex": 100,
+"cg_solver_tolerance_convex": 0.001,
+"cg_solver_tolerance_non_convex": 0.001,
+"gnc_penalty_gncsteps": 3,
+"incremental_solver_steps_convex": 3,
+"incremental_solver_steps_non_convex": 3,
+                                      
+"linearization_solver_endrelaxation_convex": 0.0003921568627450981,
+"linearization_solver_endrelaxation_non_convex": 0.0003921568627450981,
+"linearization_solver_relaxationsteps_convex": 3.0,
+"linearization_solver_relaxationsteps_non_convex": 3.0,
+"linearization_solver_startrelaxation_convex": 3.921568627450981e-07,
+"linearization_solver_startrelaxation_non_convex": 3.921568627450981e-07,
+"pyramid_resolution_minresolutionx_convex": 32,
+"pyramid_resolution_minresolutionx_non_convex": 32,
+"pyramid_resolution_minresolutiony_convex": 32,
+"pyramid_resolution_minresolutiony_non_convex": 32,
+"pyramid_resolution_scalefactor_convex": 0.5,
+"pyramid_resolution_scalefactor_non_convex": 0.5
+
+}

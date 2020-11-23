@@ -43,6 +43,82 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="json_user_input\JSONHelper.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="json_user_input\JsonSetOptions.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="json_user_input\Parser\CPUBackendParser\CPUBackendParser.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="json_user_input\Parser\FlowContainerParser.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="json_user_input\Parser\FlowSolverParser\CGSolverParser.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="json_user_input\Parser\FlowSolverParser\GNCPenaltySolverParser.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="json_user_input\Parser\FlowSolverParser\IncrementalSolverParser.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="json_user_input\Parser\FlowSolverParser\LinearizationSolverParser.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="json_user_input\Parser\LevelContainerParser.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="json_user_input\Parser\PyramidContainerParser.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="setup\RegisterCGSolver.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="setup\RegisterCPUBackend.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="setup\RegisterCPULinalg.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="setup\RegisterSunBakerSolver.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="setup\solvers\GNCSolverContainer.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="setup\solvers\LevelSolverContainer.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="setup\solvers\PyramidContainer.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="setup\solvers\PyramidIteratorContainer.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="setup\solvers\SetupSolverSettings.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="commandline_boost\ProgramOptions.cpp">
@@ -50,6 +126,46 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="commandline_boost\SetupOptions.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="json_user_input\JSONHelper.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="json_user_input\JsonSetOptions.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="json_user_input\Parser\CPUBackendParser\CPUBackendParser.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="json_user_input\Parser\FlowContainerParser.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="json_user_input\Parser\FlowSolverParser\CGSolverParser.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="json_user_input\Parser\FlowSolverParser\GNCPenaltySolverParser.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="json_user_input\Parser\FlowSolverParser\IncrementalSolverParser.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="json_user_input\Parser\FlowSolverParser\LinearizationSolverParser.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="json_user_input\Parser\LevelContainerParser.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="json_user_input\Parser\PyramidContainerParser.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -71,6 +187,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="temp_json_input.json" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

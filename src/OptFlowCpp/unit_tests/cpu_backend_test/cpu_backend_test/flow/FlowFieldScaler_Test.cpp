@@ -37,7 +37,7 @@ namespace cpu_backend
 
 			size_t new_size = out->Shape[0] * out->Shape[1] * out->Shape[2];
 
-			EXPECT_EQ(out->Shape[0], new_width);
+			EXPECT_EQ(out->Shape[2], new_width);
 			EXPECT_EQ(out->Shape[1], new_height);
 
 			double arr_out1[200];
@@ -45,7 +45,7 @@ namespace cpu_backend
 
 			for (int i = 0; i < size; i++)
 			{
-				arr_temp[i] = i * 2;
+				arr_temp[i] = i * 2.0;
 
 				EXPECT_EQ((*input)[i], i);
 			}
@@ -65,7 +65,7 @@ namespace cpu_backend
 
 			new_size = out->Shape[0] * out->Shape[1] * out->Shape[2];
 
-			EXPECT_EQ(out->Shape[0], new_width);
+			EXPECT_EQ(out->Shape[2], new_width);
 			EXPECT_EQ(out->Shape[1], new_height);
 
 			double arr_out2[8];

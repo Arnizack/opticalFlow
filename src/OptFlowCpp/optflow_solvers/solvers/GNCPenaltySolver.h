@@ -18,7 +18,6 @@ namespace optflow_solvers
 
 	class GNCPenaltySolver : public core::IFlowFieldSolver<ProblemTyp>
 	{
-
 		using PtrFlowField = std::shared_ptr < core::IArray<double, 3> > ;
 
 		using PtrStandardFlowSolver = std::shared_ptr<

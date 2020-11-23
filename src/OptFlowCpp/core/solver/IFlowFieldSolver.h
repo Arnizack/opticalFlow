@@ -7,7 +7,7 @@
 
 namespace core
 {
-
+	
 	template<class ProblemTyp>
 	class IFlowFieldSolver
 	{
