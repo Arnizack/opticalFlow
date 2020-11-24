@@ -1,1 +1,4 @@
 
+[submodule "src/OptFlowCpp/scripts/cmake_utilities"]
+	path = src/OptFlowCpp/scripts/cmake_utilities
+	url = https://github.com/Arnizack/cmake_utilities.git
