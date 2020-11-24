@@ -1,5 +1,5 @@
 #pragma once
-#include"pch.h"
+
 #include"BilateralMedian.h"
 #include<algorithm>
 #include"../../image/inner/IteratorHelper.h"

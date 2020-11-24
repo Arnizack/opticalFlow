@@ -1,0 +1,3 @@
+vcpkg install boost:windows-x64
+vcpkg install libpng:windows-x64
+vcpkg install openblas:windows-x64

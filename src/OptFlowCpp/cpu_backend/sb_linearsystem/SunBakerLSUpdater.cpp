@@ -1,5 +1,5 @@
 #pragma once
-#include"pch.h"
+
 #include"SunBakerLSUpdater.h"
 #include"SunBakerLinearOp.h"
 

@@ -11,4 +11,6 @@
 #include "framework.h"
 #include<iostream>
 
+#define TEST 2;
+
 #endif //PCH_H

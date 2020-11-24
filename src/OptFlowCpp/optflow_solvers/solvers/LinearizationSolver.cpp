@@ -1,5 +1,5 @@
 #pragma once
-#include"pch.h"
+//#include"pch.h"
 #include"LinearizationSolver.h"
 #include<math.h>
 #include"core/Logger.h"

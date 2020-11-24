@@ -1,5 +1,5 @@
 #pragma once
-#include"pch.h"
+
 #include"LogOcclusion.h"
 #include<algorithm>
 #include"../../image/inner/ArrayHelper.h"

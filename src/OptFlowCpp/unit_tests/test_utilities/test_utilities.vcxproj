@@ -172,6 +172,7 @@
     <Import Project="..\..\packages\boost_date_time-vc120.1.72.0.0\build\boost_date_time-vc120.targets" Condition="Exists('..\..\packages\boost_date_time-vc120.1.72.0.0\build\boost_date_time-vc120.targets')" />
     <Import Project="..\..\packages\boost_system-vc120.1.72.0.0\build\boost_system-vc120.targets" Condition="Exists('..\..\packages\boost_system-vc120.1.72.0.0\build\boost_system-vc120.targets')" />
     <Import Project="..\..\packages\boost_thread-vc120.1.72.0.0\build\boost_thread-vc120.targets" Condition="Exists('..\..\packages\boost_thread-vc120.1.72.0.0\build\boost_thread-vc120.targets')" />
+    <Import Project="..\..\packages\gmock.1.10.0\build\native\gmock.targets" Condition="Exists('..\..\packages\gmock.1.10.0\build\native\gmock.targets')" />
   </ImportGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
@@ -182,5 +183,6 @@
     <Error Condition="!Exists('..\..\packages\boost_date_time-vc120.1.72.0.0\build\boost_date_time-vc120.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\boost_date_time-vc120.1.72.0.0\build\boost_date_time-vc120.targets'))" />
     <Error Condition="!Exists('..\..\packages\boost_system-vc120.1.72.0.0\build\boost_system-vc120.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\boost_system-vc120.1.72.0.0\build\boost_system-vc120.targets'))" />
     <Error Condition="!Exists('..\..\packages\boost_thread-vc120.1.72.0.0\build\boost_thread-vc120.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\boost_thread-vc120.1.72.0.0\build\boost_thread-vc120.targets'))" />
+    <Error Condition="!Exists('..\..\packages\gmock.1.10.0\build\native\gmock.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\gmock.1.10.0\build\native\gmock.targets'))" />
   </Target>
 </Project>

@@ -1,4 +1,4 @@
-#include "pch.h"
+//#include "pch.h"
 #include "GNCPenaltySolver.h"
 #include"core/Logger.h"
 #include"utilities/debug/ImageLogger.h"
@@ -48,7 +48,6 @@ namespace optflow_solvers
         penalty_problem->CrossFilterImage = problem->CrossFilterImage;
         penalty_problem->FirstFrame = problem->FirstFrame;
         penalty_problem->SecondFrame = problem->SecondFrame;
-        
 
 
         for (int gnc_iter = 0; gnc_iter < _gnc_steps; gnc_iter++)

@@ -1,4 +1,4 @@
-#include"pch.h"
+
 #include "ProblemFactory.h"
 #include"../Array.h"
 #include"../image/inner/ConvertToGrayscale.h"

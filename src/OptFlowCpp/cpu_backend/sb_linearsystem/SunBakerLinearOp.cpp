@@ -1,5 +1,5 @@
 #pragma once
-#include"pch.h"
+
 #include"SunBakerLinearOp.h"
 #include"../image/inner/convolution2D.h"
 #include"../Array.h"

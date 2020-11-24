@@ -1,5 +1,5 @@
 #pragma once
-#include"pch.h"
+
 #include"WarpLinearColorImage.h"
 #include"IteratorHelper.h"
 #include"BilinearInterpolate.h"

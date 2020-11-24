@@ -1,5 +1,5 @@
 #pragma once
-#include"pch.h"
+
 #include<omp.h>
 #include"GrayWarper.h"
 #include"../inner/BicubicInterpolate.h"

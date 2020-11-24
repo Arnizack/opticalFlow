@@ -1,5 +1,5 @@
 #pragma once
-#include"pch.h"
+
 #include"CrossBilateralMedianFilter.h"
 #include"../Array.h"
 #include"inner/LogOcclusion.h"

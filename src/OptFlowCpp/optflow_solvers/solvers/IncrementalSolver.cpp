@@ -1,5 +1,5 @@
 #pragma once
-#include"pch.h"
+//#include"pch.h"
 #include"IncrementalSolver.h"
 #include <iostream>
 #include"core/Logger.h"

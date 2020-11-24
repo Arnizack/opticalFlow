@@ -1,0 +1,6 @@
+add_subdirectory(spdlog)
+add_subdirectory(libpng)
+add_subdirectory(imageLib)
+add_subdirectory(flowcode)
+add_subdirectory(googletest)
+add_subdirectory(openblas)

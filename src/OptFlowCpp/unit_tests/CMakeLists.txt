@@ -1,0 +1,3 @@
+add_subdirectory(core_mock_adaptor)
+add_subdirectory(test_utilities)
+add_subdirectory(cpu_backend_test)

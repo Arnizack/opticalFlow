@@ -1,4 +1,4 @@
-#include"pch.h"
+//#include"pch.h"
 #include "PyramidSolver.h"
 #include <iostream>
 #include"core/Logger.h"
