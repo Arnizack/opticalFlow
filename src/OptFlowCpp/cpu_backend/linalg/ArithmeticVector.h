@@ -34,7 +34,7 @@ namespace cpu_backend
 			const size_t size = (*in).Size();
 
 			#pragma omp parallel for
-			for (size_t i = 0; i < size; i++)
+			for (int i = 0; i < size; i++)
 			{
 				norm += (*in)[i] * (*in)[i];
 			}
@@ -51,7 +51,7 @@ namespace cpu_backend
 			std::shared_ptr<Array<InnerTyp, 1>> in_b = std::dynamic_pointer_cast<Array<InnerTyp, 1>>(b);
 
 			#pragma omp parallel for
-			for (size_t i = 0; i < (*in_a).Size(); i++)
+			for (int i = 0; i < (*in_a).Size(); i++)
 			{
 				out += (*in_a)[i] * (*in_b)[i];
 			}
@@ -65,7 +65,7 @@ namespace cpu_backend
 			auto out = std::dynamic_pointer_cast<Array<InnerTyp, DimCount>>(_factory->Zeros(a->Shape));
 
 			#pragma omp parallel for
-			for (size_t i = 0; i < (*out).Size(); i++)
+			for (int i = 0; i < (*out).Size(); i++)
 			{
 				(*out)[i] = fac * (*out)[i];
 			}
@@ -79,7 +79,7 @@ namespace cpu_backend
 			std::shared_ptr<Array<InnerTyp, DimCount>> in_a = std::dynamic_pointer_cast<Array<InnerTyp, DimCount>>(a);
 
 			#pragma omp parallel for
-			for (size_t i = 0; i < (*in_a).Size(); i++)
+			for (int i = 0; i < (*in_a).Size(); i++)
 			{
 				(*in_a)[i] = fac * (*in_a)[i];
 			}
@@ -99,7 +99,7 @@ namespace cpu_backend
 			auto in_d = std::dynamic_pointer_cast<Array<InnerTyp, 1>>(d);
 
 			#pragma omp parallel for
-			for (size_t i = 0; i < (*in_a).Size(); i++)
+			for (int i = 0; i < (*in_a).Size(); i++)
 			{
 				scalar_a_b += (*in_a)[i] * (*in_b)[i];
 				scalar_c_d += (*in_c)[i] * (*in_d)[i];
@@ -177,7 +177,7 @@ namespace cpu_backend
 			auto in_d = std::dynamic_pointer_cast<Array<double, 1>>(d);
 
 			#pragma omp parallel for
-			for (size_t i = 0; i < (*in_a).Size(); i++)
+			for (int i = 0; i < (*in_a).Size(); i++)
 			{
 				scalar_a_b += (*in_a)[i] * (*in_b)[i];
 				scalar_c_d += (*in_c)[i] * (*in_d)[i];
@@ -255,7 +255,7 @@ namespace cpu_backend
 			auto in_d = std::dynamic_pointer_cast<Array<float, 1>>(d);
 
 			#pragma omp parallel for
-			for (size_t i = 0; i < (*in_a).Size(); i++)
+			for (int i = 0; i < (*in_a).Size(); i++)
 			{
 				scalar_a_b += (*in_a)[i] * (*in_b)[i];
 				scalar_c_d += (*in_c)[i] * (*in_d)[i];

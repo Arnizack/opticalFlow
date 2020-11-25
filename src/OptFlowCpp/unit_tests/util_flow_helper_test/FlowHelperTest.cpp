@@ -64,7 +64,7 @@ namespace flowhelper
 
 		auto cwd = get_current_dir();
 
-		FlowField flow = OpenFlow("..\\..\\..\\..\\..\\resources\\eval-twoframes-groundtruth\\Dimetrodon\\flow10.flo");
+		FlowField flow = OpenFlow("..\\..\\..\\..\\..\\..\\resources\\eval-twoframes-groundtruth\\Dimetrodon\\flow10.flo");
 
 		
 

@@ -33,7 +33,9 @@ set(INC
 
 set(LIBS
     core
-    debug
+    debug_helper
+    flow_helper
+    image_helper
 
 )
 

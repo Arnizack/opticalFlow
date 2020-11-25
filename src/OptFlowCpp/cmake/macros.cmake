@@ -139,9 +139,7 @@ macro(optflow_add_gtest target sources includes library_deps)
   #  target_link_libraries(${target} PRIVATE ${gtest_lib})
   #endforeach()
   
-  
-  
-endmacro(gtest)
+endmacro()
 
 macro(optflow_add_gmock_lib target sources includes library_deps)
   add_library(${target} STATIC ${sources})

@@ -1,7 +1,7 @@
 #include"optflow_solvers/OpticalFlowApplication.h"
 #include"optflow_composition/ContainerInstaller.h"
 #include"core/Logger.h"
-#include"utilities/debug/ImageLogger.h"
+#include"utilities/debug_helper/ImageLogger.h"
 
 #include "json_settings/JSONHandler.h"
 //#include "optflow_composition/ContainerOptions.h"
@@ -41,8 +41,8 @@ int main(int argc, char* argv[])
 
 	OF_LOG_INFO("Start Logger");
 
-	std::string first_img_path = "..\\..\\..\\resources\\eval-twoframes\\Dimetrodon\\frame10.png"; 
-	std::string second_img_path = "..\\..\\..\\resources\\eval-twoframes\\Dimetrodon\\frame11.png";
+	std::string first_img_path =  "..\\..\\..\\..\\resources\\eval-twoframes\\Dimetrodon\\frame10.png"; 
+	std::string second_img_path = "..\\..\\..\\..\\resources\\eval-twoframes\\Dimetrodon\\frame11.png";
 	
 	std::string flow_output_path = "computed_flow.flo";
 	std::string flow_img_path = "computed_img.png";

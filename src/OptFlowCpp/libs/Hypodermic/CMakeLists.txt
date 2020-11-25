@@ -1,124 +1,31 @@
-project(Hypodermic)
-cmake_minimum_required(VERSION 2.6)
+#add_subdirectory(Hypodermic)
+add_library(hypodermic INTERFACE)
+target_include_directories(hypodermic INTERFACE "Hypodermic")
 
-
-set(Hypodermic_headers
-
-    ActivatedRegistrationInfo.h
-    ActivationException.h
-    ActivationHandler.h
-    ActivationHandlers.h
-    ActivationRegistry.h
-    ActivationResult.h
-    AnyArgument.h
-    ArgumentPack.h
-    ArgumentResolver.h
-    As.h
-    AsSelf.h
-    AutowireableConstructor.h
-    AutowireableConstructorRegistrationDescriptor.h
-    Behavior.h
-    CircularDependencyException.h
-    ComponentContext.h
-    Config.h
-    ConsoleLoggerSink.h
-    ConstructorDescriptor.h
-    ConstructorTypologyDeducer.h
-    Container.h
-    ContainerBuilder.h
-    ContainerInstanceRegistration.h
-    ContainerInstanceRegistrationActivator.h
-    DependencyActivationException.h
-    DependencyFactories.h
-    DependencyFactory.h
-    DependencyFactoryTag.h
-    EnforceBaseOf.h
-    EnforceDependencyNotAlreadyRegistered.h
-    ExceptionBase.h
-    FactoryWrapper.h
-    Hypodermic.h
-    ILoggerSink.h
-    InstanceAlreadyActivatingException.h
-    InstanceFactory.h
-    InstanceLifetime.h
-    InstanceRegistrationTags.h
-    IntegerSequence.h
-    IRegistration.h
-    IRegistrationActivator.h
-    IRegistrationDescriptor.h
-    IRegistrationRegistry.h
-    IRegistrationScope.h
-    IResolutionContainer.h
-    IResolutionContext.h
-    IRuntimeRegistrationBuilder.h
-    IsComplete.h
-    IsSupportedArgument.h
-    ITypeAlias.h
-    Log.h
-    Logger.h
-    LogLevel.h
-    MetaContains.h
-    MetaForEach.h
-    MetaIdentity.h
-    MetaInsert.h
-    MetaMap.h
-    MetaPair.h
-    Named.h
-    NamedTypeAlias.h
-    NestedRegistrationScope.h
-    NoopLoggerSink.h
-    OnActivated.h
-    PersistentInstanceRegistration.h
-    PointerAlignment.h
-    Pragmas.h
-    ProvidedDependencyTag.h
-    ProvidedInstanceDependencyTag.h
-    ProvidedInstanceFactoryRegistrationDescriptor.h
-    ProvidedInstanceRegistration.h
-    ProvidedInstanceRegistrationActivator.h
-    ProvidedInstanceRegistrationDescriptor.h
-    Registration.h
-    RegistrationActivator.h
-    RegistrationBuilder.h
-    RegistrationContext.h
-    RegistrationDescriptorBase.h
-    RegistrationDescriptorBuilder.h
-    RegistrationDescriptorInfo.h
-    RegistrationDescriptorInfoToString.h
-    RegistrationException.h
-    RegistrationScope.h
-    ResolutionContainer.h
-    ResolutionContext.h
-    ResolutionException.h
-    ResolutionInfo.h
-    RuntimeRegistrationBuilder.h
-    SingleInstance.h
-    TypeAlias.h
-    TypeAliases.h
-    TypeAliasKey.h
-    TypeInfo.h
-    UseIfNone.h
-    With.h
+set(
+    TESTSRC
+    Hypodermic/Hypodermic.Tests/main.cpp
+    Hypodermic/Hypodermic.Tests/CircularDependencyTests.cpp
+    Hypodermic/Hypodermic.Tests/ContainerBuilderTests.cpp
+    Hypodermic/Hypodermic.Tests/ContainerTests.cpp
+    Hypodermic/Hypodermic.Tests/DefaultConstructibleTests.cpp
+    Hypodermic/Hypodermic.Tests/FactoryTests.cpp
+    Hypodermic/Hypodermic.Tests/IsCompleteTests.cpp
+    Hypodermic/Hypodermic.Tests/MemoryTests.cpp
+    Hypodermic/Hypodermic.Tests/NamedTests.cpp
+    Hypodermic/Hypodermic.Tests/NestedContainerTests.cpp
+    Hypodermic/Hypodermic.Tests/PerformanceTests.cpp
+    Hypodermic/Hypodermic.Tests/PersistentInstanceRegistrationTests.cpp
+    Hypodermic/Hypodermic.Tests/ProvidedDependenciesTests.cpp
+    Hypodermic/Hypodermic.Tests/ProvidedInstanceFactoryRegistrationTests.cpp
+    Hypodermic/Hypodermic.Tests/ProvidedInstanceRegistrationTests.cpp
+    Hypodermic/Hypodermic.Tests/RegistrationTests.cpp
+    Hypodermic/Hypodermic.Tests/RuntimeRegistrationTests.cpp
+    Hypodermic/Hypodermic.Tests/UseIfNoneTests.cpp
 )
 
+add_executable(hypodermic.tests ${TESTSRC})
+target_link_libraries(hypodermic.tests boost hypodermic)
+target_include_directories(hypodermic.tests PRIVATE "Hypodermic/Hypodermic.Tests")
 
-install(FILES ${Hypodermic_headers} DESTINATION include/Hypodermic)
-
-#########################################
-# pkgconfig
-#########################################
-set(VERSION "${HYPODERMIC_VERSION}")
-set(prefix "${CMAKE_INSTALL_PREFIX}")
-set(exec_prefix "\${prefix}")
-set(includedir "\${prefix}/include")
-configure_file(
-    ${CMAKE_CURRENT_SOURCE_DIR}/libhypodermic.pc.in
-    ${CMAKE_CURRENT_BINARY_DIR}/libhypodermic.pc
-@ONLY)
-
-install(
-    FILES ${CMAKE_CURRENT_BINARY_DIR}/libhypodermic.pc
-    DESTINATION lib/pkgconfig
-)
-
-
+set_target_properties(hypodermic.tests PROPERTIES FOLDER "/libs/tests")

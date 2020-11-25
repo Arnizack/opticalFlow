@@ -60,3 +60,8 @@ set(LIBS
 )
 
 optflow_add_library(cpu_backend "${AUTOSRC}" "${INC}" "${LIBS}" STATIC)
+
+find_package(OpenMP)
+if(OpenMP_CXX_FOUND)
+    target_link_libraries(cpu_backend OpenMP::OpenMP_CXX)
+endif()

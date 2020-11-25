@@ -14,7 +14,9 @@ namespace core
 		static void Init();
 
 		static std::shared_ptr<spdlog::logger>& GetLogger() { return _Logger; }
+		static bool _should_log;
 	private:
+		
 		static std::shared_ptr<spdlog::logger> _Logger;
 	};
 
@@ -23,11 +25,11 @@ namespace core
 }
 
 //log macros
-#define OF_LOG_TRACE(...)    ::core::Logger::GetLogger()->trace(__VA_ARGS__)
-#define OF_LOG_INFO(...)     ::core::Logger::GetLogger()->info(__VA_ARGS__)
-#define OF_LOG_WARN(...)     ::core::Logger::GetLogger()->warn(__VA_ARGS__)
-#define OF_LOG_ERROR(...)    ::core::Logger::GetLogger()->error(__VA_ARGS__)
-#define OF_LOG_CRITICAL(...) ::core::Logger::GetLogger()->critical(__VA_ARGS__)
+#define OF_LOG_TRACE(...)    if(::core::Logger::_should_log) ::core::Logger::GetLogger()->trace(__VA_ARGS__)
+#define OF_LOG_INFO(...)     if(::core::Logger::_should_log) ::core::Logger::GetLogger()->info(__VA_ARGS__)
+#define OF_LOG_WARN(...)     if(::core::Logger::_should_log) ::core::Logger::GetLogger()->warn(__VA_ARGS__)
+#define OF_LOG_ERROR(...)    if(::core::Logger::_should_log) ::core::Logger::GetLogger()->error(__VA_ARGS__)
+#define OF_LOG_CRITICAL(...) if(::core::Logger::_should_log) ::core::Logger::GetLogger()->critical(__VA_ARGS__)
 
 
 

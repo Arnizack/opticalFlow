@@ -98,7 +98,7 @@ namespace cpu_backend
 			float y_proj;
 
 			#pragma omp parallel for
-			for (size_t y = 0; y < dst_height; y++) // column y
+			for (int y = 0; y < dst_height; y++) // column y
 			{
 
 				y_proj = (y - 0.5) / height_relation;
