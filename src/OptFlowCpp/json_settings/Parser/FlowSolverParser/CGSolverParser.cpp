@@ -19,12 +19,12 @@ namespace json_settings
             cg_solver->Tolerance = input[option_name];
     }
 
-    void GenerateCGSolver(modern_json::json& input, std::shared_ptr<optflow_solvers::CGSolverSettings> cg_solver, const std::string string_end)
+    void GenerateCGSolver(modern_json::json& output, std::shared_ptr<optflow_solvers::CGSolverSettings> cg_solver, const std::string string_end)
     {
         std::string option_name = GetOptionName(VarName(cg_solver->Iterations), string_end);
-        input[option_name] = cg_solver->Iterations;
+        output[option_name] = cg_solver->Iterations;
 
         option_name = GetOptionName(VarName(cg_solver->Tolerance), string_end);
-        input[option_name] = cg_solver->Tolerance;
+        output[option_name] = cg_solver->Tolerance;
     }
 }

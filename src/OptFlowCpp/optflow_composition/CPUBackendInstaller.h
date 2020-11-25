@@ -1,6 +1,9 @@
 #pragma once
 #include"CPUBackendOptions.h"
+
 #include"Hypodermic/Container.h"
+#include "CPUBackendInstallers/CPUBackendContainer.h"
+
 namespace optflow_composition
 {
 	class CPUBackendInstaller

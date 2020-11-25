@@ -1,6 +1,5 @@
 #pragma once
 #include"CPUBackendInstaller.h"
-#include"CPUBackendInstallers/RegisterCPUBackend.h"
 
 namespace optflow_composition
 {
@@ -10,9 +9,11 @@ namespace optflow_composition
     }
     std::shared_ptr<Hypodermic::Container> CPUBackendInstaller::Install()
     {
-        Hypodermic::ContainerBuilder builder;
+        /*Hypodermic::ContainerBuilder builder;
         SetCPUBackendDefaultSettings(builder);
         RegisterCPUBackend(builder);
-        return builder.build();
+        return builder.build();*/
+
+        return CPUBackendContainer(_options);
     }
 }

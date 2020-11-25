@@ -45,6 +45,15 @@
     <ClCompile Include="JSONHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Parser\CPUBackendParser\CrossMedianFilterParser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Parser\CPUBackendParser\LinearSystemParser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Parser\CPUBackendParser\CharbonnierPenaltyParser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Parser\CPUBackendParser\CPUBackendParser.h">
@@ -75,6 +84,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="JSONHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Parser\CPUBackendParser\CrossMedianFilterParser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Parser\CPUBackendParser\LinearSystemParser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Parser\CPUBackendParser\CharbonnierPenaltyParser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

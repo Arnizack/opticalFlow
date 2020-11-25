@@ -1,5 +1,16 @@
 {
-    "cpu_settings": null,
+    "cpu_settings": {
+        "charbonnier_penalty_defaultblendfactor": 0.0,
+        "charbonnier_penalty_epsilon": 0.001,
+        "charbonnier_penalty_exponent": 0.45,
+        "cross_median_filter_filterinfluence": 5.0,
+        "cross_median_filter_filterlength": 15,
+        "cross_median_filter_sigmacolor": 0.027450980392156862,
+        "cross_median_filter_sigmadistance": 7.0,
+        "cross_median_filter_sigmadiv": 0.3,
+        "cross_median_filter_sigmaerror": 20.0,
+        "linear_system_lambdakernel": 0.0392156862745098
+    },
     "solver_settings": {
         "convex_settings": {
             "cg_solver_iterations_convex": 100,
@@ -12,7 +23,7 @@
             "pyramid_resolution_minresolutiony_convex": 32,
             "pyramid_resolution_scalefactor_convex": 0.5
         },
-        "gnc_penalty_gncsteps": 2,
+        "gnc_penalty_gncsteps": 3,
         "non_convex_settings": {
             "cg_solver_iterations_non_convex": 100,
             "cg_solver_tolerance_non_convex": 0.001,
