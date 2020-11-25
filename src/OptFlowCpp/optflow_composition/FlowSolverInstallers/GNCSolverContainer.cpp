@@ -11,7 +11,7 @@ namespace optflow_composition
             .as<core::IFlowFieldSolver<std::shared_ptr<core::IGrayCrossFilterProblem>>>();
         builder.registerInstance<optflow_solvers::GNCPenaltySolverSettings>(settings.GNCSettings);
 
-        using IIteratorSolver = core::IFlowSolverIterator<core::IGrayPenaltyCrossProblem>;
+        //using IIteratorSolver = core::IFlowSolverIterator<core::IGrayPenaltyCrossProblem>;
         auto pyramid_iterator_container = PyramidIteratorContainer(backends,
             settings.PyramidContainerSettings);
         auto iterator_solver = pyramid_iterator_container->resolve<core::IFlowSolverIterator<core::IGrayPenaltyCrossProblem>>();

@@ -50,6 +50,9 @@
     <ClInclude Include="Backends.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CPUBackendInstallers\CPUBackendContainer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContainerInstaller.cpp">
@@ -73,13 +76,13 @@
     <ClCompile Include="CPUBackendInstaller.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CPUBackendOptions.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="CPUBackendInstallers\RegisterCPUBackend.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CPUBackendInstallers\RegisterCPULinalg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CPUBackendInstallers\CPUBackendContainer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

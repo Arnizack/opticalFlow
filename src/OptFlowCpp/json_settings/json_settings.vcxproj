@@ -21,7 +21,19 @@
   <ItemGroup>
     <ClCompile Include="JSONHelper.cpp" />
     <ClCompile Include="JSONHandler.cpp" />
+    <ClCompile Include="Parser\CPUBackendParser\CharbonnierPenaltyParser.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Parser\CPUBackendParser\CPUBackendParser.cpp" />
+    <ClCompile Include="Parser\CPUBackendParser\CrossMedianFilterParser.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Parser\CPUBackendParser\LinearSystemParser.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Parser\FlowContainerParser.cpp" />
     <ClCompile Include="Parser\FlowSolverParser\CGSolverParser.cpp" />
     <ClCompile Include="Parser\FlowSolverParser\GNCPenaltySolverParser.cpp" />
@@ -33,7 +45,19 @@
   <ItemGroup>
     <ClInclude Include="JSONHelper.h" />
     <ClInclude Include="JSONHandler.h" />
+    <ClInclude Include="Parser\CPUBackendParser\CharbonnierPenaltyParser.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Parser\CPUBackendParser\CPUBackendParser.h" />
+    <ClInclude Include="Parser\CPUBackendParser\CrossMedianFilterParser.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Parser\CPUBackendParser\LinearSystemParser.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Parser\FlowContainerParser.h" />
     <ClInclude Include="Parser\FlowSolverParser\CGSolverParser.h" />
     <ClInclude Include="Parser\FlowSolverParser\GNCPenaltySolverParser.h" />
