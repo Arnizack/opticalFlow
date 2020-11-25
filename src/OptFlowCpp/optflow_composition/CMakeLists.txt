@@ -1,7 +1,6 @@
 set(AUTOSRC
 "ContainerInstaller.cpp"
 "CPUBackendInstaller.cpp"
-"CPUBackendOptions.cpp"
 "FlowSolverInstaller.cpp"
 "Backends.h"
 "ContainerInstaller.h"
@@ -10,8 +9,10 @@ set(AUTOSRC
 "CPUBackendOptions.h"
 "FlowSolverInstaller.h"
 "FlowSolverOptions.h"
+"CPUBackendInstallers/CPUBackendContainer.cpp"
 "CPUBackendInstallers/RegisterCPUBackend.cpp"
 "CPUBackendInstallers/RegisterCPULinalg.cpp"
+"CPUBackendInstallers/CPUBackendContainer.h"
 "CPUBackendInstallers/RegisterCPUBackend.h"
 "CPUBackendInstallers/RegisterCPULinalg.h"
 "FlowSolverInstallers/GNCSolverContainer.cpp"
