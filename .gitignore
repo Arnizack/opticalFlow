@@ -120,3 +120,5 @@ extra_samples/profiling/stop.txt
 /extra_samples/autos/data/vehicles.csv
 /.vs
 >>>>>>> master
+/src/OptFlowCpp/computed_flow.flo
+/src/OptFlowCpp/computed_img.png
