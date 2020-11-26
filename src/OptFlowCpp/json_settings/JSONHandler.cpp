@@ -1,6 +1,6 @@
 #pragma once
 #include"JSONHandler.h"
-
+#include "core/Logger.h"
 
 namespace json_settings
 {
@@ -11,7 +11,10 @@ namespace json_settings
 		modern_json::json input;
 
 		if (!file.is_open())
+		{
+			OF_LOG_INFO("Json could not be opend");
 			return;
+		}
 
 		file >> input;
 

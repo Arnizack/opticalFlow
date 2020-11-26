@@ -14,14 +14,14 @@
 //#include "json_settings/Parser/FlowSolverParser/IncrementalSolverParser.h"
 //#include "json_settings/Parser/FlowSolverParser/LinearizationSolverParser.h"
 //#include "optflow_composition/ContainerOptions.h"
-#include <nlohmann/json.hpp>
-#include <memory>
-#include <iomanip>
-#include <fstream>
+//#include <nlohmann/json.hpp>
+//#include <memory>
+//#include <iomanip>
+//#include <fstream>
 
-#include <iostream>
+//#include <iostream>
 #include <string>
-#include <vector>
+//#include <vector>
 
 int main(int argc, char* argv[])
 {
@@ -44,11 +44,11 @@ int main(int argc, char* argv[])
 	std::string first_img_path =  "..\\..\\..\\..\\resources\\eval-twoframes\\Dimetrodon\\frame10.png"; 
 	std::string second_img_path = "..\\..\\..\\..\\resources\\eval-twoframes\\Dimetrodon\\frame11.png";
 	
-	std::string flow_output_path = "computed_flow.flo";
-	std::string flow_img_path = "computed_img.png";
+	std::string flow_output_path = "..\\..\\computed_flow.flo";
+	std::string flow_img_path = "..\\..\\computed_img.png";
 	
 
-	std::string json_input_path = "temp_json_input.json";
+	std::string json_input_path = "..\\..\\console_ui\\temp_json_input.json";
 	
 	//CommandLine Input
 	/*bool check_solve = console_ui::CheckCommandLineInput(argc, argv, first_img_path, second_img_path, flow_output_path, flow_img_path, json_input_path);
@@ -72,13 +72,15 @@ int main(int argc, char* argv[])
 	application->ComputeOpticalFlow(first_img_path, second_img_path, flow_output_path, flow_img_path);
 	//OF_LOG_IMAGE_FLOW_END();
 
+	OF_LOG_IMAGE_FLOW_END();
+
 	/*
 	* TEMP JSON Output
 	*/
 
 	//nlohmann::json out_json = json_settings::GenerateJSON();
 
-	//json_settings::OutputJSON(out_json, "temp_json_input.json");
+	//json_settings::OutputJSON(out_json, "..\\..\\console_ui\\temp_json_input.json");
 
 	return 0;
 }
