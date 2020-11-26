@@ -1,3 +1,4 @@
+message("toolchain: ${CMAKE_TOOLCHAIN_FILE}")
 find_package(spdlog REQUIRED)
 
 add_library(spdlog INTERFACE)

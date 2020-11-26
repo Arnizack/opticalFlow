@@ -55,7 +55,7 @@ set(INC
 set(LIBS
     core
     openblas
-    debug
+    debug_helper
 
 )
 
