@@ -3,7 +3,6 @@ set(AUTOSRC
 "GrayPenaltyCrossProblemScaler_Test.cpp"
 "main.cpp"
 "Reshape_Test.cpp"
-"Scaler_Test.cpp"
 "flow/BilateralMedianFilterTest.cpp"
 "flow/CrossBilateralMedianFilterTest.cpp"
 "flow/FlowFieldScaler_Test.cpp"
