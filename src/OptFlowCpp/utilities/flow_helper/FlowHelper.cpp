@@ -130,6 +130,11 @@ namespace flowhelper
             {
                 float flow_x = flow.GetXFlow(x, y) * scaler;//temp
                 float flow_y = flow.GetYFlow(x, y) * scaler;
+                if(isnan(flow_x) || isnan(flow_y) || isinf(flow_x) || isinf(flow_y))
+                {
+                    flow_x = 10000;
+                    flow_y = 10000;
+                }
                 uchar color[3] = {};
                 computeColor(flow_x, flow_y, color);
                 img.Pixel(x, y, 0) = ((float)color[0] )/ 255.0;

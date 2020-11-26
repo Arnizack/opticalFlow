@@ -34,10 +34,10 @@ int main(int argc, char* argv[])
 
 	core::Logger::Init();
 	debug::ImageLogger::Init(
-		"E:\\dev\\opticalFlow\\optFlowCpp\\opticalFlow\\src\\OptFlowCpp\\bin\\debug_images"
-		/*"H:\\dev\\opticalFlow\\optFlowCpp\\opticalFlow\\src\\OptFlowCpp\\bin\\debug_images"*/,
-		"E:\\dev\\opticalFlow\\optFlowCpp\\opticalFlow\\src\\OptFlowCpp\\bin\\debug_flow"
-		/*"H:\\dev\\opticalFlow\\optFlowCpp\\opticalFlow\\src\\OptFlowCpp\\bin\\debug_flow"*/);
+		//"E:\\dev\\opticalFlow\\optFlowCpp\\opticalFlow\\src\\OptFlowCpp\\bin\\debug_images"
+		"H:\\dev\\opticalFlow\\opticalFlow\\src\\OptFlowCpp\\build\\debug_images",
+		//"E:\\dev\\opticalFlow\\optFlowCpp\\opticalFlow\\src\\OptFlowCpp\\bin\\debug_flow"
+		"H:\\dev\\opticalFlow\\opticalFlow\\src\\OptFlowCpp\\build\\debug_flow");
 
 	OF_LOG_INFO("Start Logger");
 
@@ -63,17 +63,14 @@ int main(int argc, char* argv[])
 	//Parse JSON
 	json_settings::JsonSetupSettings(json_input_path, options);
 
-	options->SolverOptions->GNCSettings.GNCSettings->GNCSteps = 1;
-
 	di_installer.SetOptions(options);
 
 	auto di_container = di_installer.Install();
 
 	auto application = di_container->resolve<optflow_solvers::OpticalFlowApplication>();
-
-	OF_LOG_IMAGE_FLOW_BEGIN();
-
+	//OF_LOG_IMAGE_FLOW_BEGIN();
 	application->ComputeOpticalFlow(first_img_path, second_img_path, flow_output_path, flow_img_path);
+	//OF_LOG_IMAGE_FLOW_END();
 
 	OF_LOG_IMAGE_FLOW_END();
 
