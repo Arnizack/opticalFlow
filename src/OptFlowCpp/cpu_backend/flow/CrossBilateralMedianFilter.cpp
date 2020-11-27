@@ -1,12 +1,12 @@
 #pragma once
-
+#include"cpu_backend/Base.h"
 #include"CrossBilateralMedianFilter.h"
 #include"../Array.h"
 #include"inner/LogOcclusion.h"
 #include"inner/BilateralMedian.h"
 #include"../image/inner/WarpLinearColorImage.h"
 #include"inner/BilateralMedian.h"
-#include"core/Logger.h"
+
 
 namespace cpu_backend
 {
@@ -32,7 +32,7 @@ namespace cpu_backend
 	}
 	void CrossBilateralMedianFilter::ApplyTo(PtrFlowField dst, const PtrFlowField vec)
 	{
-		OF_LOG_TRACE("CrossBilateralMedianFilter");
+		OPF_LOG_TRACE("CrossBilateralMedianFilter");
 
 		auto destination = std::static_pointer_cast<Array<double, 3>>(dst);
 		auto flow = std::static_pointer_cast<Array<double, 3>>(vec);

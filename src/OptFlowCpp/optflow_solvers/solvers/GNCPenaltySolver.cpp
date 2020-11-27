@@ -1,7 +1,8 @@
 //#include "pch.h"
+#include"optflow_solvers/Base.h"
 #include "GNCPenaltySolver.h"
-#include"core/Logger.h"
-#include"debug_helper/ImageLogger.h"
+
+
 
 namespace optflow_solvers
 {
@@ -53,7 +54,7 @@ namespace optflow_solvers
         for (int gnc_iter = 0; gnc_iter < _gnc_steps; gnc_iter++)
         {
 
-            OF_LOG_INFO("GNC Solver Step: {0:d}", gnc_iter);
+            OPF_LOG_INFO("GNC Solver Step: {0:d}", gnc_iter);
             double blend_factor = ComputeBlendFactor(gnc_iter,_gnc_steps);
             _penalty_func->SetBlendFactor(blend_factor);
             penalty_problem->PenaltyFunc = _penalty_func;
@@ -63,7 +64,7 @@ namespace optflow_solvers
             
             initial_guess = current_solver->Solve(penalty_problem, initial_guess);
 
-            OF_LOG_FLOWARRAY("GNC Solver initial guess", initial_guess);
+            OPF_LOG_FLOWARRAY("GNC Solver initial guess", initial_guess);
 
 
             if (!_solver_iterator->IsEnd())

@@ -3,9 +3,9 @@
 #ifndef __MACROCONFIG__
 #define __MACROCONFIG__
 
-	#define OPF_LOG_ACTIVATED 0
+	#define OPF_LOG_IMAGE_FLOW_ACTIVATED 1
 
 
 #endif  //!__MACROCONFIG__
 
-#include"Logger.h"
+#include"debug_helper/ImageLogger.h"

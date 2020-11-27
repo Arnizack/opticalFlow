@@ -1,7 +1,7 @@
+#include"console_ui/Base.h"
 #include"optflow_solvers/OpticalFlowApplication.h"
 #include"optflow_composition/ContainerInstaller.h"
-#include"core/Logger.h"
-#include"debug_helper/ImageLogger.h"
+
 
 #include "json_settings/JSONHandler.h"
 //#include "optflow_composition/ContainerOptions.h"
@@ -39,7 +39,7 @@ int main(int argc, char* argv[])
 		//"E:\\dev\\opticalFlow\\optFlowCpp\\opticalFlow\\src\\OptFlowCpp\\bin\\debug_flow"
 		"H:\\dev\\opticalFlow\\opticalFlow\\src\\OptFlowCpp\\build\\debug_flow");
 
-	OF_LOG_INFO("Start Logger");
+	OPF_LOG_INFO("Start Logger");
 
 	std::string first_img_path =  "..\\..\\..\\..\\resources\\eval-twoframes\\Dimetrodon\\frame10.png"; 
 	std::string second_img_path = "..\\..\\..\\..\\resources\\eval-twoframes\\Dimetrodon\\frame11.png";
@@ -68,11 +68,11 @@ int main(int argc, char* argv[])
 	auto di_container = di_installer.Install();
 
 	auto application = di_container->resolve<optflow_solvers::OpticalFlowApplication>();
-	//OF_LOG_IMAGE_FLOW_BEGIN();
+	//OPF_LOG_IMAGE_FLOW_BEGIN();
 	application->ComputeOpticalFlow(first_img_path, second_img_path, flow_output_path, flow_img_path);
-	//OF_LOG_IMAGE_FLOW_END();
+	//OPF_LOG_IMAGE_FLOW_END();
 
-	OF_LOG_IMAGE_FLOW_END();
+	OPF_LOG_IMAGE_FLOW_END();
 
 	/*
 	* TEMP JSON Output

@@ -12,7 +12,7 @@ namespace json_settings
 
 		if (!file.is_open())
 		{
-			OF_LOG_INFO("Json could not be opend");
+			OPF_LOG_INFO("Json could not be opend");
 			return;
 		}
 

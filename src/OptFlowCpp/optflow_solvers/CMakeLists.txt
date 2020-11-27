@@ -1,6 +1,7 @@
 set(AUTOSRC
 "OpticalFlowApplication.cpp"
 "pch.cpp"
+"Base.h"
 "framework.h"
 "OpticalFlowApplication.h"
 "pch.h"

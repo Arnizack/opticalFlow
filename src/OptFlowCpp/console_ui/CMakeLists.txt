@@ -1,5 +1,6 @@
 set(AUTOSRC
 "main.cpp"
+"Base.h"
 "commandline/IClEngine.h"
 "commandline/commands/ICLArgument.h"
 "commandline/commands/ICLCommand.h"

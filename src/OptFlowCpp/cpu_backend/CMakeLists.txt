@@ -3,6 +3,7 @@ set(AUTOSRC
 "Array.h"
 "ArrayFactory.h"
 "ArrayScaler.h"
+"Base.h"
 "pch.h"
 "Reshaper.h"
 "Statistics.h"
@@ -64,4 +65,8 @@ optflow_add_library(cpu_backend "${AUTOSRC}" "${INC}" "${LIBS}" STATIC)
 find_package(OpenMP)
 if(OpenMP_CXX_FOUND)
     target_link_libraries(cpu_backend OpenMP::OpenMP_CXX)
+endif()
+
+if(MSVC)
+    target_compile_options(cpu_backend PRIVATE "/fp:fast")
 endif()

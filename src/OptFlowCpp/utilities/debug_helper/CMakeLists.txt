@@ -1,5 +1,6 @@
 set(AUTOSRC
 "ImageLogger.cpp"
+"Base.h"
 "ImageLogger.h"
 )
 

@@ -37,7 +37,7 @@ namespace optflow_solvers
 
 		virtual PtrVector Solve(std::shared_ptr < core::ILinearProblem<InnerTyp>> problem, const PtrVector initial_guess) override
 		{
-			OF_LOG_TRACE("Solve CG");
+			OPF_LOG_TRACE("Solve CG");
 			PtrLinearOperator A = problem->LinearOperator;
 			PtrVector b = problem->Vector;
 
