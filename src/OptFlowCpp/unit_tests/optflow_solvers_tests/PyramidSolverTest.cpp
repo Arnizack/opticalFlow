@@ -1,11 +1,11 @@
 #include"gmock/gmock.h"
 #include"optflow_solvers/solvers/PyramidSolver.h"
-#include"unit_tests/core_mock_adaptor/MockIArrayFactoryD3.h"
-#include"unit_tests/core_mock_adaptor/pyramid/FakeIPyramidBuilder.h"
-#include"unit_tests/core_mock_adaptor/flow/MockIFlowScaler.h"
-#include"unit_tests/core_mock_adaptor/solver/MockIFlowFieldSolver.h"
-#include"unit_tests/core_mock_adaptor/solver/problem/FakeGrayCrossPenaltyProblem.h"
-#include"unit_tests/core_mock_adaptor/pyramid/FakeIPyramid.h"
+#include"core_mock_adaptor/MockIArrayFactoryD3.h"
+#include"core_mock_adaptor/pyramid/FakeIPyramidBuilder.h"
+#include"core_mock_adaptor/flow/MockIFlowScaler.h"
+#include"core_mock_adaptor/solver/MockIFlowFieldSolver.h"
+#include"core_mock_adaptor/solver/problem/FakeGrayCrossPenaltyProblem.h"
+#include"core_mock_adaptor/pyramid/FakeIPyramid.h"
 #include"core/pyramid/IPyramid.h"
 
 

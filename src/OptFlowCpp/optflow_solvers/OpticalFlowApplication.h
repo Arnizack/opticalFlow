@@ -2,7 +2,7 @@
 #include"core/IArray.h"
 #include"core/IArrayFactory.h"
 #include<memory>
-#include"utilities/image_helper/ImageHelper.h"
+#include"image_helper/ImageHelper.h"
 #include<iostream>
 #include"core/solver/problem/IProblemFactory.h"
 #include"core/solver/IFlowFieldSolver.h"

@@ -6,7 +6,7 @@
 #include "../image/inner/DownScaleGaussianGrayScale.h"
 #include "../image/inner/BicubicScale.h"
 #include "../Array.h"
-#include"utilities/debug_helper/ImageLogger.h"
+#include"debug_helper/ImageLogger.h"
 
 namespace cpu_backend
 {

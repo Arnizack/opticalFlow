@@ -1,7 +1,7 @@
 #include"optflow_solvers/OpticalFlowApplication.h"
 #include"optflow_composition/ContainerInstaller.h"
 #include"core/Logger.h"
-#include"utilities/debug_helper/ImageLogger.h"
+#include"debug_helper/ImageLogger.h"
 
 #include "json_settings/JSONHandler.h"
 //#include "optflow_composition/ContainerOptions.h"

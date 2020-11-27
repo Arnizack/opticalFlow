@@ -1,7 +1,7 @@
 #pragma once
 #include"optflow_solvers/linearsystems/ISunBakerLSUpdater.h"
 #include"gmock/gmock.h"
-#include"unit_tests/core_mock_adaptor/solver/problem/MockILinearProblem.h"
+#include"core_mock_adaptor/solver/problem/MockILinearProblem.h"
 
 namespace optflow_solvers
 {

@@ -1,7 +1,7 @@
 #pragma once
 #include"ImageLogger.h"
-#include"utilities/image_helper/ImageHelper.h"
-#include"utilities/flow_helper/FlowHelper.h"
+#include"image_helper/ImageHelper.h"
+#include"flow_helper/FlowHelper.h"
 
 namespace debug
 {

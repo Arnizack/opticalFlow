@@ -3,7 +3,7 @@
 #include"IncrementalSolver.h"
 #include <iostream>
 #include"core/Logger.h"
-#include"utilities/debug_helper/ImageLogger.h"
+#include"debug_helper/ImageLogger.h"
 
 namespace optflow_solvers
 {

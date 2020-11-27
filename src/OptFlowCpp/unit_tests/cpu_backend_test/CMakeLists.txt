@@ -24,7 +24,7 @@ set(AUTOSRC
 )
 
 set(INC
-    "../../"
+    "../"
 )
 
 set(LIBS

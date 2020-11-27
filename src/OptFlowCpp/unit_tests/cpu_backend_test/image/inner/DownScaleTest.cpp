@@ -1,6 +1,6 @@
 #include"gtest/gtest.h"
 #include"cpu_backend/image/inner/DownScaleGaussianGrayScale.h"
-#include"utilities/image_helper/ImageHelper.h"
+#include"image_helper/ImageHelper.h"
 
 namespace cpu_backend
 {

@@ -1,5 +1,5 @@
 #include<gtest/gtest.h>
-#include"utilities/image_helper/ImageHelper.h"
+#include"image_helper/ImageHelper.h"
 #include"cpu_backend/Array.h"
 
 #define _SILENCE_TR1_NAMESPACE_DEPRECATION_WARNING

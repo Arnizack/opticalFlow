@@ -1,7 +1,7 @@
 #pragma once
 #include"filters/Gaussian1DFilter.h"
 #include<memory>
-#include"utilities/debug_helper/ImageLogger.h"
+#include"debug_helper/ImageLogger.h"
 #include<type_traits>
 
 namespace cpu_backend

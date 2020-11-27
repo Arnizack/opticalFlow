@@ -1,6 +1,6 @@
 #pragma once
 #include"FakeISunBakerLSUpdater.h"
-#include"unit_tests/core_mock_adaptor/solver/problem/MockILinearProblem.h"
+#include"core_mock_adaptor/solver/problem/MockILinearProblem.h"
 
 namespace optflow_solvers
 {

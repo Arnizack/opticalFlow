@@ -1,8 +1,8 @@
 #include"cpu_backend/image/warper/GrayWarper.h"
 #include"cpu_backend/Array.h"
 #include"gtest/gtest.h"
-#include"utilities/image_helper/ImageHelper.h"
-#include"unit_tests/test_utilities/Timer.h"
+#include"image_helper/ImageHelper.h"
+#include"test_utilities/Timer.h"
 
 namespace cpu_backend
 {

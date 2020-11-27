@@ -1,6 +1,6 @@
 #pragma once
 #include"core/solver/problem/IGrayCrossFilterProblem.h"
-#include"unit_tests/core_mock_adaptor/MockIArray.h"
+#include"core_mock_adaptor/MockIArray.h"
 
 namespace core
 {

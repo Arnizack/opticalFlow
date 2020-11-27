@@ -1,13 +1,13 @@
 
 #include"optflow_solvers/solvers/GNCPenaltySolver.h"
-#include"unit_tests/core_mock_adaptor/solver/MockIFlowFieldSolver.h"
-#include"unit_tests/core_mock_adaptor/penalty/MockIBlenablePenalty.h"
-#include"unit_tests/core_mock_adaptor/MockIArrayFactoryD3.h"
-#include"unit_tests/core_mock_adaptor/solver/problem/MockIProblemFactory.h"
-#include"unit_tests/core_mock_adaptor/MockIArray.h"
-#include"unit_tests/core_mock_adaptor/solver/problem/FakeGrayCrossProblem.h"
-#include"unit_tests/core_mock_adaptor/solver/problem/FakeGrayCrossPenaltyProblem.h"
-#include"unit_tests/core_mock_adaptor/solver/MockIFlowSolverIterator.h"
+#include"core_mock_adaptor/solver/MockIFlowFieldSolver.h"
+#include"core_mock_adaptor/penalty/MockIBlenablePenalty.h"
+#include"core_mock_adaptor/MockIArrayFactoryD3.h"
+#include"core_mock_adaptor/solver/problem/MockIProblemFactory.h"
+#include"core_mock_adaptor/MockIArray.h"
+#include"core_mock_adaptor/solver/problem/FakeGrayCrossProblem.h"
+#include"core_mock_adaptor/solver/problem/FakeGrayCrossPenaltyProblem.h"
+#include"core_mock_adaptor/solver/MockIFlowSolverIterator.h"
 
 namespace optflow_solvers
 {
