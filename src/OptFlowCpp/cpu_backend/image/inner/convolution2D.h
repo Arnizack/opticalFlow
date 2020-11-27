@@ -8,7 +8,7 @@ namespace cpu_backend
 
 	template<class T, size_t kernel_width, 
 		size_t kernel_height>
-	inline T Convolute2DAt(const int& x, const int& y,const T* image,
+	constexpr inline T Convolute2DAt(const int& x, const int& y,const T* image,
 		const size_t& width,const size_t& height, const T* kernel
 		
 		)
@@ -16,11 +16,13 @@ namespace cpu_backend
 		const int kernel_width_half = kernel_width / 2;
 		const int kernel_height_half = kernel_height / 2;
 		T sum = 0;
+		
 		for (size_t kernel_idx_y = 0; 
 			kernel_idx_y < kernel_height; 
 			kernel_idx_y++)
 		{
 			int y_remap = y + kernel_idx_y - kernel_height_half;
+			
 			for (size_t kernel_idx_x = 0;
 				kernel_idx_x < kernel_width;
 				kernel_idx_x++)

@@ -22,7 +22,7 @@ namespace cpu_backend
        
 
         template<class T, Padding padding>
-		inline T GetValueAt(const int& x, const  int& y, const  int width, const  int height, const T* img, const int offset = 0)
+		inline constexpr T GetValueAt(const int& x, const  int& y, const  int width, const  int height, const T* img, const int offset = 0)
 		{
             int x_remap = 0;
             int y_remap = 0;

@@ -17,6 +17,7 @@ namespace cpu_backend
     {
         size_t weights_max_length = filter_length * filter_length ;
         size_t median_list_max_length = weights_max_length * 2 + 1;
+
         #pragma omp parallel for
         for (int y = 0; y < height; y++)
         {
