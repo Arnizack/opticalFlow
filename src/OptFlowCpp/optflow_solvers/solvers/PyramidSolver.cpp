@@ -36,6 +36,7 @@ namespace optflow_solvers
 	}
 	PtrFlowField PyramidSolver::Solve(PtrProblemPyramid pyramid, PtrFlowField initial_guess)
 	{
+		OPF_PROFILE_FUNCTION();
 		PtrFlowField initial_guess_scaled = initial_guess;
 		while (!pyramid->IsEndLevel())
 		{

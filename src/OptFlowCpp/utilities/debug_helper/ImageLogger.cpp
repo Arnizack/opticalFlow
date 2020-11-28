@@ -14,7 +14,7 @@
 
 
 
-namespace debug
+namespace debug_helper
 {
     std::string ImageLogger::_image_directory;
     std::string ImageLogger::_flow_directory;

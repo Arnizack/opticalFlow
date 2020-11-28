@@ -5,7 +5,7 @@
 #include "core/IArrayFactory.h"
 #include "core/linalg/IArithmeticChained.h"
 #include "core/linalg/IArithmeticVector.h"
-#include "core/Logger.h"
+#include"../Base.h"
 #include<iostream>
 
 namespace optflow_solvers
@@ -38,6 +38,7 @@ namespace optflow_solvers
 		virtual PtrVector Solve(std::shared_ptr < core::ILinearProblem<InnerTyp>> problem, const PtrVector initial_guess) override
 		{
 			OPF_LOG_TRACE("Solve CG");
+			OPF_PROFILE_FUNCTION();
 			PtrLinearOperator A = problem->LinearOperator;
 			PtrVector b = problem->Vector;
 
@@ -54,7 +55,8 @@ namespace optflow_solvers
 			for (size_t i = 0; i < _iter; i++)
 			{
 				A->ApplyTo(z, d); //z = A.dot(d)
-
+				{
+					OPF_PROFILE_SCOPE("CG Overhead");
 				alpha = _arith_vector->ScalarDivScalar(r_current, r_current, d, z); // alpha = <r_current, r_current> / <d, z>
 
 				_arith_chained->ScaleAddTo(x, alpha, d, x); // x = alpha * d + x
@@ -71,6 +73,7 @@ namespace optflow_solvers
 				_arith_chained->ScaleAddTo(d, beta, d, r_next); // d = beta*d + r_next
 
 				std::swap(r_current, r_next);
+				}
 			}
 
 			return x;

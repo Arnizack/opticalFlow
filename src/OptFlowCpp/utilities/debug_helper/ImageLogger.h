@@ -5,7 +5,7 @@
 #include<chrono>
 #include"core/IArray.h"
 
-namespace debug
+namespace debug_helper
 {
 	class ImageLogger
 	{
@@ -46,16 +46,16 @@ namespace debug
 
 #if OPF_LOG_IMAGE_FLOW_ACTIVATED
 	#define TO_STRING(s) #s
-	#define OPF_LOG_IMAGE2D(name,data,width,height) ::debug::ImageLogger::Log2DImage(name ,data,width,height)
-	#define OPF_LOG_IMAGE2DARRAY(name,iarray) ::debug::ImageLogger::Log2DImage(name,iarray)
-	#define OPF_LOG_IMAGE3D(name,data,width,height,color_band) ::debug::ImageLogger::Log2DImage(name ,data,width,height,color_band)
-	#define OPF_LOG_IMAGE3DARRAY(name,iarray) ::debug::ImageLogger::Log2DImage(name,iarray)
+	#define OPF_LOG_IMAGE2D(name,data,width,height) ::debug_helper::ImageLogger::Log2DImage(name ,data,width,height)
+	#define OPF_LOG_IMAGE2DARRAY(name,iarray) ::debug_helper::ImageLogger::Log2DImage(name,iarray)
+	#define OPF_LOG_IMAGE3D(name,data,width,height,color_band) ::debug_helper::ImageLogger::Log2DImage(name ,data,width,height,color_band)
+	#define OPF_LOG_IMAGE3DARRAY(name,iarray) ::debug_helper::ImageLogger::Log2DImage(name,iarray)
 
-	#define OPF_LOG_FLOW(name,data,width,height) ::debug::ImageLogger::LogFlowField(name,data,width,height)
-	#define OPF_LOG_FLOWARRAY(name,iarray) ::debug::ImageLogger::LogFlowField(name,iarray)
+	#define OPF_LOG_FLOW(name,data,width,height) ::debug_helper::ImageLogger::LogFlowField(name,data,width,height)
+	#define OPF_LOG_FLOWARRAY(name,iarray) ::debug_helper::ImageLogger::LogFlowField(name,iarray)
 
-	#define OPF_LOG_IMAGE_FLOW_BEGIN() ::debug::ImageLogger::BeginLogging()
-	#define OPF_LOG_IMAGE_FLOW_END() ::debug::ImageLogger::EndLogging()
+	#define OPF_LOG_IMAGE_FLOW_BEGIN() ::debug_helper::ImageLogger::BeginLogging()
+	#define OPF_LOG_IMAGE_FLOW_END() ::debug_helper::ImageLogger::EndLogging()
 #else
 	#define OPF_LOG_IMAGE2D(name,data,width,height)
 	#define OPF_LOG_IMAGE2DARRAY(name,iarray)

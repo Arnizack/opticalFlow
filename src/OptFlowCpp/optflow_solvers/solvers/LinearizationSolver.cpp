@@ -45,6 +45,7 @@ namespace optflow_solvers
     }
     PtrFlowField LinearizationSolver::Solve(const PtrProblemTyp problem, PtrFlowField initial_guess)
     {
+        OPF_PROFILE_FUNCTION();
         size_t width = problem->FirstFrame->Shape[1];
         size_t height = problem->FirstFrame->Shape[0];
 

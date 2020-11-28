@@ -4,6 +4,7 @@
 #include"../image/inner/convolution2D.h"
 #include"../Array.h"
 #include <omp.h>
+#include"../Base.h"
 
 namespace cpu_backend
 {
@@ -26,6 +27,7 @@ namespace cpu_backend
 	}
 	void SunBakerLinearOp::ApplyTo(PtrGrayImg dst, const PtrGrayImg vec)
 	{
+		//OPF_PROFILE_FUNCTION();
 		double* dst_data = std::static_pointer_cast<
 			Array<double, 1>>(dst)->Data();
 		double* vec_data = std::static_pointer_cast<

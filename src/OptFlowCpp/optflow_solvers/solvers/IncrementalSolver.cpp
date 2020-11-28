@@ -27,6 +27,7 @@ namespace optflow_solvers
     }
     PtrFlowField IncrementalSolver::Solve(const PtrProblemTyp problem, PtrFlowField initial_guess)
     {
+        OPF_PROFILE_FUNCTION();
         for (int step = 0; step < _steps; step++)
         {
 

@@ -33,7 +33,7 @@ namespace cpu_backend
 	void CrossBilateralMedianFilter::ApplyTo(PtrFlowField dst, const PtrFlowField vec)
 	{
 		OPF_LOG_TRACE("CrossBilateralMedianFilter");
-
+		OPF_PROFILE_FUNCTION();
 		auto destination = std::static_pointer_cast<Array<double, 3>>(dst);
 		auto flow = std::static_pointer_cast<Array<double, 3>>(vec);
 		

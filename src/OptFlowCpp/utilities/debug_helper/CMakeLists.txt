@@ -2,6 +2,7 @@ set(AUTOSRC
 "ImageLogger.cpp"
 "Base.h"
 "ImageLogger.h"
+"Profiler.h"
 )
 
 set(INC 

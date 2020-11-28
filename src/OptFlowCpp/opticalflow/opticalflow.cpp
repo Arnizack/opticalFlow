@@ -66,11 +66,12 @@ namespace opticalflow
             : _image_factory(image_factory), _problem_factory(problem_factory),_flow_solver(flow_solver)
         {
             //OPF_LOG_IMAGE_FLOW_BEGIN();
+            
         };
         virtual FlowField Solve(Image first_frame, Image second_frame)
         {
-            
-
+            OPF_PROFILE_BEGIN_SESSION("solvers", "solvers_profile.json");
+            OPF_PROFILE_FUNCTION();
             size_t width = first_frame.width;
             size_t height = first_frame.height;
             std::array<const size_t,3> img_shape = {first_frame.color_bands,height,width};
@@ -84,12 +85,14 @@ namespace opticalflow
             result_flow.height = height;
             result_flow.data = std::make_shared<std::vector<double>>(width*height*2);
             array_flow->CopyDataTo(result_flow.data->data());
+            OPF_PROFILE_END_SESSION();
             return result_flow;
         }
 
         ~SunBakerOpticalFlowSolver()
         {
             OPF_LOG_IMAGE_FLOW_END();
+            
         }        
 
     };
@@ -107,15 +110,22 @@ namespace opticalflow
     std::shared_ptr<OpticalFlowSolver> CreateSolver(std::shared_ptr<SolverOptions> options)
     {
         core::Logger::Init();
-        debug::ImageLogger::Init(
+        debug_helper::ImageLogger::Init(
             //"E:\\dev\\opticalFlow\\optFlowCpp\\opticalFlow\\src\\OptFlowCpp\\bin\\debug_images"
             "..\\debug_images",
             //"E:\\dev\\opticalFlow\\optFlowCpp\\opticalFlow\\src\\OptFlowCpp\\bin\\debug_flow"
             "..\\debug_flow");
 
 	    OPF_LOG_INFO("Start Logger");
-        auto container = SetupDIContainer(options);
-        return container->resolve<SunBakerOpticalFlowSolver>();
+        OPF_PROFILE_BEGIN_SESSION("dependency injection","dependency_injection_profile.json");
+        std::shared_ptr<SunBakerOpticalFlowSolver> solver;
+        {
+            OPF_PROFILE_SCOPE("dependency injection setup");
+            auto container = SetupDIContainer(options);
+            solver = container->resolve<SunBakerOpticalFlowSolver>();
+        }
+        OPF_PROFILE_END_SESSION();
+        return solver;
 
     }
 }

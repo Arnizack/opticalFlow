@@ -45,6 +45,7 @@ namespace optflow_solvers
     }
     PtrFlowField GNCPenaltySolver::Solve(const ProblemTyp problem, PtrFlowField initial_guess)
     {
+        OPF_PROFILE_FUNCTION();
         PtrPenaltyProblem penalty_problem = _problem_factory->CreateGrayPenaltyCrossProblem();
         penalty_problem->CrossFilterImage = problem->CrossFilterImage;
         penalty_problem->FirstFrame = problem->FirstFrame;
