@@ -3,6 +3,17 @@
 #include"image_helper/ImageHelper.h"
 #include"flow_helper/FlowHelper.h"
 
+#if _WIN32
+    #include <windows.h>
+    #define MAKE_DIR(path) CreateDirectory(path, NULL)
+#elif __linux__
+    #include <sys/stat.h>
+    #define MAKE_DIR(path) mkdir(path, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH)
+#else
+#endif
+
+
+
 namespace debug
 {
     std::string ImageLogger::_image_directory;
@@ -38,6 +49,8 @@ namespace debug
         _flow_counter = 0;
         _should_log = false;
         _is_available = true;
+        MAKE_DIR(image_directory.c_str());
+        MAKE_DIR(flow_directory.c_str());
     }
     void ImageLogger::BeginLogging() { _should_log = _is_available; }
     void ImageLogger::EndLogging() { _should_log = false; }

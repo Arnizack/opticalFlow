@@ -1,6 +1,5 @@
 set(AUTOSRC
 "main.cpp"
-"Base.h"
 "commandline/IClEngine.h"
 "commandline/commands/ICLArgument.h"
 "commandline/commands/ICLCommand.h"
@@ -16,10 +15,7 @@ set(INC
 )
 
 set(LIBS
-optflow_composition
-json_settings
-optflow_solvers
-debug_helper
+opticalflow
 boost
 
 )
