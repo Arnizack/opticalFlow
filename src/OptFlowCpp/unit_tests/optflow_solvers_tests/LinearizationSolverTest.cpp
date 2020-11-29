@@ -1,13 +1,13 @@
 #include"gtest/gtest.h"
 #include"optflow_solvers/solvers/LinearizationSolver.h"
-#include"unit_tests/core_mock_adaptor/flow/MockICrossFlowFilter.h"
-#include"unit_tests/optflow_solvers_mock_adaptor/linearsystems/FakeISunBakerLSUpdater.h"
-#include"unit_tests/core_mock_adaptor/solver/MockILinearSolverD.h"
-#include"unit_tests/core_mock_adaptor/MockIReshaperD.h"
-#include"unit_tests/core_mock_adaptor/image/MockIGrayWarper.h"
-#include"unit_tests/core_mock_adaptor/MockIArrayFactoryD3.h"
-#include"unit_tests/core_mock_adaptor/linalg/MockIArithmeticBasic.h"
-#include"unit_tests/core_mock_adaptor/solver/problem/FakeGrayCrossPenaltyProblem.h"
+#include"core_mock_adaptor/flow/MockICrossFlowFilter.h"
+#include"optflow_solvers_mock_adaptor/linearsystems/FakeISunBakerLSUpdater.h"
+#include"core_mock_adaptor/solver/MockILinearSolverD.h"
+#include"core_mock_adaptor/MockIReshaperD.h"
+#include"core_mock_adaptor/image/MockIGrayWarper.h"
+#include"core_mock_adaptor/MockIArrayFactoryD3.h"
+#include"core_mock_adaptor/linalg/MockIArithmeticBasic.h"
+#include"core_mock_adaptor/solver/problem/FakeGrayCrossPenaltyProblem.h"
 
 
 namespace optflow_solvers

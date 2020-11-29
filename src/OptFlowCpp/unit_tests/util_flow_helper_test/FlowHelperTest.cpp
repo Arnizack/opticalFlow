@@ -1,7 +1,7 @@
 #include"gtest/gtest.h"
 #include<array>
 #include"cpu_backend/Array.h"
-#include"utilities/flow_helper/FlowHelper.h"
+#include"flow_helper/FlowHelper.h"
 #include<filesystem>
 
 namespace flowhelper

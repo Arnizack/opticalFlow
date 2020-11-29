@@ -3,7 +3,7 @@
 #include"libs/imageLib/imageLib/Image.h"
 #include"libs/flowcode/flowIO.h"
 #include"libs/flowcode/colorcode.h"
-#include"utilities/image_helper/ImageHelper.h"
+#include"image_helper/ImageHelper.h"
 
 namespace flowhelper
 {

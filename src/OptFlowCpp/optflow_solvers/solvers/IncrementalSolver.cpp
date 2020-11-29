@@ -1,9 +1,9 @@
 #pragma once
 //#include"pch.h"
+#include"optflow_solvers/Base.h"
 #include"IncrementalSolver.h"
 #include <iostream>
-#include"core/Logger.h"
-#include"utilities/debug_helper/ImageLogger.h"
+
 
 namespace optflow_solvers
 {
@@ -27,12 +27,13 @@ namespace optflow_solvers
     }
     PtrFlowField IncrementalSolver::Solve(const PtrProblemTyp problem, PtrFlowField initial_guess)
     {
+        OPF_PROFILE_FUNCTION();
         for (int step = 0; step < _steps; step++)
         {
 
-            OF_LOG_INFO("Incremental Solver Step: {0:d}", step);
+            OPF_LOG_INFO("Incremental Solver Step: {0:d}", step);
             initial_guess = _inner_solver->Solve(problem, initial_guess);
-            OF_LOG_FLOWARRAY("Incremental Solver initial guess", initial_guess);
+            OPF_LOG_FLOWARRAY("Incremental Solver initial guess", initial_guess);
         }
         return initial_guess;
     }

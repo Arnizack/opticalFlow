@@ -23,13 +23,22 @@ namespace core
 
 	
 }
+#ifndef OPF_LOG_ACTIVATED
+	#define OPF_LOG_ACTIVATED 1
+#endif
 
-//log macros
-#define OF_LOG_TRACE(...)    if(::core::Logger::_should_log) ::core::Logger::GetLogger()->trace(__VA_ARGS__)
-#define OF_LOG_INFO(...)     if(::core::Logger::_should_log) ::core::Logger::GetLogger()->info(__VA_ARGS__)
-#define OF_LOG_WARN(...)     if(::core::Logger::_should_log) ::core::Logger::GetLogger()->warn(__VA_ARGS__)
-#define OF_LOG_ERROR(...)    if(::core::Logger::_should_log) ::core::Logger::GetLogger()->error(__VA_ARGS__)
-#define OF_LOG_CRITICAL(...) if(::core::Logger::_should_log) ::core::Logger::GetLogger()->critical(__VA_ARGS__)
-
-
+#if OPF_LOG_ACTIVATED
+	//log macros
+	#define OPF_LOG_TRACE(...)    if(::core::Logger::_should_log) ::core::Logger::GetLogger()->trace(__VA_ARGS__)
+	#define OPF_LOG_INFO(...)     if(::core::Logger::_should_log) ::core::Logger::GetLogger()->info(__VA_ARGS__)
+	#define OPF_LOG_WARN(...)     if(::core::Logger::_should_log) ::core::Logger::GetLogger()->warn(__VA_ARGS__)
+	#define OPF_LOG_ERROR(...)    if(::core::Logger::_should_log) ::core::Logger::GetLogger()->error(__VA_ARGS__)
+	#define OPF_LOG_CRITICAL(...) if(::core::Logger::_should_log) ::core::Logger::GetLogger()->critical(__VA_ARGS__)
+#else
+	#define OPF_LOG_TRACE(...)    
+	#define OPF_LOG_INFO(...)     
+	#define OPF_LOG_WARN(...)     
+	#define OPF_LOG_ERROR(...)    
+	#define OPF_LOG_CRITICAL(...) 
+#endif
 

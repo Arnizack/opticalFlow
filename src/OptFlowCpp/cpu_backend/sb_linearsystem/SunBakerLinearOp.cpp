@@ -4,6 +4,7 @@
 #include"../image/inner/convolution2D.h"
 #include"../Array.h"
 #include <omp.h>
+#include"../Base.h"
 
 namespace cpu_backend
 {
@@ -26,6 +27,7 @@ namespace cpu_backend
 	}
 	void SunBakerLinearOp::ApplyTo(PtrGrayImg dst, const PtrGrayImg vec)
 	{
+		//OPF_PROFILE_FUNCTION();
 		double* dst_data = std::static_pointer_cast<
 			Array<double, 1>>(dst)->Data();
 		double* vec_data = std::static_pointer_cast<
@@ -58,7 +60,7 @@ namespace cpu_backend
 
 		//dst_upper = A*vec_upper - 2 lambda_kernel * ker(vec_upper)
 		//dst_upper += C*vec_lower
-		#pragma omp parallel for
+		#pragma omp parallel for collapse(2)
 		for (int y = 0; y < _height; y++)
 		{
 			for (int x = 0; x < _width; x++)
@@ -72,12 +74,22 @@ namespace cpu_backend
 				result += ptr_c_diags[coord] * vec_lower[coord];
 
 				dst_upper[coord] = result;
+
+				result = ptr_b_diags[coord] * vec_lower[coord];
+				kernel_result =
+					Convolute2DAt<double, 3, 3>(x, y, vec_lower, _width, _height, _kernel);
+
+				result -= 2 * _lambda_kernel * kernel_result;
+				result += ptr_c_diags[coord] * vec_upper[coord];
+
+				dst_lower[coord] = result;
+
 			}
 		}
-
+		/*
 		//dst_upper = B*vec_lower - 2 lambda_kernel * ker(vec_lower)
 		//dst_upper += C*vec_upper
-		#pragma omp parallel for
+		#pragma omp parallel for collapse(2)
 		for (int y = 0; y < _height; y++)
 		{
 			for (int x = 0; x < _width; x++)
@@ -92,7 +104,7 @@ namespace cpu_backend
 
 				dst_lower[coord] = result;
 			}
-		}
+		}*/
 
 
 	}

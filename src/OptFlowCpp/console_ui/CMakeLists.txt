@@ -15,10 +15,7 @@ set(INC
 )
 
 set(LIBS
-optflow_composition
-json_settings
-optflow_solvers
-debug_helper
+opticalflow
 boost
 
 )

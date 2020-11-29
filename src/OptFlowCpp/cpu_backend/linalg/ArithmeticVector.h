@@ -98,7 +98,7 @@ namespace cpu_backend
 			auto in_c = std::dynamic_pointer_cast<Array<InnerTyp, 1>>(c);
 			auto in_d = std::dynamic_pointer_cast<Array<InnerTyp, 1>>(d);
 
-			//#pragma omp parallel for
+			#pragma omp parallel for reduction(+: scalar_a_b) reduction(+: scalar_c_d)
 			for (int i = 0; i < (*in_a).Size(); i++)
 			{
 				scalar_a_b += (*in_a)[i] * (*in_b)[i];
@@ -133,7 +133,18 @@ namespace cpu_backend
 		{
 			std::shared_ptr<Array<double, DimCount>> in = std::dynamic_pointer_cast<Array<double, DimCount>>(vec);
 
-			return cblas_dnrm2((*in).Size(), &(*in)[0], 1);
+			//return cblas_dnrm2((*in).Size(), &(*in)[0], 1);
+			
+			double norm = 0;
+			const size_t size = (*in).Size();
+
+			#pragma omp parallel for reduction(+: norm)
+			for (int i = 0; i < size; i++)
+			{
+				norm += (*in)[i] * (*in)[i];
+			}
+
+			return sqrt(norm);
 		}
 
 		// <a, b>
@@ -171,16 +182,16 @@ namespace cpu_backend
 			double scalar_a_b = 0;
 			double scalar_c_d = 0;
 
-			auto in_a = std::dynamic_pointer_cast<Array<double, 1>>(a);
-			auto in_b = std::dynamic_pointer_cast<Array<double, 1>>(b);
-			auto in_c = std::dynamic_pointer_cast<Array<double, 1>>(c);
-			auto in_d = std::dynamic_pointer_cast<Array<double, 1>>(d);
+			auto in_a = std::dynamic_pointer_cast<Array<double, 1>>(a)->Data();
+			auto in_b = std::dynamic_pointer_cast<Array<double, 1>>(b)->Data();
+			auto in_c = std::dynamic_pointer_cast<Array<double, 1>>(c)->Data();
+			auto in_d = std::dynamic_pointer_cast<Array<double, 1>>(d)->Data();
 
-			//#pragma omp parallel for
-			for (int i = 0; i < (*in_a).Size(); i++)
+			#pragma omp parallel for reduction(+: scalar_a_b) reduction(+: scalar_c_d)
+			for (int i = 0; i < a->Size(); i++)
 			{
-				scalar_a_b += (*in_a)[i] * (*in_b)[i];
-				scalar_c_d += (*in_c)[i] * (*in_d)[i];
+				scalar_a_b += in_a[i] * in_b[i];
+				scalar_c_d += in_c[i] * in_d[i];
 			}
 
 			return scalar_a_b / scalar_c_d;

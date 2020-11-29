@@ -1,7 +1,7 @@
 #pragma once
 #include"core/solver/problem/IGrayPenaltyCrossProblem.h"
-#include"unit_tests/core_mock_adaptor/MockIArray.h"
-#include"unit_tests/core_mock_adaptor/penalty/MockIPenalty.h"
+#include"core_mock_adaptor/MockIArray.h"
+#include"core_mock_adaptor/penalty/MockIPenalty.h"
 
 namespace core
 {

@@ -1,13 +1,11 @@
 #pragma once
-#include<memory>
 
-namespace core
-{
-	template<class T>
-	using Scope = std::shared_ptr<T>;
+#ifndef __MACROCONFIG__
+#define __MACROCONFIG__
 
-	template<class T>
-	using Ref = std::shared_ptr<T>;
+	#define OPF_LOG_ACTIVATED 0
 
 
-}
+#endif  //!__MACROCONFIG__
+
+#include"Logger.h"

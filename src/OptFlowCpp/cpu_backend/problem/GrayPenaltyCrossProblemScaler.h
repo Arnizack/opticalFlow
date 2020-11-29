@@ -1,4 +1,5 @@
 #pragma once
+#include"cpu_backend/Base.h"
 #include "core/IScaler.h"
 #include "core/solver/problem/IGrayPenaltyCrossProblem.h"
 #include "core/solver/problem/IProblemFactory.h"
@@ -6,7 +7,7 @@
 #include "../image/inner/DownScaleGaussianGrayScale.h"
 #include "../image/inner/BicubicScale.h"
 #include "../Array.h"
-#include"utilities/debug_helper/ImageLogger.h"
+
 
 namespace cpu_backend
 {
@@ -70,8 +71,8 @@ namespace cpu_backend
 				output->PenaltyFunc = input->PenaltyFunc;
 			}
 			
-			OF_LOG_IMAGE2DARRAY("First Image Scaled", output->FirstFrame);
-			OF_LOG_IMAGE2DARRAY("Second Image Scaled", output->SecondFrame);
+			OPF_LOG_IMAGE2DARRAY("First Image Scaled", output->FirstFrame);
+			OPF_LOG_IMAGE2DARRAY("Second Image Scaled", output->SecondFrame);
 
 			return output;
 		}

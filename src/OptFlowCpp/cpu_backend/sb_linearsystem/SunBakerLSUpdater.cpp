@@ -2,7 +2,7 @@
 
 #include"SunBakerLSUpdater.h"
 #include"SunBakerLinearOp.h"
-
+#include<omp.h>
 namespace cpu_backend
 {
     using PtrGrayImg = std::shared_ptr<core::IArray<float, 2>>;
@@ -64,6 +64,7 @@ namespace cpu_backend
         double* b_y = _desired_result->Data();
         double* b_x = b_y + size;
 
+        #pragma omp parallel for
         for (int i = 0; i < size; i++)
         {
             /*

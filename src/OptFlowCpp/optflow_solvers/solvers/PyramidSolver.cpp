@@ -1,7 +1,8 @@
 //#include"pch.h"
+#include"optflow_solvers/Base.h"
 #include "PyramidSolver.h"
 #include <iostream>
-#include"core/Logger.h"
+
 namespace optflow_solvers
 {
 
@@ -35,6 +36,7 @@ namespace optflow_solvers
 	}
 	PtrFlowField PyramidSolver::Solve(PtrProblemPyramid pyramid, PtrFlowField initial_guess)
 	{
+		OPF_PROFILE_FUNCTION();
 		PtrFlowField initial_guess_scaled = initial_guess;
 		while (!pyramid->IsEndLevel())
 		{
@@ -43,7 +45,7 @@ namespace optflow_solvers
 			size_t width = problem->FirstFrame->Shape[1];
 			size_t heigth = problem->FirstFrame->Shape[0];
 
-			OF_LOG_INFO("Pyramid Level: {}, {}", width, heigth);
+			OPF_LOG_INFO("Pyramid Level: {}, {}", width, heigth);
 
 			/*PtrFlowField*/ initial_guess_scaled = _flow_scaler->Scale(initial_guess_scaled,width,heigth);
 

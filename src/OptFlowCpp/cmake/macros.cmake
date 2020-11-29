@@ -108,6 +108,22 @@ macro(__optflow_target_setup target sources includes library_deps scope)
 
   # TODO: Add tests and install targets if needed.
   set_property(TARGET ${target} PROPERTY VS_GLOBAL_ROOTNAMESPACE "${target}")
+
+  if(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
+   target_compile_options(${target} PRIVATE /Zi)
+
+   # Tell linker to include symbol data
+    set_target_properties(${target} PROPERTIES 
+        LINK_FLAGS "/INCREMENTAL:NO /DEBUG /OPT:REF /OPT:ICF"
+    )
+
+    # Set file name & location
+    set_target_properties(${target} PROPERTIES 
+        COMPILE_PDB_NAME ${target} 
+        COMPILE_PDB_OUTPUT_DIR ${CMAKE_BINARY_DIR}
+    )
+  endif()
+
 endmacro()
 
 macro(optflow_add_library target sources includes library_deps lib_typ)
