@@ -4,7 +4,7 @@ Der Versuch einen Optical Flow Algorithmus zu implementieren.
 
 ## how run the binaries
 
-``` opticalflow.exe -1 <first image path> -2 <second image path> -O <flow output path> -O<flow visualization output path> -J <json settings>```
+``` opticalflow.exe -1 <first image path> -2 <second image path> -O <flow output path> -F <flow visualization output path> -J <json settings>```
 
 An example for the json settings:
 
