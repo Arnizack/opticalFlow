@@ -1,3 +1,12 @@
+
+/src/OptFlowCpp/bin
+/src/OptFlowCpp/packages
+.vs/
+/src/OptFlowCpp/test
+/src/OptFlowCpp/.vscode
+/src/OptFlowCpp/console_ui/computed_flow.flo
+/src/OptFlowCpp/console_ui/computed_img.png
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -110,3 +119,6 @@ extra_samples/profiling/pos.txt
 extra_samples/profiling/stop.txt
 /extra_samples/autos/data/vehicles.csv
 /.vs
+>>>>>>> master
+/src/OptFlowCpp/computed_flow.flo
+/src/OptFlowCpp/computed_img.png

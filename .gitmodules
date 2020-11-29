@@ -1,0 +1,7 @@
+
+[submodule "src/OptFlowCpp/scripts/cmake_utilities"]
+	path = src/OptFlowCpp/scripts/cmake_utilities
+	url = https://github.com/Arnizack/cmake_utilities.git
+[submodule "src/OptFlowCpp/libs/hypodermic/Hypodermic"]
+	path = src/OptFlowCpp/libs/hypodermic/Hypodermic
+	url = https://github.com/ybainier/Hypodermic.git

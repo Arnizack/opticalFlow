@@ -1,0 +1,7 @@
+add_subdirectory(core_mock_adaptor)
+add_subdirectory(test_utilities)
+add_subdirectory(cpu_backend_test)
+add_subdirectory(optflow_solvers_mock_adaptor)
+add_subdirectory(optflow_solvers_tests)
+add_subdirectory(util_flow_helper_test)
+add_subdirectory(util_image_helper)
