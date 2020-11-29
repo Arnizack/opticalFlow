@@ -150,8 +150,8 @@ namespace cpu_backend
 		// <a, b>
 		virtual double ScalarProduct(const PtrVector a, const PtrVector b) override
 		{
-			std::shared_ptr<Array<double, 1>> in_a = std::dynamic_pointer_cast<Array<double, 1>>(a);
-			std::shared_ptr<Array<double, 1>> in_b = std::dynamic_pointer_cast<Array<double, 1>>(b);
+			std::shared_ptr<Array<double, 1>> in_a = std::static_pointer_cast<Array<double, 1>>(a);
+			std::shared_ptr<Array<double, 1>> in_b = std::static_pointer_cast<Array<double, 1>>(b);
 
 			return cblas_ddot((*in_a).Size(), &(*in_a)[0], 1, &(*in_b)[0], 1);
 		}
@@ -182,10 +182,10 @@ namespace cpu_backend
 			double scalar_a_b = 0;
 			double scalar_c_d = 0;
 
-			auto in_a = std::dynamic_pointer_cast<Array<double, 1>>(a)->Data();
-			auto in_b = std::dynamic_pointer_cast<Array<double, 1>>(b)->Data();
-			auto in_c = std::dynamic_pointer_cast<Array<double, 1>>(c)->Data();
-			auto in_d = std::dynamic_pointer_cast<Array<double, 1>>(d)->Data();
+			auto in_a = std::static_pointer_cast<Array<double, 1>>(a)->Data();
+			auto in_b = std::static_pointer_cast<Array<double, 1>>(b)->Data();
+			auto in_c = std::static_pointer_cast<Array<double, 1>>(c)->Data();
+			auto in_d = std::static_pointer_cast<Array<double, 1>>(d)->Data();
 
 			#pragma omp parallel for reduction(+: scalar_a_b) reduction(+: scalar_c_d)
 			for (int i = 0; i < a->Size(); i++)

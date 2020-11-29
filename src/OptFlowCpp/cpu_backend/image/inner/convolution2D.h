@@ -22,7 +22,7 @@ namespace cpu_backend
 			kernel_idx_y++)
 		{
 			int y_remap = y + kernel_idx_y - kernel_height_half;
-			
+
 			for (size_t kernel_idx_x = 0;
 				kernel_idx_x < kernel_width;
 				kernel_idx_x++)

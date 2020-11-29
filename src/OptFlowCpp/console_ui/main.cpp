@@ -3,6 +3,7 @@
 //#include <iostream>
 #include <string>
 //#include <vector>
+#include"commandline_boost/ProgramOptions.h"
 
 int main(int argc, char* argv[])
 {
@@ -20,15 +21,28 @@ int main(int argc, char* argv[])
 	std::string flow_output_path = "..\\..\\computed_flow.flo";
 	std::string flow_img_path = "..\\..\\computed_img.png";
 
-	std::string options_path = "..\\..\\console_ui\\temp_json_input.json";
+	std::string options_path = "";
+
+	bool check_solve = console_ui::CheckCommandLineInput(argc, argv, first_img_path, second_img_path, flow_output_path, flow_img_path, options_path);
+
+	if (check_solve == false)
+		return 1;
 
 	auto first_img = opticalflow::OpenImage(first_img_path);
 	auto second_img = opticalflow::OpenImage(second_img_path);
 	
-	auto options = opticalflow::ReadOptions(options_path);
+	std::shared_ptr<opticalflow::OpticalFlowSolver> solver;
 
-	auto solver = opticalflow::CreateSolver(options);
+	if(options_path=="")
+	{
+		auto options = opticalflow::ReadOptions(options_path);
 
+		solver = opticalflow::CreateSolver(options);
+	}
+	else
+	{
+		solver = opticalflow::CreateSolver();
+	}
 	auto result = solver->Solve(first_img,second_img);
 
 	opticalflow::SaveFlowField(flow_output_path,result);

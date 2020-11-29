@@ -64,10 +64,10 @@ namespace cpu_backend
 		virtual void ScaleAddTo(const PtrVector x, const double& alpha, const PtrVector a, const PtrVector b) override
 		{
 			const size_t size = a->Size();
-			auto out = std::dynamic_pointer_cast<Array<InnerTyp, DimCount>>(x)->Data();
+			auto out = std::static_pointer_cast<Array<InnerTyp, DimCount>>(x)->Data();
 
-			auto in_a = std::dynamic_pointer_cast<Array<InnerTyp, DimCount>>(a)->Data();
-			auto in_b = std::dynamic_pointer_cast<Array<InnerTyp, DimCount>>(b)->Data();
+			auto in_a = std::static_pointer_cast<Array<InnerTyp, DimCount>>(a)->Data();
+			auto in_b = std::static_pointer_cast<Array<InnerTyp, DimCount>>(b)->Data();
 
 			#pragma omp parallel for
 			for (int i = 0; i < size; i++)

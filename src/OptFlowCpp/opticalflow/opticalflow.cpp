@@ -112,9 +112,9 @@ namespace opticalflow
         core::Logger::Init();
         debug_helper::ImageLogger::Init(
             //"E:\\dev\\opticalFlow\\optFlowCpp\\opticalFlow\\src\\OptFlowCpp\\bin\\debug_images"
-            "..\\debug_images",
+            "debug_images",
             //"E:\\dev\\opticalFlow\\optFlowCpp\\opticalFlow\\src\\OptFlowCpp\\bin\\debug_flow"
-            "..\\debug_flow");
+            "debug_flow");
 
 	    OPF_LOG_INFO("Start Logger");
         OPF_PROFILE_BEGIN_SESSION("dependency injection","dependency_injection_profile.json");
