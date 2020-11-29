@@ -1,6 +1,7 @@
 #pragma once
 
 #include "cpu_backend/Reshaper.h"
+#include "cpu_backend/Container.h"
 
 #include "gtest/gtest.h"
 
@@ -47,8 +48,11 @@ namespace cpu_backend
 			auto in = setup<int, dim>();
 
 			Reshaper<int> reshaper;
+
+			auto temp = std::dynamic_pointer_cast<Container<int>>(in);
+
 			std::array<const size_t, dim> shape_change = { 10 };
-			auto out = reshaper.Reshape1D(in);
+			auto out = reshaper.Reshape1D(temp);
 
 			control<int, dim>(out, shape_change);
 		}
@@ -60,8 +64,11 @@ namespace cpu_backend
 
 			Reshaper<int> reshaper;
 
+			auto temp = std::dynamic_pointer_cast<Container<int>>(in);
+
+
 			std::array<const size_t, dim> shape_change = { 1, 10 };
-			auto out = reshaper.Reshape2D(in, shape_change);
+			auto out = reshaper.Reshape2D(temp, shape_change);
 
 			control<int, dim>(out, shape_change);
 		}
@@ -73,8 +80,10 @@ namespace cpu_backend
 
 			Reshaper<int> reshaper;
 
+			auto temp = std::dynamic_pointer_cast<Container<int>>(in);
+
 			std::array<const size_t, dim> shape_change = { 1, 5 ,2 };
-			auto out = reshaper.Reshape3D(in, shape_change);
+			auto out = reshaper.Reshape3D(temp, shape_change);
 
 			control<int, dim>(out, shape_change);
 		}

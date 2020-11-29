@@ -29,6 +29,8 @@ namespace cpu_backend
 
 			std::array<const size_t, dim> shape_copy = obj.Shape;
 
+			auto data = obj.Data();
+
 			EXPECT_EQ(obj.Size(), size);
 
 			for (auto i = 0; i < dim; i++)

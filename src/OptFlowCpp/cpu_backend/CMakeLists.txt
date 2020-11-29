@@ -3,6 +3,7 @@ set(AUTOSRC
 "Array.h"
 "ArrayFactory.h"
 "ArrayScaler.h"
+"Container.h"
 "pch.h"
 "Reshaper.h"
 "Statistics.h"

@@ -1,6 +1,7 @@
 #pragma once
 #include "core/IReshaper.h"
 #include "Array.h"
+#include "Container.h"
 
 #include <memory>
 
@@ -34,7 +35,11 @@ namespace cpu_backend
 		template<size_t DimCount>
 		std::shared_ptr < core::IArray<InnerTyp, DimCount>> return_data(std::array<const size_t, DimCount>& shape, std::shared_ptr<core::IContainer<InnerTyp>>& container)
 		{
-			return std::make_shared<Array<InnerTyp, DimCount>>(Array<InnerTyp, DimCount>(shape, *container));
+			std::shared_ptr<Container<InnerTyp>> input = std::dynamic_pointer_cast<Container<InnerTyp>>(container);
+
+			auto output = std::make_shared<Array<InnerTyp, DimCount>>( Array<InnerTyp, DimCount>(shape, *input) );
+
+			return output;
 		}
 	};
 }
