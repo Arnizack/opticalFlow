@@ -1,8 +1,9 @@
 
 # opticalFlow
-Der Versuch einen Optical Flow Algorithmus zu implementieren.
 
-## how run the binaries
+C++ implementation of an optical flow algorithm.
+
+## how run to the binaries
 
 ``` opticalflow.exe -1 <first image path> -2 <second image path> -O <flow output path> -F <flow visualization output path> -J <json settings>```
 
@@ -59,13 +60,18 @@ An example for the json settings:
 ```
 
 ## vcpkg config
-vcpkg install spdlog
-vcpkg install libpng
-vcpkg install nlohmann-json
+
 vcpkg install spdlog
 
-## References
+vcpkg install libpng
+
+vcpkg install nlohmann-json
+
+vcpkg install spdlog
+
+## Based on
 - https://vision.middlebury.edu/flow/data/
+
 - A Quantitative Analysis of Current Practices in Optical Flow Estimation and the Principles behind Them (Deqing Sun. Stefan Roth, Michael J. Black)
 
 - Horn–Schunck Optical Flow with a Multi-Scale Strategy (Enric Meinhardt-Llopis, Javier Sanchez, Daniel Kondermann)
