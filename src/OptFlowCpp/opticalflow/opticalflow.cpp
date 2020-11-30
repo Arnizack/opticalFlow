@@ -9,7 +9,7 @@
 #include"optflow_composition/ContainerInstaller.h"
 #include"Base.h"
 #include"Hypodermic/ContainerBuilder.h"
-
+#include"optflow_solvers/solvers/GNCPenaltySolver.h"
 namespace opticalflow
 {
 
@@ -62,7 +62,7 @@ namespace opticalflow
     public:
         SunBakerOpticalFlowSolver(std::shared_ptr< core::IArrayFactory<float, 3>> image_factory,
 		std::shared_ptr< core::IProblemFactory> problem_factory,
-			std::shared_ptr< core::IFlowFieldSolver < std::shared_ptr<core::IGrayCrossFilterProblem>>> flow_solver)
+            std::shared_ptr< optflow_solvers::GNCPenaltySolver> flow_solver)
             : _image_factory(image_factory), _problem_factory(problem_factory),_flow_solver(flow_solver)
         {
             //OPF_LOG_IMAGE_FLOW_BEGIN();

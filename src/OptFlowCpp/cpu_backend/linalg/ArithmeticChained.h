@@ -7,7 +7,7 @@
 namespace cpu_backend
 {
 	template<class InnerTyp, size_t DimCount>
-	class ArithmeticChained 
+	class ArithmeticChained final
 		: public core::IArithmeticChained<InnerTyp, DimCount>, 
 		public ArithmeticBasic<InnerTyp, DimCount>,
 		public core::IArithmeticBasic<InnerTyp, DimCount>

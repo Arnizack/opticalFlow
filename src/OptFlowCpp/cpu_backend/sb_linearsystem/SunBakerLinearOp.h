@@ -7,7 +7,7 @@
 namespace cpu_backend
 {
 
-	class SunBakerLinearOp : public core::ILinearOperator<
+	class SunBakerLinearOp final: public core::ILinearOperator<
 		std::shared_ptr<core::IArray<double, 1>>,
 		std::shared_ptr<core::IArray<double, 1>>>
 	{

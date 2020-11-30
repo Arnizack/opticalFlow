@@ -30,10 +30,12 @@ int main(int argc, char* argv[])
 
 	auto first_img = opticalflow::OpenImage(first_img_path);
 	auto second_img = opticalflow::OpenImage(second_img_path);
-	
+
+	options_path = "..\\..\\console_ui\\temp_json_input.json";
+
 	std::shared_ptr<opticalflow::OpticalFlowSolver> solver;
 
-	if(options_path=="")
+	if(options_path!="")
 	{
 		auto options = opticalflow::ReadOptions(options_path);
 
