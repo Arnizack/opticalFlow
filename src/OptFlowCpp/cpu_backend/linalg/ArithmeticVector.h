@@ -33,7 +33,7 @@ namespace cpu_backend
 			double norm = 0;
 			const size_t size = (*in).Size();
 
-			//#pragma omp parallel for
+			#pragma omp parallel for reduction(+: norm)
 			for (int i = 0; i < size; i++)
 			{
 				norm += (*in)[i] * (*in)[i];
@@ -42,15 +42,15 @@ namespace cpu_backend
 			return sqrt(norm);
 		}
 
-		// <a, b>
+		// <a, b> 
 		virtual double ScalarProduct(const PtrVector a, const PtrVector b) override
 		{
 			double out = 0;
 
-			std::shared_ptr<Array<InnerTyp, 1>> in_a = std::dynamic_pointer_cast<Array<InnerTyp, 1>>(a);
-			std::shared_ptr<Array<InnerTyp, 1>> in_b = std::dynamic_pointer_cast<Array<InnerTyp, 1>>(b);
+			std::shared_ptr<Array<InnerTyp, 1>> in_a = std::static_pointer_cast<Array<InnerTyp, 1>>(a);
+			std::shared_ptr<Array<InnerTyp, 1>> in_b = std::static_pointer_cast<Array<InnerTyp, 1>>(b);
 
-			//#pragma omp parallel for
+			#pragma omp parallel for reduction(+: out)
 			for (int i = 0; i < (*in_a).Size(); i++)
 			{
 				out += (*in_a)[i] * (*in_b)[i];
@@ -111,10 +111,10 @@ namespace cpu_backend
 	private:
 		std::shared_ptr<ArrayFactory<InnerTyp, DimCount>> _factory;
 	};
-
+	/*
 	/*
 	* DOUBLE
-	*/
+	*//*
 	template<size_t DimCount>
 	class ArithmeticVector<double, DimCount> : public core::IArithmeticVector<double, DimCount>
 	{
@@ -200,10 +200,10 @@ namespace cpu_backend
 	private:
 		std::shared_ptr<ArrayFactory<double, DimCount>> _factory;
 	};
-
+	*/
 	/*
 	* FLOAT
-	*/
+	*//*
 	template<size_t DimCount>
 	class ArithmeticVector<float, DimCount> : public core::IArithmeticVector<float, DimCount>
 	{
@@ -277,7 +277,7 @@ namespace cpu_backend
 
 	private:
 		std::shared_ptr<ArrayFactory<float, DimCount>> _factory;
-	};
+	}; */
 
 
 }

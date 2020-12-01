@@ -8,6 +8,39 @@
 
 namespace cpu_backend
 {
+
+	namespace _inner
+	{
+		constexpr inline double Convolute2DAt(const double* image,const int& dst_x,const int& dst_y,const int& width,
+			const int& height,const double* kernel)
+		{
+			const int kernel_height = 3;
+			const int kernel_width = 3;
+
+			const int kernel_half_height = kernel_height / 2;
+			const int kernel_half_width = kernel_width / 2;
+
+			double sum = 0;
+
+			for (int kernel_y = 0; kernel_y < kernel_height; kernel_y++)
+			{
+				int src_y = dst_y - kernel_half_height + kernel_y;
+				if(src_y>=0 && src_y < height)
+				{
+					for (int kernel_x = 0; kernel_x < kernel_width; kernel_x++)
+					{
+						int src_x = dst_x - kernel_half_width + kernel_x;
+						if (src_x >= 0 && src_x < width)
+						{
+							sum += image[src_y * width + src_x] * kernel[kernel_width * kernel_y + kernel_x];
+						}
+					}
+				}
+			}
+			return sum;
+		}
+	}
+
 	using PtrGrayImg = std::shared_ptr<core::IArray<double, 1>>;
 	SunBakerLinearOp::SunBakerLinearOp(size_t width, size_t height, 
 		std::shared_ptr<Array<double, 1>> a_diags, 
@@ -28,9 +61,9 @@ namespace cpu_backend
 	void SunBakerLinearOp::ApplyTo(PtrGrayImg dst, const PtrGrayImg vec)
 	{
 		//OPF_PROFILE_FUNCTION();
-		double* dst_data = std::static_pointer_cast<
+		double* __restrict dst_data = std::static_pointer_cast<
 			Array<double, 1>>(dst)->Data();
-		double* vec_data = std::static_pointer_cast<
+		double* __restrict vec_data = std::static_pointer_cast<
 			Array<double, 1>>(vec)->Data();
 
 		/*
@@ -41,12 +74,12 @@ namespace cpu_backend
 		double* vec_upper = vec_data;
 		double* vec_lower = vec_data+_width*_height;
 
-		double* dst_upper = dst_data;
-		double* dst_lower = dst_data + _width * _height;
+		double* __restrict dst_upper = dst_data;
+		double* __restrict dst_lower = dst_data + _width * _height;
 
-		double* ptr_a_diags = _a_diags->Data();
-		double* ptr_b_diags = _b_diags->Data();
-		double* ptr_c_diags = _c_diags->Data();
+		double* __restrict ptr_a_diags = _a_diags->Data();
+		double* __restrict ptr_b_diags = _b_diags->Data();
+		double* __restrict ptr_c_diags = _c_diags->Data();
 
 		
 		const double _kernel[9] =
@@ -67,26 +100,20 @@ namespace cpu_backend
 			{
 				int coord = y * _width + x;
 				double result = ptr_a_diags[coord] * vec_upper[coord];
+				//double kernel_result =
+				//	Convolute2DAt<double,3,3>(x,y,vec_upper, _width, _height, _kernel);
 				double kernel_result =
-					Convolute2DAt<double,3,3>(x,y,vec_upper, _width, _height, _kernel);
-				
+					_inner::Convolute2DAt(vec_upper, x,y, _width, _height, _kernel);
+
 				result -= 2 * _lambda_kernel * kernel_result;
 				result += ptr_c_diags[coord] * vec_lower[coord];
 
 				dst_upper[coord] = result;
 
-				result = ptr_b_diags[coord] * vec_lower[coord];
-				kernel_result =
-					Convolute2DAt<double, 3, 3>(x, y, vec_lower, _width, _height, _kernel);
-
-				result -= 2 * _lambda_kernel * kernel_result;
-				result += ptr_c_diags[coord] * vec_upper[coord];
-
-				dst_lower[coord] = result;
 
 			}
 		}
-		/*
+		
 		//dst_upper = B*vec_lower - 2 lambda_kernel * ker(vec_lower)
 		//dst_upper += C*vec_upper
 		#pragma omp parallel for collapse(2)
@@ -96,15 +123,17 @@ namespace cpu_backend
 			{
 				int coord = y * _width + x;
 				double result = ptr_b_diags[coord] * vec_lower[coord];
+				//double kernel_result =
+				//	Convolute2DAt<double, 3, 3>(x, y, vec_lower, _width, _height, _kernel);
 				double kernel_result =
-					Convolute2DAt<double, 3, 3>(x, y, vec_lower, _width, _height, _kernel);
+					_inner::Convolute2DAt(vec_lower, x, y, _width, _height, _kernel);
 
 				result -= 2 * _lambda_kernel * kernel_result;
 				result += ptr_c_diags[coord] * vec_upper[coord];
 
 				dst_lower[coord] = result;
 			}
-		}*/
+		}
 
 
 	}

@@ -16,12 +16,19 @@ namespace optflow_solvers
 	{
 		using PtrVector = std::shared_ptr< core::IArray<InnerTyp, 1>>;
 		using PtrLinearOperator = std::shared_ptr<core::ILinearOperator<PtrVector, PtrVector>>;
+	private:
+		const double _tol;
+		const size_t _iter;
+
+		const std::shared_ptr< core::IArrayFactory<InnerTyp, 1>> _arr_factory;
+		const std::shared_ptr< core::IArithmeticVector<InnerTyp, 1>> _arith_vector;
+		const std::shared_ptr< core::IArithmeticChained<InnerTyp, 1>> _arith_chained;
 
 	public:
 		ConjugateGradientSolver( 
-		std::shared_ptr< core::IArrayFactory<InnerTyp, 1>> arr_factory,
-		std::shared_ptr< core::IArithmeticVector<InnerTyp, 1>> arith_vector,
-		std::shared_ptr< core::IArithmeticChained<InnerTyp, 1>> arith_chained,
+		const std::shared_ptr< core::IArrayFactory<InnerTyp, 1>> arr_factory,
+		const std::shared_ptr< core::IArithmeticVector<InnerTyp, 1>> arith_vector,
+		const std::shared_ptr< core::IArithmeticChained<InnerTyp, 1>> arith_chained,
 		std::shared_ptr < CGSolverSettings> settings
 		) 
 			: _arr_factory(arr_factory), _arith_vector(arith_vector), _arith_chained(arith_chained), 
@@ -52,39 +59,42 @@ namespace optflow_solvers
 			double alpha;
 			double beta;
 
+			double scalar_r_current = _arith_vector->ScalarProduct(r_current, r_current);
+
 			for (size_t i = 0; i < _iter; i++)
 			{
 				A->ApplyTo(z, d); //z = A.dot(d)
 				//{
-				//	OPF_PROFILE_SCOPE("CG Overhead");
-				alpha = _arith_vector->ScalarDivScalar(r_current, r_current, d, z); // alpha = <r_current, r_current> / <d, z>
+					//OPF_PROFILE_SCOPE("CG Overhead");
+					double scaler_d_z = _arith_vector->ScalarProduct(d, z);
+					//alpha = _arith_vector->ScalarDivScalar(r_current, r_current, d, z); // alpha = <r_current, r_current> / <d, z>
+					alpha = scalar_r_current / scaler_d_z;
 
-				_arith_chained->ScaleAddTo(x, alpha, d, x); // x = alpha * d + x
+					_arith_chained->ScaleAddTo(x, alpha, d, x); // x = alpha * d + x
 
-				_arith_chained->ScaleAddTo(r_next, -alpha, z, r_current); // r_next  = r_current - alpha * z
+					_arith_chained->ScaleAddTo(r_next, -alpha, z, r_current); // r_next  = r_current - alpha * z
 
-				if (_arith_vector->NormEuclidean(r_next) < _tol)
-				{
-					return x;
-				}
+					if (_arith_vector->NormEuclidean(r_next) < _tol)
+					{
+						return x;
+					}
 
-				beta = _arith_vector->ScalarDivScalar(r_next, r_next, r_current, r_current); // beta = <r_next, r_next> / <r_current, r_current>
+					//beta = _arith_vector->ScalarDivScalar(r_next, r_next, r_current, r_current); // beta = <r_next, r_next> / <r_current, r_current>
+					double scaler_r_next = _arith_vector->ScalarProduct(r_next, r_next);
+					
+					beta = scaler_r_next / scalar_r_current;
 
-				_arith_chained->ScaleAddTo(d, beta, d, r_next); // d = beta*d + r_next
+					scalar_r_current = scaler_r_next;
 
-				std::swap(r_current, r_next);
+					_arith_chained->ScaleAddTo(d, beta, d, r_next); // d = beta*d + r_next
+
+					std::swap(r_current, r_next);
 				//}
 			}
 
 			return x;
 		}
 
-	private:
-		const double _tol;
-		const size_t _iter;
 
-		std::shared_ptr< core::IArrayFactory<InnerTyp, 1>> _arr_factory;
-		std::shared_ptr< core::IArithmeticVector<InnerTyp, 1>> _arith_vector;
-		std::shared_ptr< core::IArithmeticChained<InnerTyp, 1>> _arith_chained;
 	};
 }
