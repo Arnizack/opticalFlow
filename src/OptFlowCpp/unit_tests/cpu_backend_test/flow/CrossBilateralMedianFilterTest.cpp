@@ -171,6 +171,7 @@ namespace cpu_backend
 		settings->SigmaDistance = sigma_distance;
 		settings->SigmaColor = sigma_color;
 		settings->FilterLength = filter_length;
+		settings->MedianFilterLength = 9;
 		settings->Speedup = true;
 
 		CrossBilateralMedianFilter filter(flow_deriv_calc, settings);

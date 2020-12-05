@@ -14,7 +14,7 @@ namespace cpu_backend
 		double SigmaDistance = 7;
 		double SigmaColor = 7.0 /255;
 		int FilterLength = 15;
-		int MedianFilterLength = 9;
+		int MedianFilterLength = 7;
 		float EdgeTolerance = 0.4;
 		float EdgeThickness = 5;
 		bool Speedup = true;
