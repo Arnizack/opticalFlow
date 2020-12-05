@@ -17,6 +17,25 @@ namespace cpu_backend
 		size_t color_channel_count,
 		double* destination
 	);
+
+	void BilateralMedianEdgeSpeedup(
+		double* flow,
+		double* auxiliary_flow,
+		double* log_occlusion,
+		float* image,
+		double filter_influence,
+		double auxiliary_influence,
+		double sigma_distance,
+		double sigma_color,
+		bool* is_edge_map,
+		int filter_length,
+		size_t width,
+		size_t height,
+		size_t color_channel_count,
+
+		double* destination
+	);
+
 	//returns the weights count
 	size_t BilateralMedianWeight(int x, int y,
 		double* log_occlusion,

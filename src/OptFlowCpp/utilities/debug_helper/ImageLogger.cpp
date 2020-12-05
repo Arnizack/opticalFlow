@@ -97,4 +97,20 @@ namespace debug_helper
         std::string filepath = GetFlowFilepath(name);
         flowhelper::SaveFlow2Color(filepath, data);
     }
+    void ImageLogger::LogMask(std::string name, bool* data, size_t width, size_t height)
+    {
+        if (!_should_log) return;
+        std::string filepath = GetImageFilepath(name);
+        auto img = std::make_unique<std::vector<float>>(width * height);
+        float* img_data = img->data();
+        for(int i = 0; i< width*height;i++ )
+        {
+            if (data[i])
+                img_data[i] = 1;
+            else
+                img_data[i] = 0;
+        }
+        
+        imagehelper::SaveImage(filepath, img_data, width, height, 1);
+    }
 }
