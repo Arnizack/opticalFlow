@@ -197,7 +197,7 @@ namespace debug_helper
     #define OPF_PROFILE_ACTIVATED 0
 #endif
 
-#define OPF_PROFILE_ACTIVATED 0
+//#define OPF_PROFILE_ACTIVATED 0
 
 #if OPF_PROFILE_ACTIVATED
 	// Resolve which function signature macro will be used. Note that this only

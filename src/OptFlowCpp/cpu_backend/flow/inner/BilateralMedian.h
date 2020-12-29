@@ -17,6 +17,8 @@ namespace cpu_backend
 		size_t color_channel_count,
 		double* destination
 	);
+
+
 	//returns the weights count
 	size_t BilateralMedianWeight(int x, int y,
 		double* log_occlusion,

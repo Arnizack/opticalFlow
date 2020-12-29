@@ -36,6 +36,8 @@ namespace debug_helper
 		static void LogFlowField(std::string name, double* data, size_t width, size_t height);
 
 		static void LogFlowField(std::string name, std::shared_ptr<core::IArray<double, 3>> data);
+
+		static void LogMask(std::string name, bool* data, size_t width, size_t height);
 	};
 }
 
@@ -50,6 +52,7 @@ namespace debug_helper
 	#define OPF_LOG_IMAGE2DARRAY(name,iarray) ::debug_helper::ImageLogger::Log2DImage(name,iarray)
 	#define OPF_LOG_IMAGE3D(name,data,width,height,color_band) ::debug_helper::ImageLogger::Log2DImage(name ,data,width,height,color_band)
 	#define OPF_LOG_IMAGE3DARRAY(name,iarray) ::debug_helper::ImageLogger::Log2DImage(name,iarray)
+	#define OPF_LOG_MASK(name,data,width,height) ::debug_helper::ImageLogger::LogMask(name ,data,width,height)
 
 	#define OPF_LOG_FLOW(name,data,width,height) ::debug_helper::ImageLogger::LogFlowField(name,data,width,height)
 	#define OPF_LOG_FLOWARRAY(name,iarray) ::debug_helper::ImageLogger::LogFlowField(name,iarray)
@@ -61,6 +64,7 @@ namespace debug_helper
 	#define OPF_LOG_IMAGE2DARRAY(name,iarray)
 	#define OPF_LOG_IMAGE3D(name,data,width,height,color_band)
 	#define OPF_LOG_IMAGE3DARRAY(name,iarray)
+	#define OPF_LOG_MASK(name,data,width,height)
 	#define OPF_LOG_FLOW(name,data,width,height)
 	#define OPF_LOG_FLOWARRAY(name,iarray)
 	#define OPF_LOG_IMAGE_FLOW_BEGIN()
