@@ -9,10 +9,11 @@ namespace core
 	{
 		using ConstPtrArray = const std::shared_ptr<IContainer<InnerTyp>>;
 	public:
-		virtual InnerTyp NormL2(ConstPtrArray x)=0;
-		virtual InnerTyp StandardDeviation(ConstPtrArray x) = 0;
-		virtual InnerTyp Sum(ConstPtrArray x) = 0;
-		virtual InnerTyp Mean(ConstPtrArray x) = 0;
+		//virtual InnerTyp NormL2(ConstPtrArray x)=0;
+		virtual double Variance(ConstPtrArray x) = 0;
+		virtual /*InnerTyp*/ double StandardDeviation(ConstPtrArray x) = 0;
+		virtual /*InnerTyp*/ double Sum(ConstPtrArray x) = 0;
+		virtual /*InnerTyp*/ double Mean(ConstPtrArray x) = 0;
 	};
 }
 

@@ -13,7 +13,7 @@ namespace core
 
 	public:
 		// ||vec|| / norm(vec)
-		virtual double NormEuclidean(const PtrVector vec) = 0;
+		virtual double NormEuclidean(const PtrMatrix vec) = 0;
 
 		// <a, b>
 		virtual double ScalarProduct(const PtrVector a, const PtrVector b) = 0;

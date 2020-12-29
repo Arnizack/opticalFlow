@@ -18,6 +18,7 @@ set(AUTOSRC
 "image/IGrayscaleFilter.h"
 "image/IGrayscaleScaler.h"
 "image/IGrayWarper.h"
+"image/IPreProcessor.h"
 "linalg/IArithmeticBasic.h"
 "linalg/IArithmeticChained.h"
 "linalg/IArithmeticVector.h"

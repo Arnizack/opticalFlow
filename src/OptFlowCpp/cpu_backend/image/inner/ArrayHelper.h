@@ -55,6 +55,7 @@ namespace cpu_backend
                 return img[offset + width * y + x];
             }
 		}
+
         template<class T>
         void PrintArray(const T* array, int width)
         {

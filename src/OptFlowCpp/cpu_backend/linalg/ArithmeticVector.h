@@ -26,17 +26,17 @@ namespace cpu_backend
 		{}
 
 		// ||vec|| / norm(vec)
-		virtual double NormEuclidean(const PtrVector vec) override
+		virtual double NormEuclidean(const PtrMatrix vec) override
 		{
-			std::shared_ptr<Array<InnerTyp, DimCount>> in = std::dynamic_pointer_cast<Array<InnerTyp, DimCount>>(vec);
+			auto in = std::dynamic_pointer_cast<Array<InnerTyp, DimCount>>(vec)->Data();
 
 			double norm = 0;
-			const size_t size = (*in).Size();
+			const size_t size = vec->Size();
 
 			#pragma omp parallel for reduction(+: norm)
 			for (int i = 0; i < size; i++)
 			{
-				norm += (*in)[i] * (*in)[i];
+				norm += in[i] * in[i];
 			}
 
 			return sqrt(norm);
@@ -47,13 +47,13 @@ namespace cpu_backend
 		{
 			double out = 0;
 
-			std::shared_ptr<Array<InnerTyp, 1>> in_a = std::static_pointer_cast<Array<InnerTyp, 1>>(a);
-			std::shared_ptr<Array<InnerTyp, 1>> in_b = std::static_pointer_cast<Array<InnerTyp, 1>>(b);
+			auto in_a = std::static_pointer_cast<Array<InnerTyp, 1>>(a)->Data();
+			auto in_b = std::static_pointer_cast<Array<InnerTyp, 1>>(b)->Data();
 
 			#pragma omp parallel for reduction(+: out)
-			for (int i = 0; i < (*in_a).Size(); i++)
+			for (int i = 0; i < a->Size(); i++)
 			{
-				out += (*in_a)[i] * (*in_b)[i];
+				out += in_a[i] * in_b[i];
 			}
 
 			return out;
@@ -62,12 +62,16 @@ namespace cpu_backend
 		// x = fac * A
 		virtual PtrMatrix Scale(const double& fac, const PtrMatrix a) override
 		{
-			auto out = std::dynamic_pointer_cast<Array<InnerTyp, DimCount>>(_factory->Zeros(a->Shape));
+			auto in = std::static_pointer_cast<Array<InnerTyp, DimCount>>(a);
+
+			auto out = std::static_pointer_cast<Array<InnerTyp, DimCount>>(_factory->CreateFromSource(in->Data(), a->Shape));
+
+			auto out_data = out->Data();
 
 			#pragma omp parallel for
-			for (int i = 0; i < (*out).Size(); i++)
+			for (int i = 0; i < a->Size(); i++)
 			{
-				(*out)[i] = fac * (*out)[i];
+				out_data[i] = fac * out_data[i];
 			}
 
 			return out;
@@ -76,12 +80,12 @@ namespace cpu_backend
 		// A = fac * A
 		virtual void ScaleTo(const double& fac, const PtrMatrix a) override
 		{
-			std::shared_ptr<Array<InnerTyp, DimCount>> in_a = std::dynamic_pointer_cast<Array<InnerTyp, DimCount>>(a);
+			auto in_a = std::static_pointer_cast<Array<InnerTyp, DimCount>>(a)->Data();
 
 			#pragma omp parallel for
-			for (int i = 0; i < (*in_a).Size(); i++)
+			for (int i = 0; i < a->Size(); i++)
 			{
-				(*in_a)[i] = fac * (*in_a)[i];
+				in_a[i] = fac * in_a[i];
 			}
 
 			return;
@@ -93,16 +97,16 @@ namespace cpu_backend
 			double scalar_a_b = 0;
 			double scalar_c_d = 0;
 
-			auto in_a = std::dynamic_pointer_cast<Array<InnerTyp, 1>>(a);
-			auto in_b = std::dynamic_pointer_cast<Array<InnerTyp, 1>>(b);
-			auto in_c = std::dynamic_pointer_cast<Array<InnerTyp, 1>>(c);
-			auto in_d = std::dynamic_pointer_cast<Array<InnerTyp, 1>>(d);
+			auto in_a = std::static_pointer_cast<Array<InnerTyp, 1>>(a)->Data();
+			auto in_b = std::static_pointer_cast<Array<InnerTyp, 1>>(b)->Data();
+			auto in_c = std::static_pointer_cast<Array<InnerTyp, 1>>(c)->Data();
+			auto in_d = std::static_pointer_cast<Array<InnerTyp, 1>>(d)->Data();
 
 			#pragma omp parallel for reduction(+: scalar_a_b) reduction(+: scalar_c_d)
-			for (int i = 0; i < (*in_a).Size(); i++)
+			for (int i = 0; i < a->Size(); i++)
 			{
-				scalar_a_b += (*in_a)[i] * (*in_b)[i];
-				scalar_c_d += (*in_c)[i] * (*in_d)[i];
+				scalar_a_b += in_a[i] * in_b[i];
+				scalar_c_d += in_c[i] * in_d[i];
 			}
 
 			return scalar_a_b / scalar_c_d;
